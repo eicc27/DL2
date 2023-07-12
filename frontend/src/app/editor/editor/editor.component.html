@@ -1,0 +1,10 @@
+<mat-drawer-container autosize="true">
+  <mat-drawer mode="side" [(opened)]="this.isDrawerOpen">
+    <app-fs (fileSelected)="this.openFile($event)" (fileOpened)="this.fillText($event)" />
+    <div class="drag-handle" (mousedown)="this.toggleDrag($event)"></div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-tagbar [tabs]="this.tabs" [activeTab]="this.activeTab" (tabClose)="this.closeTab($event)"></app-tagbar>
+    <textarea (input)="this.getSeggestion()" #editor></textarea>
+  </mat-drawer-content>
+</mat-drawer-container>

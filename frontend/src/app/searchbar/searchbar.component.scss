@@ -1,0 +1,30 @@
+.searchbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 2em;
+  border: 1px solid silver;
+  border-radius: .2em;
+  background: white;
+  transition: all .2s ease-out;
+
+  input {
+    margin-left: 1em;
+    border: none;
+    width: 20vw;
+
+    &:focus {
+      outline: none;
+    }
+
+  }
+
+  mat-icon {
+    margin-right: .5em;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

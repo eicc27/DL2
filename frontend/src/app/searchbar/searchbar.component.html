@@ -1,0 +1,9 @@
+<span class="searchbar" #searchbar>
+  <input
+    type="text"
+    placeholder="Search..."
+    (focus)="this.toggleFocus()"
+    (blur)="this.toggleFocus()"
+  />
+  <mat-icon>search</mat-icon>
+</span>

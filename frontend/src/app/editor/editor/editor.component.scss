@@ -1,0 +1,34 @@
+mat-drawer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 100vh;
+  mat-drawer {
+    width: 20vw;
+    overflow-x: hidden;
+    transition: all .1s ease-out;
+  }
+}
+
+.drag-handle {
+  height: 100%;
+  width: 5px;
+  background: transparent;
+  cursor: ew-resize;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+textarea {
+  resize: none;
+  width: 100vw;
+  min-height: 100vh;
+  border: none;
+  outline: none;
+  &:focus {
+    outline: none;
+  }
+}
+
+
