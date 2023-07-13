@@ -83,6 +83,7 @@ export default class PaperCrawler extends BaseCrawler {
             methods: methods,
             citations: citesAndRefs.citations,
             references: citesAndRefs.references,
+            referencedPapers: citesAndRefs.referencedPapers,
         }
     }
 }

@@ -1,0 +1,2789 @@
+{
+    "abstract": "Meeting online is becoming the new normal. Creating an immersive experience for online meetings is a necessity towards more diverse and seamless environments. Efficient photorealistic rendering of human 3D dynamics is the core of immersive meetings. Current popular applications achieve real-time conferencing but fall short in delivering photorealistic human dynamics, either due to limited 2D space or the use of avatars that lack realistic interactions between participants. Recent advances in neural rendering, such as the Neural Radiance Field (NeRF), offer the potential for greater realism in metaverse meetings. However, the slow rendering speed of NeRF poses challenges for real-time conferencing. We envision a pipeline for a future extended reality metaverse conferencing system that leverages monocular video acquisition and free-viewpoint synthesis to enhance data and hardware efficiency. Towards an immersive conferencing experience, we explore an accelerated NeRF-based free-viewpoint synthesis algorithm for rendering photorealistic human dynamics more efficiently. We show that our algorithm achieves comparable rendering quality while performing training and inference 44.5% and 213% faster than state-of-the-art methods, respectively. Our exploration provides a design basis for constructing metaverse conferencing systems that can handle complex application scenarios, including dynamic scene relighting with customized themes and multi-user conferencing that harmonizes real-world people into an extended world.",
+    "arxivId": "2306.16541",
+    "authors": [
+        {
+            "authorId": "2220916335",
+            "name": "Chuanyue Shen",
+            "url": "https://www.semanticscholar.org/author/2220916335"
+        },
+        {
+            "authorId": "2220868628",
+            "name": "Letian Zhang",
+            "url": "https://www.semanticscholar.org/author/2220868628"
+        },
+        {
+            "authorId": "51126028",
+            "name": "Zhangsihao Yang",
+            "url": "https://www.semanticscholar.org/author/51126028"
+        },
+        {
+            "authorId": "1522034508",
+            "name": "Masood S. Mortazavi",
+            "url": "https://www.semanticscholar.org/author/1522034508"
+        },
+        {
+            "authorId": "20339402",
+            "name": "Xiyun Song",
+            "url": "https://www.semanticscholar.org/author/20339402"
+        },
+        {
+            "authorId": "144454465",
+            "name": "Liang Peng",
+            "url": "https://www.semanticscholar.org/author/144454465"
+        },
+        {
+            "authorId": "2220855481",
+            "name": "Heather Yu",
+            "url": "https://www.semanticscholar.org/author/2220855481"
+        }
+    ],
+    "citationVelocity": 0,
+    "citations": [],
+    "corpusId": 259287433,
+    "doi": "10.48550/arXiv.2306.16541",
+    "fieldsOfStudy": [
+        "Computer Science"
+    ],
+    "influentialCitationCount": 0,
+    "isOpenAccess": false,
+    "isPublisherLicensed": true,
+    "is_open_access": false,
+    "is_publisher_licensed": true,
+    "numCitedBy": 0,
+    "numCiting": 39,
+    "paperId": "455c7f7aeb6f24a096b49cd85edd9ed42daf5b4b",
+    "references": [
+        {
+            "arxivId": "2206.00878",
+            "authors": [
+                {
+                    "authorId": "144436761",
+                    "name": "T. Hu"
+                },
+                {
+                    "authorId": "25059098",
+                    "name": "Shu Liu"
+                },
+                {
+                    "authorId": "2664636",
+                    "name": "Yilun Chen"
+                },
+                {
+                    "authorId": "35925165",
+                    "name": "Tiancheng Shen"
+                },
+                {
+                    "authorId": "1729056",
+                    "name": "Jiaya Jia"
+                }
+            ],
+            "doi": "10.1109/CVPR52688.2022.01256",
+            "intent": [
+                "background"
+            ],
+            "isInfluential": false,
+            "paperId": "1cc529c36edb9d41d78daed360a2eb81c848edae",
+            "title": "EfficientNeRF - Efficient Neural Radiance Fields",
+            "url": "https://www.semanticscholar.org/paper/1cc529c36edb9d41d78daed360a2eb81c848edae",
+            "venue": "2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+            "year": 2022
+        },
+        {
+            "arxivId": "2203.14478",
+            "authors": [
+                {
+                    "authorId": "41017836",
+                    "name": "Zerong Zheng"
+                },
+                {
+                    "authorId": "2143496929",
+                    "name": "Han Huang"
+                },
+                {
+                    "authorId": null,
+                    "name": "Tao Yu"
+                },
+                {
+                    "authorId": "49724467",
+                    "name": "Hongwen Zhang"
+                },
+                {
+                    "authorId": "3133575",
+                    "name": "Yandong Guo"
+                },
+                {
+                    "authorId": "1680777",
+                    "name": "Yebin Liu"
+                }
+            ],
+            "doi": "10.1109/CVPR52688.2022.01543",
+            "intent": [
+                "methodology"
+            ],
+            "isInfluential": false,
+            "paperId": "59d25f507cfe13dd215ef243609dafea9eefae19",
+            "title": "Structured Local Radiance Fields for Human Avatar Modeling",
+            "url": "https://www.semanticscholar.org/paper/59d25f507cfe13dd215ef243609dafea9eefae19",
+            "venue": "2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+            "year": 2022
+        },
+        {
+            "arxivId": "2203.12575",
+            "authors": [
+                {
+                    "authorId": "30401303",
+                    "name": "Wei Jiang"
+                },
+                {
+                    "authorId": "2906716",
+                    "name": "K. M. Yi"
+                },
+                {
+                    "authorId": "2063981",
+                    "name": "Golnoosh Samei"
+                },
+                {
+                    "authorId": "2577513",
+                    "name": "Oncel Tuzel"
+                },
+                {
+                    "authorId": "1952002",
+                    "name": "Anurag Ranjan"
+                }
+            ],
+            "doi": "10.48550/arXiv.2203.12575",
+            "intent": [],
+            "isInfluential": false,
+            "paperId": "17df7e87a5d25e6e83d773e6f686eb0a85f6827e",
+            "title": "NeuMan: Neural Human Radiance Field from a Single Video",
+            "url": "https://www.semanticscholar.org/paper/17df7e87a5d25e6e83d773e6f686eb0a85f6827e",
+            "venue": "ECCV",
+            "year": 2022
+        },
+        {
+            "arxivId": "2202.05263",
+            "authors": [
+                {
+                    "authorId": "7638730",
+                    "name": "Matthew Tancik"
+                },
+                {
+                    "authorId": "24026083",
+                    "name": "Vincent Casser"
+                },
+                {
+                    "authorId": "3084614",
+                    "name": "Xinchen Yan"
+                },
+                {
+                    "authorId": "7177932",
+                    "name": "Sabeek Pradhan"
+                },
+                {
+                    "authorId": "2577533",
+                    "name": "B. Mildenhall"
+                },
+                {
+                    "authorId": "2179732",
+                    "name": "Pratul P. Srinivasan"
+                },
+                {
+                    "authorId": "50329510",
+                    "name": "J. Barron"
+                },
+                {
+                    "authorId": "34699489",
+                    "name": "Henrik Kretzschmar"
+                }
+            ],
+            "doi": "10.1109/CVPR52688.2022.00807",
+            "intent": [
+                "methodology"
+            ],
+            "isInfluential": false,
+            "paperId": "d7d1bbade9453f0348fac8a5c60d131528b87fcf",
+            "title": "Block-NeRF: Scalable Large Scene Neural View Synthesis",
+            "url": "https://www.semanticscholar.org/paper/d7d1bbade9453f0348fac8a5c60d131528b87fcf",
+            "venue": "2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+            "year": 2022
+        },
+        {
+            "arxivId": "2201.05989",
+            "authors": [
+                {
+                    "authorId": "145878249",
+                    "name": "T. Müller"
+                },
+                {
+                    "authorId": "2114739960",
+                    "name": "Alex Evans"
+                },
+                {
+                    "authorId": "1822833",
+                    "name": "Christoph Schied"
+                },
+                {
+                    "authorId": "145661463",
+                    "name": "A. Keller"
+                }
+            ],
+            "doi": "10.1145/3528223.3530127",
+            "intent": [
+                "background",
+                "methodology"
+            ],
+            "isInfluential": true,
+            "paperId": "60e69982ef2920596c6f31d6fd3ca5e9591f3db6",
+            "title": "Instant neural graphics primitives with a multiresolution hash encoding",
+            "url": "https://www.semanticscholar.org/paper/60e69982ef2920596c6f31d6fd3ca5e9591f3db6",
+            "venue": "ACM Trans. Graph.",
+            "year": 2022
+        },
+        {
+            "arxivId": "2201.04127",
+            "authors": [
+                {
+                    "authorId": "3210124",
+                    "name": "Chung-Yi Weng"
+                },
+                {
+                    "authorId": "143800609",
+                    "name": "B. Curless"
+                },
+                {
+                    "authorId": "2179732",
+                    "name": "Pratul P. Srinivasan"
+                },
+                {
+                    "authorId": "50329510",
+                    "name": "J. Barron"
+                },
+                {
+                    "authorId": "1397689071",
+                    "name": "Ira Kemelmacher-Shlizerman"
+                }
+            ],
+            "doi": "10.1109/CVPR52688.2022.01573",
+            "intent": [
+                "background",
+                "methodology"
+            ],
+            "isInfluential": true,
+            "paperId": "f763a59644e27a2215095943224f2564e670a504",
+            "title": "HumanNeRF: Free-viewpoint Rendering of Moving People from Monocular Video",
+            "url": "https://www.semanticscholar.org/paper/f763a59644e27a2215095943224f2564e670a504",
+            "venue": "2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+            "year": 2022
+        },
+        {
+            "arxivId": "2110.13746",
+            "authors": [
+                {
+                    "authorId": "47995443",
+                    "name": "Hongyi Xu"
+                },
+                {
+                    "authorId": "1914886",
+                    "name": "Thiemo Alldieck"
+                },
+                {
+                    "authorId": "1781120",
+                    "name": "C. Sminchisescu"
+                }
+            ],
+            "doi": null,
+            "intent": [],
+            "isInfluential": false,
+            "paperId": "e67b57dec4da780b5cb4bcb33498a1a329afe53d",
+            "title": "H-NeRF: Neural Radiance Fields for Rendering and Temporal Reconstruction of Humans in Motion",
+            "url": "https://www.semanticscholar.org/paper/e67b57dec4da780b5cb4bcb33498a1a329afe53d",
+            "venue": "NeurIPS",
+            "year": 2021
+        },
+        {
+            "arxivId": "2110.13903",
+            "authors": [
+                {
+                    "authorId": "50688939",
+                    "name": "Hao Chen"
+                },
+                {
+                    "authorId": "2082464935",
+                    "name": "Bo He"
+                },
+                {
+                    "authorId": "2113291093",
+                    "name": "Hanyu Wang"
+                },
+                {
+                    "authorId": "153159300",
+                    "name": "Yixuan Ren"
+                },
+                {
+                    "authorId": "38760573",
+                    "name": "Ser-Nam Lim"
+                },
+                {
+                    "authorId": "1781242",
+                    "name": "Abhinav Shrivastava"
+                }
+            ],
+            "doi": null,
+            "intent": [
+                "methodology"
+            ],
+            "isInfluential": false,
+            "paperId": "e2aa30b637621cf8ca42c9eefc55016cdda5c255",
+            "title": "NeRV: Neural Representations for Videos",
+            "url": "https://www.semanticscholar.org/paper/e2aa30b637621cf8ca42c9eefc55016cdda5c255",
+            "venue": "NeurIPS",
+            "year": 2021
+        },
+        {
+            "arxivId": "2109.07448",
+            "authors": [
+                {
+                    "authorId": "47822164",
+                    "name": "Youngjoon Kwon"
+                },
+                {
+                    "authorId": "24028009",
+                    "name": "Dahun Kim"
+                },
+                {
+                    "authorId": "39686979",
+                    "name": "Duygu Ceylan"
+                },
+                {
+                    "authorId": "145472944",
+                    "name": "H. Fuchs"
+                }
+            ],
+            "doi": null,
+            "intent": [
+                "background"
+            ],
+            "isInfluential": false,
+            "paperId": "102516bd65bcf42837251f579cf15943499be343",
+            "title": "Neural Human Performer: Learning Generalizable Radiance Fields for Human Performance Rendering",
+            "url": "https://www.semanticscholar.org/paper/102516bd65bcf42837251f579cf15943499be343",
+            "venue": "NeurIPS",
+            "year": 2021
+        },
+        {
+            "arxivId": "2109.01847",
+            "authors": [
+                {
+                    "authorId": "1400284746",
+                    "name": "Bangbang Yang"
+                },
+                {
+                    "authorId": "1591143181",
+                    "name": "Yinda Zhang"
+                },
+                {
+                    "authorId": "121983635",
+                    "name": "Yinghao Xu"
+                },
+                {
+                    "authorId": "2110512150",
+                    "name": "Yijin Li"
+                },
+                {
+                    "authorId": "2111825207",
+                    "name": "Han Zhou"
+                },
+                {
+                    "authorId": "1679542",
+                    "name": "H. Bao"
+                },
+                {
+                    "authorId": "32162658",
+                    "name": "Guofeng Zhang"
+                },
+                {
+                    "authorId": "1813796",
+                    "name": "Zhaopeng Cui"
+                }
+            ],
+            "doi": "10.1109/ICCV48922.2021.01352",
+            "intent": [
+                "methodology"
+            ],
+            "isInfluential": false,
+            "paperId": "8bdfd48579130b50112c03170904d803aafe6ba9",
+            "title": "Learning Object-Compositional Neural Radiance Field for Editable Scene Rendering",
+            "url": "https://www.semanticscholar.org/paper/8bdfd48579130b50112c03170904d803aafe6ba9",
+            "venue": "2021 IEEE/CVF International Conference on Computer Vision (ICCV)",
+            "year": 2021
+        },
+        {
+            "arxivId": "2106.12372",
+            "authors": [
+                {
+                    "authorId": "145878249",
+                    "name": "T. Müller"
+                },
+                {
+                    "authorId": "1801097",
+                    "name": "Fabrice Rousselle"
+                },
+                {
+                    "authorId": "144086164",
+                    "name": "J. Nov'ak"
+                },
+                {
+                    "authorId": "145661463",
+                    "name": "A. Keller"
+                }
+            ],
+            "doi": "10.1145/3450626.3459812",
+            "intent": [
+                "background",
+                "result",
+                "methodology"
+            ],
+            "isInfluential": true,
+            "paperId": "1115d5d022c3c15246463a0bc684bb789bfc82dd",
+            "title": "Real-time neural radiance caching for path tracing",
+            "url": "https://www.semanticscholar.org/paper/1115d5d022c3c15246463a0bc684bb789bfc82dd",
+            "venue": "ACM Trans. Graph.",
+            "year": 2021
+        },
+        {
+            "arxivId": "2106.02019",
+            "authors": [
+                {
+                    "authorId": "46458089",
+                    "name": "Lingjie Liu"
+                },
+                {
+                    "authorId": "14210288",
+                    "name": "Marc Habermann"
+                },
+                {
+                    "authorId": "104834674",
+                    "name": "Viktor Rudnev"
+                },
+                {
+                    "authorId": "3434185",
+                    "name": "Kripasindhu Sarkar"
+                },
+                {
+                    "authorId": "3016273",
+                    "name": "Jiatao Gu"
+                },
+                {
+                    "authorId": "1680185",
+                    "name": "C. Theobalt"
+                }
+            ],
+            "doi": null,
+            "intent": [
+                "background",
+                "methodology"
+            ],
+            "isInfluential": true,
+            "paperId": "29da3be81905d577dac9144c1c3cb5c6678f7027",
+            "title": "Neural Actor: Neural Free-view Synthesis of Human Actors with Pose Control",
+            "url": "https://www.semanticscholar.org/paper/29da3be81905d577dac9144c1c3cb5c6678f7027",
+            "venue": "ArXiv",
+            "year": 2021
+        },
+        {
+            "arxivId": "2106.01970",
+            "authors": [
+                {
+                    "authorId": "2108764358",
+                    "name": "Xiuming Zhang"
+                },
+                {
+                    "authorId": "2179732",
+                    "name": "Pratul P. Srinivasan"
+                },
+                {
+                    "authorId": "22257166",
+                    "name": "Boyang Deng"
+                },
+                {
+                    "authorId": "1778676",
+                    "name": "P. Debevec"
+                },
+                {
+                    "authorId": "1768236",
+                    "name": "W. Freeman"
+                },
+                {
+                    "authorId": "2065306202",
+                    "name": "Jonathan T. Barron"
+                }
+            ],
+            "doi": "10.1145/3478513.3480496",
+            "intent": [
+                "methodology"
+            ],
+            "isInfluential": false,
+            "paperId": "46d7aa01541acda0a6705ae27875523947c57c7d",
+            "title": "NeRFactor: Neural Factorization of Shape and Reflectance Under an Unknown Illumination",
+            "url": "https://www.semanticscholar.org/paper/46d7aa01541acda0a6705ae27875523947c57c7d",
+            "venue": "ACM Trans. Graph.",
+            "year": 2021
+        },
+        {
+            "arxivId": "2105.02872",
+            "authors": [
+                {
+                    "authorId": "2072712025",
+                    "name": "Sida Peng"
+                },
+                {
+                    "authorId": "65906869",
+                    "name": "Junting Dong"
+                },
+                {
+                    "authorId": "2144298123",
+                    "name": "Qianqian Wang"
+                },
+                {
+                    "authorId": "2116578390",
+                    "name": "Shang-Wei Zhang"
+                },
+                {
+                    "authorId": "2066148547",
+                    "name": "Qing Shuai"
+                },
+                {
+                    "authorId": "145453113",
+                    "name": "Xiaowei Zhou"
+                },
+                {
+                    "authorId": "1679542",
+                    "name": "H. Bao"
+                }
+            ],
+            "doi": "10.1109/ICCV48922.2021.01405",
+            "intent": [],
+            "isInfluential": false,
+            "paperId": "35e940ace815548f620709d9c1803da34c581e86",
+            "title": "Animatable Neural Radiance Fields for Modeling Dynamic Human Bodies",
+            "url": "https://www.semanticscholar.org/paper/35e940ace815548f620709d9c1803da34c581e86",
+            "venue": "2021 IEEE/CVF International Conference on Computer Vision (ICCV)",
+            "year": 2021
+        },
+        {
+            "arxivId": "2103.15875",
+            "authors": [
+                {
+                    "authorId": "12551457",
+                    "name": "S. Zhi"
+                },
+                {
+                    "authorId": "3422926",
+                    "name": "Tristan Laidlow"
+                },
+                {
+                    "authorId": "2864731",
+                    "name": "Stefan Leutenegger"
+                },
+                {
+                    "authorId": "2052135690",
+                    "name": "A. Davison"
+                }
+            ],
+            "doi": "10.1109/ICCV48922.2021.01554",
+            "intent": [],
+            "isInfluential": false,
+            "paperId": "be05b97c1a221b12640bac66cf4b322e3a81ca86",
+            "title": "In-Place Scene Labelling and Understanding with Implicit Scene Representation",
+            "url": "https://www.semanticscholar.org/paper/be05b97c1a221b12640bac66cf4b322e3a81ca86",
+            "venue": "2021 IEEE/CVF International Conference on Computer Vision (ICCV)",
+            "year": 2021
+        },
+        {
+            "arxivId": "2103.13744",
+            "authors": [
+                {
+                    "authorId": "2091073616",
+                    "name": "Christian Reiser"
+                },
+                {
+                    "authorId": "49009409",
+                    "name": "Songyou Peng"
+                },
+                {
+                    "authorId": "2699340",
+                    "name": "Yiyi Liao"
+                },
+                {
+                    "authorId": "47237027",
+                    "name": "Andreas Geiger"
+                }
+            ],
+            "doi": "10.1109/ICCV48922.2021.01407",
+            "intent": [
+                "methodology"
+            ],
+            "isInfluential": false,
+            "paperId": "c041aaed581616e122e790dd2769337216df3d8d",
+            "title": "KiloNeRF: Speeding up Neural Radiance Fields with Thousands of Tiny MLPs",
+            "url": "https://www.semanticscholar.org/paper/c041aaed581616e122e790dd2769337216df3d8d",
+            "venue": "2021 IEEE/CVF International Conference on Computer Vision (ICCV)",
+            "year": 2021
+        },
+        {
+            "arxivId": "2103.14024",
+            "authors": [
+                {
+                    "authorId": "2024370854",
+                    "name": "Alex Yu"
+                },
+                {
+                    "authorId": "51104559",
+                    "name": "Ruilong Li"
+                },
+                {
+                    "authorId": "7638730",
+                    "name": "Matthew Tancik"
+                },
+                {
+                    "authorId": "1706574",
+                    "name": "Hao Li"
+                },
+                {
+                    "authorId": "47383180",
+                    "name": "Ren Ng"
+                },
+                {
+                    "authorId": "20615377",
+                    "name": "Angjoo Kanazawa"
+                }
+            ],
+            "doi": "10.1109/ICCV48922.2021.00570",
+            "intent": [
+                "background"
+            ],
+            "isInfluential": false,
+            "paperId": "5744fcc21b40327f7ad710de7d947d4584c53012",
+            "title": "PlenOctrees for Real-time Rendering of Neural Radiance Fields",
+            "url": "https://www.semanticscholar.org/paper/5744fcc21b40327f7ad710de7d947d4584c53012",
+            "venue": "2021 IEEE/CVF International Conference on Computer Vision (ICCV)",
+            "year": 2021
+        },
+        {
+            "arxivId": "2103.10380",
+            "authors": [
+                {
+                    "authorId": "8472317",
+                    "name": "Stephan J. Garbin"
+                },
+                {
+                    "authorId": "49268985",
+                    "name": "Marek Kowalski"
+                },
+                {
+                    "authorId": "143945334",
+                    "name": "Matthew Johnson"
+                },
+                {
+                    "authorId": "143774737",
+                    "name": "J. Shotton"
+                },
+                {
+                    "authorId": "39596866",
+                    "name": "Julien P. C. Valentin"
+                }
+            ],
+            "doi": "10.1109/ICCV48922.2021.01408",
+            "intent": [
+                "methodology"
+            ],
+            "isInfluential": false,
+            "paperId": "b99c59e6601e2cc5ba1cb2dd740c6c5487b77fe6",
+            "title": "FastNeRF: High-Fidelity Neural Rendering at 200FPS",
+            "url": "https://www.semanticscholar.org/paper/b99c59e6601e2cc5ba1cb2dd740c6c5487b77fe6",
+            "venue": "2021 IEEE/CVF International Conference on Computer Vision (ICCV)",
+            "year": 2021
+        },
+        {
+            "arxivId": "2102.06199",
+            "authors": [
+                {
+                    "authorId": "2066630474",
+                    "name": "Shih-Yang Su"
+                },
+                {
+                    "authorId": "1612967506",
+                    "name": "F. Yu"
+                },
+                {
+                    "authorId": "2065899365",
+                    "name": "Michael Zollhoefer"
+                },
+                {
+                    "authorId": "2933543",
+                    "name": "Helge Rhodin"
+                }
+            ],
+            "doi": null,
+            "intent": [
+                "background",
+                "methodology"
+            ],
+            "isInfluential": false,
+            "paperId": "74bb19d1ce2ec9fb9605545a750e68281a067e63",
+            "title": "A-NeRF: Articulated Neural Radiance Fields for Learning Human Shape, Appearance, and Pose",
+            "url": "https://www.semanticscholar.org/paper/74bb19d1ce2ec9fb9605545a750e68281a067e63",
+            "venue": "NeurIPS",
+            "year": 2021
+        },
+        {
+            "arxivId": "2012.15838",
+            "authors": [
+                {
+                    "authorId": "2072712025",
+                    "name": "Sida Peng"
+                },
+                {
+                    "authorId": "2145782988",
+                    "name": "Yuanqing Zhang"
+                },
+                {
+                    "authorId": "121983635",
+                    "name": "Yinghao Xu"
+                },
+                {
+                    "authorId": "2144298123",
+                    "name": "Qianqian Wang"
+                },
+                {
+                    "authorId": "2066148547",
+                    "name": "Qing Shuai"
+                },
+                {
+                    "authorId": "1679542",
+                    "name": "H. Bao"
+                },
+                {
+                    "authorId": "145453113",
+                    "name": "Xiaowei Zhou"
+                }
+            ],
+            "doi": "10.1109/CVPR46437.2021.00894",
+            "intent": [
+                "background",
+                "methodology"
+            ],
+            "isInfluential": true,
+            "paperId": "af8faec7c0b8f4b2a28d42a86e0e7d499016c560",
+            "title": "Neural Body: Implicit Neural Representations with Structured Latent Codes for Novel View Synthesis of Dynamic Humans",
+            "url": "https://www.semanticscholar.org/paper/af8faec7c0b8f4b2a28d42a86e0e7d499016c560",
+            "venue": "2021 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+            "year": 2020
+        },
+        {
+            "arxivId": "2012.12884",
+            "authors": [
+                {
+                    "authorId": "3210124",
+                    "name": "Chung-Yi Weng"
+                },
+                {
+                    "authorId": "143800609",
+                    "name": "B. Curless"
+                },
+                {
+                    "authorId": "1397689071",
+                    "name": "Ira Kemelmacher-Shlizerman"
+                }
+            ],
+            "doi": null,
+            "intent": [
+                "methodology"
+            ],
+            "isInfluential": false,
+            "paperId": "a6167229bac2ff9206fde21c443b7cadde9e8a5a",
+            "title": "Vid2Actor: Free-viewpoint Animatable Person Synthesis from Video in the Wild",
+            "url": "https://www.semanticscholar.org/paper/a6167229bac2ff9206fde21c443b7cadde9e8a5a",
+            "venue": "ArXiv",
+            "year": 2020
+        },
+        {
+            "arxivId": "2012.03918",
+            "authors": [
+                {
+                    "authorId": "2063102428",
+                    "name": "Mark Boss"
+                },
+                {
+                    "authorId": "2056204078",
+                    "name": "Raphael Braun"
+                },
+                {
+                    "authorId": "2745026",
+                    "name": "V. Jampani"
+                },
+                {
+                    "authorId": "50329510",
+                    "name": "J. Barron"
+                },
+                {
+                    "authorId": "2107890439",
+                    "name": "Ce Liu"
+                },
+                {
+                    "authorId": "1809190",
+                    "name": "H. Lensch"
+                }
+            ],
+            "doi": "10.1109/ICCV48922.2021.01245",
+            "intent": [
+                "methodology"
+            ],
+            "isInfluential": false,
+            "paperId": "094cc920af8422a1bd98967d2614e38dc939e323",
+            "title": "NeRD: Neural Reflectance Decomposition from Image Collections",
+            "url": "https://www.semanticscholar.org/paper/094cc920af8422a1bd98967d2614e38dc939e323",
+            "venue": "2021 IEEE/CVF International Conference on Computer Vision (ICCV)",
+            "year": 2020
+        },
+        {
+            "arxivId": "2012.01714",
+            "authors": [
+                {
+                    "authorId": "2202838",
+                    "name": "David B. Lindell"
+                },
+                {
+                    "authorId": "144247981",
+                    "name": "Julien N. P. Martel"
+                },
+                {
+                    "authorId": "1731170",
+                    "name": "Gordon Wetzstein"
+                }
+            ],
+            "doi": "10.1109/CVPR46437.2021.01432",
+            "intent": [
+                "background"
+            ],
+            "isInfluential": false,
+            "paperId": "4fc6e9545d30539fac6a6a0dcac1418ad4dd9a9f",
+            "title": "AutoInt: Automatic Integration for Fast Neural Volume Rendering",
+            "url": "https://www.semanticscholar.org/paper/4fc6e9545d30539fac6a6a0dcac1418ad4dd9a9f",
+            "venue": "2021 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+            "year": 2020
+        },
+        {
+            "arxivId": "2011.12100",
+            "authors": [
+                {
+                    "authorId": "145048708",
+                    "name": "Michael Niemeyer"
+                },
+                {
+                    "authorId": "47237027",
+                    "name": "Andreas Geiger"
+                }
+            ],
+            "doi": "10.1109/CVPR46437.2021.01129",
+            "intent": [
+                "methodology"
+            ],
+            "isInfluential": false,
+            "paperId": "69a1d72bac9dfb18940ff97ae91643d6c8158e6d",
+            "title": "GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields",
+            "url": "https://www.semanticscholar.org/paper/69a1d72bac9dfb18940ff97ae91643d6c8158e6d",
+            "venue": "2021 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+            "year": 2020
+        },
+        {
+            "arxivId": "2007.11571",
+            "authors": [
+                {
+                    "authorId": "46458089",
+                    "name": "Lingjie Liu"
+                },
+                {
+                    "authorId": "3016273",
+                    "name": "Jiatao Gu"
+                },
+                {
+                    "authorId": "38943657",
+                    "name": "Kyaw Zaw Lin"
+                },
+                {
+                    "authorId": "144078686",
+                    "name": "Tat-Seng Chua"
+                },
+                {
+                    "authorId": "1680185",
+                    "name": "C. Theobalt"
+                }
+            ],
+            "doi": null,
+            "intent": [
+                "background"
+            ],
+            "isInfluential": false,
+            "paperId": "17d7767a6ea87f4ab24d9cfaa5039160af9cad76",
+            "title": "Neural Sparse Voxel Fields",
+            "url": "https://www.semanticscholar.org/paper/17d7767a6ea87f4ab24d9cfaa5039160af9cad76",
+            "venue": "NeurIPS",
+            "year": 2020
+        },
+        {
+            "arxivId": "2007.02442",
+            "authors": [
+                {
+                    "authorId": "40502376",
+                    "name": "Katja Schwarz"
+                },
+                {
+                    "authorId": "2699340",
+                    "name": "Yiyi Liao"
+                },
+                {
+                    "authorId": "145048708",
+                    "name": "Michael Niemeyer"
+                },
+                {
+                    "authorId": "47237027",
+                    "name": "Andreas Geiger"
+                }
+            ],
+            "doi": null,
+            "intent": [
+                "methodology"
+            ],
+            "isInfluential": false,
+            "paperId": "62d337dbaead376ca042f23d62c0d4b65ec98546",
+            "title": "GRAF: Generative Radiance Fields for 3D-Aware Image Synthesis",
+            "url": "https://www.semanticscholar.org/paper/62d337dbaead376ca042f23d62c0d4b65ec98546",
+            "venue": "NeurIPS",
+            "year": 2020
+        },
+        {
+            "arxivId": "2003.08934",
+            "authors": [
+                {
+                    "authorId": "2577533",
+                    "name": "B. Mildenhall"
+                },
+                {
+                    "authorId": "2179732",
+                    "name": "Pratul P. Srinivasan"
+                },
+                {
+                    "authorId": "7638730",
+                    "name": "Matthew Tancik"
+                },
+                {
+                    "authorId": "50329510",
+                    "name": "J. Barron"
+                },
+                {
+                    "authorId": "1752236",
+                    "name": "R. Ramamoorthi"
+                },
+                {
+                    "authorId": "47383180",
+                    "name": "Ren Ng"
+                }
+            ],
+            "doi": "10.1007/978-3-030-58452-8_24",
+            "intent": [
+                "background",
+                "methodology"
+            ],
+            "isInfluential": true,
+            "paperId": "428b663772dba998f5dc6a24488fff1858a0899f",
+            "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+            "url": "https://www.semanticscholar.org/paper/428b663772dba998f5dc6a24488fff1858a0899f",
+            "venue": "ECCV",
+            "year": 2020
+        },
+        {
+            "arxivId": "1909.12828",
+            "authors": [
+                {
+                    "authorId": "113950826",
+                    "name": "Nikos Kolotouros"
+                },
+                {
+                    "authorId": "2829330",
+                    "name": "G. Pavlakos"
+                },
+                {
+                    "authorId": "2105795",
+                    "name": "Michael J. Black"
+                },
+                {
+                    "authorId": "1751586",
+                    "name": "Kostas Daniilidis"
+                }
+            ],
+            "doi": "10.1109/ICCV.2019.00234",
+            "intent": [
+                "methodology"
+            ],
+            "isInfluential": false,
+            "paperId": "0c2b90305dbeb11950ff71718cb3331048124d50",
+            "title": "Learning to Reconstruct 3D Human Pose and Shape via Model-Fitting in the Loop",
+            "url": "https://www.semanticscholar.org/paper/0c2b90305dbeb11950ff71718cb3331048124d50",
+            "venue": "2019 IEEE/CVF International Conference on Computer Vision (ICCV)",
+            "year": 2019
+        },
+        {
+            "arxivId": null,
+            "authors": [
+                {
+                    "authorId": "33810877",
+                    "name": "Peter Hedman"
+                },
+                {
+                    "authorId": "41052563",
+                    "name": "J. Philip"
+                },
+                {
+                    "authorId": "39310157",
+                    "name": "True Price"
+                },
+                {
+                    "authorId": "40454588",
+                    "name": "Jan-Michael Frahm"
+                },
+                {
+                    "authorId": "1721779",
+                    "name": "G. Drettakis"
+                },
+                {
+                    "authorId": "3309893",
+                    "name": "G. Brostow"
+                }
+            ],
+            "doi": "10.1145/3272127.3275084",
+            "intent": [
+                "background"
+            ],
+            "isInfluential": false,
+            "paperId": "30453b89e7d83f8142e5010a0998175bffc56025",
+            "title": "Deep blending for free-viewpoint image-based rendering",
+            "url": "https://www.semanticscholar.org/paper/30453b89e7d83f8142e5010a0998175bffc56025",
+            "venue": "ACM Trans. Graph.",
+            "year": 2018
+        },
+        {
+            "arxivId": "1801.03924",
+            "authors": [
+                {
+                    "authorId": "2844849",
+                    "name": "Richard Zhang"
+                },
+                {
+                    "authorId": "2094770",
+                    "name": "Phillip Isola"
+                },
+                {
+                    "authorId": "1763086",
+                    "name": "Alexei A. Efros"
+                },
+                {
+                    "authorId": "2177801",
+                    "name": "Eli Shechtman"
+                },
+                {
+                    "authorId": "39231399",
+                    "name": "Oliver Wang"
+                }
+            ],
+            "doi": "10.1109/CVPR.2018.00068",
+            "intent": [],
+            "isInfluential": false,
+            "paperId": "c468bbde6a22d961829e1970e6ad5795e05418d1",
+            "title": "The Unreasonable Effectiveness of Deep Features as a Perceptual Metric",
+            "url": "https://www.semanticscholar.org/paper/c468bbde6a22d961829e1970e6ad5795e05418d1",
+            "venue": "2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition",
+            "year": 2018
+        },
+        {
+            "arxivId": null,
+            "authors": [
+                {
+                    "authorId": "3273714",
+                    "name": "Mingsong Dou"
+                },
+                {
+                    "authorId": "2121982",
+                    "name": "S. Khamis"
+                },
+                {
+                    "authorId": "91070402",
+                    "name": "Yu.G. Degtyarev"
+                },
+                {
+                    "authorId": "143906553",
+                    "name": "Philip L. Davidson"
+                },
+                {
+                    "authorId": "34772804",
+                    "name": "S. Fanello"
+                },
+                {
+                    "authorId": "2371390",
+                    "name": "Adarsh Kowdle"
+                },
+                {
+                    "authorId": "7540558",
+                    "name": "Sergio Orts"
+                },
+                {
+                    "authorId": "2086328",
+                    "name": "Christoph Rhemann"
+                },
+                {
+                    "authorId": "2288470",
+                    "name": "David Kim"
+                },
+                {
+                    "authorId": "2039726328",
+                    "name": "Jonathan Taylor"
+                },
+                {
+                    "authorId": "143967473",
+                    "name": "Pushmeet Kohli"
+                },
+                {
+                    "authorId": "3440762",
+                    "name": "V. Tankovich"
+                },
+                {
+                    "authorId": "79406746",
+                    "name": "S. Izadi"
+                }
+            ],
+            "doi": "10.1145/2897824.2925969",
+            "intent": [
+                "background"
+            ],
+            "isInfluential": false,
+            "paperId": "bf0a10f4b076cb46273c2b2ad4f3acd6f23a827e",
+            "title": "Fusion4D: real-time performance capture of challenging scenes",
+            "url": "https://www.semanticscholar.org/paper/bf0a10f4b076cb46273c2b2ad4f3acd6f23a827e",
+            "venue": "ACM Trans. Graph.",
+            "year": 2016
+        },
+        {
+            "arxivId": null,
+            "authors": [
+                {
+                    "authorId": "36676121",
+                    "name": "Alvaro Collet"
+                },
+                {
+                    "authorId": "153486578",
+                    "name": "Ming Chuang"
+                },
+                {
+                    "authorId": "2066139949",
+                    "name": "Pat Sweeney"
+                },
+                {
+                    "authorId": "31582245",
+                    "name": "D. Gillett"
+                },
+                {
+                    "authorId": "32447917",
+                    "name": "D. Evseev"
+                },
+                {
+                    "authorId": "2081677676",
+                    "name": "David Calabrese"
+                },
+                {
+                    "authorId": "144201188",
+                    "name": "Hugues Hoppe"
+                },
+                {
+                    "authorId": "35869859",
+                    "name": "Adam G. Kirk"
+                },
+                {
+                    "authorId": "2074769877",
+                    "name": "Steve Sullivan"
+                }
+            ],
+            "doi": "10.1145/2766945",
+            "intent": [
+                "background"
+            ],
+            "isInfluential": false,
+            "paperId": "d468062762decb2470e2840d4bffcd323e599812",
+            "title": "High-quality streamable free-viewpoint video",
+            "url": "https://www.semanticscholar.org/paper/d468062762decb2470e2840d4bffcd323e599812",
+            "venue": "ACM Trans. Graph.",
+            "year": 2015
+        },
+        {
+            "arxivId": null,
+            "authors": [
+                {
+                    "authorId": "2118476745",
+                    "name": "Jehee Lee"
+                },
+                {
+                    "authorId": "2115495076",
+                    "name": "K. Lee"
+                }
+            ],
+            "doi": "10.1145/1028523.1028535",
+            "intent": [
+                "background"
+            ],
+            "isInfluential": false,
+            "paperId": "aea6dc73a932f98ac4323185549bf94c5ae750dd",
+            "title": "Precomputing avatar behavior from human motion data",
+            "url": "https://www.semanticscholar.org/paper/aea6dc73a932f98ac4323185549bf94c5ae750dd",
+            "venue": "SCA '04",
+            "year": 2004
+        },
+        {
+            "arxivId": null,
+            "authors": [
+                {
+                    "authorId": "2415843",
+                    "name": "S. Gortler"
+                },
+                {
+                    "authorId": "2026212",
+                    "name": "R. Grzeszczuk"
+                },
+                {
+                    "authorId": "1717841",
+                    "name": "R. Szeliski"
+                },
+                {
+                    "authorId": "1400248273",
+                    "name": "Michael F. Cohen"
+                }
+            ],
+            "doi": "10.1145/237170.237200",
+            "intent": [
+                "background"
+            ],
+            "isInfluential": false,
+            "paperId": "2a737fbad8dd29730313c89ae1123efeab48786d",
+            "title": "The lumigraph",
+            "url": "https://www.semanticscholar.org/paper/2a737fbad8dd29730313c89ae1123efeab48786d",
+            "venue": "SIGGRAPH",
+            "year": 1996
+        },
+        {
+            "arxivId": null,
+            "authors": [
+                {
+                    "authorId": "2072712025",
+                    "name": "Sida Peng"
+                },{
+                    "abstract": "Meeting online is becoming the new normal. Creating an immersive experience for online meetings is a necessity towards more diverse and seamless environments. Efficient photorealistic rendering of human 3D dynamics is the core of immersive meetings. Current popular applications achieve real-time conferencing but fall short in delivering photorealistic human dynamics, either due to limited 2D space or the use of avatars that lack realistic interactions between participants. Recent advances in neural rendering, such as the Neural Radiance Field (NeRF), offer the potential for greater realism in metaverse meetings. However, the slow rendering speed of NeRF poses challenges for real-time conferencing. We envision a pipeline for a future extended reality metaverse conferencing system that leverages monocular video acquisition and free-viewpoint synthesis to enhance data and hardware efficiency. Towards an immersive conferencing experience, we explore an accelerated NeRF-based free-viewpoint synthesis algorithm for rendering photorealistic human dynamics more efficiently. We show that our algorithm achieves comparable rendering quality while performing training and inference 44.5% and 213% faster than state-of-the-art methods, respectively. Our exploration provides a design basis for constructing metaverse conferencing systems that can handle complex application scenarios, including dynamic scene relighting with customized themes and multi-user conferencing that harmonizes real-world people into an extended world.",
+                    "arxivId": "2306.16541",
+                    "authors": [
+                        {
+                            "authorId": "2220916335",
+                            "name": "Chuanyue Shen",
+                            "url": "https://www.semanticscholar.org/author/2220916335"
+                        },
+                        {
+                            "authorId": "2220868628",
+                            "name": "Letian Zhang",
+                            "url": "https://www.semanticscholar.org/author/2220868628"
+                        },
+                        {
+                            "authorId": "51126028",
+                            "name": "Zhangsihao Yang",
+                            "url": "https://www.semanticscholar.org/author/51126028"
+                        },
+                        {
+                            "authorId": "1522034508",
+                            "name": "Masood S. Mortazavi",
+                            "url": "https://www.semanticscholar.org/author/1522034508"
+                        },
+                        {
+                            "authorId": "20339402",
+                            "name": "Xiyun Song",
+                            "url": "https://www.semanticscholar.org/author/20339402"
+                        },
+                        {
+                            "authorId": "144454465",
+                            "name": "Liang Peng",
+                            "url": "https://www.semanticscholar.org/author/144454465"
+                        },
+                        {
+                            "authorId": "2220855481",
+                            "name": "Heather Yu",
+                            "url": "https://www.semanticscholar.org/author/2220855481"
+                        }
+                    ],
+                    "citationVelocity": 0,
+                    "citations": [],
+                    "corpusId": 259287433,
+                    "doi": "10.48550/arXiv.2306.16541",
+                    "fieldsOfStudy": [
+                        "Computer Science"
+                    ],
+                    "influentialCitationCount": 0,
+                    "isOpenAccess": false,
+                    "isPublisherLicensed": true,
+                    "is_open_access": false,
+                    "is_publisher_licensed": true,
+                    "numCitedBy": 0,
+                    "numCiting": 39,
+                    "paperId": "455c7f7aeb6f24a096b49cd85edd9ed42daf5b4b",
+                    "references": [
+                        {
+                            "arxivId": "2206.00878",
+                            "authors": [
+                                {
+                                    "authorId": "144436761",
+                                    "name": "T. Hu"
+                                },
+                                {
+                                    "authorId": "25059098",
+                                    "name": "Shu Liu"
+                                },
+                                {
+                                    "authorId": "2664636",
+                                    "name": "Yilun Chen"
+                                },
+                                {
+                                    "authorId": "35925165",
+                                    "name": "Tiancheng Shen"
+                                },
+                                {
+                                    "authorId": "1729056",
+                                    "name": "Jiaya Jia"
+                                }
+                            ],
+                            "doi": "10.1109/CVPR52688.2022.01256",
+                            "intent": [
+                                "background"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "1cc529c36edb9d41d78daed360a2eb81c848edae",
+                            "title": "EfficientNeRF - Efficient Neural Radiance Fields",
+                            "url": "https://www.semanticscholar.org/paper/1cc529c36edb9d41d78daed360a2eb81c848edae",
+                            "venue": "2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+                            "year": 2022
+                        },
+                        {
+                            "arxivId": "2203.14478",
+                            "authors": [
+                                {
+                                    "authorId": "41017836",
+                                    "name": "Zerong Zheng"
+                                },
+                                {
+                                    "authorId": "2143496929",
+                                    "name": "Han Huang"
+                                },
+                                {
+                                    "authorId": null,
+                                    "name": "Tao Yu"
+                                },
+                                {
+                                    "authorId": "49724467",
+                                    "name": "Hongwen Zhang"
+                                },
+                                {
+                                    "authorId": "3133575",
+                                    "name": "Yandong Guo"
+                                },
+                                {
+                                    "authorId": "1680777",
+                                    "name": "Yebin Liu"
+                                }
+                            ],
+                            "doi": "10.1109/CVPR52688.2022.01543",
+                            "intent": [
+                                "methodology"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "59d25f507cfe13dd215ef243609dafea9eefae19",
+                            "title": "Structured Local Radiance Fields for Human Avatar Modeling",
+                            "url": "https://www.semanticscholar.org/paper/59d25f507cfe13dd215ef243609dafea9eefae19",
+                            "venue": "2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+                            "year": 2022
+                        },
+                        {
+                            "arxivId": "2203.12575",
+                            "authors": [
+                                {
+                                    "authorId": "30401303",
+                                    "name": "Wei Jiang"
+                                },
+                                {
+                                    "authorId": "2906716",
+                                    "name": "K. M. Yi"
+                                },
+                                {
+                                    "authorId": "2063981",
+                                    "name": "Golnoosh Samei"
+                                },
+                                {
+                                    "authorId": "2577513",
+                                    "name": "Oncel Tuzel"
+                                },
+                                {
+                                    "authorId": "1952002",
+                                    "name": "Anurag Ranjan"
+                                }
+                            ],
+                            "doi": "10.48550/arXiv.2203.12575",
+                            "intent": [],
+                            "isInfluential": false,
+                            "paperId": "17df7e87a5d25e6e83d773e6f686eb0a85f6827e",
+                            "title": "NeuMan: Neural Human Radiance Field from a Single Video",
+                            "url": "https://www.semanticscholar.org/paper/17df7e87a5d25e6e83d773e6f686eb0a85f6827e",
+                            "venue": "ECCV",
+                            "year": 2022
+                        },
+                        {
+                            "arxivId": "2202.05263",
+                            "authors": [
+                                {
+                                    "authorId": "7638730",
+                                    "name": "Matthew Tancik"
+                                },
+                                {
+                                    "authorId": "24026083",
+                                    "name": "Vincent Casser"
+                                },
+                                {
+                                    "authorId": "3084614",
+                                    "name": "Xinchen Yan"
+                                },
+                                {
+                                    "authorId": "7177932",
+                                    "name": "Sabeek Pradhan"
+                                },
+                                {
+                                    "authorId": "2577533",
+                                    "name": "B. Mildenhall"
+                                },
+                                {
+                                    "authorId": "2179732",
+                                    "name": "Pratul P. Srinivasan"
+                                },
+                                {
+                                    "authorId": "50329510",
+                                    "name": "J. Barron"
+                                },
+                                {
+                                    "authorId": "34699489",
+                                    "name": "Henrik Kretzschmar"
+                                }
+                            ],
+                            "doi": "10.1109/CVPR52688.2022.00807",
+                            "intent": [
+                                "methodology"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "d7d1bbade9453f0348fac8a5c60d131528b87fcf",
+                            "title": "Block-NeRF: Scalable Large Scene Neural View Synthesis",
+                            "url": "https://www.semanticscholar.org/paper/d7d1bbade9453f0348fac8a5c60d131528b87fcf",
+                            "venue": "2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+                            "year": 2022
+                        },
+                        {
+                            "arxivId": "2201.05989",
+                            "authors": [
+                                {
+                                    "authorId": "145878249",
+                                    "name": "T. Müller"
+                                },
+                                {
+                                    "authorId": "2114739960",
+                                    "name": "Alex Evans"
+                                },
+                                {
+                                    "authorId": "1822833",
+                                    "name": "Christoph Schied"
+                                },
+                                {
+                                    "authorId": "145661463",
+                                    "name": "A. Keller"
+                                }
+                            ],
+                            "doi": "10.1145/3528223.3530127",
+                            "intent": [
+                                "background",
+                                "methodology"
+                            ],
+                            "isInfluential": true,
+                            "paperId": "60e69982ef2920596c6f31d6fd3ca5e9591f3db6",
+                            "title": "Instant neural graphics primitives with a multiresolution hash encoding",
+                            "url": "https://www.semanticscholar.org/paper/60e69982ef2920596c6f31d6fd3ca5e9591f3db6",
+                            "venue": "ACM Trans. Graph.",
+                            "year": 2022
+                        },
+                        {
+                            "arxivId": "2201.04127",
+                            "authors": [
+                                {
+                                    "authorId": "3210124",
+                                    "name": "Chung-Yi Weng"
+                                },
+                                {
+                                    "authorId": "143800609",
+                                    "name": "B. Curless"
+                                },
+                                {
+                                    "authorId": "2179732",
+                                    "name": "Pratul P. Srinivasan"
+                                },
+                                {
+                                    "authorId": "50329510",
+                                    "name": "J. Barron"
+                                },
+                                {
+                                    "authorId": "1397689071",
+                                    "name": "Ira Kemelmacher-Shlizerman"
+                                }
+                            ],
+                            "doi": "10.1109/CVPR52688.2022.01573",
+                            "intent": [
+                                "background",
+                                "methodology"
+                            ],
+                            "isInfluential": true,
+                            "paperId": "f763a59644e27a2215095943224f2564e670a504",
+                            "title": "HumanNeRF: Free-viewpoint Rendering of Moving People from Monocular Video",
+                            "url": "https://www.semanticscholar.org/paper/f763a59644e27a2215095943224f2564e670a504",
+                            "venue": "2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+                            "year": 2022
+                        },
+                        {
+                            "arxivId": "2110.13746",
+                            "authors": [
+                                {
+                                    "authorId": "47995443",
+                                    "name": "Hongyi Xu"
+                                },
+                                {
+                                    "authorId": "1914886",
+                                    "name": "Thiemo Alldieck"
+                                },
+                                {
+                                    "authorId": "1781120",
+                                    "name": "C. Sminchisescu"
+                                }
+                            ],
+                            "doi": null,
+                            "intent": [],
+                            "isInfluential": false,
+                            "paperId": "e67b57dec4da780b5cb4bcb33498a1a329afe53d",
+                            "title": "H-NeRF: Neural Radiance Fields for Rendering and Temporal Reconstruction of Humans in Motion",
+                            "url": "https://www.semanticscholar.org/paper/e67b57dec4da780b5cb4bcb33498a1a329afe53d",
+                            "venue": "NeurIPS",
+                            "year": 2021
+                        },
+                        {
+                            "arxivId": "2110.13903",
+                            "authors": [
+                                {
+                                    "authorId": "50688939",
+                                    "name": "Hao Chen"
+                                },
+                                {
+                                    "authorId": "2082464935",
+                                    "name": "Bo He"
+                                },
+                                {
+                                    "authorId": "2113291093",
+                                    "name": "Hanyu Wang"
+                                },
+                                {
+                                    "authorId": "153159300",
+                                    "name": "Yixuan Ren"
+                                },
+                                {
+                                    "authorId": "38760573",
+                                    "name": "Ser-Nam Lim"
+                                },
+                                {
+                                    "authorId": "1781242",
+                                    "name": "Abhinav Shrivastava"
+                                }
+                            ],
+                            "doi": null,
+                            "intent": [
+                                "methodology"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "e2aa30b637621cf8ca42c9eefc55016cdda5c255",
+                            "title": "NeRV: Neural Representations for Videos",
+                            "url": "https://www.semanticscholar.org/paper/e2aa30b637621cf8ca42c9eefc55016cdda5c255",
+                            "venue": "NeurIPS",
+                            "year": 2021
+                        },
+                        {
+                            "arxivId": "2109.07448",
+                            "authors": [
+                                {
+                                    "authorId": "47822164",
+                                    "name": "Youngjoon Kwon"
+                                },
+                                {
+                                    "authorId": "24028009",
+                                    "name": "Dahun Kim"
+                                },
+                                {
+                                    "authorId": "39686979",
+                                    "name": "Duygu Ceylan"
+                                },
+                                {
+                                    "authorId": "145472944",
+                                    "name": "H. Fuchs"
+                                }
+                            ],
+                            "doi": null,
+                            "intent": [
+                                "background"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "102516bd65bcf42837251f579cf15943499be343",
+                            "title": "Neural Human Performer: Learning Generalizable Radiance Fields for Human Performance Rendering",
+                            "url": "https://www.semanticscholar.org/paper/102516bd65bcf42837251f579cf15943499be343",
+                            "venue": "NeurIPS",
+                            "year": 2021
+                        },
+                        {
+                            "arxivId": "2109.01847",
+                            "authors": [
+                                {
+                                    "authorId": "1400284746",
+                                    "name": "Bangbang Yang"
+                                },
+                                {
+                                    "authorId": "1591143181",
+                                    "name": "Yinda Zhang"
+                                },
+                                {
+                                    "authorId": "121983635",
+                                    "name": "Yinghao Xu"
+                                },
+                                {
+                                    "authorId": "2110512150",
+                                    "name": "Yijin Li"
+                                },
+                                {
+                                    "authorId": "2111825207",
+                                    "name": "Han Zhou"
+                                },
+                                {
+                                    "authorId": "1679542",
+                                    "name": "H. Bao"
+                                },
+                                {
+                                    "authorId": "32162658",
+                                    "name": "Guofeng Zhang"
+                                },
+                                {
+                                    "authorId": "1813796",
+                                    "name": "Zhaopeng Cui"
+                                }
+                            ],
+                            "doi": "10.1109/ICCV48922.2021.01352",
+                            "intent": [
+                                "methodology"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "8bdfd48579130b50112c03170904d803aafe6ba9",
+                            "title": "Learning Object-Compositional Neural Radiance Field for Editable Scene Rendering",
+                            "url": "https://www.semanticscholar.org/paper/8bdfd48579130b50112c03170904d803aafe6ba9",
+                            "venue": "2021 IEEE/CVF International Conference on Computer Vision (ICCV)",
+                            "year": 2021
+                        },
+                        {
+                            "arxivId": "2106.12372",
+                            "authors": [
+                                {
+                                    "authorId": "145878249",
+                                    "name": "T. Müller"
+                                },
+                                {
+                                    "authorId": "1801097",
+                                    "name": "Fabrice Rousselle"
+                                },
+                                {
+                                    "authorId": "144086164",
+                                    "name": "J. Nov'ak"
+                                },
+                                {
+                                    "authorId": "145661463",
+                                    "name": "A. Keller"
+                                }
+                            ],
+                            "doi": "10.1145/3450626.3459812",
+                            "intent": [
+                                "background",
+                                "result",
+                                "methodology"
+                            ],
+                            "isInfluential": true,
+                            "paperId": "1115d5d022c3c15246463a0bc684bb789bfc82dd",
+                            "title": "Real-time neural radiance caching for path tracing",
+                            "url": "https://www.semanticscholar.org/paper/1115d5d022c3c15246463a0bc684bb789bfc82dd",
+                            "venue": "ACM Trans. Graph.",
+                            "year": 2021
+                        },
+                        {
+                            "arxivId": "2106.02019",
+                            "authors": [
+                                {
+                                    "authorId": "46458089",
+                                    "name": "Lingjie Liu"
+                                },
+                                {
+                                    "authorId": "14210288",
+                                    "name": "Marc Habermann"
+                                },
+                                {
+                                    "authorId": "104834674",
+                                    "name": "Viktor Rudnev"
+                                },
+                                {
+                                    "authorId": "3434185",
+                                    "name": "Kripasindhu Sarkar"
+                                },
+                                {
+                                    "authorId": "3016273",
+                                    "name": "Jiatao Gu"
+                                },
+                                {
+                                    "authorId": "1680185",
+                                    "name": "C. Theobalt"
+                                }
+                            ],
+                            "doi": null,
+                            "intent": [
+                                "background",
+                                "methodology"
+                            ],
+                            "isInfluential": true,
+                            "paperId": "29da3be81905d577dac9144c1c3cb5c6678f7027",
+                            "title": "Neural Actor: Neural Free-view Synthesis of Human Actors with Pose Control",
+                            "url": "https://www.semanticscholar.org/paper/29da3be81905d577dac9144c1c3cb5c6678f7027",
+                            "venue": "ArXiv",
+                            "year": 2021
+                        },
+                        {
+                            "arxivId": "2106.01970",
+                            "authors": [
+                                {
+                                    "authorId": "2108764358",
+                                    "name": "Xiuming Zhang"
+                                },
+                                {
+                                    "authorId": "2179732",
+                                    "name": "Pratul P. Srinivasan"
+                                },
+                                {
+                                    "authorId": "22257166",
+                                    "name": "Boyang Deng"
+                                },
+                                {
+                                    "authorId": "1778676",
+                                    "name": "P. Debevec"
+                                },
+                                {
+                                    "authorId": "1768236",
+                                    "name": "W. Freeman"
+                                },
+                                {
+                                    "authorId": "2065306202",
+                                    "name": "Jonathan T. Barron"
+                                }
+                            ],
+                            "doi": "10.1145/3478513.3480496",
+                            "intent": [
+                                "methodology"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "46d7aa01541acda0a6705ae27875523947c57c7d",
+                            "title": "NeRFactor: Neural Factorization of Shape and Reflectance Under an Unknown Illumination",
+                            "url": "https://www.semanticscholar.org/paper/46d7aa01541acda0a6705ae27875523947c57c7d",
+                            "venue": "ACM Trans. Graph.",
+                            "year": 2021
+                        },
+                        {
+                            "arxivId": "2105.02872",
+                            "authors": [
+                                {
+                                    "authorId": "2072712025",
+                                    "name": "Sida Peng"
+                                },
+                                {
+                                    "authorId": "65906869",
+                                    "name": "Junting Dong"
+                                },
+                                {
+                                    "authorId": "2144298123",
+                                    "name": "Qianqian Wang"
+                                },
+                                {
+                                    "authorId": "2116578390",
+                                    "name": "Shang-Wei Zhang"
+                                },
+                                {
+                                    "authorId": "2066148547",
+                                    "name": "Qing Shuai"
+                                },
+                                {
+                                    "authorId": "145453113",
+                                    "name": "Xiaowei Zhou"
+                                },
+                                {
+                                    "authorId": "1679542",
+                                    "name": "H. Bao"
+                                }
+                            ],
+                            "doi": "10.1109/ICCV48922.2021.01405",
+                            "intent": [],
+                            "isInfluential": false,
+                            "paperId": "35e940ace815548f620709d9c1803da34c581e86",
+                            "title": "Animatable Neural Radiance Fields for Modeling Dynamic Human Bodies",
+                            "url": "https://www.semanticscholar.org/paper/35e940ace815548f620709d9c1803da34c581e86",
+                            "venue": "2021 IEEE/CVF International Conference on Computer Vision (ICCV)",
+                            "year": 2021
+                        },
+                        {
+                            "arxivId": "2103.15875",
+                            "authors": [
+                                {
+                                    "authorId": "12551457",
+                                    "name": "S. Zhi"
+                                },
+                                {
+                                    "authorId": "3422926",
+                                    "name": "Tristan Laidlow"
+                                },
+                                {
+                                    "authorId": "2864731",
+                                    "name": "Stefan Leutenegger"
+                                },
+                                {
+                                    "authorId": "2052135690",
+                                    "name": "A. Davison"
+                                }
+                            ],
+                            "doi": "10.1109/ICCV48922.2021.01554",
+                            "intent": [],
+                            "isInfluential": false,
+                            "paperId": "be05b97c1a221b12640bac66cf4b322e3a81ca86",
+                            "title": "In-Place Scene Labelling and Understanding with Implicit Scene Representation",
+                            "url": "https://www.semanticscholar.org/paper/be05b97c1a221b12640bac66cf4b322e3a81ca86",
+                            "venue": "2021 IEEE/CVF International Conference on Computer Vision (ICCV)",
+                            "year": 2021
+                        },
+                        {
+                            "arxivId": "2103.13744",
+                            "authors": [
+                                {
+                                    "authorId": "2091073616",
+                                    "name": "Christian Reiser"
+                                },
+                                {
+                                    "authorId": "49009409",
+                                    "name": "Songyou Peng"
+                                },
+                                {
+                                    "authorId": "2699340",
+                                    "name": "Yiyi Liao"
+                                },
+                                {
+                                    "authorId": "47237027",
+                                    "name": "Andreas Geiger"
+                                }
+                            ],
+                            "doi": "10.1109/ICCV48922.2021.01407",
+                            "intent": [
+                                "methodology"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "c041aaed581616e122e790dd2769337216df3d8d",
+                            "title": "KiloNeRF: Speeding up Neural Radiance Fields with Thousands of Tiny MLPs",
+                            "url": "https://www.semanticscholar.org/paper/c041aaed581616e122e790dd2769337216df3d8d",
+                            "venue": "2021 IEEE/CVF International Conference on Computer Vision (ICCV)",
+                            "year": 2021
+                        },
+                        {
+                            "arxivId": "2103.14024",
+                            "authors": [
+                                {
+                                    "authorId": "2024370854",
+                                    "name": "Alex Yu"
+                                },
+                                {
+                                    "authorId": "51104559",
+                                    "name": "Ruilong Li"
+                                },
+                                {
+                                    "authorId": "7638730",
+                                    "name": "Matthew Tancik"
+                                },
+                                {
+                                    "authorId": "1706574",
+                                    "name": "Hao Li"
+                                },
+                                {
+                                    "authorId": "47383180",
+                                    "name": "Ren Ng"
+                                },
+                                {
+                                    "authorId": "20615377",
+                                    "name": "Angjoo Kanazawa"
+                                }
+                            ],
+                            "doi": "10.1109/ICCV48922.2021.00570",
+                            "intent": [
+                                "background"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "5744fcc21b40327f7ad710de7d947d4584c53012",
+                            "title": "PlenOctrees for Real-time Rendering of Neural Radiance Fields",
+                            "url": "https://www.semanticscholar.org/paper/5744fcc21b40327f7ad710de7d947d4584c53012",
+                            "venue": "2021 IEEE/CVF International Conference on Computer Vision (ICCV)",
+                            "year": 2021
+                        },
+                        {
+                            "arxivId": "2103.10380",
+                            "authors": [
+                                {
+                                    "authorId": "8472317",
+                                    "name": "Stephan J. Garbin"
+                                },
+                                {
+                                    "authorId": "49268985",
+                                    "name": "Marek Kowalski"
+                                },
+                                {
+                                    "authorId": "143945334",
+                                    "name": "Matthew Johnson"
+                                },
+                                {
+                                    "authorId": "143774737",
+                                    "name": "J. Shotton"
+                                },
+                                {
+                                    "authorId": "39596866",
+                                    "name": "Julien P. C. Valentin"
+                                }
+                            ],
+                            "doi": "10.1109/ICCV48922.2021.01408",
+                            "intent": [
+                                "methodology"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "b99c59e6601e2cc5ba1cb2dd740c6c5487b77fe6",
+                            "title": "FastNeRF: High-Fidelity Neural Rendering at 200FPS",
+                            "url": "https://www.semanticscholar.org/paper/b99c59e6601e2cc5ba1cb2dd740c6c5487b77fe6",
+                            "venue": "2021 IEEE/CVF International Conference on Computer Vision (ICCV)",
+                            "year": 2021
+                        },
+                        {
+                            "arxivId": "2102.06199",
+                            "authors": [
+                                {
+                                    "authorId": "2066630474",
+                                    "name": "Shih-Yang Su"
+                                },
+                                {
+                                    "authorId": "1612967506",
+                                    "name": "F. Yu"
+                                },
+                                {
+                                    "authorId": "2065899365",
+                                    "name": "Michael Zollhoefer"
+                                },
+                                {
+                                    "authorId": "2933543",
+                                    "name": "Helge Rhodin"
+                                }
+                            ],
+                            "doi": null,
+                            "intent": [
+                                "background",
+                                "methodology"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "74bb19d1ce2ec9fb9605545a750e68281a067e63",
+                            "title": "A-NeRF: Articulated Neural Radiance Fields for Learning Human Shape, Appearance, and Pose",
+                            "url": "https://www.semanticscholar.org/paper/74bb19d1ce2ec9fb9605545a750e68281a067e63",
+                            "venue": "NeurIPS",
+                            "year": 2021
+                        },
+                        {
+                            "arxivId": "2012.15838",
+                            "authors": [
+                                {
+                                    "authorId": "2072712025",
+                                    "name": "Sida Peng"
+                                },
+                                {
+                                    "authorId": "2145782988",
+                                    "name": "Yuanqing Zhang"
+                                },
+                                {
+                                    "authorId": "121983635",
+                                    "name": "Yinghao Xu"
+                                },
+                                {
+                                    "authorId": "2144298123",
+                                    "name": "Qianqian Wang"
+                                },
+                                {
+                                    "authorId": "2066148547",
+                                    "name": "Qing Shuai"
+                                },
+                                {
+                                    "authorId": "1679542",
+                                    "name": "H. Bao"
+                                },
+                                {
+                                    "authorId": "145453113",
+                                    "name": "Xiaowei Zhou"
+                                }
+                            ],
+                            "doi": "10.1109/CVPR46437.2021.00894",
+                            "intent": [
+                                "background",
+                                "methodology"
+                            ],
+                            "isInfluential": true,
+                            "paperId": "af8faec7c0b8f4b2a28d42a86e0e7d499016c560",
+                            "title": "Neural Body: Implicit Neural Representations with Structured Latent Codes for Novel View Synthesis of Dynamic Humans",
+                            "url": "https://www.semanticscholar.org/paper/af8faec7c0b8f4b2a28d42a86e0e7d499016c560",
+                            "venue": "2021 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+                            "year": 2020
+                        },
+                        {
+                            "arxivId": "2012.12884",
+                            "authors": [
+                                {
+                                    "authorId": "3210124",
+                                    "name": "Chung-Yi Weng"
+                                },
+                                {
+                                    "authorId": "143800609",
+                                    "name": "B. Curless"
+                                },
+                                {
+                                    "authorId": "1397689071",
+                                    "name": "Ira Kemelmacher-Shlizerman"
+                                }
+                            ],
+                            "doi": null,
+                            "intent": [
+                                "methodology"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "a6167229bac2ff9206fde21c443b7cadde9e8a5a",
+                            "title": "Vid2Actor: Free-viewpoint Animatable Person Synthesis from Video in the Wild",
+                            "url": "https://www.semanticscholar.org/paper/a6167229bac2ff9206fde21c443b7cadde9e8a5a",
+                            "venue": "ArXiv",
+                            "year": 2020
+                        },
+                        {
+                            "arxivId": "2012.03918",
+                            "authors": [
+                                {
+                                    "authorId": "2063102428",
+                                    "name": "Mark Boss"
+                                },
+                                {
+                                    "authorId": "2056204078",
+                                    "name": "Raphael Braun"
+                                },
+                                {
+                                    "authorId": "2745026",
+                                    "name": "V. Jampani"
+                                },
+                                {
+                                    "authorId": "50329510",
+                                    "name": "J. Barron"
+                                },
+                                {
+                                    "authorId": "2107890439",
+                                    "name": "Ce Liu"
+                                },
+                                {
+                                    "authorId": "1809190",
+                                    "name": "H. Lensch"
+                                }
+                            ],
+                            "doi": "10.1109/ICCV48922.2021.01245",
+                            "intent": [
+                                "methodology"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "094cc920af8422a1bd98967d2614e38dc939e323",
+                            "title": "NeRD: Neural Reflectance Decomposition from Image Collections",
+                            "url": "https://www.semanticscholar.org/paper/094cc920af8422a1bd98967d2614e38dc939e323",
+                            "venue": "2021 IEEE/CVF International Conference on Computer Vision (ICCV)",
+                            "year": 2020
+                        },
+                        {
+                            "arxivId": "2012.01714",
+                            "authors": [
+                                {
+                                    "authorId": "2202838",
+                                    "name": "David B. Lindell"
+                                },
+                                {
+                                    "authorId": "144247981",
+                                    "name": "Julien N. P. Martel"
+                                },
+                                {
+                                    "authorId": "1731170",
+                                    "name": "Gordon Wetzstein"
+                                }
+                            ],
+                            "doi": "10.1109/CVPR46437.2021.01432",
+                            "intent": [
+                                "background"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "4fc6e9545d30539fac6a6a0dcac1418ad4dd9a9f",
+                            "title": "AutoInt: Automatic Integration for Fast Neural Volume Rendering",
+                            "url": "https://www.semanticscholar.org/paper/4fc6e9545d30539fac6a6a0dcac1418ad4dd9a9f",
+                            "venue": "2021 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+                            "year": 2020
+                        },
+                        {
+                            "arxivId": "2011.12100",
+                            "authors": [
+                                {
+                                    "authorId": "145048708",
+                                    "name": "Michael Niemeyer"
+                                },
+                                {
+                                    "authorId": "47237027",
+                                    "name": "Andreas Geiger"
+                                }
+                            ],
+                            "doi": "10.1109/CVPR46437.2021.01129",
+                            "intent": [
+                                "methodology"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "69a1d72bac9dfb18940ff97ae91643d6c8158e6d",
+                            "title": "GIRAFFE: Representing Scenes as Compositional Generative Neural Feature Fields",
+                            "url": "https://www.semanticscholar.org/paper/69a1d72bac9dfb18940ff97ae91643d6c8158e6d",
+                            "venue": "2021 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+                            "year": 2020
+                        },
+                        {
+                            "arxivId": "2007.11571",
+                            "authors": [
+                                {
+                                    "authorId": "46458089",
+                                    "name": "Lingjie Liu"
+                                },
+                                {
+                                    "authorId": "3016273",
+                                    "name": "Jiatao Gu"
+                                },
+                                {
+                                    "authorId": "38943657",
+                                    "name": "Kyaw Zaw Lin"
+                                },
+                                {
+                                    "authorId": "144078686",
+                                    "name": "Tat-Seng Chua"
+                                },
+                                {
+                                    "authorId": "1680185",
+                                    "name": "C. Theobalt"
+                                }
+                            ],
+                            "doi": null,
+                            "intent": [
+                                "background"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "17d7767a6ea87f4ab24d9cfaa5039160af9cad76",
+                            "title": "Neural Sparse Voxel Fields",
+                            "url": "https://www.semanticscholar.org/paper/17d7767a6ea87f4ab24d9cfaa5039160af9cad76",
+                            "venue": "NeurIPS",
+                            "year": 2020
+                        },
+                        {
+                            "arxivId": "2007.02442",
+                            "authors": [
+                                {
+                                    "authorId": "40502376",
+                                    "name": "Katja Schwarz"
+                                },
+                                {
+                                    "authorId": "2699340",
+                                    "name": "Yiyi Liao"
+                                },
+                                {
+                                    "authorId": "145048708",
+                                    "name": "Michael Niemeyer"
+                                },
+                                {
+                                    "authorId": "47237027",
+                                    "name": "Andreas Geiger"
+                                }
+                            ],
+                            "doi": null,
+                            "intent": [
+                                "methodology"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "62d337dbaead376ca042f23d62c0d4b65ec98546",
+                            "title": "GRAF: Generative Radiance Fields for 3D-Aware Image Synthesis",
+                            "url": "https://www.semanticscholar.org/paper/62d337dbaead376ca042f23d62c0d4b65ec98546",
+                            "venue": "NeurIPS",
+                            "year": 2020
+                        },
+                        {
+                            "arxivId": "2003.08934",
+                            "authors": [
+                                {
+                                    "authorId": "2577533",
+                                    "name": "B. Mildenhall"
+                                },
+                                {
+                                    "authorId": "2179732",
+                                    "name": "Pratul P. Srinivasan"
+                                },
+                                {
+                                    "authorId": "7638730",
+                                    "name": "Matthew Tancik"
+                                },
+                                {
+                                    "authorId": "50329510",
+                                    "name": "J. Barron"
+                                },
+                                {
+                                    "authorId": "1752236",
+                                    "name": "R. Ramamoorthi"
+                                },
+                                {
+                                    "authorId": "47383180",
+                                    "name": "Ren Ng"
+                                }
+                            ],
+                            "doi": "10.1007/978-3-030-58452-8_24",
+                            "intent": [
+                                "background",
+                                "methodology"
+                            ],
+                            "isInfluential": true,
+                            "paperId": "428b663772dba998f5dc6a24488fff1858a0899f",
+                            "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+                            "url": "https://www.semanticscholar.org/paper/428b663772dba998f5dc6a24488fff1858a0899f",
+                            "venue": "ECCV",
+                            "year": 2020
+                        },
+                        {
+                            "arxivId": "1909.12828",
+                            "authors": [
+                                {
+                                    "authorId": "113950826",
+                                    "name": "Nikos Kolotouros"
+                                },
+                                {
+                                    "authorId": "2829330",
+                                    "name": "G. Pavlakos"
+                                },
+                                {
+                                    "authorId": "2105795",
+                                    "name": "Michael J. Black"
+                                },
+                                {
+                                    "authorId": "1751586",
+                                    "name": "Kostas Daniilidis"
+                                }
+                            ],
+                            "doi": "10.1109/ICCV.2019.00234",
+                            "intent": [
+                                "methodology"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "0c2b90305dbeb11950ff71718cb3331048124d50",
+                            "title": "Learning to Reconstruct 3D Human Pose and Shape via Model-Fitting in the Loop",
+                            "url": "https://www.semanticscholar.org/paper/0c2b90305dbeb11950ff71718cb3331048124d50",
+                            "venue": "2019 IEEE/CVF International Conference on Computer Vision (ICCV)",
+                            "year": 2019
+                        },
+                        {
+                            "arxivId": null,
+                            "authors": [
+                                {
+                                    "authorId": "33810877",
+                                    "name": "Peter Hedman"
+                                },
+                                {
+                                    "authorId": "41052563",
+                                    "name": "J. Philip"
+                                },
+                                {
+                                    "authorId": "39310157",
+                                    "name": "True Price"
+                                },
+                                {
+                                    "authorId": "40454588",
+                                    "name": "Jan-Michael Frahm"
+                                },
+                                {
+                                    "authorId": "1721779",
+                                    "name": "G. Drettakis"
+                                },
+                                {
+                                    "authorId": "3309893",
+                                    "name": "G. Brostow"
+                                }
+                            ],
+                            "doi": "10.1145/3272127.3275084",
+                            "intent": [
+                                "background"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "30453b89e7d83f8142e5010a0998175bffc56025",
+                            "title": "Deep blending for free-viewpoint image-based rendering",
+                            "url": "https://www.semanticscholar.org/paper/30453b89e7d83f8142e5010a0998175bffc56025",
+                            "venue": "ACM Trans. Graph.",
+                            "year": 2018
+                        },
+                        {
+                            "arxivId": "1801.03924",
+                            "authors": [
+                                {
+                                    "authorId": "2844849",
+                                    "name": "Richard Zhang"
+                                },
+                                {
+                                    "authorId": "2094770",
+                                    "name": "Phillip Isola"
+                                },
+                                {
+                                    "authorId": "1763086",
+                                    "name": "Alexei A. Efros"
+                                },
+                                {
+                                    "authorId": "2177801",
+                                    "name": "Eli Shechtman"
+                                },
+                                {
+                                    "authorId": "39231399",
+                                    "name": "Oliver Wang"
+                                }
+                            ],
+                            "doi": "10.1109/CVPR.2018.00068",
+                            "intent": [],
+                            "isInfluential": false,
+                            "paperId": "c468bbde6a22d961829e1970e6ad5795e05418d1",
+                            "title": "The Unreasonable Effectiveness of Deep Features as a Perceptual Metric",
+                            "url": "https://www.semanticscholar.org/paper/c468bbde6a22d961829e1970e6ad5795e05418d1",
+                            "venue": "2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition",
+                            "year": 2018
+                        },
+                        {
+                            "arxivId": null,
+                            "authors": [
+                                {
+                                    "authorId": "3273714",
+                                    "name": "Mingsong Dou"
+                                },
+                                {
+                                    "authorId": "2121982",
+                                    "name": "S. Khamis"
+                                },
+                                {
+                                    "authorId": "91070402",
+                                    "name": "Yu.G. Degtyarev"
+                                },
+                                {
+                                    "authorId": "143906553",
+                                    "name": "Philip L. Davidson"
+                                },
+                                {
+                                    "authorId": "34772804",
+                                    "name": "S. Fanello"
+                                },
+                                {
+                                    "authorId": "2371390",
+                                    "name": "Adarsh Kowdle"
+                                },
+                                {
+                                    "authorId": "7540558",
+                                    "name": "Sergio Orts"
+                                },
+                                {
+                                    "authorId": "2086328",
+                                    "name": "Christoph Rhemann"
+                                },
+                                {
+                                    "authorId": "2288470",
+                                    "name": "David Kim"
+                                },
+                                {
+                                    "authorId": "2039726328",
+                                    "name": "Jonathan Taylor"
+                                },
+                                {
+                                    "authorId": "143967473",
+                                    "name": "Pushmeet Kohli"
+                                },
+                                {
+                                    "authorId": "3440762",
+                                    "name": "V. Tankovich"
+                                },
+                                {
+                                    "authorId": "79406746",
+                                    "name": "S. Izadi"
+                                }
+                            ],
+                            "doi": "10.1145/2897824.2925969",
+                            "intent": [
+                                "background"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "bf0a10f4b076cb46273c2b2ad4f3acd6f23a827e",
+                            "title": "Fusion4D: real-time performance capture of challenging scenes",
+                            "url": "https://www.semanticscholar.org/paper/bf0a10f4b076cb46273c2b2ad4f3acd6f23a827e",
+                            "venue": "ACM Trans. Graph.",
+                            "year": 2016
+                        },
+                        {
+                            "arxivId": null,
+                            "authors": [
+                                {
+                                    "authorId": "36676121",
+                                    "name": "Alvaro Collet"
+                                },
+                                {
+                                    "authorId": "153486578",
+                                    "name": "Ming Chuang"
+                                },
+                                {
+                                    "authorId": "2066139949",
+                                    "name": "Pat Sweeney"
+                                },
+                                {
+                                    "authorId": "31582245",
+                                    "name": "D. Gillett"
+                                },
+                                {
+                                    "authorId": "32447917",
+                                    "name": "D. Evseev"
+                                },
+                                {
+                                    "authorId": "2081677676",
+                                    "name": "David Calabrese"
+                                },
+                                {
+                                    "authorId": "144201188",
+                                    "name": "Hugues Hoppe"
+                                },
+                                {
+                                    "authorId": "35869859",
+                                    "name": "Adam G. Kirk"
+                                },
+                                {
+                                    "authorId": "2074769877",
+                                    "name": "Steve Sullivan"
+                                }
+                            ],
+                            "doi": "10.1145/2766945",
+                            "intent": [
+                                "background"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "d468062762decb2470e2840d4bffcd323e599812",
+                            "title": "High-quality streamable free-viewpoint video",
+                            "url": "https://www.semanticscholar.org/paper/d468062762decb2470e2840d4bffcd323e599812",
+                            "venue": "ACM Trans. Graph.",
+                            "year": 2015
+                        },
+                        {
+                            "arxivId": null,
+                            "authors": [
+                                {
+                                    "authorId": "2118476745",
+                                    "name": "Jehee Lee"
+                                },
+                                {
+                                    "authorId": "2115495076",
+                                    "name": "K. Lee"
+                                }
+                            ],
+                            "doi": "10.1145/1028523.1028535",
+                            "intent": [
+                                "background"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "aea6dc73a932f98ac4323185549bf94c5ae750dd",
+                            "title": "Precomputing avatar behavior from human motion data",
+                            "url": "https://www.semanticscholar.org/paper/aea6dc73a932f98ac4323185549bf94c5ae750dd",
+                            "venue": "SCA '04",
+                            "year": 2004
+                        },
+                        {
+                            "arxivId": null,
+                            "authors": [
+                                {
+                                    "authorId": "2415843",
+                                    "name": "S. Gortler"
+                                },
+                                {
+                                    "authorId": "2026212",
+                                    "name": "R. Grzeszczuk"
+                                },
+                                {
+                                    "authorId": "1717841",
+                                    "name": "R. Szeliski"
+                                },
+                                {
+                                    "authorId": "1400248273",
+                                    "name": "Michael F. Cohen"
+                                }
+                            ],
+                            "doi": "10.1145/237170.237200",
+                            "intent": [
+                                "background"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "2a737fbad8dd29730313c89ae1123efeab48786d",
+                            "title": "The lumigraph",
+                            "url": "https://www.semanticscholar.org/paper/2a737fbad8dd29730313c89ae1123efeab48786d",
+                            "venue": "SIGGRAPH",
+                            "year": 1996
+                        },
+                        {
+                            "arxivId": null,
+                            "authors": [
+                                {
+                                    "authorId": "2072712025",
+                                    "name": "Sida Peng"
+                                },
+                                {
+                                    "authorId": "2116578390",
+                                    "name": "Shang-Wei Zhang"
+                                },
+                                {
+                                    "authorId": "121832519",
+                                    "name": "Zhen Xu"
+                                },
+                                {
+                                    "authorId": "2158857804",
+                                    "name": "Chen Geng"
+                                },
+                                {
+                                    "authorId": "15679675",
+                                    "name": "Boyi Jiang"
+                                },
+                                {
+                                    "authorId": "1679542",
+                                    "name": "H. Bao"
+                                },
+                                {
+                                    "authorId": "145453113",
+                                    "name": "Xiaowei Zhou"
+                                }
+                            ],
+                            "doi": "10.48550/arXiv.2203.08133",
+                            "intent": [
+                                "methodology"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "f04d8a5f62099635d30284d1b0167c4ff2d82348",
+                            "title": "Animatable Neural Implicit Surfaces for Creating Avatars from Videos",
+                            "url": "https://www.semanticscholar.org/paper/f04d8a5f62099635d30284d1b0167c4ff2d82348",
+                            "venue": "ArXiv",
+                            "year": 2022
+                        },
+                        {
+                            "arxivId": null,
+                            "authors": [],
+                            "doi": null,
+                            "intent": [],
+                            "isInfluential": false,
+                            "paperId": "",
+                            "title": "Tiny CUDA Neural Network Framework",
+                            "url": "",
+                            "venue": "",
+                            "year": 2021
+                        },
+                        {
+                            "arxivId": null,
+                            "authors": [],
+                            "doi": null,
+                            "intent": [
+                                "background",
+                                "methodology"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "",
+                            "title": "Neural Volumes: Learning dynamic renderable volumes from images",
+                            "url": "",
+                            "venue": "ACM transactions on graphics (TOG),",
+                            "year": 2019
+                        },
+                        {
+                            "arxivId": null,
+                            "authors": [],
+                            "doi": null,
+                            "intent": [
+                                "methodology"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "",
+                            "title": "SMPL: A skinned multiperson linear model",
+                            "url": "",
+                            "venue": "ACM transactions on graphics (TOG),",
+                            "year": 2015
+                        },
+                        {
+                            "arxivId": null,
+                            "authors": [],
+                            "doi": null,
+                            "intent": [
+                                "methodology"
+                            ],
+                            "isInfluential": false,
+                            "paperId": "",
+                            "title": "Latent variable models: An introduction to factor, path, and structural equation analysis",
+                            "url": "",
+                            "venue": "",
+                            "year": 2004
+                        }
+                    ],
+                    "s2FieldsOfStudy": [
+                        {
+                            "category": "Computer Science",
+                            "source": "external"
+                        },
+                        {
+                            "category": "Computer Science",
+                            "source": "s2-fos-model"
+                        }
+                    ],
+                    "title": "Envisioning a Next Generation Extended Reality Conferencing System with Efficient Photorealistic Human Rendering",
+                    "topics": [],
+                    "url": "https://www.semanticscholar.org/paper/455c7f7aeb6f24a096b49cd85edd9ed42daf5b4b",
+                    "venue": "arXiv.org",
+                    "year": 2023
+                }
+                {
+                    "authorId": "2116578390",
+                    "name": "Shang-Wei Zhang"
+                },
+                {
+                    "authorId": "121832519",
+                    "name": "Zhen Xu"
+                },
+                {
+                    "authorId": "2158857804",
+                    "name": "Chen Geng"
+                },
+                {
+                    "authorId": "15679675",
+                    "name": "Boyi Jiang"
+                },
+                {
+                    "authorId": "1679542",
+                    "name": "H. Bao"
+                },
+                {
+                    "authorId": "145453113",
+                    "name": "Xiaowei Zhou"
+                }
+            ],
+            "doi": "10.48550/arXiv.2203.08133",
+            "intent": [
+                "methodology"
+            ],
+            "isInfluential": false,
+            "paperId": "f04d8a5f62099635d30284d1b0167c4ff2d82348",
+            "title": "Animatable Neural Implicit Surfaces for Creating Avatars from Videos",
+            "url": "https://www.semanticscholar.org/paper/f04d8a5f62099635d30284d1b0167c4ff2d82348",
+            "venue": "ArXiv",
+            "year": 2022
+        },
+        {
+            "arxivId": null,
+            "authors": [],
+            "doi": null,
+            "intent": [],
+            "isInfluential": false,
+            "paperId": "",
+            "title": "Tiny CUDA Neural Network Framework",
+            "url": "",
+            "venue": "",
+            "year": 2021
+        },
+        {
+            "arxivId": null,
+            "authors": [],
+            "doi": null,
+            "intent": [
+                "background",
+                "methodology"
+            ],
+            "isInfluential": false,
+            "paperId": "",
+            "title": "Neural Volumes: Learning dynamic renderable volumes from images",
+            "url": "",
+            "venue": "ACM transactions on graphics (TOG),",
+            "year": 2019
+        },
+        {
+            "arxivId": null,
+            "authors": [],
+            "doi": null,
+            "intent": [
+                "methodology"
+            ],
+            "isInfluential": false,
+            "paperId": "",
+            "title": "SMPL: A skinned multiperson linear model",
+            "url": "",
+            "venue": "ACM transactions on graphics (TOG),",
+            "year": 2015
+        },
+        {
+            "arxivId": null,
+            "authors": [],
+            "doi": null,
+            "intent": [
+                "methodology"
+            ],
+            "isInfluential": false,
+            "paperId": "",
+            "title": "Latent variable models: An introduction to factor, path, and structural equation analysis",
+            "url": "",
+            "venue": "",
+            "year": 2004
+        }
+    ],
+    "s2FieldsOfStudy": [
+        {
+            "category": "Computer Science",
+            "source": "external"
+        },
+        {
+            "category": "Computer Science",
+            "source": "s2-fos-model"
+        }
+    ],
+    "title": "Envisioning a Next Generation Extended Reality Conferencing System with Efficient Photorealistic Human Rendering",
+    "topics": [],
+    "url": "https://www.semanticscholar.org/paper/455c7f7aeb6f24a096b49cd85edd9ed42daf5b4b",
+    "venue": "arXiv.org",
+    "year": 2023
+}

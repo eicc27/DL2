@@ -24,4 +24,5 @@ export interface Metadata {
     abstract: string;
     references: number;
     citations: number;
+    referencedPapers: string[];
 }

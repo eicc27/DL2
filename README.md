@@ -12,3 +12,16 @@ out-of-the-box development experience considering UI design.
 - Graph visualisation: Uses D3, a rather complex graph engine with embedded physics engine that handles the forces among nodes.
 - WebASM integrated LSP: Uses Jedi & Pygments, Python language metatools to provide code autocompletions and syntax highlighting, embedded in JS using Pyodide.
 - WebSocket based RTC: Uses WebSocket to provide a peer-to-peer connection in document editing context.
+
+
+## Security chain management
+
+> Keycloak(TODO)
+
+## distributive ML
+
+> Ray(TODO)
+
+## AWS Autoscaler
+
+> Uses JMeter...(testing suites) to guide the configuration of autoscaler.
