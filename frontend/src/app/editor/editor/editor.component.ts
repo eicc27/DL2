@@ -1,8 +1,10 @@
 import { DOCUMENT } from '@angular/common';
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   Inject,
+  OnInit,
   Renderer2,
   ViewChild,
 } from '@angular/core';
@@ -16,15 +18,50 @@ import * as pyodide from 'pyodide';
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.scss'],
 })
-export class EditorComponent {
+export class EditorComponent implements OnInit, AfterViewInit {
   private dragging = false;
   public isDrawerOpen = true;
   public tabs: Tab[] = [];
   public activeTab = -1;
+  @ViewChild('editor') editor!: ElementRef<HTMLDivElement>;
+  @ViewChild('cursor') cursor!: ElementRef<HTMLTextAreaElement>;
   private webasm: pyodide.PyodideInterface | undefined = undefined;
+  public lines: string[] = [];
+  public cursorPos = {
+    col: 0,
+    row: 0,
+  };
 
-  @ViewChild('editor')
-  public editor!: ElementRef<HTMLTextAreaElement>;
+  private setCursor() {
+    // finds the span element with id c${row}_${col} and sets the cursor position
+    const id = `c${this.cursorPos.row}_${this.cursorPos.col}`;
+    const span = document.getElementById(id);
+    if (!span) return;
+    const rect = span.getBoundingClientRect();
+    const cursor = this.cursor.nativeElement;
+    cursor.style.left = `calc(${rect.left}px - 0.1em)`;
+    cursor.style.top = `${rect.top}px`;
+    console.log(this.cursorPos.row, this.cursorPos.col);
+    // set textarea to be focused
+    cursor.focus();
+  }
+
+  public input(event: Event) {
+    const target = event.target;
+    if (!(target instanceof HTMLTextAreaElement)) return;
+    const key = target.value;
+    console.log(key);
+    target.value = '';
+    // update lines
+    const { row, col } = this.cursorPos;
+    const line = this.lines[row];
+    const newLine = line.slice(0, col) + key + line.slice(col);
+    this.lines[row] = newLine;
+    // update cursor position
+    this.cursorPos.col += 1;
+    this.setCursor();
+  }
+
   loading = true;
 
   constructor(
@@ -49,17 +86,31 @@ export class EditorComponent {
     this.webasm = await pyodide.loadPyodide({
       indexURL: 'assets/pyodide/',
     });
-    await this.webasm.loadPackage('jedi');
     const py = `import jedi
 def suggest(text, line, column):
     script = jedi.Script(text)
     try:
-        completions = script.complete(line, column)
-        return [c.name for c in completions]
+      completions = script.complete(line, column)
+      return [c.name for c in completions]
     except:
-        return []
-`;
-    await this.webasm!.runPythonAsync(py);
+      return []
+    `;
+    this.webasm.loadPackage('jedi').then(() => this.webasm!.runPythonAsync(py));
+  }
+
+  ngAfterViewInit() {
+    this.editor.nativeElement.onclick = (e) => {
+      const target = e.target;
+      if (!(target instanceof HTMLElement)) return;
+      const id = target.id;
+      if (!id.startsWith('c')) return;
+      const [row, col] = id.slice(1).split('_');
+      this.cursorPos = {
+        row: parseInt(row),
+        col: parseInt(col),
+      };
+      this.setCursor();
+    }
   }
 
   private drag(e: MouseEvent) {
@@ -115,29 +166,15 @@ def suggest(text, line, column):
   }
 
   public fillText(text: string) {
-    const editor = document.querySelector('textarea') as HTMLElement;
-    editor.innerHTML = text;
+    this.lines = text.split('\\n');
   }
 
   public async getSeggestion() {
-    const editorElement = this.editor.nativeElement;
-    const getLineNumber = () => {
-      return editorElement.value
-        .substring(0, editorElement.selectionStart)
-        .split('\\n').length;
-    };
-    const getColumnNumber = () => {
-      var lines = editorElement.value
-        .substring(0, editorElement.selectionStart)
-        .split('\\n');
-      var currentLine = lines[lines.length - 1];
-      return currentLine.length;
-    };
-    const lineNumber = getLineNumber();
-    const columnNumber = getColumnNumber();
-    const text = editorElement.value;
     const result = await this.webasm!.runPythonAsync(
-      `suggest("${text}", ${lineNumber}, ${columnNumber})`
+      `suggest("""
+${this.lines.join('\\n')}""", ${this.cursorPos.row + 1}, ${
+        this.cursorPos.col + 1
+      })`
     );
     const suggestions: string[] = result.toJs();
     console.log(suggestions.slice(10));

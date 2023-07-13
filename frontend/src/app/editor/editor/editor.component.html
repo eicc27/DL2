@@ -1,10 +1,31 @@
 <mat-drawer-container autosize="true">
   <mat-drawer mode="side" [(opened)]="this.isDrawerOpen">
-    <app-fs (fileSelected)="this.openFile($event)" (fileOpened)="this.fillText($event)" />
+    <app-fs
+      (fileSelected)="this.openFile($event)"
+      (fileOpened)="this.fillText($event)"
+    />
     <div class="drag-handle" (mousedown)="this.toggleDrag($event)"></div>
   </mat-drawer>
   <mat-drawer-content>
-    <app-tagbar [tabs]="this.tabs" [activeTab]="this.activeTab" (tabClose)="this.closeTab($event)"></app-tagbar>
-    <textarea (input)="this.getSeggestion()" #editor></textarea>
+    <app-tagbar
+      [tabs]="this.tabs"
+      [activeTab]="this.activeTab"
+      (tabClose)="this.closeTab($event)"
+    ></app-tagbar>
+    <div class="editor" #editor>
+      <textarea #cursor (input)="this.input($event)"></textarea>
+      <div
+        class="line"
+        id="r{{ i }}"
+        *ngFor="let line of this.lines; index as i"
+      >
+        <div class="line-number">{{ i + 1 }}</div>
+        <div class="line-content">
+          <span *ngFor="let char of line.split(''); index as j" id="c{{ i }}_{{ j }}">{{
+            char
+          }}</span>
+        </div>
+      </div>
+    </div>
   </mat-drawer-content>
 </mat-drawer-container>

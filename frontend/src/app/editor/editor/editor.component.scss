@@ -3,6 +3,7 @@ mat-drawer-container {
   flex-direction: column;
   align-items: flex-start;
   min-height: 100vh;
+
   mat-drawer {
     width: 20vw;
     overflow-x: hidden;
@@ -20,15 +21,41 @@ mat-drawer-container {
   top: 0;
 }
 
-textarea {
-  resize: none;
-  width: 100vw;
+.editor {
   min-height: 100vh;
+  width: 100vw;
+
+  .line,
+  .line-content {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .line-number {
+    margin-right: 2em;
+  }
+
+  span {
+    font-family: monospace;
+    font-size: 1.2em;
+    letter-spacing: 0.1em;
+  }
+}
+
+textarea {
+  position: fixed;
+  overflow: hidden;
+  resize: none;
+  width: 0.05em;
+  height: 1.2em;
   border: none;
   outline: none;
+  background: rgba($color: #FFFFFF, $alpha: 0.3);
+  z-index: 10;
   &:focus {
     outline: none;
   }
 }
-
-
