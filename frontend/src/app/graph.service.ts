@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import * as d3 from 'd3';
+import { GRPAH } from './static-graph.model';
 
 export interface Node extends d3.SimulationNodeDatum {
   id: string;
-  group: number;
+  field: string;
 }
 
 export interface Link {
@@ -18,52 +19,9 @@ export class GraphService {
   private width = 800;
   private height = 600;
 
-  private nodes: Node[] = [
-    { id: 'DL', group: 0 },
-    { id: 'CNN', group: 1 },
-    { id: 'RNN', group: 1 },
-    { id: 'LSTM', group: 1 },
-    { id: 'GRU', group: 1 },
-    { id: 'GAN', group: 1 },
-    { id: 'AE', group: 1 },
-    { id: 'VAE', group: 1 },
-    { id: 'GCN', group: 1 },
-    { id: 'GAT', group: 1 },
-    { id: 'Att', group: 1 },
-    { id: 'ResNet', group: 2 },
-    { id: 'YOLO', group: 2 },
-    { id: 'Trans', group: 2 },
-    { id: 'BERT', group: 2 },
-    { id: 'SRGAN', group: 3 },
-    { id: 'WGAN', group: 3 },
-    { id: 'DCGAN', group: 3 },
-    { id: 'VGG', group: 2 },
-    // Add more nodes as per your data...
-  ];
+  private nodes: Node[] = GRPAH.nodes;
 
-  private links: Link[] = [
-    { source: 'DL', target: 'CNN' },
-    { source: 'DL', target: 'RNN' },
-    { source: 'DL', target: 'LSTM' },
-    { source: 'DL', target: 'GRU' },
-    { source: 'DL', target: 'GAN' },
-    { source: 'DL', target: 'AE' },
-    { source: 'DL', target: 'VAE' },
-    { source: 'DL', target: 'GCN' },
-    { source: 'DL', target: 'GAT' },
-    { source: 'DL', target: 'Att' },
-    { source: 'CNN', target: 'ResNet' },
-    { source: 'CNN', target: 'YOLO' },
-    { source: 'CNN', target: 'VGG' },
-    { source: 'Att', target: 'Trans' },
-    { source: 'Att', target: 'BERT' },
-    { source: 'GAN', target: 'SRGAN' },
-    { source: 'GAN', target: 'WGAN' },
-    { source: 'GAN', target: 'DCGAN' },
-    { source: 'ResNet', target: 'SRGAN' },
-    { source: 'VGG', target: 'SRGAN' },
-    // Add more links as per your data...
-  ];
+  private links: Link[] = GRPAH.edges;
 
   // create a force simulation
   private simulation: d3.Simulation<Node, Link>;
@@ -179,7 +137,7 @@ export class GraphService {
         .data(this.nodes)
         .join('circle')
         .attr('r', 5)
-        .attr('fill', (d) => this.color(d.group.toString()))
+        .attr('fill', (d) => this.color(d.field))
     );
   }
 
