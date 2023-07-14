@@ -12,18 +12,36 @@
       [activeTab]="this.activeTab"
       (tabClose)="this.closeTab($event)"
     ></app-tagbar>
-    <div class="editor" #editor>
-      <textarea #cursor (input)="this.input($event)"></textarea>
+    <div class="editor noselect" #editor>
+      <!-- <textarea
+        #cursor
+        (input)="this.input($event)"
+        (keydown)="this.control($event)"
+      ></textarea> -->
       <div
         class="line"
         id="r{{ i }}"
         *ngFor="let line of this.lines; index as i"
       >
-        <div class="line-number">{{ i + 1 }}</div>
-        <div class="line-content">
-          <span *ngFor="let char of line.split(''); index as j" id="c{{ i }}_{{ j }}">{{
-            char
-          }}</span>
+        <div class="line-number {{ this.cursorPos.row == i ? 'current' : '' }}">
+          {{ i + 1 }}
+        </div>
+        <div class="line-content" id="rc{{ i }}">
+          <span
+            *ngFor="let char of line.split(''); index as j"
+            id="c{{ i }}_{{ j }}"
+            >{{ char === " " ? "&nbsp;" : char }}</span
+          >
+          <span id="c{{ i }}_{{ line.split('').length }}">&nbsp;</span>
+          <!-- <ul
+            #lsp
+            *ngIf="this.cursorPos.row == i && this.suggestions.length"
+            class="suggestions {{ this.suggestions.length ? '' : 'hidden' }}"
+          >
+            <li *ngFor="let suggestion of this.suggestions; index as i">
+              {{ suggestion }}
+            </li>
+          </ul> -->
         </div>
       </div>
     </div>

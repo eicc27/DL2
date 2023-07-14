@@ -37,6 +37,10 @@ mat-tree {
 .example-tree div[role=group]>.mat-tree-node {
   padding-left: 1em;
   min-height: 1em;
+  &:hover {
+    cursor: pointer;
+    background: #f5f5f5;
+  }
 }
 
 

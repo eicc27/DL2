@@ -21,9 +21,27 @@ mat-drawer-container {
   top: 0;
 }
 
+.noselect {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                supported by Chrome, Opera and Firefox */
+}
+
 .editor {
   min-height: 100vh;
   width: 100vw;
+  padding-top: 1em;
+  position: relative;
 
   .line,
   .line-content {
@@ -34,28 +52,78 @@ mat-drawer-container {
     justify-content: flex-start;
   }
 
+  .line {
+    min-height: 2em;
+  }
+
+  .line-content {
+    margin-left: 2em;
+
+    &:hover {
+      cursor: text;
+    }
+  }
+
   .line-number {
-    margin-right: 2em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    position: absolute;
+    left: .1em;
+    color: rgba($color: navy, $alpha: 0.2);
+
+    &.current {
+      color: rgba($color: navy, $alpha: 0.6);
+    }
   }
 
   span {
     font-family: monospace;
     font-size: 1.2em;
-    letter-spacing: 0.1em;
+    padding: 0 .05em;
   }
 }
 
-textarea {
-  position: fixed;
+input {
+  position: absolute;
   overflow: hidden;
   resize: none;
   width: 0.05em;
-  height: 1.2em;
+  font-size: 1.5em;
   border: none;
   outline: none;
-  background: rgba($color: #FFFFFF, $alpha: 0.3);
+  background: transparent;
   z-index: 10;
+
   &:focus {
     outline: none;
+  }
+}
+
+ul,
+li {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.suggestions {
+  &.hidden {
+    visibility: hidden;
+  }
+
+  position: absolute;
+  max-height: 20vh;
+  overflow-x: hidden;
+  width: 25vw;
+  background: lightgray;
+  border: 1px solid black;
+  font-family: monospace;
+
+  li {
+    padding: 0.2em;
+
+    &:hover {
+      background: lightgoldenrodyellow;
+      cursor: pointer;
+    }
   }
 }

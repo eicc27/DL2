@@ -8,9 +8,8 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
+import { encode } from 'he';
 import { Tab } from '../tagbar/tagbar.component';
-import axios from 'axios';
-import { ServerService } from 'src/app/server.service';
 import * as pyodide from 'pyodide';
 
 @Component({
@@ -24,42 +23,176 @@ export class EditorComponent implements OnInit, AfterViewInit {
   public tabs: Tab[] = [];
   public activeTab = -1;
   @ViewChild('editor') editor!: ElementRef<HTMLDivElement>;
-  @ViewChild('cursor') cursor!: ElementRef<HTMLTextAreaElement>;
+  private cursor: HTMLInputElement | undefined = undefined;
+  private lsp: HTMLUListElement | undefined = undefined;
   private webasm: pyodide.PyodideInterface | undefined = undefined;
+  public encode = (text: string) =>
+    encode(text, {
+      useNamedReferences: true,
+    });
+
   public lines: string[] = [];
   public cursorPos = {
     col: 0,
     row: 0,
   };
+  public suggestions: string[] = [];
 
   private setCursor() {
+    this.cursor?.remove();
+    const textArea = this.renderer.createElement('input') as HTMLInputElement;
+    textArea.oninput = this.input.bind(this);
+    textArea.onkeydown = this.control.bind(this);
     // finds the span element with id c${row}_${col} and sets the cursor position
     const id = `c${this.cursorPos.row}_${this.cursorPos.col}`;
-    const span = document.getElementById(id);
+    let span = document.getElementById(id)!;
     if (!span) return;
-    const rect = span.getBoundingClientRect();
-    const cursor = this.cursor.nativeElement;
-    cursor.style.left = `calc(${rect.left}px - 0.1em)`;
-    cursor.style.top = `${rect.top}px`;
+    const left = span.offsetLeft;
+    textArea.style.left = `calc(${left}px - 0.1em)`;
+    const top = span.offsetTop;
+    // textArea.style.top = `calc(${top}px - 0.1em)`;
     console.log(this.cursorPos.row, this.cursorPos.col);
+    // finds the row and appends the textarea
+    const row = document.getElementById(`rc${this.cursorPos.row}`)!;
+    row.appendChild(textArea);
     // set textarea to be focused
-    cursor.focus();
+    textArea.focus();
+    this.cursor = textArea;
   }
 
   public input(event: Event) {
     const target = event.target;
-    if (!(target instanceof HTMLTextAreaElement)) return;
+    if (!(target instanceof HTMLInputElement)) return;
     const key = target.value;
-    console.log(key);
     target.value = '';
     // update lines
     const { row, col } = this.cursorPos;
     const line = this.lines[row];
-    const newLine = line.slice(0, col) + key + line.slice(col);
-    this.lines[row] = newLine;
-    // update cursor position
-    this.cursorPos.col += 1;
-    this.setCursor();
+    if (key != '\n' && key != '\r') {
+      const newLine = line.slice(0, col) + key + line.slice(col);
+      this.lines[row] = newLine;
+      // update cursor position
+      this.cursorPos.col += 1;
+    }
+    setTimeout(async () => {
+      this.setCursor();
+      if (key != ' ') this.suggest();
+      else this.suggestions = [];
+    }, 5);
+  }
+
+  private suggest() {
+    console.log('suggestions:');
+    this.webasm!.runPythonAsync(
+      `suggest("""
+${this.lines.join('\n')}""", ${this.cursorPos.row + 2}, ${
+        this.cursorPos.col - 1
+      })`
+    ).then((result) => {
+      this.clearSuggetions();
+      const suggestions: string[] = result.toJs();
+      this.suggestions = suggestions;
+      console.log(suggestions);
+      // set the position of the suggestions
+      this.craeteSuggestionElement();
+      if (!this.lsp) return;
+      const id = `c${this.cursorPos.row}_${this.cursorPos.col}`;
+      const span = document.getElementById(id)!;
+      const top = span.offsetTop;
+      const left = span.offsetLeft;
+      this.lsp.style.top = `calc(${top}px + 1em)`;
+      this.lsp.style.left = `calc(${left}px + 1em)`;
+      const rowElement = document.getElementById(`rc${this.cursorPos.row}`)!;
+      rowElement.appendChild(this.lsp);
+    });
+  }
+
+  /** TODO: add suggestion info for autocompletion */
+  craeteSuggestionElement() {
+    if (!this.suggestions.length) return;
+    const suggestionElement = this.renderer.createElement('ul') as HTMLUListElement;
+    suggestionElement.classList.add('suggestions');
+    for (const suggestion of this.suggestions) {
+      const li = this.renderer.createElement('li');
+      li.innerText = suggestion;
+      suggestionElement.appendChild(li);
+    }
+    this.lsp = suggestionElement;
+  }
+
+  clearSuggetions() {
+    if (!this.lsp) return;
+    this.suggestions = [];
+    this.lsp.remove();
+    this.lsp = undefined;
+  }
+
+  control(event: KeyboardEvent) {
+    switch (event.key) {
+      case 'ArrowLeft':
+        this.clearSuggetions();
+        this.cursorPos.col -= 1;
+        this.cursorPos.col = Math.max(this.cursorPos.col, 0);
+        setTimeout(() => this.setCursor(), 20);
+        break;
+      case 'ArrowRight':
+        this.clearSuggetions();
+        this.cursorPos.col += 1;
+        this.cursorPos.col = Math.min(
+          this.cursorPos.col,
+          this.lines[this.cursorPos.row].length
+        );
+        setTimeout(() => this.setCursor(), 20);
+        break;
+      case 'ArrowUp':
+        this.clearSuggetions();
+        this.cursorPos.row -= 1;
+        this.cursorPos.row = Math.max(this.cursorPos.row, 0);
+        setTimeout(() => this.setCursor(), 20);
+        break;
+      case 'ArrowDown':
+        this.clearSuggetions();
+        this.cursorPos.row += 1;
+        this.cursorPos.row = Math.min(
+          this.cursorPos.row,
+          this.lines.length - 1
+        );
+        setTimeout(() => this.setCursor(), 20);
+        break;
+      case 'Backspace':
+        this.clearSuggetions();
+        const { row, col } = this.cursorPos;
+        const line = this.lines[row];
+        if (col <= 0) {
+          if (row <= 0) return;
+          this.cursorPos.row -= 1;
+          this.cursorPos.col = this.lines[this.cursorPos.row].length;
+          const line1 = this.lines[this.cursorPos.row];
+          const line2 = this.lines[this.cursorPos.row + 1];
+          this.lines[this.cursorPos.row] = line1 + line2;
+          this.lines.splice(this.cursorPos.row + 1, 1);
+          setTimeout(() => this.setCursor(), 20);
+          break;
+        }
+        const newLine = line.slice(0, col - 1) + line.slice(col);
+        this.lines[row] = newLine;
+        this.cursorPos.col -= 1;
+        setTimeout(() => this.setCursor(), 20);
+        break;
+      case 'Enter':
+        this.clearSuggetions();
+        this.suggestions = [];
+        const { row: r, col: c } = this.cursorPos;
+        const line1 = this.lines[r].slice(0, c);
+        const line2 = this.lines[r].slice(c);
+        this.lines[r] = line1;
+        this.lines.splice(r + 1, 0, line2);
+        this.cursorPos.row += 1;
+        this.cursorPos.col = 0;
+        setTimeout(() => this.setCursor(), 20);
+        break;
+    }
+    // console.log(this.lines);
   }
 
   loading = true;
@@ -92,7 +225,8 @@ def suggest(text, line, column):
     try:
       completions = script.complete(line, column)
       return [c.name for c in completions]
-    except:
+    except Exception as e:
+      print(e)
       return []
     `;
     this.webasm.loadPackage('jedi').then(() => this.webasm!.runPythonAsync(py));
@@ -110,7 +244,7 @@ def suggest(text, line, column):
         col: parseInt(col),
       };
       this.setCursor();
-    }
+    };
   }
 
   private drag(e: MouseEvent) {
@@ -166,17 +300,6 @@ def suggest(text, line, column):
   }
 
   public fillText(text: string) {
-    this.lines = text.split('\\n');
-  }
-
-  public async getSeggestion() {
-    const result = await this.webasm!.runPythonAsync(
-      `suggest("""
-${this.lines.join('\\n')}""", ${this.cursorPos.row + 1}, ${
-        this.cursorPos.col + 1
-      })`
-    );
-    const suggestions: string[] = result.toJs();
-    console.log(suggestions.slice(10));
+    this.lines = text.split('\n');
   }
 }
