@@ -42,7 +42,10 @@ async function main() {
 /**
  * Sanitize the crawled data and creates node-edge citation graph.
  * The metadata of the graph is the field of the paper.
- *
+ * This function mathematically expects an 
+ * even-distributed graph considering the fields,
+ * and will try to make the generated subgraph as diverse as possible.
+ * As a result, the `alpha` specified is just an approximation.
  * @param alpha The percentage of nodes needed.
  */
 function sanitize(alpha = 1) {
