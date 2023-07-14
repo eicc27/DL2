@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as d3 from 'd3';
-import { GRPAH } from './static-graph.model';
+import { GRAPH } from './static-graph.model';
 
 export interface Node extends d3.SimulationNodeDatum {
   id: string;
@@ -19,9 +19,9 @@ export class GraphService {
   private width = 800;
   private height = 600;
 
-  private nodes: Node[] = GRPAH.nodes;
+  private nodes: Node[] = GRAPH.nodes;
 
-  private links: Link[] = GRPAH.edges;
+  private links: Link[] = GRAPH.edges;
 
   // create a force simulation
   private simulation: d3.Simulation<Node, Link>;
@@ -105,7 +105,7 @@ export class GraphService {
       .attr('width', this.width)
       .attr('height', this.height)
       .attr('viewBox', [0, 0, this.width, this.height])
-      .attr('style', 'max-width: 100%; height: auto;');
+      .attr('style', 'max-width: 100%; height: auto; overflow: hidden;');
   }
 
   public createLinks(

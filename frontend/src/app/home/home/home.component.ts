@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
       // zoom in on node
       const transform = d3.zoomIdentity
         .translate(0, 0)
-        .scale(2)
+        .scale(3)
         .translate(
           -(node.datum() as any).x + this.graphService.Width / 2,
           -(node.datum() as any).y + this.graphService.Height / 2

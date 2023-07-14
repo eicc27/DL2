@@ -5,36 +5,111 @@ import { FIELDS, PWCPAGES } from "../utils/Constants.js";
 import SotACrawler from "./SotACrawler.js";
 import chalk from "chalk";
 import IndexCrawler from "./IndexCrawler.js";
-
-
+import { Node, Edge } from "../types/Graph.js";
 
 async function main() {
-    // crawling HTML, HyperText Mardown Language
-    // HTML -> DOM:
-    // Axios GET -> HTML(string) -> JSDOM -> HTML(DOM) -> QuerySelector
-    const crawlIndex = async (index: string, field: string) => {
-        const crawler = new PaperCrawler(index);
-        const result = (await crawler.crawl(false))! as any;
-        result.field = field;
-        fs.writeFileSync(`data/${result.id}.json`, JSON.stringify(result, null, '\t'));
-        console.log('Crawled: ' + result.id);
+  // crawling HTML, HyperText Mardown Language
+  // HTML -> DOM:
+  // Axios GET -> HTML(string) -> JSDOM -> HTML(DOM) -> QuerySelector
+  const sotACrawler = new SotACrawler();
+  await sotACrawler.crawl(false);
+  console.log(chalk.green("SotA fields has been crawled!"));
+  const crawlIndex = async (index: string, field: string) => {
+    const crawler = new PaperCrawler(index);
+    const result = (await crawler.crawl(false))! as any;
+    result.field = field;
+    fs.writeFileSync(
+      `data/${result.id}.json`,
+      JSON.stringify(result, null, "\t")
+    );
+    console.log("Crawled: " + result.id);
+  };
+  const pool = new AsyncPool(10);
+  // FIELDS have been initialized by SotACrawler
+  for (const field of FIELDS) {
+    for (let i = 1; i <= PWCPAGES; i++) {
+      const indexCrawler = new IndexCrawler(field, i);
+      const indexResult = (await indexCrawler.crawl(false))!;
+      for (const index of indexResult) {
+        await pool.submit(crawlIndex, index, field);
+      }
     }
-    const pool = new AsyncPool(10);
-    // FIELDS have been initialized by SotACrawler
-    for (const field of FIELDS) {
-        for (let i = 1; i <= PWCPAGES; i++) {
-            const indexCrawler = new IndexCrawler(field, i);
-            const indexResult = (await indexCrawler.crawl(false))!;
-            for (const index of indexResult) {
-                await pool.submit(crawlIndex, index, field);
-            }
-        }
-        console.log(chalk.green(`${field} has been crawled!`));
-    }
-    await pool.close();
+    console.log(chalk.green(`${field} has been crawled!`));
+  }
+  await pool.close();
 }
 
-const sotACrawler = new SotACrawler();
-await sotACrawler.crawl(false);
-console.log(chalk.green('SotA fields has been crawled!'));
-main();
+/**
+ * Sanitize the crawled data and creates node-edge citation graph.
+ * The metadata of the graph is the field of the paper.
+ *
+ * @param alpha The percentage of nodes needed.
+ */
+function sanitize(alpha = 1) {
+  const files = fs.readdirSync("data/");
+  const fields: any = {};
+  const papers: string[] = [];
+  for (const file of files) {
+    papers.push(file.slice(0, -5));
+    const content = fs.readFileSync(`data/${file}`, "utf-8");
+    const data = JSON.parse(content);
+    const field = data.field;
+    if (Object.keys(fields).includes(field)) {
+      fields[field]++;
+    } else {
+      fields[field] = 1;
+    }
+  }
+  let nodes: Node[] = [];
+  const edges: Edge[] = [];
+  const field_counter: any = {};
+  for (const field in fields) {
+    field_counter[field] = 0;
+  }
+  const cap = Math.ceil((papers.length / Object.keys(fields).length) * alpha);
+  for (const paper of papers) {
+    const file = fs.readFileSync(`data/${paper}.json`, "utf-8");
+    const data = JSON.parse(file);
+    const field = data.field;
+    field_counter[field]++;
+    if (field_counter[field] >= cap) continue;
+    if (field_counter[field] >= fields[field]) continue;
+    nodes.push({
+      id: data.id,
+      field: field,
+    });
+  }
+  // purge the nodes that are not referenced by other nodes
+  nodes = nodes.filter(node => {
+    const file = fs.readFileSync(`data/${node.id}.json`, "utf-8");
+    const data = JSON.parse(file);
+    return data.referencedPapers.length > 0;
+  });
+  const papersInNodes = nodes.map(node => node.id);
+  for (const node of nodes) {
+    const id = node.id;
+    const file = fs.readFileSync(`data/${id}.json`, "utf-8");
+    const data = JSON.parse(file);
+    for (const ref of data.referencedPapers) {
+      if (papersInNodes.includes(ref))
+        edges.push({
+          source: id,
+          target: ref,
+        });
+    }
+  }
+  fs.writeFileSync(
+    "graph.json",
+    JSON.stringify(
+      {
+        nodes: nodes,
+        edges: edges,
+      },
+      null,
+      "\t"
+    )
+  );
+}
+
+// main();
+sanitize(.1);

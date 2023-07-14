@@ -23,6 +23,7 @@ import { FsComponent } from './editor/fs/fs.component';
 import { FileItemComponent } from './editor/fs/file-item/file-item.component';
 import { FolderItemComponent } from './editor/fs/folder-item/folder-item.component';
 import { TagbarComponent } from './editor/tagbar/tagbar.component';
+import { PaperComponent } from './paper/paper.component';
 
 // routing
 const appRoutes = [
@@ -31,6 +32,10 @@ const appRoutes = [
     path: 'editor',
     component: EditorComponent,
   },
+  {
+    path: 'paper/:id',
+    component: PaperComponent,
+  }
 ];
 @NgModule({
   declarations: [
@@ -43,6 +48,7 @@ const appRoutes = [
     FileItemComponent,
     FolderItemComponent,
     TagbarComponent,
+    PaperComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
