@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { OnInit } from '@angular/core';
 import * as d3 from 'd3';
 import { GraphService, Node, Link } from 'src/app/graph.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,8 +12,13 @@ import { GraphService, Node, Link } from 'src/app/graph.service';
 })
 export class HomeComponent implements OnInit {
   private zoom = false;
+  private zoomTarget: SVGElement | null = null;
 
-  public constructor(titleService: Title, private graphService: GraphService) {
+  public constructor(
+    titleService: Title,
+    private graphService: GraphService,
+    private router: Router
+  ) {
     titleService.setTitle('DL2 Home');
   }
 
@@ -41,8 +47,15 @@ export class HomeComponent implements OnInit {
     nodes.append('title').text((d: Node) => d.id);
     nodes.on('click', (event: MouseEvent) => {
       const target = event.target as SVGElement;
+      this.zoom = true;
+      if (this.zoomTarget == target) {
+        //double click, goes to the paper page
+        const node = d3.select(target);
+        const id = (node.datum() as any).id;
+        this.router.navigate(['/paper', id]);
+      }
+      this.zoomTarget = target;
       const node = d3.select(target);
-      // zoom in on node
       const transform = d3.zoomIdentity
         .translate(0, 0)
         .scale(3)

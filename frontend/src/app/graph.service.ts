@@ -138,6 +138,8 @@ export class GraphService {
         .join('circle')
         .attr('r', 5)
         .attr('fill', (d) => this.color(d.field))
+        // on hover: cursor changes to pointer
+        .attr('cursor', 'pointer')
     );
   }
 

@@ -1,3 +1,19 @@
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 15vh;
+}
+
+text {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: normal;
+  font-size: 3em;
+  color: white;
+}
+
 mat-toolbar {
   z-index: 10;
   position: fixed;
@@ -55,46 +71,48 @@ app-userinfo {
   right: 2em;
 }
 
-main {
+circle {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.title {
   width: 100vw;
-  height: 50vh;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  top: 15vh;
+  position: relative;
   z-index: 0;
-
+  max-height: 40vh;
+  overflow: hidden;
   .left {
     display: flex;
     width: 35vw;
     flex-direction: column;
     align-items: flex-start;
-
     div {
       font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
       font-weight: normal;
       font-size: 3em;
       margin: .1em 0;
-
       &:last-child {
         font-weight: bold;
         font-size: 4em;
       }
     }
   }
-
   .right {
     width: 50vw;
-    overflow: hidden;
   }
 }
 
-
-text {
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-weight: normal;
-  font-size: 3em;
-  color: white;
+.graph-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 }
+

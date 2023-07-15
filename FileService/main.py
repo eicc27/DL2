@@ -3,7 +3,9 @@ from flask_cors import CORS
 from constants import USER_BASEDIR
 from response import Response
 import os
-# import jedi
+import jedi
+jedi.settings.call_signatures_validity = 10.0
+
 
 app = Flask(__name__)
 CORS(app)  # This will enable CORS for all routes

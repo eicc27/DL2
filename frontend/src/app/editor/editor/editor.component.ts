@@ -8,9 +8,9 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { encode } from 'he';
 import { Tab } from '../tagbar/tagbar.component';
 import * as pyodide from 'pyodide';
+
 
 @Component({
   selector: 'app-editor',
@@ -25,11 +25,8 @@ export class EditorComponent implements OnInit, AfterViewInit {
   @ViewChild('editor') editor!: ElementRef<HTMLDivElement>;
   private cursor: HTMLInputElement | undefined = undefined;
   private lsp: HTMLUListElement | undefined = undefined;
-  private webasm: pyodide.PyodideInterface | undefined = undefined;
-  public encode = (text: string) =>
-    encode(text, {
-      useNamedReferences: true,
-    });
+  // private webasm: pyodide.PyodideInterface | undefined = undefined;
+  private worker: Worker | undefined = undefined;
 
   public lines: string[] = [];
   public cursorPos = {
@@ -49,9 +46,8 @@ export class EditorComponent implements OnInit, AfterViewInit {
     if (!span) return;
     const left = span.offsetLeft;
     textArea.style.left = `calc(${left}px - 0.1em)`;
-    const top = span.offsetTop;
     // textArea.style.top = `calc(${top}px - 0.1em)`;
-    console.log(this.cursorPos.row, this.cursorPos.col);
+    // console.log(this.cursorPos.row, this.cursorPos.col);
     // finds the row and appends the textarea
     const row = document.getElementById(`rc${this.cursorPos.row}`)!;
     row.appendChild(textArea);
@@ -82,35 +78,26 @@ export class EditorComponent implements OnInit, AfterViewInit {
   }
 
   private suggest() {
-    console.log('suggestions:');
-    this.webasm!.runPythonAsync(
-      `suggest("""
-${this.lines.join('\n')}""", ${this.cursorPos.row + 2}, ${
-        this.cursorPos.col - 1
-      })`
-    ).then((result) => {
-      this.clearSuggetions();
-      const suggestions: string[] = result.toJs();
-      this.suggestions = suggestions;
-      console.log(suggestions);
-      // set the position of the suggestions
-      this.craeteSuggestionElement();
-      if (!this.lsp) return;
-      const id = `c${this.cursorPos.row}_${this.cursorPos.col}`;
-      const span = document.getElementById(id)!;
-      const top = span.offsetTop;
-      const left = span.offsetLeft;
-      this.lsp.style.top = `calc(${top}px + 1em)`;
-      this.lsp.style.left = `calc(${left}px + 1em)`;
-      const rowElement = document.getElementById(`rc${this.cursorPos.row}`)!;
-      rowElement.appendChild(this.lsp);
+    this.worker!.postMessage({
+      lines: this.lines,
+      cursorPos: this.cursorPos,
     });
+    //     this.webasm!.runPythonAsync(
+    //       `suggest("""
+    // ${this.lines.join('\n')}""", ${this.cursorPos.row + 2}, ${
+    //         this.cursorPos.col - 1
+    //       })`
+    //     ).then((result) => {
+
+    //     });
   }
 
   /** TODO: add suggestion info for autocompletion */
   craeteSuggestionElement() {
     if (!this.suggestions.length) return;
-    const suggestionElement = this.renderer.createElement('ul') as HTMLUListElement;
+    const suggestionElement = this.renderer.createElement(
+      'ul'
+    ) as HTMLUListElement;
     suggestionElement.classList.add('suggestions');
     for (const suggestion of this.suggestions) {
       const li = this.renderer.createElement('li');
@@ -200,7 +187,26 @@ ${this.lines.join('\n')}""", ${this.cursorPos.row + 2}, ${
   constructor(
     private renderer: Renderer2,
     @Inject(DOCUMENT) private document: Document
-  ) {}
+  ) {
+    this.worker = new Worker(new URL('./editor.worker', import.meta.url));
+    this.worker.onmessage = (e) => {
+      this.clearSuggetions();
+      const suggestions: string[] = e.data;
+      this.suggestions = suggestions;
+      console.log(suggestions);
+      // set the position of the suggestions
+      this.craeteSuggestionElement();
+      if (!this.lsp) return;
+      const id = `c${this.cursorPos.row}_${this.cursorPos.col}`;
+      const span = document.getElementById(id)!;
+      const top = span.offsetTop;
+      const left = span.offsetLeft;
+      this.lsp.style.top = `calc(${top}px + 1em)`;
+      this.lsp.style.left = `calc(${left}px + 1em)`;
+      const rowElement = document.getElementById(`rc${this.cursorPos.row}`)!;
+      rowElement.appendChild(this.lsp);
+    }
+  }
 
   public toggleDrag(e: MouseEvent) {
     this.dragging = true;
@@ -216,20 +222,21 @@ ${this.lines.join('\n')}""", ${this.cursorPos.row + 2}, ${
       (drawerElement as HTMLElement).style.borderRight = '1px solid lightgray';
       this.renderer.removeClass(this.document.body, 'no-select');
     };
-    this.webasm = await pyodide.loadPyodide({
-      indexURL: 'assets/pyodide/',
-    });
-    const py = `import jedi
-def suggest(text, line, column):
-    script = jedi.Script(text)
-    try:
-      completions = script.complete(line, column)
-      return [c.name for c in completions]
-    except Exception as e:
-      print(e)
-      return []
-    `;
-    this.webasm.loadPackage('jedi').then(() => this.webasm!.runPythonAsync(py));
+    //     this.webasm = await pyodide.loadPyodide({
+    //       indexURL: 'assets/pyodide/',
+    //     });
+
+    //     const py = `import jedi
+    // def suggest(text, line, column):
+    //     script = jedi.Script(text)
+    //     try:
+    //       completions = script.complete(line, column)
+    //       return [c.name for c in completions]
+    //     except Exception as e:
+    //       print(e)
+    //       return []
+    //     `;
+    //     this.webasm.loadPackage('jedi').then(() => this.webasm!.runPythonAsync(py));
   }
 
   ngAfterViewInit() {
