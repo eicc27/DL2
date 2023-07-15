@@ -1,7 +1,12 @@
+export interface Task {
+    name: string;
+    desc: string;
+}
 
 export interface Method {
     method: string;
-    url: string;
+    desc?: string;
+    url?: string;
 }
 
 

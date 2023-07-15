@@ -1,24 +1,34 @@
-import * as fs from "fs";
 import AsyncPool from "../utils/AsyncPool.js";
 import PaperCrawler from "./PaperCrawler.js";
-import { FIELDS, PWCPAGES } from "../utils/Constants.js";
+import { FIELDS, PWCPAGES, SUBSCRIPTION_FIELDS } from "../utils/Constants.js";
 import SotACrawler from "./SotACrawler.js";
 import chalk from "chalk";
 import IndexCrawler from "./IndexCrawler.js";
 import { Node, Edge } from "../types/Graph.js";
+import TaskCrawler from "./TaskCrawler.js";
+import SubscriptionCrawler from "./SubscriptionCrawler.js";
+import InverseCrawler from "./InverseCrawler.js";
+import { writeFileSync } from "fs";
+import * as fs from 'fs';
 
-async function main() {
+async function init() {
   // crawling HTML, HyperText Mardown Language
   // HTML -> DOM:
   // Axios GET -> HTML(string) -> JSDOM -> HTML(DOM) -> QuerySelector
   const sotACrawler = new SotACrawler();
   await sotACrawler.crawl(false);
   console.log(chalk.green("SotA fields has been crawled!"));
-  const crawlIndex = async (index: string, field: string) => {
+  const crawlIndex = async (index: string) => {
+    const taskCrawler = new TaskCrawler(index.slice(7));
     const crawler = new PaperCrawler(index);
-    const result = (await crawler.crawl(false))! as any;
-    result.field = field;
-    fs.writeFileSync(
+    const results = await Promise.all([
+      crawler.crawl(false),
+      taskCrawler.crawl(false),
+    ]);
+    const result = results[0] as any;
+    const tasks = results[1] as any;
+    result.tasks = tasks;
+    writeFileSync(
       `data/${result.id}.json`,
       JSON.stringify(result, null, "\t")
     );
@@ -30,6 +40,7 @@ async function main() {
     for (let i = 1; i <= PWCPAGES; i++) {
       const indexCrawler = new IndexCrawler(field, i);
       const indexResult = (await indexCrawler.crawl(false))!;
+      // the PWC identifier of papers: /paper/{paper}
       for (const index of indexResult) {
         await pool.submit(crawlIndex, index, field);
       }
@@ -42,7 +53,7 @@ async function main() {
 /**
  * Sanitize the crawled data and creates node-edge citation graph.
  * The metadata of the graph is the field of the paper.
- * This function mathematically expects an 
+ * This function mathematically expects an
  * even-distributed graph considering the fields,
  * and will try to make the generated subgraph as diverse as possible.
  * As a result, the `alpha` specified is just an approximation.
@@ -83,12 +94,12 @@ function sanitize(alpha = 1) {
     });
   }
   // purge the nodes that are not referenced by other nodes
-  nodes = nodes.filter(node => {
+  nodes = nodes.filter((node) => {
     const file = fs.readFileSync(`data/${node.id}.json`, "utf-8");
     const data = JSON.parse(file);
     return data.referencedPapers.length > 0;
   });
-  const papersInNodes = nodes.map(node => node.id);
+  const papersInNodes = nodes.map((node) => node.id);
   for (const node of nodes) {
     const id = node.id;
     const file = fs.readFileSync(`data/${id}.json`, "utf-8");
@@ -114,5 +125,33 @@ function sanitize(alpha = 1) {
   );
 }
 
-// main();
+async function subscribe() {
+  for (const field of SUBSCRIPTION_FIELDS) {
+    console.log(chalk.green(`Crawling ${field}`));
+    const subscriptionCrawler = new SubscriptionCrawler(field);
+    // arxiv ids retreived by subscription crawler
+    const results: string[] = await subscriptionCrawler.crawl(false);
+    const pool = new AsyncPool(10);
+    const task = async (result: string) => {
+      const inverseCrawler = new InverseCrawler(result);
+      const pwcId = await inverseCrawler.crawl(false);
+      const paperCrawler = new PaperCrawler("/paper/" + pwcId);
+      const taskCrawler = new TaskCrawler(pwcId);
+      const results = await Promise.all([
+        paperCrawler.crawl(false),
+        taskCrawler.crawl(false),
+      ]);
+      const paper = results[0] as any;
+      const tasks = results[1]!;
+      paper.tasks = tasks;
+      writeFileSync(`data/${result}.json`, JSON.stringify(paper, null, "\t"));
+    };
+    for (const result of results) {
+      await pool.submit(task, result);
+    }
+    await pool.close();
+  }
+}
+await init();
+await subscribe();
 sanitize(.1);

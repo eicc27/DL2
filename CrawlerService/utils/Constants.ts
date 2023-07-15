@@ -7,3 +7,8 @@ export const PWCPAGES = 10;
 export const FIELDS = [
     'semantic-segmentation',
 ];
+
+export const SUBSCRIPTION_FIELDS = [
+    'cs.LG',
+    'cs.AI'
+];
