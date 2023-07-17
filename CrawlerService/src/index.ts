@@ -67,7 +67,7 @@ function sanitize(alpha = 1) {
     papers.push(file.slice(0, -5));
     const content = fs.readFileSync(`data/${file}`, "utf-8");
     const data = JSON.parse(content);
-    const field = data.field;
+    const field = data.tasks.length ? data.tasks[0].name : 'Unknown';
     if (Object.keys(fields).includes(field)) {
       fields[field]++;
     } else {
@@ -80,11 +80,12 @@ function sanitize(alpha = 1) {
   for (const field in fields) {
     field_counter[field] = 0;
   }
+  console.log(chalk.green(`Detected ${Object.keys(fields).length} fields.`));
   const cap = Math.ceil((papers.length / Object.keys(fields).length) * alpha);
   for (const paper of papers) {
     const file = fs.readFileSync(`data/${paper}.json`, "utf-8");
     const data = JSON.parse(file);
-    const field = data.field;
+    const field = data.tasks.length ? data.tasks[0].name : 'Unknown';
     field_counter[field]++;
     if (field_counter[field] >= cap) continue;
     if (field_counter[field] >= fields[field]) continue;
@@ -93,6 +94,7 @@ function sanitize(alpha = 1) {
       field: field,
     });
   }
+  console.log(chalk.green(`Generated ${nodes.length} nodes.`));
   // purge the nodes that are not referenced by other nodes
   nodes = nodes.filter((node) => {
     const file = fs.readFileSync(`data/${node.id}.json`, "utf-8");
@@ -112,6 +114,11 @@ function sanitize(alpha = 1) {
         });
     }
   }
+  // purge the nodes that are not referenced by other nodes, by edges
+  nodes = nodes.filter((node) => {
+    const id = node.id;
+    return edges.some((edge) => edge.source === id || edge.target === id);
+  });
   fs.writeFileSync(
     "graph.json",
     JSON.stringify(
@@ -152,6 +159,6 @@ async function subscribe() {
     await pool.close();
   }
 }
-await init();
-await subscribe();
-sanitize(.1);
+// await init();
+// await subscribe();
+sanitize(.3);

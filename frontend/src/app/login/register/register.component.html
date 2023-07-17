@@ -1,0 +1,63 @@
+<app-sphere></app-sphere>
+<main class="login">
+  <h1 class="title">Register</h1>
+  <div class="form">
+    <div class="row">
+      <span class="title"
+        >Username
+        <app-notification placeholder="*">
+          Your user name, which is used for login. Must be unique and more than
+          6 characters.
+        </app-notification>
+      </span>
+      <input
+        type="input"
+        placeholder="username"
+        (input)="this.checkUser()"
+        (focus)="this.checkUser()"
+        (blur)="this.checkUser()"
+        #username
+      />
+    </div>
+    <div *ngIf="!nameValid" class="error">Username is not valid</div>
+    <div *ngIf="!nameUnique" class="error">Username exists</div>
+  </div>
+  <div class="form">
+    <div class="row">
+      <span class="title"
+        >Password
+        <app-notification placeholder="*">
+          Your very secret password. Must be more than 6 characters. Numbers,
+          lower & upper cases are required.
+        </app-notification>
+      </span>
+      <input
+        type="password"
+        placeholder="password"
+        (input)="this.checkPassword()"
+        (focus)="this.checkPassword()"
+        (blur)="this.checkPassword()"
+        #passwd
+      />
+    </div>
+    <div *ngIf="!passValid" class="error">Password is not valid</div>
+  </div>
+  <div class="form">
+    <div class="row">
+      <span class="title">Email</span>
+      <input
+        type="input"
+        placeholder="email"
+        (input)="this.checkEmail()"
+        (focus)="this.checkEmail()"
+        (blur)="this.checkEmail()"
+        #email
+        />
+    </div>
+    <div *ngIf="!emailValid" class="error">Email is not valid</div>
+  </div>
+  <button class="signin" (click)="this.signUp()">Sign Up</button>
+</main>
+<div class="corner" (click)="gotoLogin()">
+  <span>Back to Login</span>
+</div>

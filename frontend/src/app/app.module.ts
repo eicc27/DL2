@@ -15,7 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { HomeComponent } from './home/home/home.component';
-import { RouterModule } from '@angular/router';
+import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { UserinfoComponent } from './home/userinfo/userinfo.component';
 import { EditorComponent } from './editor/editor/editor.component';
@@ -24,6 +24,10 @@ import { FileItemComponent } from './editor/fs/file-item/file-item.component';
 import { FolderItemComponent } from './editor/fs/folder-item/folder-item.component';
 import { TagbarComponent } from './editor/tagbar/tagbar.component';
 import { PaperComponent } from './paper/paper.component';
+import { LoginComponent } from './login/login/login.component';
+import { SphereComponent } from './login/sphere/sphere.component';
+import { RegisterComponent } from './login/register/register.component';
+import { NotificationComponent } from './login/notification/notification.component';
 
 // routing
 const appRoutes = [
@@ -35,7 +39,15 @@ const appRoutes = [
   {
     path: 'paper/:id',
     component: PaperComponent,
-  }
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+  },
 ];
 @NgModule({
   declarations: [
@@ -49,6 +61,10 @@ const appRoutes = [
     FolderItemComponent,
     TagbarComponent,
     PaperComponent,
+    LoginComponent,
+    SphereComponent,
+    RegisterComponent,
+    NotificationComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

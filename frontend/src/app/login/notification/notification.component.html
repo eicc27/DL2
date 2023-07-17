@@ -1,0 +1,7 @@
+<span class="annotation" (mouseenter)="this.toggle()" (mouseleave)="this.toggle()">
+  <span><sup>{{this.placeholder}}</sup></span>
+  <span class="hint" *ngIf="this.show">
+    <ng-content />
+  </span>
+</span>
+

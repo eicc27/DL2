@@ -1,1 +1,6 @@
-
+.userinfo {
+  cursor: pointer;
+  &:hover {
+    color: royalblue;
+  }
+}

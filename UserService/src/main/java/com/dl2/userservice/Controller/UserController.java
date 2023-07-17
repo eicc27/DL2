@@ -1,29 +1,43 @@
 package com.dl2.userservice.Controller;
 
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import com.dl2.userservice.DTO.UserRequest;
+import com.dl2.userservice.Entity.User;
+import com.dl2.userservice.Response;
+import com.dl2.userservice.Service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UserController {
-    @GetMapping("/hello")
+    @Autowired
+    private UserService service;
+
+    @PostMapping("/login")
     @ResponseBody
-    public String hello() {
-        return "hello world";
+    @CrossOrigin
+    public Response login(
+            @RequestBody UserRequest dto
+            ) {
+        if (service.checkByNameAndPwd(dto.getName(), dto.getPassword())) {
+            return new Response(200, "Login success", dto.getName());
+        } else {
+            return new Response(400, "Wrong user name or password");
+        }
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-
-    @GetMapping("/home")
-    public String home(Principal principal) {
-        return "Welcome, " + principal.getName();
+    @PostMapping("/register")
+    @ResponseBody
+    @CrossOrigin
+    public Response register(
+            @RequestBody User user
+    ) {
+        if (service.checkByName(user.getName())) {
+            return new Response(400, "User name duplicated.");
+        } else {
+            service.register(user);
+            return new Response(200);
+        }
     }
 }

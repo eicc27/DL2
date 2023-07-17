@@ -78,4 +78,10 @@ export class HomeComponent implements OnInit {
         .on('end', dragended)
     );
   }
+
+  ngOnDestroy() {
+    // Remove the canvas when the component is destroyed
+    let canvas = document.getElementById('myCanvas');
+    if (canvas) canvas.remove();
+  }
 }

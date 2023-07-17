@@ -1,0 +1,73 @@
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { RouteReuseStrategy, Router } from '@angular/router';
+import { SphereService } from '../sphere.service';
+import axios from 'axios';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ServerService } from 'src/app/server.service';
+import Response from 'src/response.model';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
+})
+export class LoginComponent implements AfterViewInit {
+  @ViewChild('username') NameElement!: ElementRef<HTMLInputElement>;
+  @ViewChild('passwd') PasswordElement!: ElementRef<HTMLInputElement>;
+
+  nameValid = true;
+  passValid = true;
+
+  public constructor(
+    private sphereService: SphereService,
+    private router: Router,
+    private snack: MatSnackBar,
+  ) {}
+
+  checkName() {
+    const content = this.NameElement.nativeElement.value;
+    if (content.length) {
+      this.nameValid = true;
+    } else {
+      this.nameValid = false;
+    }
+  }
+
+  checkPwd() {
+    const content = this.PasswordElement.nativeElement.value;
+    if (content.length) {
+      this.passValid = true;
+    } else {
+      this.passValid = false;
+    }
+  }
+
+  ngAfterViewInit(): void {
+    this.sphereService.render();
+  }
+
+  async signIn() {
+    this.checkName();
+    this.checkPwd();
+    if (!this.nameValid || !this.passValid) {
+      return;
+    }
+    const resp = await axios.post(ServerService.LoginServer + '/user/login', {
+      name: this.NameElement.nativeElement.value,
+      password: this.PasswordElement.nativeElement.value,
+    });
+    const data: Response = resp.data;
+    if (data.code == 200) {
+      localStorage.setItem('user', data.data);
+      this.router.navigate(['/']);
+    } else if (data.code == 400){
+      this.snack.open('Wrong user name or password.', 'Close', {
+        duration: 5000,
+      });
+    }
+  }
+
+  public gotoReg() {
+    window.location.pathname = '/register';
+  }
+}

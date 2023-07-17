@@ -1,0 +1,38 @@
+<app-sphere> </app-sphere>
+<main class="login">
+  <h1 class="title">Login</h1>
+  <div class="form">
+    <div class="row">
+      <span class="title"
+        >Username
+      </span>
+      <input
+        type="input"
+        placeholder="username"
+        (input)="this.checkName()"
+        (focus)="this.checkName()"
+        (blur)="this.checkName()"
+        #username
+      />
+    </div>
+    <div *ngIf="!nameValid" class="error">Username cannot be empty</div>
+  </div>
+  <div class="form">
+    <div class="row">
+      <span class="title"
+        >Password
+      </span>
+      <input
+        type="password"
+        placeholder="password"
+        (input)="this.checkPwd()"
+        (focus)="this.checkPwd()"
+        (blur)="this.checkPwd()"
+        #passwd
+      />
+    </div>
+    <div *ngIf="!passValid" class="error">Password cannot be empty</div>
+  </div>
+  <button class="signin" (click)="signIn()">Sign In</button>
+  <button class="reg" (click)="gotoReg()">Register</button>
+</main>

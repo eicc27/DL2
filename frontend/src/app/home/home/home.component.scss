@@ -85,7 +85,7 @@ circle {
   justify-content: center;
   position: relative;
   z-index: 0;
-  max-height: 40vh;
+  max-height: 50vh;
   overflow: hidden;
   .left {
     display: flex;
@@ -97,7 +97,7 @@ circle {
       font-weight: normal;
       font-size: 3em;
       margin: .1em 0;
-      &:last-child {
+      &:nth-child(3), &:nth-child(4) {
         font-weight: bold;
         font-size: 4em;
       }

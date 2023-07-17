@@ -1,3 +1,7 @@
-<div class="userinfo">
+<div *ngIf="!this.loggedIn" class="userinfo" (click)="this.login()">
   Login
+</div>
+<div *ngIf="this.loggedIn" class="userinfo" (click)="this.logout()">
+  <span>hello, </span>
+  <span>{{this.name}}</span>
 </div>
