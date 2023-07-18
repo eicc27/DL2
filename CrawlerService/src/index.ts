@@ -59,7 +59,7 @@ async function init() {
  * As a result, the `alpha` specified is just an approximation.
  * @param alpha The percentage of nodes needed.
  */
-function sanitize(alpha = 1) {
+function generateStaticGraph(alpha = 1) {
   const files = fs.readdirSync("data/");
   const fields: any = {};
   const papers: string[] = [];
@@ -159,6 +159,26 @@ async function subscribe() {
     await pool.close();
   }
 }
+
+function sanitize() {
+  let papers = fs.readdirSync("data/");
+  papers = papers.filter((paper) => paper.endsWith(".json"));
+  papers = papers.map((paper) => paper.slice(0, -5));
+  for (const paper of papers) {
+    const fileName = `data/${paper}.json`;
+    const file = fs.readFileSync(fileName, "utf-8");
+    const data = JSON.parse(file);
+    const sanitizedRefs: string[] = [];
+    for (const ref in data.referencedPapers) {
+      if (papers.includes(ref)) {
+        sanitizedRefs.push(ref);
+      }
+    }
+    data.referencedPapers = sanitizedRefs;
+    writeFileSync(fileName, JSON.stringify(data, null, "\t"));
+  }
+}
 // await init();
 // await subscribe();
-sanitize(.3);
+// generateStaticGraph(.3);
+// sanitize();
