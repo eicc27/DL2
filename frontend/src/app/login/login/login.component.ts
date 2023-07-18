@@ -5,6 +5,7 @@ import axios from 'axios';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ServerService } from 'src/app/server.service';
 import Response from 'src/response.model';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -20,9 +21,9 @@ export class LoginComponent implements AfterViewInit {
 
   public constructor(
     private sphereService: SphereService,
-    private router: Router,
     private snack: MatSnackBar,
-  ) {}
+    private authService: AuthService,
+    ) {}
 
   checkName() {
     const content = this.NameElement.nativeElement.value;
@@ -58,8 +59,8 @@ export class LoginComponent implements AfterViewInit {
     });
     const data: Response = resp.data;
     if (data.code == 200) {
-      localStorage.setItem('user', data.data);
-      this.router.navigate(['/']);
+      this.authService.setToken(data.data);
+      window.location.pathname = '/';
     } else if (data.code == 400){
       this.snack.open('Wrong user name or password.', 'Close', {
         duration: 5000,

@@ -4,6 +4,7 @@ import { OnInit } from '@angular/core';
 import * as d3 from 'd3';
 import { GraphService, Node, Link } from 'src/app/graph.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,7 @@ export class HomeComponent implements OnInit {
   public constructor(
     titleService: Title,
     private graphService: GraphService,
-    private router: Router
+    private router: Router,
   ) {
     titleService.setTitle('DL2 Home');
   }
@@ -52,7 +53,7 @@ export class HomeComponent implements OnInit {
         //double click, goes to the paper page
         const node = d3.select(target);
         const id = (node.datum() as any).id;
-        this.router.navigate(['/paper', id]);
+        window.location.pathname = '/paper/' + id;
       }
       this.zoomTarget = target;
       const node = d3.select(target);

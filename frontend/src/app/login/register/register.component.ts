@@ -4,6 +4,7 @@ import { ServerService } from 'src/app/server.service';
 import Response from 'src/response.model';
 import { Router } from '@angular/router';
 import { SphereService } from '../sphere.service';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ export class RegisterComponent implements AfterViewInit {
   @ViewChild('email') EmailElement!: ElementRef<HTMLInputElement>;
 
   public constructor(
-    private router: Router,
+    private authService: AuthService,
     private sphereService: SphereService,
   ) {}
 
@@ -29,6 +30,7 @@ export class RegisterComponent implements AfterViewInit {
   public emailValid = true;
   public univValid = true;
   public nameUnique = true;
+  public emailUnique = true;
 
   checkUser() {
     this.nameUnique = true;
@@ -53,6 +55,7 @@ export class RegisterComponent implements AfterViewInit {
   }
 
   checkEmail() {
+    this.emailUnique = true;
     const content = this.EmailElement.nativeElement.value;
     if (!content.length) {
       this.emailValid = true;
@@ -90,10 +93,12 @@ export class RegisterComponent implements AfterViewInit {
     const data: Response = resp.data;
     if (data.code == 400) {
       this.nameUnique = false;
-    } else if (data.code == 200) {
+    } else if (data.code == 401) {
+      this.emailUnique = false;
+    }else if (data.code == 200) {
       // store the user info in local storage
-      localStorage.setItem('user', data.data);
-      this.router.navigate(['/']);
+      this.authService.setToken(data.data);
+      window.location.pathname = '/';
     }
   }
 

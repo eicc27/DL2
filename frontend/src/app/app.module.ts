@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { HomeComponent } from './home/home/home.component';
+import { JwtModule } from '@auth0/angular-jwt';
 import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { UserinfoComponent } from './home/userinfo/userinfo.component';
@@ -68,6 +69,13 @@ const appRoutes = [
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem('access_token'),
+        allowedDomains: ['*'],
+        disallowedRoutes: []
+      }
+    }),
     BrowserModule,
     BrowserAnimationsModule,
     MatToolbarModule,

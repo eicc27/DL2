@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-userinfo',
@@ -10,22 +11,23 @@ export class UserinfoComponent {
   loggedIn = false;
   name = '';
 
-  public constructor(private route: Router) {
-    const user = localStorage.getItem('user');
-    console.log(user);
+  public constructor(private route: Router, private authService: AuthService) {}
+
+  ngOnInit() {
+    const user = this.authService.getToken();
     if (user) {
       this.loggedIn = true;
-      this.name = user;
+      this.name = user.name;
     }
   }
 
   public login() {
-    this.route.navigate(['login']);
+    window.location.pathname = '/login';
   }
 
   public logout() {
     localStorage.removeItem('user');
     this.loggedIn = false;
-    this.route.navigate(['login']);
+    window.location.pathname = '/login';
   }
 }

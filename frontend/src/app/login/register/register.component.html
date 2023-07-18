@@ -44,7 +44,12 @@
   </div>
   <div class="form">
     <div class="row">
-      <span class="title">Email</span>
+      <span class="title"
+        >Email
+        <app-notification placeholder="+">
+          Your email. Must be unique.
+        </app-notification>
+      </span>
       <input
         type="input"
         placeholder="email"
@@ -52,9 +57,10 @@
         (focus)="this.checkEmail()"
         (blur)="this.checkEmail()"
         #email
-        />
+      />
     </div>
     <div *ngIf="!emailValid" class="error">Email is not valid</div>
+    <div *ngIf="!emailUnique" class="error">Email already exists</div>
   </div>
   <button class="signin" (click)="this.signUp()">Sign Up</button>
 </main>

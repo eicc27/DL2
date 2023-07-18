@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @Service
@@ -15,16 +16,20 @@ public class UserService {
     private UserRepository repo;
 
 
-
-    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 
     @Transactional
-    public boolean checkByNameAndPwd(String name, String pwd) {
+    public Optional<User> checkByNameAndPwd(String name, String pwd) {
         Optional<User> user = repo.findUserByName(name);
-        return user.map(u -> {
+        boolean result = user.map(u -> {
             return encoder.matches(pwd, u.getPassword());
         }).orElse(false);
+        if (result) {
+            return user;
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Transactional
@@ -34,8 +39,14 @@ public class UserService {
     }
 
     @Transactional
-    public User register(User user) {
+    public void register(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
-        return repo.save(user);
+        repo.save(user);
+    }
+
+    @Transactional
+    public boolean checkByEmail(String email) {
+        Optional<User> user = repo.findUserByEmail(email);
+        return user.isPresent();
     }
 }

@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { Tab } from '../tagbar/tagbar.component';
 import * as pyodide from 'pyodide';
-
+import { EditorService } from '../editor.service';
 
 @Component({
   selector: 'app-editor',
@@ -26,7 +26,6 @@ export class EditorComponent implements OnInit, AfterViewInit {
   private cursor: HTMLInputElement | undefined = undefined;
   private lsp: HTMLUListElement | undefined = undefined;
   // private webasm: pyodide.PyodideInterface | undefined = undefined;
-  private worker: Worker | undefined = undefined;
 
   public lines: string[] = [];
   public cursorPos = {
@@ -77,11 +76,25 @@ export class EditorComponent implements OnInit, AfterViewInit {
     }, 5);
   }
 
-  private suggest() {
-    this.worker!.postMessage({
+  private async suggest() {
+    this.clearSuggetions();
+    const suggestions = await this.webasm.suggest({
       lines: this.lines,
       cursorPos: this.cursorPos,
     });
+    this.suggestions = suggestions;
+    console.log(suggestions);
+    // set the position of the suggestions
+    this.craeteSuggestionElement();
+    if (!this.lsp) return;
+    const id = `c${this.cursorPos.row}_${this.cursorPos.col}`;
+    const span = document.getElementById(id)!;
+    const top = span.offsetTop;
+    const left = span.offsetLeft;
+    this.lsp.style.top = `calc(${top}px + 1em)`;
+    this.lsp.style.left = `calc(${left}px + 1em)`;
+    const rowElement = document.getElementById(`rc${this.cursorPos.row}`)!;
+    rowElement.appendChild(this.lsp);
     //     this.webasm!.runPythonAsync(
     //       `suggest("""
     // ${this.lines.join('\n')}""", ${this.cursorPos.row + 2}, ${
@@ -186,27 +199,9 @@ export class EditorComponent implements OnInit, AfterViewInit {
 
   constructor(
     private renderer: Renderer2,
-    @Inject(DOCUMENT) private document: Document
-  ) {
-    this.worker = new Worker(new URL('./editor.worker', import.meta.url));
-    this.worker.onmessage = (e) => {
-      this.clearSuggetions();
-      const suggestions: string[] = e.data;
-      this.suggestions = suggestions;
-      console.log(suggestions);
-      // set the position of the suggestions
-      this.craeteSuggestionElement();
-      if (!this.lsp) return;
-      const id = `c${this.cursorPos.row}_${this.cursorPos.col}`;
-      const span = document.getElementById(id)!;
-      const top = span.offsetTop;
-      const left = span.offsetLeft;
-      this.lsp.style.top = `calc(${top}px + 1em)`;
-      this.lsp.style.left = `calc(${left}px + 1em)`;
-      const rowElement = document.getElementById(`rc${this.cursorPos.row}`)!;
-      rowElement.appendChild(this.lsp);
-    }
-  }
+    @Inject(DOCUMENT) private document: Document,
+    private webasm: EditorService
+  ) {}
 
   public toggleDrag(e: MouseEvent) {
     this.dragging = true;
@@ -222,21 +217,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
       (drawerElement as HTMLElement).style.borderRight = '1px solid lightgray';
       this.renderer.removeClass(this.document.body, 'no-select');
     };
-    //     this.webasm = await pyodide.loadPyodide({
-    //       indexURL: 'assets/pyodide/',
-    //     });
-
-    //     const py = `import jedi
-    // def suggest(text, line, column):
-    //     script = jedi.Script(text)
-    //     try:
-    //       completions = script.complete(line, column)
-    //       return [c.name for c in completions]
-    //     except Exception as e:
-    //       print(e)
-    //       return []
-    //     `;
-    //     this.webasm.loadPackage('jedi').then(() => this.webasm!.runPythonAsync(py));
+    await this.webasm.loadPyodide();
   }
 
   ngAfterViewInit() {
