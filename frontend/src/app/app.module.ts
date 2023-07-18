@@ -14,10 +14,11 @@ import { MatTreeModule } from '@angular/material/tree';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { HomeComponent } from './home/home/home.component';
 import { JwtModule } from '@auth0/angular-jwt';
-import { RouteReuseStrategy, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { UserinfoComponent } from './home/userinfo/userinfo.component';
 import { EditorComponent } from './editor/editor/editor.component';
@@ -32,6 +33,7 @@ import { RegisterComponent } from './login/register/register.component';
 import { NotificationComponent } from './login/notification/notification.component';
 import { LoadingComponent } from './loading/loading.component';
 import { HighlightCapitalizedPipe } from './highlight-capitalized.pipe';
+import { TopbarComponent } from './topbar/topbar.component';
 
 // routing
 const appRoutes = [
@@ -53,6 +55,7 @@ const appRoutes = [
     component: RegisterComponent,
   },
 ];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,6 +74,7 @@ const appRoutes = [
     NotificationComponent,
     LoadingComponent,
     HighlightCapitalizedPipe,
+    TopbarComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -93,6 +97,7 @@ const appRoutes = [
     MatButtonModule,
     MatTabsModule,
     MatProgressSpinnerModule,
+    MatChipsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

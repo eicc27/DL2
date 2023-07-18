@@ -24,7 +24,7 @@ export class GraphService {
   private links: Link[] = GRAPH.edges;
 
   // create a force simulation
-  private simulation: d3.Simulation<Node, Link>;
+  private simulation!: d3.Simulation<Node, Link>;
 
   // color scheme for the nodes
   private color = d3.scaleOrdinal(d3.schemeCategory10);
@@ -50,16 +50,21 @@ export class GraphService {
   };
 
   constructor() {
+  }
+
+  init(width: number, height: number) {
+    this.width = width;
+    this.height = height;
     this.simulation = d3
-      .forceSimulation(this.nodes)
-      .force(
-        'link',
-        d3
-          .forceLink(this.links)
-          .id((d: d3.SimulationNodeDatum) => (d as Node).id)
-      )
-      .force('charge', d3.forceManyBody())
-      .force('center', d3.forceCenter(this.width / 2, this.height / 2));
+    .forceSimulation(this.nodes)
+    .force(
+      'link',
+      d3
+        .forceLink(this.links)
+        .id((d: d3.SimulationNodeDatum) => (d as Node).id)
+    )
+    .force('charge', d3.forceManyBody())
+    .force('center', d3.forceCenter(this.width / 2, this.height / 2));
   }
 
   get Nodes() {
@@ -105,7 +110,7 @@ export class GraphService {
       .attr('width', this.width)
       .attr('height', this.height)
       .attr('viewBox', [0, 0, this.width, this.height])
-      .attr('style', 'max-width: 100%; height: auto; overflow: hidden;');
+      .attr('style', 'max-width: 100%; height: auto;');
   }
 
   public createLinks(
@@ -115,7 +120,7 @@ export class GraphService {
       svg
         .append('g')
         .attr('stroke', '#999')
-        .attr('stroke-opacity', 0.6)
+        .attr('stroke-opacity', 0.2)
         .selectAll()
         .data(this.links)
         .join('line')
@@ -133,11 +138,13 @@ export class GraphService {
         .attr('stroke', '#fff')
         // TODO: change this dynamically to the view numbers added by nodes
         .attr('stroke-width', 1.5)
+        .attr('stroke-opacity', 0.3)
         .selectAll()
         .data(this.nodes)
         .join('circle')
         .attr('r', 5)
         .attr('fill', (d) => this.color(d.field))
+        .attr('fill-opacity', 0.3)
         // on hover: cursor changes to pointer
         .attr('cursor', 'pointer')
     );

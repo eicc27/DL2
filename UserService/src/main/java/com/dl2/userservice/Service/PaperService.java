@@ -85,11 +85,6 @@ public class PaperService {
         String[] tasks = new String[taskPapers.size()];
         Long[] numPapers = new Long[taskPapers.size()];
         for (Object[] taskPaper : taskPapers) {
-//            Optional<TaskPaper> task = taskPaperRepository.getTaskPaperByTaskId((String) taskPaper[0]);
-//            task.ifPresent(value -> {
-//                tasks[taskPapers.indexOf(taskPaper)] = value.getTaskId();
-//                System.out.println("success");
-//            });
             tasks[taskPapers.indexOf(taskPaper)] = (String) taskPaper[0];
             numPapers[taskPapers.indexOf(taskPaper)] = (Long) taskPaper[1];
         }

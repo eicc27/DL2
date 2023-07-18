@@ -1,0 +1,57 @@
+mat-toolbar {
+  z-index: 10;
+  position: fixed;
+}
+
+button {
+  font-style: italic;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 1.2em;
+  background: none;
+  border: none;
+  transition: all .1s ease-out;
+  padding: 0 .8em;
+  height: inherit;
+
+  &:hover {
+    cursor: pointer;
+    color: orangered;
+    background-color: silver;
+  }
+
+  margin-right: 5%;
+}
+
+.spacer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 30vw;
+  height: inherit;
+
+  .spacer-item {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    padding: 0 .8em;
+    margin: 0 1em;
+    height: inherit;
+    transition: all .2s ease-out;
+
+    &:hover {
+      cursor: pointer;
+      color: orangered;
+      background-color: silver;
+    }
+  }
+}
+
+
+app-userinfo {
+  height: inherit;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 2em;
+}

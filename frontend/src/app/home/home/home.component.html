@@ -1,25 +1,14 @@
-<mat-toolbar>
-  <button (click)="this.showFn()">fn</button>
-  <app-searchbar></app-searchbar>
-  <div class="spacer">
-    <div class="spacer-item">SotA</div>
-    <div class="spacer-item">Models</div>
-    <div class="spacer-item">Tools</div>
-    <div class="spacer-item">About</div>
-  </div>
-  <app-userinfo></app-userinfo>
-</mat-toolbar>
-<main>
-  <div class="title">
+<app-topbar />
+<div class="title">
+  <div class="left-bg">
     <div class="left">
       <div>Explainable,</div>
       <div>Customized,</div>
       <div>For Learners,</div>
       <div>By Learners.</div>
     </div>
-    <div class="right">
-      <!-- knowledge graph demo -->
-    </div>
   </div>
-  <div class="graph-container">hello world!</div>
-</main>
+  <div class="right" #graphContainer>
+    <!-- knowledge graph demo -->
+  </div>
+</div>

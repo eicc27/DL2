@@ -1,4 +1,5 @@
 <app-loading *ngIf="this.loading"></app-loading>
+<app-topbar *ngIf="!this.loading"/>
 <main *ngIf="!this.loading" class="container">
   <h1 [innerHTML]="this.paper.title | highlightCapitalized: 'royalblue'">
   </h1>
@@ -13,15 +14,19 @@
   </div>
   <div class="tasks">
     <h2 class="title">Tasks</h2>
-    <div *ngFor="let task of this.paper.tasks; index as i" class="task">
-      <div class="name">{{task.name}}</div>
-    </div>
+    <mat-chip-listbox>
+      <mat-chip *ngFor="let task of this.paper.tasks; index as i" class="task">
+        {{task.name}}
+      </mat-chip>
+    </mat-chip-listbox>
   </div>
   <div class="methods">
     <h2 class="title">Methods</h2>
-    <div *ngFor="let method of this.paper.methods; index as i" class="method">
-      <div class="name">{{method.name}}</div>
-    </div>
+    <mat-chip-listbox>
+      <mat-chip *ngFor="let method of this.paper.methods; index as i" class="method">
+        {{method.name}}
+      </mat-chip>
+    </mat-chip-listbox>
   </div>
   <div class="codes">
     <h2 class="title">Codes</h2>
