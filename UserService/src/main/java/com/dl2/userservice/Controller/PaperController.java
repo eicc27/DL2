@@ -26,11 +26,18 @@ public class PaperController {
         }
     }
 
-    @GetMapping("/popularTask")
+    @GetMapping("/{paperId}/popularTask")
     @ResponseBody
     @CrossOrigin
-    public Response getPopularTask() {
+    public Response getPopularTask(@PathVariable("paperId") String paperId) {
 //        return new Response(200, "here is the popular task");
-        return new Response(200, "Success.", paperService.getMostPopularTasksByNumOfPapers());
+        return new Response(200, "Success.", paperService.getMostPopularTasksByNumOfPapers(paperId));
+    }
+
+    @GetMapping("/{paperId}/popularMethod")
+    @ResponseBody
+    @CrossOrigin
+    public Response getPopularMethod(@PathVariable("paperId") String paperId) {
+        return new Response(200, "Success.", paperService.getMostPopularMethodsByNumOfPapers(paperId));
     }
 }

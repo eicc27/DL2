@@ -1,9 +1,6 @@
 package com.dl2.userservice.Service;
 
-import com.dl2.userservice.DTO.CodeResponse;
-import com.dl2.userservice.DTO.PaperResponse;
-import com.dl2.userservice.DTO.PaperTaskResponse;
-import com.dl2.userservice.DTO.TaskAndMethodResponse;
+import com.dl2.userservice.DTO.*;
 import com.dl2.userservice.Entity.*;
 import com.dl2.userservice.Repository.*;
 import jakarta.transaction.Transactional;
@@ -79,21 +76,30 @@ public class PaperService {
     }
 
     @Transactional
-    public PaperTaskResponse getMostPopularTasksByNumOfPapers() {
-        List<Object[]> taskPapers = taskPaperRepository.getMostPopularTasksByNumOfPapers();
+    public PaperTaskResponse getMostPopularTasksByNumOfPapers(String paperId) {
+        List<Object[]> taskPapers = taskPaperRepository.getMostPopularTasksByNumOfPapers(paperId);
 
         String[] tasks = new String[taskPapers.size()];
         Long[] numPapers = new Long[taskPapers.size()];
         for (Object[] taskPaper : taskPapers) {
-//            Optional<TaskPaper> task = taskPaperRepository.getTaskPaperByTaskId((String) taskPaper[0]);
-//            task.ifPresent(value -> {
-//                tasks[taskPapers.indexOf(taskPaper)] = value.getTaskId();
-//                System.out.println("success");
-//            });
             tasks[taskPapers.indexOf(taskPaper)] = (String) taskPaper[0];
             numPapers[taskPapers.indexOf(taskPaper)] = (Long) taskPaper[1];
         }
         return new PaperTaskResponse(tasks, numPapers);
+    }
+
+    @Transactional
+    public PaperMethodResponse getMostPopularMethodsByNumOfPapers(String paperId) {
+        List<Object[]> methodPapers = methodPaperRepository.getMostPopularMethodsByNumOfPapers(paperId);
+
+        String[] methods = new String[methodPapers.size()];
+        Long[] numPapers = new Long[methodPapers.size()];
+        for (Object[] methodPaper : methodPapers) {
+            methods[methodPapers.indexOf(methodPaper)] = (String) methodPaper[0];
+            numPapers[methodPapers.indexOf(methodPaper)] = (Long) methodPaper[1];
+        }
+
+        return new PaperMethodResponse(methods, numPapers);
     }
 
 
