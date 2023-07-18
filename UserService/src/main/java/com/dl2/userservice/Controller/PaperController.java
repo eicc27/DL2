@@ -25,4 +25,12 @@ public class PaperController {
             return new Response(200, "Success.", paperResponse);
         }
     }
+
+    @GetMapping("/popularTask")
+    @ResponseBody
+    @CrossOrigin
+    public Response getPopularTask() {
+//        return new Response(200, "here is the popular task");
+        return new Response(200, "Success.", paperService.getMostPopularTasksByNumOfPapers());
+    }
 }
