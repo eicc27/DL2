@@ -1,1 +1,33 @@
-<p>paper works! The route is {{ this.id }}</p>
+<app-loading *ngIf="this.loading"></app-loading>
+<main *ngIf="!this.loading" class="container">
+  <h1 [innerHTML]="this.paper.title | highlightCapitalized: 'royalblue'">
+  </h1>
+  <i class="arxiv-id">arxiv: {{ this.paper.arxivId }}</i>
+  <p class="abs">{{ this.paper.abs }}</p>
+  <div class="authors">
+    <h2 class="title">Authors</h2>
+    <span *ngFor="let author of this.paper.authors; index as i" class="author">
+      <i>{{ author }}</i
+      ><span *ngIf="i != this.paper.authors.length - 1">, </span>
+    </span>
+  </div>
+  <div class="tasks">
+    <h2 class="title">Tasks</h2>
+    <div *ngFor="let task of this.paper.tasks; index as i" class="task">
+      <div class="name">{{task.name}}</div>
+    </div>
+  </div>
+  <div class="methods">
+    <h2 class="title">Methods</h2>
+    <div *ngFor="let method of this.paper.methods; index as i" class="method">
+      <div class="name">{{method.name}}</div>
+    </div>
+  </div>
+  <div class="codes">
+    <h2 class="title">Codes</h2>
+    <div *ngFor="let task of this.paper.codes; index as i" class="code">
+      <a class="url" [href]="task.url">{{task.shortened}}</a>
+      <div class="rating">{{task.rating}}</div>
+    </div>
+  </div>
+</main>

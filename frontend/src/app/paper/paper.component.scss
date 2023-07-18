@@ -1,0 +1,101 @@
+main {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  left: 10vw;
+  align-items: flex-start;
+  justify-self: unset;
+  min-height: 200vh;
+}
+
+
+h1,
+h2 {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  letter-spacing: -.5px;
+}
+
+h1 {
+  font-size: 1.8em;
+}
+
+h2 {
+  font-size: 1.4em;
+}
+
+.colorized {
+  color: royalblue;
+}
+
+.arxiv-id {
+  font-size: .9em;
+  color: #777;
+  text-decoration: underline;
+  transition: all .3s ease-out;
+
+  &:hover {
+    color: royalblue;
+    cursor: pointer;
+  }
+}
+
+.author i {
+  font-family: Arial, Helvetica, sans-serif;
+  transition: all .2s ease-out;
+
+  &:hover {
+    color: royalblue;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.tasks .task, .methods .method {
+  margin: .5em 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  transition: all .2s ease-out;
+
+  &:hover {
+    cursor: pointer;
+    color: lightcoral;
+  }
+
+  .task-name, .method-name {
+    font-size: 1.1em;
+    margin-left: .5em;
+  }
+}
+
+.codes {
+  font-size: 1.1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  .code {
+    display: flex;
+    flex-direction: row;
+    margin: .5em 0;
+    .url {
+      color: #777;
+      text-decoration: none;
+      transition: all .2s ease-out;
+
+      &:hover {
+        color: royalblue;
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+
+    .rating {
+      margin-left: 1em;
+    }
+  }
+}

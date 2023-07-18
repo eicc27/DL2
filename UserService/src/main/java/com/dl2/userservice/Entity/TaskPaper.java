@@ -12,9 +12,11 @@ import java.io.Serializable;
 public class TaskPaper {
     @Id
     @GeneratedValue()
+    @Column(name = "taskid")
     private String taskId;
 
     @Id
     @GeneratedValue()
+    @Column(name = "paperid")
     private String paperId;
 }

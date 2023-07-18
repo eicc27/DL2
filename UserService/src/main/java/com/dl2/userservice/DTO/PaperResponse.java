@@ -13,4 +13,5 @@ public class PaperResponse {
     private String[] authors;
     private TaskAndMethodResponse[] tasks;
     private TaskAndMethodResponse[] methods;
+    private CodeResponse[] codes;
 }

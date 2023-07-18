@@ -13,6 +13,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { HomeComponent } from './home/home/home.component';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -29,6 +30,8 @@ import { LoginComponent } from './login/login/login.component';
 import { SphereComponent } from './login/sphere/sphere.component';
 import { RegisterComponent } from './login/register/register.component';
 import { NotificationComponent } from './login/notification/notification.component';
+import { LoadingComponent } from './loading/loading.component';
+import { HighlightCapitalizedPipe } from './highlight-capitalized.pipe';
 
 // routing
 const appRoutes = [
@@ -66,6 +69,8 @@ const appRoutes = [
     SphereComponent,
     RegisterComponent,
     NotificationComponent,
+    LoadingComponent,
+    HighlightCapitalizedPipe,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -73,8 +78,8 @@ const appRoutes = [
       config: {
         tokenGetter: () => localStorage.getItem('access_token'),
         allowedDomains: ['*'],
-        disallowedRoutes: []
-      }
+        disallowedRoutes: [],
+      },
     }),
     BrowserModule,
     BrowserAnimationsModule,
@@ -87,6 +92,7 @@ const appRoutes = [
     MatTreeModule,
     MatButtonModule,
     MatTabsModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

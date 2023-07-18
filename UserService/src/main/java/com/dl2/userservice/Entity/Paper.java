@@ -15,7 +15,7 @@ public class Paper {
 
     private String title;
 
-    private Year author;
+    private Year year;
 
     @Column(name="abstract", length = 10000)
     private String abs;

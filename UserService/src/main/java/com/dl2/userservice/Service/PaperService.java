@@ -1,5 +1,6 @@
 package com.dl2.userservice.Service;
 
+import com.dl2.userservice.DTO.CodeResponse;
 import com.dl2.userservice.DTO.PaperResponse;
 import com.dl2.userservice.DTO.TaskAndMethodResponse;
 import com.dl2.userservice.Entity.*;
@@ -34,6 +35,9 @@ public class PaperService {
     @Autowired
     private TaskRepository taskRepository;
 
+    @Autowired
+    private CodeRepository codeRepository;
+
     @Transactional
     public PaperResponse getPaperByArxivId(String arxivId) {
         Optional<Paper> paper = paperRepository.getPaperByArxivId(arxivId);
@@ -58,7 +62,19 @@ public class PaperService {
             Optional<Author> author = authorRepository.getAuthorByName(authorPaper.getAuthorId());
             author.ifPresent(value -> authors[authorPapers.indexOf(authorPaper)] = value.getName());
         }
-        return new PaperResponse(paper.get().getArxivId(), paper.get().getTitle(), paper.get().getAbs(), paper.get().getCitations(), authors, tasks, methods);
+        List<Code> codes = codeRepository.getCodesByPaperId(arxivId);
+        CodeResponse[] codeResponses = new CodeResponse[codes.size()];
+        for (Code code : codes) {
+            codeResponses[codes.indexOf(code)] = new CodeResponse(code.getUrl(), code.getRating());
+        }
+        return new PaperResponse(paper.get().getArxivId(),
+                paper.get().getTitle(),
+                paper.get().getAbs(),
+                paper.get().getCitations(),
+                authors,
+                tasks,
+                methods,
+                codeResponses);
     }
 
 }
