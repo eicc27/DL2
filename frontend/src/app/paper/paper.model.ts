@@ -1,6 +1,11 @@
-interface TaskAndMethod {
-  name: string;
-  intro: string;
+interface Task {
+  taskName: string[];
+  numPapers: number[];
+}
+
+interface Method {
+  methodName: string[];
+  numPapers: number[];
 }
 
 interface Code {
@@ -15,7 +20,9 @@ export default interface Paper {
   abs: string;
   citations: number;
   authors: string[];
-  tasks: TaskAndMethod[];
-  methods: TaskAndMethod[];
+  tasks: Task;
+  methods: Method;
   codes: Code[];
+  taskColors: string[];
+  methodColors: string[];
 }

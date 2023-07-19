@@ -7,6 +7,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,8 +71,8 @@ public class PaperService {
                 paper.get().getAbs(),
                 paper.get().getCitations(),
                 authors,
-                tasks,
-                methods,
+                getMostPopularTasksByNumOfPapers(arxivId),
+                getMostPopularMethodsByNumOfPapers(arxivId),
                 codeResponses);
     }
 
@@ -102,5 +103,43 @@ public class PaperService {
         return new PaperMethodResponse(methods, numPapers);
     }
 
+    @Transactional
+    public List<PaperResponse> getMostCitedPapers() {
+        List<Paper> papers = paperRepository.getMostCitedPapers();
+        List<PaperResponse> paperResponses = new ArrayList<>();
+        for (Paper paper : papers) {
+            paperResponses.add(getPaperByArxivId(paper.getArxivId()));
+        }
+        return paperResponses;
+    }
 
+    @Transactional
+    public List<FeaturedTaskAndMethodResponse> getFeaturedTasks() {
+        List<Object[]> objects = taskPaperRepository.getMostPopularTasks();
+        List<FeaturedTaskAndMethodResponse> featuredTaskAndMethodResponses = new ArrayList<>();
+        for (Object[] object : objects) {
+            featuredTaskAndMethodResponses.add(new FeaturedTaskAndMethodResponse((String) object[0], (Long) object[1]));
+        }
+        return featuredTaskAndMethodResponses;
+    }
+
+    @Transactional
+    public List<FeaturedTaskAndMethodResponse> getFeaturedMethods() {
+        List<Object[]> objects = methodPaperRepository.getMostPopularMethods();
+        List<FeaturedTaskAndMethodResponse> featuredTaskAndMethodResponses = new ArrayList<>();
+        for (Object[] object : objects) {
+            featuredTaskAndMethodResponses.add(new FeaturedTaskAndMethodResponse((String) object[0], (Long) object[1]));
+        }
+        return featuredTaskAndMethodResponses;
+    }
+
+    @Transactional
+    public List<PaperResponse> searchByTitle(String query) {
+        List<Paper> papers = paperRepository.searchByTitle(query);
+        List<PaperResponse> paperResponses = new ArrayList<>();
+        for (Paper paper : papers) {
+            paperResponses.add(getPaperByArxivId(paper.getArxivId()));
+        }
+        return paperResponses;
+    }
 }

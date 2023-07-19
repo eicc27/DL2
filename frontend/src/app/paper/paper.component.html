@@ -1,9 +1,26 @@
 <app-loading *ngIf="this.loading"></app-loading>
-<app-topbar *ngIf="!this.loading"/>
+<app-topbar *ngIf="!this.loading" />
 <main *ngIf="!this.loading" class="container">
-  <h1 [innerHTML]="this.paper.title | highlightCapitalized: 'royalblue'">
-  </h1>
-  <i class="arxiv-id">arxiv: {{ this.paper.arxivId }}</i>
+  <h1 [innerHTML]="this.paper.title | highlightCapitalized : 'royalblue'"></h1>
+  <span class="arxiv-and-star">
+    <i class="arxiv-id">arxiv: {{ this.paper.arxivId }}</i>
+    <button (click)="toggleFav()" *ngIf="this.authorized">
+      <mat-icon
+        *ngIf="!fav"
+        [style]="{
+          color: '#ccc'
+        }"
+        >star_border</mat-icon
+      >
+      <mat-icon
+        *ngIf="fav"
+        [style]="{
+          color: 'gold'
+        }"
+        >star</mat-icon
+      >
+    </button>
+  </span>
   <p class="abs">{{ this.paper.abs }}</p>
   <div class="authors">
     <h2 class="title">Authors</h2>
@@ -15,24 +32,44 @@
   <div class="tasks">
     <h2 class="title">Tasks</h2>
     <mat-chip-listbox>
-      <mat-chip *ngFor="let task of this.paper.tasks; index as i" class="task">
-        {{task.name}}
-      </mat-chip>
+      <mat-basic-chip
+        *ngFor="let task of this.paper.tasks.taskName; index as i"
+        class="task"
+        [ngStyle]="{
+          background: this.paper.taskColors[i],
+          color: 'whitesmoke',
+          padding: '0.5rem 0.8rem',
+          margin: '0 0.5rem',
+          'border-radius': '2rem'
+        }"
+      >
+        {{ task }}
+      </mat-basic-chip>
     </mat-chip-listbox>
   </div>
   <div class="methods">
     <h2 class="title">Methods</h2>
     <mat-chip-listbox>
-      <mat-chip *ngFor="let method of this.paper.methods; index as i" class="method">
-        {{method.name}}
-      </mat-chip>
+      <mat-basic-chip
+        *ngFor="let method of this.paper.methods.methodName; index as i"
+        class="method"
+        [ngStyle]="{
+          background: this.paper.methodColors[i],
+          color: 'whitesmoke',
+          padding: '0.5rem 0.8rem',
+          margin: '0.5rem',
+          'border-radius': '2rem'
+        }"
+      >
+        {{ method }}
+      </mat-basic-chip>
     </mat-chip-listbox>
   </div>
   <div class="codes">
     <h2 class="title">Codes</h2>
     <div *ngFor="let task of this.paper.codes; index as i" class="code">
-      <a class="url" [href]="task.url">{{task.shortened}}</a>
-      <div class="rating">{{task.rating}}</div>
+      <a class="url" [href]="task.url">{{ task.shortened }}</a>
+      <div class="rating">{{ task.rating }}</div>
     </div>
   </div>
 </main>

@@ -1,0 +1,36 @@
+<div class="overlay" *ngIf="this.searching">
+  searching...
+</div>
+
+<div class="overlay" *ngIf="!this.searching && !this.papers.length">
+  The result is empty.
+</div>
+
+<div class="overlay" *ngIf ="!this.searching && this.papers.length">
+  <div class="overlay-paper" *ngFor="let paper of papers" (click)="openPaper(paper.arxivId)">
+    <h3
+      class="overlay-paper-title"
+      [innerHTML]="this.paper.title"
+    ></h3>
+    <div class="overlay-authors">
+      <span *ngFor="let author of paper.authors; index as i">
+        <i>{{ author }}</i
+        ><span *ngIf="i != paper.authors.length - 1">,&nbsp;</span>
+      </span>
+    </div>
+    <div class="overlay-methods" *ngIf="paper.methods.methodName.length">
+      <span class="overlay-method-desc">Uses:</span>
+      <span *ngFor="let method of paper.methods.methodName; index as i">
+        <span>{{ method }}</span
+        ><span *ngIf="i != paper.methods.methodName.length - 1">,&nbsp;</span>
+      </span>
+    </div>
+    <div class="overlay-tasks" *ngIf="paper.tasks.taskName.length">
+      <span class="overlay-method-desc">Used for:</span>
+      <span *ngFor="let task of paper.tasks.taskName; index as i">
+        <span>{{ task }}</span
+        ><span *ngIf="i != paper.tasks.taskName.length - 1">,&nbsp;</span>
+      </span>
+    </div>
+  </div>
+</div>

@@ -25,6 +25,16 @@ h2 {
   font-size: 1.4em;
 }
 
+.arxiv-and-star {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  .arxiv-id {
+    margin-right: 1em;
+  }
+}
+
 .colorized {
   color: royalblue;
 }
@@ -52,21 +62,23 @@ h2 {
   }
 }
 
-.tasks .task, .methods .method {
-  margin: .5em 0;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  transition: all .2s ease-out;
+.tasks .task,
+.methods .method {
+  // margin: .5em 0;
+  // display: flex;
+  // flex-direction: row;
+  // align-items: center;
+  // justify-content: flex-start;
+  // width: 100%;
+  // transition: all .2s ease-out;
 
-  &:hover {
-    cursor: pointer;
-    color: lightcoral;
-  }
+  // &:hover {
+  //   cursor: pointer;
+  //   color: lightcoral;
+  // }
 
-  .task-name, .method-name {
+  .task-name,
+  .method-name {
     font-size: 1.1em;
     margin-left: .5em;
   }
@@ -83,6 +95,7 @@ h2 {
     display: flex;
     flex-direction: row;
     margin: .5em 0;
+
     .url {
       color: #777;
       text-decoration: none;
@@ -98,5 +111,15 @@ h2 {
     .rating {
       margin-left: 1em;
     }
+  }
+}
+
+mat-chip-listbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  mat-basic-chip {
+    margin: .5em !important;
   }
 }

@@ -34,6 +34,7 @@ import { NotificationComponent } from './login/notification/notification.compone
 import { LoadingComponent } from './loading/loading.component';
 import { HighlightCapitalizedPipe } from './highlight-capitalized.pipe';
 import { TopbarComponent } from './topbar/topbar.component';
+import { SearchOverlayComponent } from './search-overlay/search-overlay.component';
 
 // routing
 const appRoutes = [
@@ -75,6 +76,7 @@ const appRoutes = [
     LoadingComponent,
     HighlightCapitalizedPipe,
     TopbarComponent,
+    SearchOverlayComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

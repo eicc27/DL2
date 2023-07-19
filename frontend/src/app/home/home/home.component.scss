@@ -1,4 +1,12 @@
+app-topbar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+}
+
 .title {
+  overflow: hidden;
   $duration: 1s;
   position: absolute;
   width: 100vw;
@@ -9,12 +17,14 @@
   align-items: center;
   animation: $duration ease-out title-showup forwards;
   opacity: 0%;
-  overflow: hidden;
   transition: all .3s ease-out;
+
   div {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 1.5em;
-    &:nth-child(3), &:nth-child(4) {
+
+    &:nth-child(3),
+    &:nth-child(4) {
       font-size: 2em;
       font-weight: bold;
     }
@@ -44,20 +54,103 @@
     width: inherit;
     height: inherit;
     transition: all 0.5s ease-out;
+
     // background: rgba(0, 0, 0, 0.5);
-    circle, line {
+    circle,
+    line {
       transition: all 0.5s ease-out;
     }
   }
 }
 
 @keyframes title-showup {
- 0% {
-  opacity: 0;
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 100%;
+  }
 }
 
- 100% {
-  opacity: 100%;
- }
-}
+.featured {
+  position: absolute;
+  top: 110vh;
+  left: 10vw;
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-bottom: 5em;
 
+  h2,
+  h3 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+
+  h2 {
+    font-size: 2.3em;
+    padding: 0;
+    margin: 0;
+    margin-top:1em;
+    margin-bottom: .5em;
+  }
+
+  h3 {
+    font-size: 1.3em;
+    padding: 0;
+    margin: 0;
+    margin-bottom: .2em;
+  }
+
+  .papers {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+
+    .tasks,
+    .methods {
+      margin-top: .8em;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+      span {
+        font-size: 1em;
+        &.method-desc {
+          font-size: 1.2em;
+          font-weight: bold;
+          margin-right: .3em;
+        }
+      }
+    }
+
+    .paper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      margin: 1em 0.5em;
+      padding: 1.5em 1em;
+      width: 75vw;
+      background: rgba($color: #ddd, $alpha: 0.4);
+      transition: all .3s ease-out;
+
+      &:hover {
+        box-shadow: 2px 2px 2px 0px gray;
+        transform: scale(1.05);
+        cursor: pointer;
+      }
+
+      .authors {
+        color: #888;
+
+        span {
+          margin: 0;
+          padding: 0;
+        }
+      }
+    }
+  }
+}

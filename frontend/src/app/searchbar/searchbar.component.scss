@@ -28,3 +28,31 @@
     }
   }
 }
+
+.background {
+  z-index: 50;
+  position: fixed;
+  left: 0;
+  top: 10vh;
+  width: 100vw;
+  height: 90vh;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.5);
+  animation: 0.2s ease-out sr-showup forwards;
+}
+
+app-search-overlay {
+  position: fixed;
+  animation: 0.2s ease-out sr-showup forwards;
+  z-index: 100;
+}
+
+@keyframes sr-showup {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 100%;
+  }
+}

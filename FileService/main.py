@@ -22,7 +22,6 @@ def get_filesystem():
             elif os.path.isdir(actual_dir):
                 dirs_with_type.append({"name": d, "type": "dir"})
         return dirs_with_type
-
     user_id = request.json["userId"]
     is_new = False
     if not os.path.exists(USER_BASEDIR + user_id):

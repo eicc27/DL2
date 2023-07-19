@@ -16,16 +16,28 @@ public interface MethodPaperRepository extends JpaRepository<MethodPaper, String
     Optional<MethodPaper> getMethodPaperByMethodId(String methodId);
 
     @Query(value = """
-                    select methodid, num
-                    from method_paper,
-                    (
-                    	select methodid, count(*) as num
-                        from method_paper
-                        group by methodid
-                        order by num desc
-                    ) as Order_method(id, num)
-                    where paperid = :paperId and id = methodid
-                    limit 5;
+            SELECT methodid, total_papers
+            FROM (
+                SELECT methodid, COUNT(*) AS total_papers
+                FROM method_paper
+                GROUP BY methodid
+            ) AS total_counts
+            WHERE methodid IN (
+                SELECT methodid
+                FROM method_paper
+                WHERE paperid = :paperId
+            )
+            ORDER BY total_papers DESC
+            LIMIT 5;
                    """, nativeQuery = true)
     List<Object[]> getMostPopularMethodsByNumOfPapers(@Param("paperId") String paperId);
+
+    @Query(value = """
+            select methodid as name, count(*) as paperNum
+            from method_paper
+                group by name
+                order by paperNum desc
+                limit 10;
+            """, nativeQuery = true)
+    List<Object[]> getMostPopularMethods();
 }

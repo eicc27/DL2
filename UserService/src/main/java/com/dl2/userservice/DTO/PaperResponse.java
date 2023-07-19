@@ -11,7 +11,7 @@ public class PaperResponse {
     private String abs;
     private Long citations;
     private String[] authors;
-    private TaskAndMethodResponse[] tasks;
-    private TaskAndMethodResponse[] methods;
+    private PaperTaskResponse tasks;
+    private PaperMethodResponse methods;
     private CodeResponse[] codes;
 }

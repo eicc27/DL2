@@ -19,6 +19,7 @@ public class PaperController {
     @CrossOrigin
     public Response getPaperById(@PathVariable("paperId") String paperId) {
         PaperResponse paperResponse = paperService.getPaperByArxivId(paperId);
+
         if (paperResponse == null) {
             return new Response(400, "Paper not found.");
         } else {
@@ -39,5 +40,26 @@ public class PaperController {
     @CrossOrigin
     public Response getPopularMethod(@PathVariable("paperId") String paperId) {
         return new Response(200, "Success.", paperService.getMostPopularMethodsByNumOfPapers(paperId));
+    }
+
+    @GetMapping("/featured/papers")
+    @ResponseBody
+    @CrossOrigin
+    public Response getFeaturedPapers() {
+        return new Response(200, "Success.", paperService.getMostCitedPapers());
+    }
+
+    @GetMapping("/featured/tasks")
+    @ResponseBody
+    @CrossOrigin
+    public Response getFeaturedTasks() {
+        return new Response(200, "Success.", paperService.getFeaturedTasks());
+    }
+
+    @GetMapping("/featured/methods")
+    @ResponseBody
+    @CrossOrigin
+    public Response getFeaturedMethods() {
+        return new Response(200, "Success.", paperService.getFeaturedMethods());
     }
 }

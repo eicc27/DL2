@@ -1,7 +1,9 @@
 package com.dl2.userservice.Controller;
 
 
+import com.auth0.jwt.interfaces.Claim;
 import com.dl2.userservice.DTO.UserRequest;
+import com.dl2.userservice.DTO.UserViewRequest;
 import com.dl2.userservice.Entity.User;
 import com.dl2.userservice.Response;
 import com.dl2.userservice.Security.JWTUtil;
@@ -52,5 +54,84 @@ public class UserController {
             service.register(user);
             return new Response(200, "Register success.", token);
         }
+    }
+
+    @PostMapping("/record_viewed")
+    @ResponseBody
+    @CrossOrigin
+    public Response recordUserViewed(
+            @RequestBody UserViewRequest request
+    ) {
+        Map<String, Claim> valid = jwtUtil.verifyToken(request.getJwt());
+        if (valid == null) {
+            return new Response(400, "Invalid token.");
+        }
+        // get user name from jwt token
+        String name = jwtUtil.getUserName(request.getJwt());
+        Optional<User> user = service.getUserByName(name);
+        if (user.isEmpty()) {
+            return new Response(400, "User not found.");
+        }
+        service.recordUserViewed(user.get().getId(), request.getPaperId());
+        return new Response(200, "success");
+    }
+
+    @PostMapping("/favourite")
+    @ResponseBody
+    @CrossOrigin
+    public Response recordUserFavourite(
+            @RequestBody UserViewRequest request
+    ) {
+        Map<String, Claim> valid = jwtUtil.verifyToken(request.getJwt());
+        if (valid == null) {
+            return new Response(400, "Invalid token.");
+        }
+        // get user name from jwt token
+        String name = jwtUtil.getUserName(request.getJwt());
+        Optional<User> user = service.getUserByName(name);
+        if (user.isEmpty()) {
+            return new Response(400, "User not found.");
+        }
+        service.addUserFavorite(user.get().getId(), request.getPaperId());
+        return new Response(200, "success");
+    }
+
+    @PostMapping("/unfavourite")
+    @ResponseBody
+    @CrossOrigin
+    public Response deleteUserFavourite(
+            @RequestBody UserViewRequest request
+    ) {
+        Map<String, Claim> valid = jwtUtil.verifyToken(request.getJwt());
+        if (valid == null) {
+            return new Response(400, "Invalid token.");
+        }
+        // get user name from jwt token
+        String name = jwtUtil.getUserName(request.getJwt());
+        Optional<User> user = service.getUserByName(name);
+        if (user.isEmpty()) {
+            return new Response(400, "User not found.");
+        }
+        service.deleteUserFavorite(user.get().getId(), request.getPaperId());
+        return new Response(200, "success");
+    }
+
+    @PostMapping("/get_favourite")
+    @ResponseBody
+    @CrossOrigin
+    public Response getUserFavourite(
+            @RequestBody UserViewRequest request
+    ) {
+        Map<String, Claim> valid = jwtUtil.verifyToken(request.getJwt());
+        if (valid == null) {
+            return new Response(400, "Invalid token.");
+        }
+        // get user name from jwt token
+        String name = jwtUtil.getUserName(request.getJwt());
+        Optional<User> user = service.getUserByName(name);
+        if (user.isEmpty()) {
+            return new Response(400, "User not found.");
+        }
+        return new Response(200, "success", service.getUserFavourite(user.get().getId(), request.getPaperId()));
     }
 }

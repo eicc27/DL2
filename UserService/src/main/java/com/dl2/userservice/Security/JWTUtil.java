@@ -37,7 +37,11 @@ public class JWTUtil {
                     .verify(token)
                     .getClaims();
         } catch (JWTVerificationException e) {
-            throw new RuntimeException(e);
+            return null;
         }
+    }
+
+    public String getUserName(String token) {
+        return verifyToken(token).get("name").asString();
     }
 }
