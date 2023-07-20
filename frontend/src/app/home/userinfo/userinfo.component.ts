@@ -25,9 +25,7 @@ export class UserinfoComponent {
     window.location.pathname = '/login';
   }
 
-  public logout() {
-    localStorage.removeItem('user');
-    this.loggedIn = false;
-    window.location.pathname = '/login';
+  public goHome() {
+    window.location.pathname = '/home';
   }
 }

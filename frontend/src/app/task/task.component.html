@@ -1,0 +1,27 @@
+<app-topbar />
+<div class="task-container" *ngIf="task">
+  <h1>{{ task.name }}</h1>
+  <markdown katex [data]="task.intro"></markdown>
+  <div class="pop">
+    <h2 class="pop-title">Known to be solved with:</h2>
+    <div class="pop-content">
+      <span
+        *ngFor="let method of task.methods; index as i"
+        [ngStyle]="{
+          background: task.methodColors[i],
+          color: 'whitesmoke',
+          padding: '0.5rem 0.8rem',
+          margin: '0.5rem',
+          'border-radius': '2rem'
+        }"
+        (click)="gotoMethod(method)"
+      >
+        {{ method }}
+      </span>
+    </div>
+  </div>
+  <div class="papers">
+    <h2 class="paper-title">Papers With Task:</h2>
+    <app-paper-info [papers]="task.papers"></app-paper-info>
+  </div>
+</div>

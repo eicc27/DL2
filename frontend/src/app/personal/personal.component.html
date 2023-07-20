@@ -1,0 +1,33 @@
+<app-topbar />
+<div class="main">
+  <h1>
+    <span class="greeting">Welcome home, </span>
+    <span class="name">{{ this.name }}</span
+    >!
+  </h1>
+  <div class="recommend">
+    <h2>For You!</h2>
+    <app-paper-info
+      [papers]="recommends"
+      [accent]="true"
+      *ngIf="recommends.length"
+    />
+    <div class="empty" (click)="gotoMain()" *ngIf="!recommends.length">
+      No recommendations. Go check more papers!
+    </div>
+  </div>
+  <div class="recent">
+    <h2>Recent Viewed on ArXiv</h2>
+    <app-paper-info [papers]="recents" *ngIf="recents.length" />
+    <div class="empty" (click)="gotoMain()" *ngIf="!recents.length">
+      No views found. Go check some papers!
+    </div>
+  </div>
+  <div class="favs">
+    <h2>Recent Favorites</h2>
+    <app-paper-info [papers]="favs" *ngIf="favs.length" />
+    <div class="empty" (click)="gotoMain()" *ngIf="!favs.length">
+      No favorites found. Go check some papers!
+    </div>
+  </div>
+</div>

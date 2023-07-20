@@ -24,7 +24,7 @@ public class PaperService {
         }
         String[] nearbyPaperIds = new String[NearbyPapers.size()];
         Long[] nearbyPaperCitations = new Long[NearbyPapers.size()];
-        for(Paper p : NearbyPapers){
+        for(Paper p : NearbyPapers) {
             nearbyPaperIds[NearbyPapers.indexOf(p)] = p.getPaperId();
             nearbyPaperCitations[NearbyPapers.indexOf(p)] = p.getCitedNum();
         }

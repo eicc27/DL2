@@ -2,8 +2,8 @@
   <button (click)="this.showFn()">DL2</button>
   <app-searchbar></app-searchbar>
   <div class="spacer">
-    <div class="spacer-item">Methods</div>
-    <div class="spacer-item">Models</div>
+    <div class="spacer-item" (click)="this.goto('/methods')">Methods</div>
+    <div class="spacer-item" (click)="this.goto('/tasks')">Tasks</div>
     <div class="spacer-item" (click)="this.goto('/editor')">Editor</div>
     <div class="spacer-item">About</div>
   </div>

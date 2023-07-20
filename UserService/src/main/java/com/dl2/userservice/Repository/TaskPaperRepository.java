@@ -40,4 +40,11 @@ public interface TaskPaperRepository extends JpaRepository<TaskPaper, String> {
                 limit 10;
             """, nativeQuery = true)
     List<Object[]> getMostPopularTasks();
+
+    @Query(value = """
+                select * from task_paper
+                where userid = :userId and rating = 1
+                limit 5;
+            """, nativeQuery = true)
+    List<TaskPaper> getRecentViewedTasksByUserId(@Param("userId") Long userId);
 }

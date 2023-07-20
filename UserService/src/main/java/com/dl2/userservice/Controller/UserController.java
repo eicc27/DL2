@@ -2,15 +2,20 @@ package com.dl2.userservice.Controller;
 
 
 import com.auth0.jwt.interfaces.Claim;
+import com.dl2.userservice.DTO.PaperResponse;
 import com.dl2.userservice.DTO.UserRequest;
 import com.dl2.userservice.DTO.UserViewRequest;
+import com.dl2.userservice.Entity.Paper;
 import com.dl2.userservice.Entity.User;
+import com.dl2.userservice.Entity.UserPaper;
 import com.dl2.userservice.Response;
 import com.dl2.userservice.Security.JWTUtil;
+import com.dl2.userservice.Service.PaperService;
 import com.dl2.userservice.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -19,6 +24,9 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private UserService service;
+
+    @Autowired
+    private PaperService paperService;
 
     private final JWTUtil jwtUtil = new JWTUtil();
 
@@ -133,5 +141,37 @@ public class UserController {
             return new Response(400, "User not found.");
         }
         return new Response(200, "success", service.getUserFavourite(user.get().getId(), request.getPaperId()));
+    }
+
+    @PostMapping("/recent")
+    @ResponseBody
+    @CrossOrigin
+    public Response getUserRecentAndFavourites(
+            @RequestBody UserViewRequest request
+    ) {
+        Map<String, Claim> valid = jwtUtil.verifyToken(request.getJwt());
+        if (valid == null) {
+            return new Response(400, "Invalid token.");
+        }
+        // get user name from jwt token
+        String name = jwtUtil.getUserName(request.getJwt());
+        Optional<User> user = service.getUserByName(name);
+        if (user.isEmpty()) {
+            return new Response(400, "User not found.");
+        }
+        Map<String, List<PaperResponse>> result = new java.util.HashMap<>();
+        List<UserPaper> recentUserPapers = service.getUserRecentViewed(user.get().getId());
+        List<PaperResponse> recentPapers = new java.util.ArrayList<>();
+        for (UserPaper userPaper : recentUserPapers) {
+            recentPapers.add(paperService.getPaperByArxivId(userPaper.getPaperId()));
+        }
+        List<UserPaper> favouriteUserPapers = service.getUserRecentFav(user.get().getId());
+        List<PaperResponse> favouritePapers = new java.util.ArrayList<>();
+        for (UserPaper userPaper : favouriteUserPapers) {
+            favouritePapers.add(paperService.getPaperByArxivId(userPaper.getPaperId()));
+        }
+        result.put("recent", recentPapers);
+        result.put("favourite", favouritePapers);
+        return new Response(200, "success", result);
     }
 }

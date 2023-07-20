@@ -72,7 +72,7 @@ export class SearchbarComponent {
       this.papers = data.data.map((paper: Paper) => {
         if (paper.authors.length > 2) {
           paper.authors = paper.authors.slice(0, 2);
-          paper.authors.push('et. al.');
+          paper.authors.push('et al.');
         }
         return paper;
       });

@@ -10,13 +10,9 @@ os.path.exis
 # Create a Jedi Script object
 script = jedi.Script(source)
 
-import os
-
 # Get the completions at the cursor position (line 3, column 13 in this case)
 completions = script.complete(3, len("os.path.exis"))
-import os
 
-os.path.exists()
 for completion in completions:
     completion: Completion
     print(completion.docstring(raw=True))

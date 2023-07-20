@@ -1,5 +1,6 @@
 package com.dl2.neo4jservice.neo4jservice.Controller;
 
+import com.dl2.neo4jservice.neo4jservice.DTO.PaperRequest;
 import com.dl2.neo4jservice.neo4jservice.DTO.PaperResponse;
 import com.dl2.neo4jservice.neo4jservice.Response;
 import com.dl2.neo4jservice.neo4jservice.Service.PaperService;
@@ -18,8 +19,8 @@ public class PaperController {
     @PostMapping("/nearbyPaper")
     @ResponseBody
     @CrossOrigin(originPatterns = "*", allowedHeaders = "*", allowCredentials = "true")
-    public Response getPaperById(@RequestBody List<String> paperIds) {
-        PaperResponse paperResponse = paperService.findNearbyPaper(paperIds);
+    public Response getPaperById(@RequestBody PaperRequest paperIds) {
+        PaperResponse paperResponse = paperService.findNearbyPaper(paperIds.getArxivId());
         if (paperResponse == null) {
             return new Response(400, "Paper not found.");
         } else {

@@ -11,6 +11,7 @@ import {
   MatTreeNestedDataSource,
 } from '@angular/material/tree';
 import OpenResponse from './OpenResponse';
+import { AuthService } from 'src/app/auth.service';
 
 interface FileNode {
   name: string;
@@ -27,7 +28,8 @@ interface FileNode {
 export class FsComponent implements OnInit {
   private lspServer: string;
   private fileNodes: FileNode[] = [];
-  public userId = '001';
+  private authorized = this.authService.isAuthenticated();
+  public userId!: string;
 
   @Output('fileSelected')
   public fileSelected = new EventEmitter<string>();
@@ -35,7 +37,7 @@ export class FsComponent implements OnInit {
   @Output('fileOpened')
   public fileOpened = new EventEmitter<string>();
 
-  public constructor(private snackBar: MatSnackBar) {
+  public constructor(private snackBar: MatSnackBar, private authService: AuthService) {
     this.lspServer = ServerService.LspServer;
     this.dataSource.data = this.fileNodes;
   }
@@ -47,8 +49,9 @@ export class FsComponent implements OnInit {
   public hasChild = (_: number, node: FileNode) => !!node.children;
 
   async ngOnInit() {
+    this.userId = this.authService.getToken()!.name;
     const res = await axios.post(`${this.lspServer}/fs`, {
-      userId: '001',
+      userId: this.userId,
     });
     const fsResponse: GenericResponse<FsResponse> = res.data;
     if (fsResponse.data.isNew)
@@ -85,7 +88,7 @@ export class FsComponent implements OnInit {
     else absPath = node.name;
     // console.log(absPath);
     const res = await axios.post(`${this.lspServer}/fs`, {
-      userId: '001',
+      userId: this.userId,
       parent: absPath,
     });
     const fsResponse: GenericResponse<FsResponse> = res.data;

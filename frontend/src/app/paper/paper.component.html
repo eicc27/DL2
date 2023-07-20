@@ -3,7 +3,9 @@
 <main *ngIf="!this.loading" class="container">
   <h1 [innerHTML]="this.paper.title | highlightCapitalized : 'royalblue'"></h1>
   <span class="arxiv-and-star">
-    <i class="arxiv-id">arxiv: {{ this.paper.arxivId }}</i>
+    <i class="arxiv-id" (click)="gotoArxiv()"
+      >arxiv: {{ this.paper.arxivId }}</i
+    >
     <button (click)="toggleFav()" *ngIf="this.authorized">
       <mat-icon
         *ngIf="!fav"
@@ -29,7 +31,7 @@
       ><span *ngIf="i != this.paper.authors.length - 1">, </span>
     </span>
   </div>
-  <div class="tasks">
+  <div class="tasks" *ngIf="this.paper.tasks.taskName.length">
     <h2 class="title">Tasks</h2>
     <mat-chip-listbox>
       <mat-basic-chip
@@ -47,7 +49,7 @@
       </mat-basic-chip>
     </mat-chip-listbox>
   </div>
-  <div class="methods">
+  <div class="methods" *ngIf="this.paper.methods.methodName.length">
     <h2 class="title">Methods</h2>
     <mat-chip-listbox>
       <mat-basic-chip
@@ -68,8 +70,12 @@
   <div class="codes">
     <h2 class="title">Codes</h2>
     <div *ngFor="let task of this.paper.codes; index as i" class="code">
-      <a class="url" [href]="task.url">{{ task.shortened }}</a>
+      <a class="url" [href]="task.url" [innerHTML]="task.shortened"></a>
       <div class="rating">{{ task.rating }}</div>
     </div>
+  </div>
+  <div class="related" *ngIf="this.relatedPapers.length">
+    <h2 class="title">Related Papers</h2>
+    <app-paper-info [papers]="this.relatedPapers"></app-paper-info>
   </div>
 </main>

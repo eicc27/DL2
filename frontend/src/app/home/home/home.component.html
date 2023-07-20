@@ -15,32 +15,7 @@
 <div class="featured">
   <div class="papers">
     <h2>Featured Papers</h2>
-    <div class="paper" *ngFor="let paper of papers" (click)="openPaper(paper.arxivId)">
-      <h3
-        class="paper-title"
-        [innerHTML]="this.paper.title | highlightCapitalized : 'royalblue'"
-      ></h3>
-      <div class="authors">
-        <span *ngFor="let author of paper.authors; index as i">
-          <i>{{ author }}</i
-          ><span *ngIf="i != paper.authors.length - 1">,&nbsp;</span>
-        </span>
-      </div>
-      <div class="methods">
-        <span class="method-desc">Uses:</span>
-        <span *ngFor="let method of paper.methods.methodName; index as i">
-          <span>{{ method }}</span
-          ><span *ngIf="i != paper.methods.methodName.length - 1">,&nbsp;</span>
-        </span>
-      </div>
-      <div class="tasks">
-        <span class="method-desc">Used for:</span>
-        <span *ngFor="let task of paper.tasks.taskName; index as i">
-          <span>{{ task }}</span
-          ><span *ngIf="i != paper.tasks.taskName.length - 1">,&nbsp;</span>
-        </span>
-      </div>
-    </div>
+    <app-paper-info [papers]="papers"></app-paper-info>
   </div>
   <div class="methods">
     <h2>Featured Methods</h2>

@@ -5,6 +5,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -45,11 +46,18 @@ public interface UserPaperRepository extends JpaRepository<UserPaper, Long> {
             """, nativeQuery = true)
     List<UserPaper> getRecentViewedPapersByUserId(Long userId);
 
+    @Query(value = """
+            select * from user_paper
+            where userid = :userId and rating = 2
+            limit 5;
+            """, nativeQuery = true)
+    List<UserPaper> getRecentFavPapersByUserId(Long userId);
+
     @Transactional
     @Modifying
     @Query(value = """
             delete from user_paper
-            where id = :id;
+            where `id` = ?;
             """, nativeQuery = true)
     void deleteViewedUserPaperById(Long id);
 }

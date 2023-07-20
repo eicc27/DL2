@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MarkdownModule } from 'ngx-markdown';
 
 // angular-material part
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -15,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { HomeComponent } from './home/home/home.component';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -23,8 +25,6 @@ import { SearchbarComponent } from './searchbar/searchbar.component';
 import { UserinfoComponent } from './home/userinfo/userinfo.component';
 import { EditorComponent } from './editor/editor/editor.component';
 import { FsComponent } from './editor/fs/fs.component';
-import { FileItemComponent } from './editor/fs/file-item/file-item.component';
-import { FolderItemComponent } from './editor/fs/folder-item/folder-item.component';
 import { TagbarComponent } from './editor/tagbar/tagbar.component';
 import { PaperComponent } from './paper/paper.component';
 import { LoginComponent } from './login/login/login.component';
@@ -35,6 +35,12 @@ import { LoadingComponent } from './loading/loading.component';
 import { HighlightCapitalizedPipe } from './highlight-capitalized.pipe';
 import { TopbarComponent } from './topbar/topbar.component';
 import { SearchOverlayComponent } from './search-overlay/search-overlay.component';
+import { PersonalComponent } from './personal/personal.component';
+import { PaperInfoComponent } from './paper/paper-info/paper-info.component';
+import { MethodsComponent } from './methods/methods.component';
+import { TasksComponent } from './tasks/tasks.component';
+import { TaskComponent } from './task/task.component';
+import { MethodComponent } from './method/method.component';
 
 // routing
 const appRoutes = [
@@ -55,6 +61,26 @@ const appRoutes = [
     path: 'register',
     component: RegisterComponent,
   },
+  {
+    path: 'home',
+    component: PersonalComponent,
+  },
+  {
+    path: 'methods',
+    component: MethodsComponent,
+  },
+  {
+    path: 'tasks',
+    component: TasksComponent,
+  },
+  {
+    path: 'task/:task',
+    component: TaskComponent,
+  },
+  {
+    path: 'method/:method',
+    component: MethodComponent,
+  }
 ];
 
 @NgModule({
@@ -65,8 +91,6 @@ const appRoutes = [
     UserinfoComponent,
     EditorComponent,
     FsComponent,
-    FileItemComponent,
-    FolderItemComponent,
     TagbarComponent,
     PaperComponent,
     LoginComponent,
@@ -77,6 +101,12 @@ const appRoutes = [
     HighlightCapitalizedPipe,
     TopbarComponent,
     SearchOverlayComponent,
+    PersonalComponent,
+    PaperInfoComponent,
+    MethodsComponent,
+    TasksComponent,
+    TaskComponent,
+    MethodComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -87,6 +117,7 @@ const appRoutes = [
         disallowedRoutes: [],
       },
     }),
+    MarkdownModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -100,6 +131,7 @@ const appRoutes = [
     MatTabsModule,
     MatProgressSpinnerModule,
     MatChipsModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

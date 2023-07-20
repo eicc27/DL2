@@ -1,0 +1,47 @@
+app-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.task-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  top: 10vw;
+  left: 10vw;
+  width: 80vw;
+  h1,
+  h2 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  h2 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+  }
+  markdown {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background: rgba($color: #ddd, $alpha: 0.4);
+    padding: 1.5em;
+    box-shadow: 2px 2px 2px 0px gray;
+    line-height: 3ch;
+    font-size: 1.1em;
+  }
+  .pop-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    span {
+      transition: all .3s ease-out;
+      &:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+      }
+    }
+  }
+}

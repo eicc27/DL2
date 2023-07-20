@@ -1,0 +1,53 @@
+h3 {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 1.3em;
+  padding: 0;
+  margin: 0;
+  margin-bottom: .2em;
+}
+
+.tasks,
+.methods {
+  margin-top: .8em;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+  span {
+    font-size: 1em;
+
+    &.method-desc {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-right: .3em;
+    }
+  }
+}
+
+.paper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 1em 0.5em;
+  padding: 1.5em 1em;
+  width: 75vw;
+  background: rgba($color: #ddd, $alpha: 0.4);
+  &.accent {
+    background: rgba($color: salmon, $alpha: 0.2);
+  }
+  transition: all .3s ease-out;
+
+  &:hover {
+    box-shadow: 2px 2px 2px 0px gray;
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+
+  .authors {
+    color: #888;
+
+    span {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}

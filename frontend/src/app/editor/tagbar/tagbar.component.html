@@ -1,8 +1,8 @@
 <mat-tab-group #tabgroup>
   <mat-tab *ngFor="let tab of this.tabs; index as i">
     <ng-template mat-tab-label>
-      <span>{{tab.name}}</span>
-      <mat-icon (click)="this.tabClose(i)">"close"</mat-icon>
+      <span class="tab-name">{{tab.name}}</span>
+      <mat-icon (click)="this.tabClose(i)">close</mat-icon>
     </ng-template>
   </mat-tab>
 </mat-tab-group>

@@ -1,3 +1,4 @@
+<app-topbar />
 <mat-drawer-container autosize="true">
   <mat-drawer mode="side" [(opened)]="this.isDrawerOpen">
     <app-fs
@@ -12,12 +13,7 @@
       [activeTab]="this.activeTab"
       (tabClose)="this.closeTab($event)"
     ></app-tagbar>
-    <div class="editor noselect" #editor>
-      <!-- <textarea
-        #cursor
-        (input)="this.input($event)"
-        (keydown)="this.control($event)"
-      ></textarea> -->
+    <div class="editor noselect {{this.tabs.length ? '' : 'hidden'}}" #editor>
       <div
         class="line"
         id="r{{ i }}"
@@ -33,15 +29,6 @@
             >{{ char === " " ? "&nbsp;" : char }}</span
           >
           <span id="c{{ i }}_{{ line.split('').length }}">&nbsp;</span>
-          <!-- <ul
-            #lsp
-            *ngIf="this.cursorPos.row == i && this.suggestions.length"
-            class="suggestions {{ this.suggestions.length ? '' : 'hidden' }}"
-          >
-            <li *ngFor="let suggestion of this.suggestions; index as i">
-              {{ suggestion }}
-            </li>
-          </ul> -->
         </div>
       </div>
     </div>

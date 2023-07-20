@@ -61,23 +61,6 @@ public class UserService {
     }
 
     @Transactional
-    public boolean isUserFavourite(Long userId, String paperid) {
-        List<UserPaper> userPapers = userPaperRepository.getUserPapersByUserIdAndPaperIdAndRating(userId, paperid, 2L);
-        if (userPapers.isEmpty()) {
-            return false;
-        } else {
-            boolean flag = false;
-            for (UserPaper userPaper : userPapers) {
-                if (userPaper.getRating() == 2) {
-                    flag = true;
-                    break;
-                }
-            }
-            return flag;
-        }
-    }
-
-    @Transactional
     public void addUserFavorite(Long userId, String paperId) {
         userPaperRepository.addFavUserPaperByUserIdAndPaperId(userId, paperId);
     }
@@ -95,6 +78,11 @@ public class UserService {
             userPaperRepository.deleteViewedUserPaperById(userPapers.get(4).getId());
         }
         // then add
+        // if exists, delete then insert
+        List<UserPaper> papers = userPaperRepository.getUserPapersByUserIdAndPaperIdAndRating(userId, paperId, 1L);
+        if (!papers.isEmpty()) {
+            userPaperRepository.deleteViewedUserPaperById(papers.get(0).getId());
+        }
         userPaperRepository.addViewedUserPaperByUserIdAndPaperId(userId, paperId);
     }
 
@@ -102,5 +90,15 @@ public class UserService {
     public boolean getUserFavourite(Long userId, String paperId) {
         List<UserPaper> papers = userPaperRepository.getUserPapersByUserIdAndPaperIdAndRating(userId, paperId, 2L);
         return !papers.isEmpty();
+    }
+
+    @Transactional
+    public List<UserPaper> getUserRecentViewed(Long userId) {
+        return userPaperRepository.getRecentViewedPapersByUserId(userId);
+    }
+
+    @Transactional
+    public List<UserPaper> getUserRecentFav(Long userId) {
+        return userPaperRepository.getRecentFavPapersByUserId(userId);
     }
 }

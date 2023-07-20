@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FileItemComponent } from './file-item.component';
+import { MethodsComponent } from './methods.component';
 
-describe('FileItemComponent', () => {
-  let component: FileItemComponent;
-  let fixture: ComponentFixture<FileItemComponent>;
+describe('MethodsComponent', () => {
+  let component: MethodsComponent;
+  let fixture: ComponentFixture<MethodsComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FileItemComponent]
+      declarations: [MethodsComponent]
     });
-    fixture = TestBed.createComponent(FileItemComponent);
+    fixture = TestBed.createComponent(MethodsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -9,5 +9,7 @@ export class ServerService {
 
   public static readonly LoginServer = 'http://localhost:8080';
 
+  public static readonly N4JServer = 'http://localhost:7474';
+
   constructor() { }
 }

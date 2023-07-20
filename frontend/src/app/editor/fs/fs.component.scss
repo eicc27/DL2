@@ -1,8 +1,10 @@
 .title {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 1.2em;
-  background: #f5f5f5;
-  padding: 0.2em 0 0.2em 0.5em;
+  background: rgba(royalblue, .6);
+  padding: 0.5em 0 0.5em 0.5em;
+  margin-bottom: 1em;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
 }
 
 
@@ -37,9 +39,9 @@ mat-tree {
 .example-tree div[role=group]>.mat-tree-node {
   padding-left: 1em;
   min-height: 1em;
+
   &:hover {
     cursor: pointer;
-    background: #f5f5f5;
   }
 }
 

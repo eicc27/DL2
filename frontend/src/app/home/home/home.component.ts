@@ -125,13 +125,7 @@ export class HomeComponent implements OnInit {
   public async getFeaturedPapers() {
     const resp = await axios.get(ServerService.LoginServer + '/paper/featured/papers');
     const data: GenericResponse<Paper[]> = resp.data;
-    this.papers = data.data.map((paper: Paper) => {
-      if (paper.authors.length > 2) {
-        paper.authors = paper.authors.slice(0, 2);
-        paper.authors.push('et. al.');
-      }
-      return paper;
-    });
+    this.papers = data.data;
   }
 
   public async getFeaturedMethods() {

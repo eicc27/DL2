@@ -9,8 +9,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Tab } from '../tagbar/tagbar.component';
-import * as pyodide from 'pyodide';
 import { EditorService } from '../editor.service';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-editor',
@@ -18,6 +18,7 @@ import { EditorService } from '../editor.service';
   styleUrls: ['./editor.component.scss'],
 })
 export class EditorComponent implements OnInit, AfterViewInit {
+  private authorized = this.authService.isAuthenticated();
   private dragging = false;
   public isDrawerOpen = true;
   public tabs: Tab[] = [];
@@ -25,16 +26,18 @@ export class EditorComponent implements OnInit, AfterViewInit {
   @ViewChild('editor') editor!: ElementRef<HTMLDivElement>;
   private cursor: HTMLInputElement | undefined = undefined;
   private lsp: HTMLUListElement | undefined = undefined;
-  // private webasm: pyodide.PyodideInterface | undefined = undefined;
-
+  private selecting = false;
+  private selectStart = [-1, -1];
+  private selectEnd = [-1, -1];
   public lines: string[] = [];
   public cursorPos = {
     col: 0,
     row: 0,
   };
-  public suggestions: string[] = [];
+  public suggestions: any[] = [];
 
   private setCursor() {
+    console.log('set cursor start');
     this.cursor?.remove();
     const textArea = this.renderer.createElement('input') as HTMLInputElement;
     textArea.oninput = this.input.bind(this);
@@ -45,7 +48,6 @@ export class EditorComponent implements OnInit, AfterViewInit {
     if (!span) return;
     const left = span.offsetLeft;
     textArea.style.left = `calc(${left}px - 0.1em)`;
-    // textArea.style.top = `calc(${top}px - 0.1em)`;
     // console.log(this.cursorPos.row, this.cursorPos.col);
     // finds the row and appends the textarea
     const row = document.getElementById(`rc${this.cursorPos.row}`)!;
@@ -53,11 +55,13 @@ export class EditorComponent implements OnInit, AfterViewInit {
     // set textarea to be focused
     textArea.focus();
     this.cursor = textArea;
+    console.log('set cursor');
   }
 
   public input(event: Event) {
     const target = event.target;
     if (!(target instanceof HTMLInputElement)) return;
+    this.deleteRegion();
     const key = target.value;
     target.value = '';
     // update lines
@@ -95,14 +99,6 @@ export class EditorComponent implements OnInit, AfterViewInit {
     this.lsp.style.left = `calc(${left}px + 1em)`;
     const rowElement = document.getElementById(`rc${this.cursorPos.row}`)!;
     rowElement.appendChild(this.lsp);
-    //     this.webasm!.runPythonAsync(
-    //       `suggest("""
-    // ${this.lines.join('\n')}""", ${this.cursorPos.row + 2}, ${
-    //         this.cursorPos.col - 1
-    //       })`
-    //     ).then((result) => {
-
-    //     });
   }
 
   /** TODO: add suggestion info for autocompletion */
@@ -112,9 +108,21 @@ export class EditorComponent implements OnInit, AfterViewInit {
       'ul'
     ) as HTMLUListElement;
     suggestionElement.classList.add('suggestions');
-    for (const suggestion of this.suggestions) {
+    for (let i = 0; i < this.suggestions.length; i++) {
+      const suggestion = this.suggestions[i];
       const li = this.renderer.createElement('li');
-      li.innerText = suggestion;
+      if (i == 0) li.classList.add('selected');
+      // add name span
+      const nameSpan = this.renderer.createElement('span');
+      nameSpan.classList.add('name');
+      nameSpan.classList.add('from-' + suggestion.get('from'));
+      nameSpan.innerText = suggestion.get('name');
+      li.appendChild(nameSpan);
+      // add type span
+      const typeSpan = this.renderer.createElement('span');
+      typeSpan.classList.add('type');
+      typeSpan.innerText = suggestion.get('type');
+      li.appendChild(typeSpan);
       suggestionElement.appendChild(li);
     }
     this.lsp = suggestionElement;
@@ -127,7 +135,64 @@ export class EditorComponent implements OnInit, AfterViewInit {
     this.lsp = undefined;
   }
 
+  private deleteRegion() {
+    const start = this.selectStart;
+    const end = this.selectEnd;
+    if (!this.isSelected()) return;
+    const startRow = Math.min(start[0], end[0]);
+    const endRow = Math.max(start[0], end[0]);
+    let startCol: number, endCol: number;
+    if (start[0] > end[0]) {
+      startCol = end[1];
+      endCol = start[1];
+    } else if (start[0] < end[0]) {
+      startCol = start[1];
+      endCol = end[1];
+    } else {
+      startCol = Math.min(start[1], end[1]);
+      endCol = Math.max(start[1], end[1]);
+    }
+    if (startRow == endRow) {
+      // splice
+      const line = this.lines[startRow];
+      const newLine = line.slice(0, startCol) + line.slice(endCol);
+      this.lines[startRow] = newLine;
+    } else {
+      // on this.startRow, delete to end of line
+      const line = this.lines[startRow];
+      const newLine = line.slice(0, startCol);
+      this.lines[startRow] = newLine;
+      // on this.endRow, delete from start of line
+      const line2 = this.lines[endRow];
+      const newLine2 = line2.slice(endCol);
+      this.lines[endRow] = newLine2;
+      // delete all lines in between
+      this.lines.splice(startRow + 1, endRow - startRow - 1);
+      // and merge startRow and endRow
+      const line1 = this.lines[startRow];
+      const line3 = this.lines[startRow + 1];
+      this.lines[startRow] = line1 + line3;
+      this.lines.splice(startRow + 1, 1);
+    }
+    this.cursorPos = {
+      row: startRow,
+      col: startCol,
+    };
+    this.selectEnd = this.selectStart;
+    setTimeout(this.setCursor.bind(this), 20);
+  }
+
+  public isSelected() {
+    return (
+      this.selectStart[0] != -1 &&
+      this.selectEnd[0] != -1 &&
+      (this.selectStart[0] != this.selectEnd[0] ||
+        this.selectStart[1] != this.selectEnd[1])
+    );
+  }
+
   control(event: KeyboardEvent) {
+    const isSelected = this.isSelected();
     switch (event.key) {
       case 'ArrowLeft':
         this.clearSuggetions();
@@ -160,7 +225,10 @@ export class EditorComponent implements OnInit, AfterViewInit {
         setTimeout(() => this.setCursor(), 20);
         break;
       case 'Backspace':
+        console.log(isSelected);
+        this.deleteRegion();
         this.clearSuggetions();
+        if (isSelected) break;
         const { row, col } = this.cursorPos;
         const line = this.lines[row];
         if (col <= 0) {
@@ -180,6 +248,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
         setTimeout(() => this.setCursor(), 20);
         break;
       case 'Enter':
+        this.deleteRegion();
         this.clearSuggetions();
         this.suggestions = [];
         const { row: r, col: c } = this.cursorPos;
@@ -191,6 +260,31 @@ export class EditorComponent implements OnInit, AfterViewInit {
         this.cursorPos.col = 0;
         setTimeout(() => this.setCursor(), 20);
         break;
+      case 'Tab':
+        if (!this.suggestions.length) {
+          // insert 4 spaces
+          this.deleteRegion();
+          this.clearSuggetions();
+          const { row, col } = this.cursorPos;
+          const line = this.lines[row];
+          const newLine = line.slice(0, col) + '    ' + line.slice(col);
+          this.lines[row] = newLine;
+          this.cursorPos.col += 4;
+          setTimeout(() => this.setCursor(), 20);
+        } else {
+          const suggestion = this.suggestions[0];
+          const name = suggestion.get('name');
+          const from = suggestion.get('from');
+          const { row, col } = this.cursorPos;
+          const line = this.lines[row];
+          const newLine = line.slice(0, col - from - 1) + name + line.slice(col);
+          this.lines[row] = newLine;
+          this.cursorPos.col += name.length - from - 1;
+          event.preventDefault();
+          event.stopPropagation();
+          this.suggestions = [];
+          setTimeout(this.setCursor.bind(this), 20);
+        }
     }
     // console.log(this.lines);
   }
@@ -200,7 +294,8 @@ export class EditorComponent implements OnInit, AfterViewInit {
   constructor(
     private renderer: Renderer2,
     @Inject(DOCUMENT) private document: Document,
-    private webasm: EditorService
+    private webasm: EditorService,
+    private authService: AuthService,
   ) {}
 
   public toggleDrag(e: MouseEvent) {
@@ -210,6 +305,8 @@ export class EditorComponent implements OnInit, AfterViewInit {
   }
 
   async ngOnInit() {
+    if (!this.authorized)
+      window.location.pathname = '/login';
     document.onmousemove = (e) => this.drag(e);
     document.onmouseup = () => {
       this.dragging = false;
@@ -232,6 +329,112 @@ export class EditorComponent implements OnInit, AfterViewInit {
         col: parseInt(col),
       };
       this.setCursor();
+    };
+    this.editor.nativeElement.onmousedown = (e) => {
+      for (let i = 0; i < this.lines.length; i++) {
+        const line = this.lines[i];
+        for (let j = 0; j <= line.length; j++) {
+          const span = document.getElementById(`c${i}_${j}`)!;
+          span.classList.remove('selected');
+        }
+      }
+      this.selectStart = [-1, -1];
+      this.selectEnd = [-1, -1];
+      // listen for drag to select events
+      this.selecting = true;
+      const target = e.target;
+      if (!(target instanceof HTMLElement)) return;
+      const id = target.id;
+      if (!id.startsWith('c')) return;
+      const [row, col] = id.slice(1).split('_');
+      this.selectStart = [parseInt(row), parseInt(col)];
+      this.cursorPos = {
+        row: parseInt(row),
+        col: parseInt(col),
+      };
+      this.setCursor();
+    };
+
+    this.editor.nativeElement.onmouseup = (e) => {
+      this.selecting = false;
+      const target = e.target;
+      if (!(target instanceof HTMLSpanElement)) return;
+      const id = target.id;
+      if (!id.startsWith('c')) return;
+      const [row, col] = id.slice(1).split('_');
+      this.selectEnd = [parseInt(row), parseInt(col)];
+      this.cursorPos = {
+        row: this.selectEnd[0],
+        col: this.selectEnd[1],
+      };
+    };
+
+    this.editor.nativeElement.onmousemove = (e) => {
+      if (!this.selecting) return;
+      const target = e.target;
+      if (!(target instanceof HTMLSpanElement)) return;
+      const id = target.id;
+      if (!id.startsWith('c')) return;
+      const [row, col] = id.slice(1).split('_');
+      // mark from selectStart to current position as selected
+      const start = this.selectStart;
+      const end = [parseInt(row), parseInt(col)];
+      this.selectEnd = end;
+      this.cursorPos = {
+        row: parseInt(row),
+        col: parseInt(col),
+      };
+      this.setCursor();
+      const startRow = Math.min(start[0], end[0]);
+      const endRow = Math.max(start[0], end[0]);
+      let startCol: number, endCol: number;
+      if (start[0] > end[0]) {
+        startCol = end[1];
+        endCol = start[1];
+      } else if (start[0] < end[0]) {
+        startCol = start[1];
+        endCol = end[1];
+      } else {
+        startCol = Math.min(start[1], end[1]);
+        endCol = Math.max(start[1], end[1]);
+      }
+      console.log(startRow, startCol, endRow, endCol);
+      // first mark all unselected
+      for (let i = 0; i < this.lines.length; i++) {
+        const line = this.lines[i];
+        for (let j = 0; j <= line.length; j++) {
+          const span = document.getElementById(`c${i}_${j}`)!;
+          span.classList.remove('selected');
+        }
+      }
+      // then mark selected
+      if (startRow == endRow) {
+        for (let i = startRow; i <= endRow; i++) {
+          for (let j = startCol; j <= endCol; j++) {
+            const span = document.getElementById(`c${i}_${j}`)!;
+            span.classList.add('selected');
+          }
+        }
+      } else {
+        // on this.startRow, select to end of line
+        if (!this.lines[startRow]) return;
+        for (let j = startCol; j <= this.lines[startRow].length; j++) {
+          const span = document.getElementById(`c${startRow}_${j}`)!;
+          span.classList.add('selected');
+        }
+        // on this.endRow, select from start of line
+        for (let j = 0; j <= endCol; j++) {
+          const span = document.getElementById(`c${endRow}_${j}`)!;
+          span.classList.add('selected');
+        }
+        // select all lines in between
+        for (let i = startRow + 1; i < endRow; i++) {
+          for (let j = 0; j <= this.lines[i].length; j++) {
+            const span = document.getElementById(`c${i}_${j}`)!;
+            span.classList.add('selected');
+          }
+        }
+      }
     };
   }
 

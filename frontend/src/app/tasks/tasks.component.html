@@ -1,0 +1,21 @@
+<app-topbar />
+<div class="methods">
+  <div class="method" *ngFor="let task of tasks" (click)="this.goto(task.name)">
+    <h2>{{task.name}} <span>with {{task.numPapers}} papers</span></h2>
+    <div class="pop">
+      <span class="pop-title">
+        Known to be solved with:
+      </span>
+      <span *ngFor="let method of task.methods; index as i">
+        {{method}}<span *ngIf="i < task.methods.length - 1">, </span>
+      </span>
+    </div>
+    <markdown katex *ngIf="task.intro.length" class="intro" [data]="task.intro.split('\n')[0]"></markdown>
+  </div>
+</div>
+<mat-paginator [length]="length"
+              [pageSize]="10"
+              [pageSizeOptions]="[10]"
+              aria-label="Select page"
+              (page)="changPage($event)">
+</mat-paginator>

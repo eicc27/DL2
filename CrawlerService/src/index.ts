@@ -12,7 +12,7 @@ import { writeFileSync } from "fs";
 import * as fs from 'fs';
 
 async function init() {
-  // crawling HTML, HyperText Mardown Language
+  // crawling HTML, HyperText Markdown Language
   // HTML -> DOM:
   // Axios GET -> HTML(string) -> JSDOM -> HTML(DOM) -> QuerySelector
   const sotACrawler = new SotACrawler();

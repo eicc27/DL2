@@ -1,0 +1,43 @@
+app-topbar {
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.main {
+  z-index: 0 !important;
+  position: absolute;
+  top: 10vh;
+  width: 80vw;
+  left: 10vw;
+  h1 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    .greeting {
+      font-size: 0.8em;
+      font-weight: normal;
+    }
+    .name {
+      color: royalblue;
+    }
+  }
+  h2 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-top: 2em;
+    margin-bottom: 1em;
+  }
+
+  .empty {
+    color: #bbb;
+    font-style: italic;
+    transition: all .2s ease-out;
+    &:hover {
+      color: royalblue;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
+
+app-topbar, app-search-overlay {
+  z-index: 100;
+}
