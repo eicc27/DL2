@@ -4,6 +4,7 @@ import com.dl2.userservice.Entity.User;
 import com.dl2.userservice.Entity.UserPaper;
 import com.dl2.userservice.Repository.UserPaperRepository;
 import com.dl2.userservice.Repository.UserRepository;
+import com.dl2.userservice.Repository.UserTaskRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,6 +20,9 @@ public class UserService {
 
     @Autowired
     private UserPaperRepository userPaperRepository;
+
+    @Autowired
+    private UserTaskRepository userTaskRepository;
 
 
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -100,5 +104,13 @@ public class UserService {
     @Transactional
     public List<UserPaper> getUserRecentFav(Long userId) {
         return userPaperRepository.getRecentFavPapersByUserId(userId);
+    }
+
+    @Transactional
+    public void recordUserLikedTasks(Long userId, List<String> taskIds) {
+        userTaskRepository.deleteAllLikedTaskByUserId(userId);
+        for (String taskId : taskIds) {
+            userTaskRepository.addLikedTaskByUserIdAndTaskId(userId, taskId);
+        }
     }
 }

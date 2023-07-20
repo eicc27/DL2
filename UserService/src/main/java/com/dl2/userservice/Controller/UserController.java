@@ -4,6 +4,7 @@ package com.dl2.userservice.Controller;
 import com.auth0.jwt.interfaces.Claim;
 import com.dl2.userservice.DTO.PaperResponse;
 import com.dl2.userservice.DTO.UserRequest;
+import com.dl2.userservice.DTO.UserTaskRequest;
 import com.dl2.userservice.DTO.UserViewRequest;
 import com.dl2.userservice.Entity.Paper;
 import com.dl2.userservice.Entity.User;
@@ -173,5 +174,25 @@ public class UserController {
         result.put("recent", recentPapers);
         result.put("favourite", favouritePapers);
         return new Response(200, "success", result);
+    }
+
+    @PostMapping("/likedTasks")
+    @ResponseBody
+    @CrossOrigin
+    public Response recordUserLikedTasks (
+            @RequestBody UserTaskRequest request
+    ) {
+        Map<String, Claim> valid = jwtUtil.verifyToken(request.getJwt());
+        if (valid == null) {
+            return new Response(400, "Invalid token.");
+        }
+        // get user name from jwt token
+        String name = jwtUtil.getUserName(request.getJwt());
+        Optional<User> user = service.getUserByName(name);
+        if (user.isEmpty()) {
+            return new Response(400, "User not found.");
+        }
+        service.recordUserLikedTasks(user.get().getId(), request.getTaskIds());
+        return new Response(200, "success");
     }
 }
