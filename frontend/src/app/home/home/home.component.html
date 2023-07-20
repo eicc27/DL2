@@ -20,7 +20,7 @@
   <div class="methods">
     <h2>Featured Methods</h2>
     <mat-chip-set>
-      <mat-chip *ngFor="let method of methods">
+      <mat-chip *ngFor="let method of methods" (click)="openMethod(method.name)">
         {{ method.name }}
       </mat-chip>
     </mat-chip-set>
@@ -28,7 +28,7 @@
   <div class="tasks">
     <h2>Featured Tasks</h2>
     <mat-chip-set>
-      <mat-chip *ngFor="let task of tasks">
+      <mat-chip *ngFor="let task of tasks" (click)="openTask(task.name)">
         {{ task.name }}
       </mat-chip>
     </mat-chip-set>

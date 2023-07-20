@@ -5,30 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2531699d-c68f-4ab0-a1b0-d4b842e8d38e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/DL2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DL2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/aws.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/maven_wrapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_7_20_15_11____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_7_20_15_11____.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_7_20_15_11____2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_7_20_15_11____2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/dl2/userservice/Repository/UserPaperRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/dl2/userservice/Repository/UserPaperRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/dl2/userservice/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/dl2/userservice/Service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/login/register/register.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/login/register/register.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/methods/methods.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/methods/methods.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/methods/methods.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/methods/methods.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/paper/paper.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/paper/paper.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/paper/paper.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/paper/paper.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/paper/paper.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/paper/paper.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/personal/personal.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/personal/personal.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/personal/personal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/personal/personal.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/tasks/tasks.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/tasks/tasks.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/home/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/home/home/home.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/home/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/home/home/home.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,8 +32,11 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -69,10 +51,23 @@
       <updated>1689857965738</updated>
       <workItem from="1689857969098" duration="197000" />
       <workItem from="1689860845030" duration="101000" />
+      <workItem from="1689861234325" duration="1558000" />
+      <workItem from="1689871812893" duration="270000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

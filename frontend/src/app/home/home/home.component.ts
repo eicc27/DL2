@@ -143,4 +143,12 @@ export class HomeComponent implements OnInit {
   public openPaper(id: string) {
     window.location.pathname = "/paper/" + id;
   }
+
+  public openTask(task: string) {
+    window.location.pathname = "/task/" + task;
+  }
+
+  public openMethod(method: string) {
+    window.location.pathname = "/method/" + method;
+  }
 }
