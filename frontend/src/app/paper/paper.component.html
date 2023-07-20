@@ -33,39 +33,40 @@
   </div>
   <div class="tasks" *ngIf="this.paper.tasks.taskName.length">
     <h2 class="title">Tasks</h2>
-    <mat-chip-listbox>
-      <mat-basic-chip
+    <div class="pop-content">
+      <span
         *ngFor="let task of this.paper.tasks.taskName; index as i"
-        class="task"
         [ngStyle]="{
-          background: this.paper.taskColors[i],
-          color: 'whitesmoke',
-          padding: '0.5rem 0.8rem',
-          margin: '0 0.5rem',
-          'border-radius': '2rem'
-        }"
-      >
-        {{ task }}
-      </mat-basic-chip>
-    </mat-chip-listbox>
-  </div>
-  <div class="methods" *ngIf="this.paper.methods.methodName.length">
-    <h2 class="title">Methods</h2>
-    <mat-chip-listbox>
-      <mat-basic-chip
-        *ngFor="let method of this.paper.methods.methodName; index as i"
-        class="method"
-        [ngStyle]="{
-          background: this.paper.methodColors[i],
+          background: paper.methodColors[i],
           color: 'whitesmoke',
           padding: '0.5rem 0.8rem',
           margin: '0.5rem',
           'border-radius': '2rem'
         }"
+        (click)="gotoTask(task)"
+      >
+        {{ task }}
+      </span>
+    </div>
+  </div>
+  <div class="methods" *ngIf="this.paper.methods.methodName.length">
+    <h2 class="title">Methods</h2>
+
+    <div class="pop-content">
+      <span
+        *ngFor="let method of this.paper.methods.methodName; index as i"
+        [ngStyle]="{
+          background: paper.methodColors[i],
+          color: 'whitesmoke',
+          padding: '0.5rem 0.8rem',
+          margin: '0.5rem',
+          'border-radius': '2rem'
+        }"
+        (click)="gotoMethod(method)"
       >
         {{ method }}
-      </mat-basic-chip>
-    </mat-chip-listbox>
+      </span>
+    </div>
   </div>
   <div class="codes">
     <h2 class="title">Codes</h2>

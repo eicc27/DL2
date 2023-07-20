@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MarkdownModule } from 'ngx-markdown';
-
 // angular-material part
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
@@ -17,6 +16,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { FormsModule } from '@angular/forms';
 
 import { HomeComponent } from './home/home/home.component';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -41,6 +41,7 @@ import { MethodsComponent } from './methods/methods.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { TaskComponent } from './task/task.component';
 import { MethodComponent } from './method/method.component';
+import { AfterComponent } from './login/after/after.component';
 
 // routing
 const appRoutes = [
@@ -60,6 +61,10 @@ const appRoutes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
+  {
+    path: 'after',
+    component: AfterComponent
   },
   {
     path: 'home',
@@ -107,6 +112,7 @@ const appRoutes = [
     TasksComponent,
     TaskComponent,
     MethodComponent,
+    AfterComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -132,6 +138,7 @@ const appRoutes = [
     MatProgressSpinnerModule,
     MatChipsModule,
     MatPaginatorModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

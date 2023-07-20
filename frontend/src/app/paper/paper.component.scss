@@ -102,13 +102,17 @@ h2 {
   }
 }
 
-mat-chip-listbox {
+.pop-content {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-
-  mat-basic-chip {
-    margin: .5em !important;
+  flex-wrap: wrap;
+  span {
+    transition: all .3s ease-out;
+    &:hover {
+      transform: scale(1.05);
+      cursor: pointer;
+    }
   }
 }

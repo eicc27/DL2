@@ -4,18 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="37b56e31-bb0f-4520-af3a-354997732050" name="更改" comment="">
+    <list default="true" id="2531699d-c68f-4ab0-a1b0-d4b842e8d38e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/DL2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DL2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/aws.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/maven_wrapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_7_20_15_11____.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_7_20_15_11____.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2023_7_20_15_11____2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/_2023_7_20_15_11____2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/dl2/userservice/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/dl2/userservice/Controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/dl2/userservice/Repository/UserPaperRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/dl2/userservice/Repository/UserPaperRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserService/src/main/java/com/dl2/userservice/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/java/com/dl2/userservice/Service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/UserService/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/login/register/register.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/login/register/register.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/methods/methods.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/methods/methods.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/methods/methods.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/methods/methods.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/paper/paper.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/paper/paper.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/paper/paper.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/paper/paper.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/paper/paper.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/paper/paper.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/personal/personal.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/personal/personal.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/personal/personal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/personal/personal.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/tasks/tasks.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/tasks/tasks.component.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,52 +41,34 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
-  <component name="ProjectId" id="2SpIDMuDFoskRRnKN0BdygOrgdF" />
+  <component name="ProjectId" id="2Spyky5E5JecTiZ1BmV6U1FDsux" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/大学/项目和比赛/nus summer workshop/cloud computing/DL2/UserService",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "spring.configuration.checksum": "c7cecc784ef25761d454344f20f9df8a",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager">
-    <configuration name="Neo4jServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="Neo4jService" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.dl2.neo4jservice.neo4jservice.Neo4jServiceApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="默认任务">
-      <changelist id="37b56e31-bb0f-4520-af3a-354997732050" name="更改" comment="" />
-      <created>1689836975588</created>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2531699d-c68f-4ab0-a1b0-d4b842e8d38e" name="Changes" comment="" />
+      <created>1689857965738</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1689836975588</updated>
-      <workItem from="1689836981467" duration="516000" />
-      <workItem from="1689837520409" duration="30000" />
-      <workItem from="1689837728753" duration="6473000" />
+      <updated>1689857965738</updated>
+      <workItem from="1689857969098" duration="197000" />
+      <workItem from="1689860845030" duration="101000" />
     </task>
     <servers />
   </component>

@@ -30,4 +30,7 @@ export class MethodsComponent {
     this.tasks = data.data.tasks;
     this.length = data.data.totalElements;
   }
+  public goto(name: string) {
+    window.location.pathname = `/method/${name}`;
+  }
 }

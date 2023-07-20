@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 import axios from 'axios';
 import { ServerService } from '../server.service';
 import GenericResponse from '../GenericResponse.model';
@@ -18,7 +19,7 @@ export class PersonalComponent {
   public favs: Paper[] = [];
   public recommends: Paper[] = [];
 
-  public constructor(private authService: AuthService) {}
+  public constructor(private authService: AuthService, private router: Router) {}
 
   async ngOnInit() {
     if (!this.authorized) window.location.href = '/login';
@@ -70,7 +71,9 @@ export class PersonalComponent {
     const paperData: GenericResponse<Paper[]> = paperResp.data;
     this.recommends = paperData.data;
   }
-
+  gotoSelect(){
+    this.router.navigate(['/after']);
+  }
   gotoMain() {
     window.location.href = '/';
   }

@@ -149,6 +149,14 @@ export class PaperComponent implements OnInit {
     window.open(url, '_blank');
   }
 
+  gotoMethod(method: string) {
+    window.location.pathname = `/method/${method}`;
+  }
+
+  gotoTask(task: string) {
+    window.location.pathname = `/task/${task}`;
+  }
+
   private async getRelatedPapers() {
     const resp = await axios.post(
       ServerService.N4JServer + '/paper/nearbyPaper',

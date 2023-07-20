@@ -2,19 +2,14 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Neo4jService" />
       </profile>
     </annotationProcessing>
-  </component>
-  <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="Neo4jService" options="-parameters" />
-      <module name="UserService" options="-parameters" />
-    </option>
+    <bytecodeTargetLevel>
+      <module name="UserService" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

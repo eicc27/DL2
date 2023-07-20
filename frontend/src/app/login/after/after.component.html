@@ -1,0 +1,14 @@
+<input id="search" type="text" [(ngModel)]="query">
+
+<div *ngFor="let task of getFilteredTasks()">
+    <input type="checkbox" (change)="selectTask(task)"> {{task}}
+</div>
+
+<div>
+    Selected:
+    <div *ngFor="let task of selectedTasks">
+        {{task}}
+    </div>
+</div>
+
+<button (click)="submit()">Go!</button>

@@ -78,9 +78,6 @@ public class UserService {
     public void recordUserViewed(Long userId, String paperId) {
         // first delete
         List<UserPaper> userPapers = userPaperRepository.getRecentViewedPapersByUserId(userId);
-        if (userPapers.size() >= 5) {
-            userPaperRepository.deleteViewedUserPaperById(userPapers.get(4).getId());
-        }
         // then add
         // if exists, delete then insert
         List<UserPaper> papers = userPaperRepository.getUserPapersByUserIdAndPaperIdAndRating(userId, paperId, 1L);
