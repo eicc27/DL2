@@ -1,14 +1,40 @@
-<input id="search" type="text" [(ngModel)]="query">
+<app-topbar></app-topbar>
 
-<div *ngFor="let task of getFilteredTasks()">
-    <input type="checkbox" (change)="selectTask(task)"> {{task}}
+<div class="task-selection">
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input
+      matInput
+      id="search"
+      placeholder="filter by task name..."
+      type="text"
+      (input)="filterTasks($event)"
+    />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+  <div class="all-tasks">
+    <h2>Tasks</h2>
+    <mat-chip-set>
+      <mat-chip-option
+        *ngFor="let task of filteredTasks; index as i"
+        [selected]="taskSelected[tasks.indexOf(task)]"
+        (selectionChange)="toggleSelection(task)"
+      >
+        {{ task }}
+      </mat-chip-option>
+    </mat-chip-set>
+  </div>
+  <div class="selected-tasks">
+    <h2>Selected Tasks</h2>
+    <mat-chip-set *ngIf="selectedTasks.length">
+      <mat-chip *ngFor="let task of selectedTasks; index as i" color="primary">
+        {{ task }}
+      </mat-chip>
+    </mat-chip-set>
+    <p *ngIf="!selectedTasks.length" class="empty">No tasks selected</p>
+  </div>
+  <button mat-raised-button color="primary" (click)="submit()"
+  [disabled]="!this.selectedTasks.length">
+    <i>Go!</i>
+  </button>
 </div>
-
-<div>
-    Selected:
-    <div *ngFor="let task of selectedTasks">
-        {{task}}
-    </div>
-</div>
-
-<button (click)="submit()">Go!</button>

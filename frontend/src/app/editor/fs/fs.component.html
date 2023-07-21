@@ -16,7 +16,10 @@
     {{ node.name }}
   </mat-tree-node>
   <!-- This is the tree node template for expandable nodes -->
-  <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild" class="mat-tree-node">
+  <mat-nested-tree-node
+    *matTreeNodeDef="let node; when: hasChild"
+    class="mat-tree-node"
+  >
     <div>
       <button
         matTreeNodeToggle
@@ -28,6 +31,15 @@
         </mat-icon>
       </button>
       <span>{{ node.name }}</span>
+      <button (click)="this.addFile(node)" class="add-file">
+        <mat-icon>description</mat-icon>
+      </button>
+      <button (click)="this.addFolder(node)" class="add-file">
+        <mat-icon>create_new_folder</mat-icon>
+      </button>
+      <button (click)="this.uploadFile(node)" class="add-file">
+        <mat-icon>cloud_upload</mat-icon>
+      </button>
     </div>
     <!-- There is inline padding applied to this div using styles.
           This padding value depends on the mat-icon-button width.  -->
@@ -39,3 +51,60 @@
     </div>
   </mat-nested-tree-node>
 </mat-tree>
+<div class="overlay" *ngIf="newObject">
+  <div class="add-new">
+    <div class="add-new-title">Add new {{ newObject.type }}</div>
+    <div class="add-new-body">
+      <span>{{ newObject.parent }}</span>
+      <label
+        class="custom-file-upload"
+        *ngIf="newObject.type == 'file by upload'"
+        for="file"
+      >
+        <span *ngIf="!newObject.name.length">
+          <mat-icon>cloud_upload</mat-icon> Upload file
+        </span>
+        <span *ngIf="newObject.name.length">
+          {{ newObject.name }}
+        </span>
+      </label>
+      <input
+        [type]="
+          newObject.type == 'file' || newObject.type == 'folder'
+            ? 'text'
+            : 'file'
+        "
+        [id]="
+          newObject.type == 'file' || newObject.type == 'folder'
+            ? 'text'
+            : 'file'
+        "
+        class="add-new-body-input"
+        [placeholder]="newObject.name"
+        (input)="this.checkFileName()"
+        (focus)="this.checkFileName()"
+        (blur)="this.checkFileName()"
+        (change)="onFileSelected($event)"
+      />
+      <div class="error-msg" *ngIf="newObject.errorMsg">
+        {{ newObject.errorMsg }}
+      </div>
+    </div>
+    <div
+      class="progress"
+      *ngIf="newObject.type == 'file by upload' && newObject.progress"
+    >
+      <mat-progress-bar
+        mode="determinate"
+        [value]="newObject.progress"
+      ></mat-progress-bar>
+      <span>{{newObject.progress}}%</span>
+    </div>
+    <div class="add-new-body-buttons">
+      <button mat-stroked-button color="primary" (click)="this.addNew()">
+        Add
+      </button>
+      <button mat-stroked-button (click)="this.cancel()">Cancel</button>
+    </div>
+  </div>
+</div>

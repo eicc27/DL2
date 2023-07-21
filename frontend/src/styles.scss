@@ -54,3 +54,7 @@ span.short {
     color: black;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+
+.mat-drawer-inner-container, mat-drawer-content {
+  overflow: hidden !important;
+}

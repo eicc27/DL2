@@ -20,7 +20,7 @@ def get_filesystem():
             if os.path.isfile(actual_dir):
                 dirs_with_type.append({"name": d, "type": "file"})
             elif os.path.isdir(actual_dir):
-                dirs_with_type.append({"name": d, "type": "dir"})
+                dirs_with_type.append({"name": d, "type": "folder"})
         return dirs_with_type
     user_id = request.json["userId"]
     is_new = False
@@ -107,6 +107,38 @@ def getSuggestion():
         "data": {"completions": [c.name for c in completions]},
     }
 
+
+@app.route("/add", methods=["POST"])
+def addFile():
+    if request.is_json:
+        type = request.json["type"]
+        name = request.json["name"]
+        parent = request.json["parent"]
+    else:
+        type = request.form["type"]
+        name = request.form["name"]
+        parent = request.form["parent"]
+    try:
+        if type == 'folder':
+            os.mkdir(f"users/{parent}/{name}")
+        elif type == 'file':
+            f = open(f"users/{parent}/{name}", "w")
+            f.close()
+        else:
+            file = request.files['file']
+            file.save(f"users/{parent}/{name}")
+        return {
+        "code": 200,
+        "msg": "add file",
+        "data": {"type": type, "name": name, "parent": parent},
+        }
+    except Exception as e:
+        print(e)
+        return {
+            "code": 400,
+            "msg": "add file failed",
+            "data": {"type": type, "name": name, "parent": parent},
+        }
 
 if __name__ == "__main__":
     app.run(port=5000)

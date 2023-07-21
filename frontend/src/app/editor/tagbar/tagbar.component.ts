@@ -36,9 +36,13 @@ export class TagbarComponent implements OnChanges {
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['activeTab'] && this.tabgroup) {
-      // console.log(this.tabgroup);
+      console.log(this.tabgroup);
       this.tabgroup.selectedIndex = this.activeTab;
     }
+  }
+
+  public open(tab: Tab) {
+    console.log(tab);
   }
 
   public tabClose(index: number) {

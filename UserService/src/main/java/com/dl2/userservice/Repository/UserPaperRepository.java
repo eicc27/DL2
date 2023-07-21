@@ -49,7 +49,7 @@ public interface UserPaperRepository extends JpaRepository<UserPaper, Long> {
     @Query(value = """
             select * from user_paper
             where userid = :userId and rating = 2
-            order by id limit 5;
+            order by id desc limit 5;
             """, nativeQuery = true)
     List<UserPaper> getRecentFavPapersByUserId(Long userId);
 

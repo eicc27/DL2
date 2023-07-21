@@ -17,6 +17,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import { HomeComponent } from './home/home/home.component';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -138,6 +139,7 @@ const appRoutes = [
     MatProgressSpinnerModule,
     MatChipsModule,
     MatPaginatorModule,
+    MatProgressBarModule,
     FormsModule,
   ],
   providers: [],

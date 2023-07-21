@@ -9,10 +9,15 @@ mat-drawer-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-height: 90vh;
-  position: fixed;
+  height: 90vh;
+  position: absolute;
   top: 10vh;
   left: 0;
+  overflow: hidden !important;
+
+  mat-drawer-content {
+    overflow: hidden;
+  }
 
   mat-drawer {
     width: 20vw;
@@ -51,11 +56,17 @@ mat-drawer-container {
   visibility: hidden;
 }
 
+app-tagbar {
+  display: flex;
+}
+
 .editor {
-  min-height: 100vh;
+  height: 80vh;
   width: 100vw;
   padding-top: 1em;
   position: relative;
+  overflow: scroll;
+
   .line,
   .line-content {
     display: flex;
@@ -92,6 +103,7 @@ mat-drawer-container {
     font-family: monospace;
     font-size: 1.2em;
     padding: 0 .05em;
+
     &.selected {
       background: rgba($color: royalblue, $alpha: .3);
     }
@@ -142,11 +154,13 @@ li {
     justify-content: flex-start;
     position: relative;
     width: inherit;
+
     &:hover,
     &.selected {
       background: lightgoldenrodyellow;
       cursor: pointer;
     }
+
     .type {
       font-size: .9em;
       color: #aaa;

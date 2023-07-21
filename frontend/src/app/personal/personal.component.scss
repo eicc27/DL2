@@ -38,6 +38,27 @@ app-topbar {
   }
 }
 
+.config {
+  font-size: 1em;
+  transition: all .3s linear;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  color: #999;
+  mat-icon {
+    transition: all .3s linear;
+    margin-left: 0.5em;
+  }
+  &:hover {
+    cursor: pointer;
+    color: royalblue;
+    mat-icon {
+      transform: rotate(180deg);
+    }
+  }
+}
+
 app-topbar, app-search-overlay {
   z-index: 100;
 }

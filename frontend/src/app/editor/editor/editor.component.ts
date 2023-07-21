@@ -30,6 +30,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
   private selectStart = [-1, -1];
   private selectEnd = [-1, -1];
   public lines: string[] = [];
+  public drawerWidth = '20vw';
   public cursorPos = {
     col: 0,
     row: 0,
@@ -300,7 +301,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
 
   public toggleDrag(e: MouseEvent) {
     this.dragging = true;
-    console.log('dragging', this.dragging);
+    // console.log('dragging', this.dragging);
     this.renderer.addClass(this.document.body, 'no-select');
   }
 
@@ -313,6 +314,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
       const drawerElement = document.querySelector('mat-drawer')!;
       (drawerElement as HTMLElement).style.borderRight = '1px solid lightgray';
       this.renderer.removeClass(this.document.body, 'no-select');
+      this.drawerWidth = drawerElement.getBoundingClientRect().width + 'px';
     };
     await this.webasm.loadPyodide();
   }
@@ -462,6 +464,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
       (drawerElement as HTMLElement).style.width = `${newWidth}px`;
       // set handle position to new width
       (handleElement as HTMLElement).style.left = `${newWidth - handleWidth}px`;
+      this.drawerWidth = `${newWidth}px`;
     });
   }
 

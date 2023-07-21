@@ -1,6 +1,16 @@
 import { Injectable } from '@angular/core';
 import * as pyodide from 'pyodide';
 
+function makePythonSafe(pythonCode: string): string {
+  return pythonCode
+    .replace(/\\/g, '\\\\')  // Replace backslashes first to avoid escaping newly added backslashes
+    .replace(/"/g, '\\"')    // Escape double quotes
+    .replace(/'/g, "\\'")    // Escape single quotes
+    .replace(/\n/g, '\\n')   // Escape newlines
+    .replace(/\r/g, '\\r')   // Escape carriage returns
+    .replace(/\t/g, '\\t');  // Escape tabs
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -32,7 +42,7 @@ def suggest(text, line, column):
   async suggest(data: any) {
     const result = await this.webasm.runPythonAsync(
       `suggest("""
-${data.lines.join('\n').replace('"', '\\"').replace("'", "\\'")}
+${makePythonSafe(data.lines.join('\n'))}
 """, ${data.cursorPos.row + 2}, ${data.cursorPos.col - 1})`
     );
     return result.toJs();

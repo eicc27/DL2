@@ -11,12 +11,11 @@ import java.util.Map;
 public class JWTUtil {
     private final String SECRET = "DeepLearningLearningPlatform";
 
-    private final Long EXP = 10 * 60 * 1000L;
-
     public String createToken(Map<String, String> claims) {
         try {
 
             Algorithm algorithm = Algorithm.HMAC256(SECRET);
+            long EXP = 10 * 60 * 24 * 1000L;
             return com.auth0.jwt.JWT.create()
                     .withIssuer("DL2")
                     .withClaim("name", claims.get("name"))
