@@ -1,4 +1,4 @@
-<mat-tab-group #tabgroup>
+<mat-tab-group #tabgroup (selectedTabChange)="open($event)">
   <mat-tab *ngFor="let tab of this.tabs; index as i">
     <ng-template mat-tab-label>
       <span class="tab-name">{{tab.name}}</span>

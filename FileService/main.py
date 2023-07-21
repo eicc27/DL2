@@ -140,5 +140,26 @@ def addFile():
             "data": {"type": type, "name": name, "parent": parent},
         }
 
+@app.route("/save", methods=["POST"])
+def saveFile():
+    path = request.json["path"]
+    text = request.json["text"]
+    user_id = request.json["userId"]
+    try:
+        with open(f"users/{path}", "w") as f:
+            f.write(text)
+        return {
+            "code": 200,
+            "msg": "save file",
+            "data": {"path": path, "userId": user_id},
+        }
+    except Exception as e:
+        print(e)
+        return {
+            "code": 400,
+            "msg": "save file failed",
+            "data": {"path": path, "userId": user_id},
+        }
+
 if __name__ == "__main__":
     app.run(port=5000)

@@ -18,6 +18,7 @@
       [style]="{
         width: 'calc(100vw - ' + this.drawerWidth + ')',
       }"
+      (fileOpened)="this.fillText($event)"
     ></app-tagbar>
     <div class="editor noselect {{ this.tabs.length ? '' : 'hidden' }}" #editor>
       <div
@@ -40,3 +41,7 @@
     </div>
   </mat-drawer-content>
 </mat-drawer-container>
+<div class="file-saving" *ngIf="this.saving">
+  <mat-spinner></mat-spinner>
+  <div class="text">Saving your file...</div>
+</div>

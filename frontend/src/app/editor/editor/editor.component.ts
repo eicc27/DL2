@@ -11,6 +11,9 @@ import {
 import { Tab } from '../tagbar/tagbar.component';
 import { EditorService } from '../editor.service';
 import { AuthService } from 'src/app/auth.service';
+import axios from 'axios';
+import { ServerService } from 'src/app/server.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-editor',
@@ -31,6 +34,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
   private selectEnd = [-1, -1];
   public lines: string[] = [];
   public drawerWidth = '20vw';
+  public saving = false;
   public cursorPos = {
     col: 0,
     row: 0,
@@ -192,8 +196,30 @@ export class EditorComponent implements OnInit, AfterViewInit {
     );
   }
 
-  control(event: KeyboardEvent) {
+  async control(event: KeyboardEvent) {
     const isSelected = this.isSelected();
+    if (event.key == 's' && (event.ctrlKey || event.metaKey)) {
+      event.preventDefault();
+      // console.log('Ctrl + S was pressed');
+      this.saving = true;
+      const absPath = this.tabs[this.activeTab].path;
+      const resp = await axios.post(ServerService.LspServer + '/save', {
+        path: absPath,
+        userId: this.authService.getToken()!.name,
+        text: this.lines.join('\n'),
+      });
+      if (resp.data.code == 200) {
+        this.snackBar.open('Saved', 'OK', {
+          duration: 2000,
+        });
+      } else {
+        this.snackBar.open('Error saving file', 'OK', {
+          duration: 2000,
+        });
+      }
+      this.saving = false;
+      return;
+    }
     switch (event.key) {
       case 'ArrowLeft':
         this.clearSuggetions();
@@ -278,7 +304,8 @@ export class EditorComponent implements OnInit, AfterViewInit {
           const from = suggestion.get('from');
           const { row, col } = this.cursorPos;
           const line = this.lines[row];
-          const newLine = line.slice(0, col - from - 1) + name + line.slice(col);
+          const newLine =
+            line.slice(0, col - from - 1) + name + line.slice(col);
           this.lines[row] = newLine;
           this.cursorPos.col += name.length - from - 1;
           event.preventDefault();
@@ -297,6 +324,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
     @Inject(DOCUMENT) private document: Document,
     private webasm: EditorService,
     private authService: AuthService,
+    private snackBar: MatSnackBar
   ) {}
 
   public toggleDrag(e: MouseEvent) {
@@ -306,8 +334,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
   }
 
   async ngOnInit() {
-    if (!this.authorized)
-      window.location.pathname = '/login';
+    if (!this.authorized) window.location.pathname = '/login';
     document.onmousemove = (e) => this.drag(e);
     document.onmouseup = () => {
       this.dragging = false;
