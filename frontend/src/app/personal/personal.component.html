@@ -22,8 +22,8 @@
   <div class="recommend">
     <h2>New Papers in Your Fields</h2>
     <app-paper-info
+      class="new"
       [papers]="new"
-      [accent]="true"
       *ngIf="new.length"
     />
     <div class="empty" (click)="gotoMain()" *ngIf="!new.length">
