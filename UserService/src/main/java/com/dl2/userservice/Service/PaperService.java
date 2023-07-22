@@ -43,18 +43,6 @@ public class PaperService {
         if (paper.isEmpty()) {
             return null;
         }
-        List<MethodPaper> methodPapers = methodPaperRepository.getMethodPapersByPaperId(arxivId);
-        TaskAndMethodResponse[] methods = new TaskAndMethodResponse[methodPapers.size()];
-        for (MethodPaper methodPaper : methodPapers) {
-            Optional<Method> method = methodRepository.getMethodByName(methodPaper.getMethodId());
-            method.ifPresent(value -> methods[methodPapers.indexOf(methodPaper)] = new TaskAndMethodResponse(value.getName(), value.getIntro()));
-        }
-        List<TaskPaper> taskPapers = taskPaperRepository.getTaskPapersByPaperId(arxivId);
-        TaskAndMethodResponse[] tasks = new TaskAndMethodResponse[taskPapers.size()];
-        for (TaskPaper taskPaper : taskPapers) {
-            Optional<Task> task = taskRepository.getTaskByName(taskPaper.getTaskId());
-            task.ifPresent(value -> tasks[taskPapers.indexOf(taskPaper)] = new TaskAndMethodResponse(value.getName(), value.getIntro()));
-        }
         List<AuthorPaper> authorPapers = authorPaperRepository.getAuthorPapersByPaperId(arxivId);
         String[] authors = new String[authorPapers.size()];
         for (AuthorPaper authorPaper : authorPapers) {

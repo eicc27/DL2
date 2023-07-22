@@ -159,32 +159,12 @@ export class PaperComponent implements OnInit {
 
   private async getRelatedPapers() {
     const resp = await axios.post(
-      ServerService.N4JServer + '/paper/nearbyPaper',
+      ServerService.N4JServer,
       {
-        arxivId: [this.id],
+        query: [this.id],
       }
     );
-    const data: GenericResponse<Recommendation> = resp.data;
-    let sortedRecommendations: SortedRecommendation[] = [];
-    data.data.arxivId.forEach((arxivId, i) => {
-      sortedRecommendations.push({
-        arxivId,
-        citations: data.data.citations[i],
-      });
-    });
-    // sort by citations descending
-    sortedRecommendations = sortedRecommendations
-      .sort((a, b) => b.citations - a.citations)
-      .slice(0, 5);
-    const paperResp = await axios.post(
-      ServerService.LoginServer + '/paper/papers',
-      {
-        arxivId: sortedRecommendations.map(
-          (recommendation) => recommendation.arxivId
-        ),
-      }
-    );
-    const paperData: GenericResponse<Paper[]> = paperResp.data;
-    this.relatedPapers = paperData.data;
+    const data = resp.data;
+    this.relatedPapers = data.papers;
   }
 }

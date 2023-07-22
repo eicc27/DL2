@@ -45,33 +45,13 @@ export class PersonalComponent {
   private async getRecommends() {
     const arxivIds = this.recents.map((paper) => paper.arxivId);
     const resp = await axios.post(
-      ServerService.N4JServer + '/paper/nearbyPaper',
+      ServerService.N4JServer,
       {
-        arxivId: arxivIds,
+        query: arxivIds,
       }
     );
-    const data: GenericResponse<Recommendation> = resp.data;
-    let sortedRecommendations: SortedRecommendation[] = [];
-    data.data.arxivId.forEach((arxivId, i) => {
-      sortedRecommendations.push({
-        arxivId,
-        citations: data.data.citations[i],
-      });
-    });
-    // sort by citations descending
-    sortedRecommendations = sortedRecommendations
-      .sort((a, b) => b.citations - a.citations)
-      .slice(0, 5);
-    const paperResp = await axios.post(
-      ServerService.LoginServer + '/paper/papers',
-      {
-        arxivId: sortedRecommendations.map(
-          (recommendation) => recommendation.arxivId
-        ),
-      }
-    );
-    const paperData: GenericResponse<Paper[]> = paperResp.data;
-    this.recommends = paperData.data;
+    const data = resp.data;
+    this.recommends = data.papers;
   }
   gotoSelect(){
     this.router.navigate(['/after']);
