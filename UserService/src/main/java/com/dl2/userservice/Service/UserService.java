@@ -1,8 +1,10 @@
 package com.dl2.userservice.Service;
 
+import com.dl2.userservice.Entity.Paper;
 import com.dl2.userservice.Entity.User;
 import com.dl2.userservice.Entity.UserPaper;
 import com.dl2.userservice.Repository.UserPaperRepository;
+import com.dl2.userservice.Repository.PaperRepository;
 import com.dl2.userservice.Repository.UserRepository;
 import com.dl2.userservice.Repository.UserTaskRepository;
 import jakarta.transaction.Transactional;
@@ -23,6 +25,9 @@ public class UserService {
 
     @Autowired
     private UserTaskRepository userTaskRepository;
+
+    @Autowired
+    private PaperRepository paperRepository;
 
 
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -96,6 +101,11 @@ public class UserService {
     @Transactional
     public List<UserPaper> getUserRecentViewed(Long userId) {
         return userPaperRepository.getRecentViewedPapersByUserId(userId);
+    }
+
+    @Transactional
+    public List<Paper> getUserNewPapers(Long userId) {
+        return paperRepository.getNewPapersByUserId(userId);
     }
 
     @Transactional

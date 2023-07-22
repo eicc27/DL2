@@ -18,6 +18,7 @@ export class PersonalComponent {
   public recents: Paper[] = [];
   public favs: Paper[] = [];
   public recommends: Paper[] = [];
+  public new: Paper[] = [];
 
   public constructor(private authService: AuthService, private router: Router) {}
 
@@ -38,6 +39,7 @@ export class PersonalComponent {
     }
     this.recents = data.data.recent;
     this.favs = data.data.favourite;
+    this.new = data.data.new
   }
 
   private async getRecommends() {

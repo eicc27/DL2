@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2531699d-c68f-4ab0-a1b0-d4b842e8d38e" name="Changes" comment="">
+    <list default="true" id="2531699d-c68f-4ab0-a1b0-d4b842e8d38e" name="Changes" comment="homepage buttons">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/home/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/home/home/home.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/home/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/home/home/home.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +51,17 @@
       <workItem from="1689860845030" duration="101000" />
       <workItem from="1689861234325" duration="1558000" />
       <workItem from="1689871812893" duration="270000" />
+      <workItem from="1689872127890" duration="942000" />
     </task>
+    <task id="LOCAL-00001" summary="homepage buttons">
+      <option name="closed" value="true" />
+      <created>1689872222927</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1689872222927</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -69,5 +77,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="homepage buttons" />
+    <option name="LAST_COMMIT_MESSAGE" value="homepage buttons" />
   </component>
 </project>

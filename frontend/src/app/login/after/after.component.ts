@@ -86,8 +86,9 @@ export class AfterComponent {
   async submit() {
     await axios.post(ServerService.LoginServer + '/user/likedTasks', {
       jwt: localStorage.getItem('access_token'),
-      tasks: this.selectedTasks,
+      taskIds: this.selectedTasks,
     });
+    window.location.pathname = '/home';
   }
   filterTasks(event: Event) {
     const value = (event.target as HTMLInputElement).value;
@@ -98,9 +99,5 @@ export class AfterComponent {
     this.filteredTasks = this.tasks.filter((task) =>
       task.toLowerCase().includes(value.toLowerCase())
     );
-  }
-
-  navigate() {
-    window.location.pathname = '/home';
   }
 }

@@ -6,7 +6,6 @@ import com.dl2.userservice.DTO.PaperResponse;
 import com.dl2.userservice.DTO.UserRequest;
 import com.dl2.userservice.DTO.UserTaskRequest;
 import com.dl2.userservice.DTO.UserViewRequest;
-import com.dl2.userservice.Entity.Paper;
 import com.dl2.userservice.Entity.User;
 import com.dl2.userservice.Entity.UserPaper;
 import com.dl2.userservice.Response;
@@ -171,8 +170,10 @@ public class UserController {
         for (UserPaper userPaper : favouriteUserPapers) {
             favouritePapers.add(paperService.getPaperByArxivId(userPaper.getPaperId()));
         }
+        List<PaperResponse> newUserPapers = paperService.getNewPapersByUserId(user.get().getId());
         result.put("recent", recentPapers);
         result.put("favourite", favouritePapers);
+        result.put("new", newUserPapers);
         return new Response(200, "success", result);
     }
 

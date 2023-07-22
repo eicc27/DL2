@@ -142,4 +142,14 @@ public class PaperService {
         }
         return paperResponses;
     }
+
+    @Transactional
+    public List<PaperResponse> getNewPapersByUserId(Long userId) {
+        List<Paper> papers = paperRepository.getNewPapersByUserId(userId);
+        List<PaperResponse> paperResponses = new ArrayList<>();
+        for (Paper paper : papers) {
+            paperResponses.add(getPaperByArxivId(paper.getArxivId()));
+        }
+        return paperResponses;
+    }
 }
