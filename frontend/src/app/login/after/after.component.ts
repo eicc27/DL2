@@ -3,6 +3,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ServerService } from 'src/app/server.service';
+import GenericResponse from 'src/app/GenericResponse.model';
 import axios from 'axios';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
@@ -66,10 +67,19 @@ export class AfterComponent {
     }
   }
   query: string = '';
-  ngOnInit(): void {
+  async ngOnInit() {
     if (!this.authorized) {
       window.location.pathname = '/login';
+      return;
     }
+    const resp = await axios.post(ServerService.LoginServer + '/user/choseTasks', {
+      jwt: localStorage.getItem('access_token'),
+    });
+    const data: GenericResponse<any> = resp.data;
+    for (let task of data.data.result) {
+      this.taskSelected[this.tasks.indexOf(task)] = true;
+    }
+    this.selectedTasks = data.data.result;
   }
   toggleSelection(task: String) {
     const index = this.tasks.indexOf(task);

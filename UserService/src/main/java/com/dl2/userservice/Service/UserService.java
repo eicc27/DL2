@@ -1,8 +1,6 @@
 package com.dl2.userservice.Service;
 
-import com.dl2.userservice.Entity.Paper;
-import com.dl2.userservice.Entity.User;
-import com.dl2.userservice.Entity.UserPaper;
+import com.dl2.userservice.Entity.*;
 import com.dl2.userservice.Repository.UserPaperRepository;
 import com.dl2.userservice.Repository.PaperRepository;
 import com.dl2.userservice.Repository.UserRepository;
@@ -101,6 +99,11 @@ public class UserService {
     @Transactional
     public List<UserPaper> getUserRecentViewed(Long userId) {
         return userPaperRepository.getRecentViewedPapersByUserId(userId);
+    }
+
+    @Transactional
+    public List<UserTask> getUserTasks(Long userId) {
+        return userTaskRepository.getUserTaskByUserId(userId);
     }
 
     @Transactional

@@ -33,5 +33,5 @@ public interface UserTaskRepository extends JpaRepository<UserTask, Long> {
             select * from user_task
             where userid = :userId
             """, nativeQuery = true)
-    List<Task> getUserTaskByUserId(@Param("userId")Long userId);
+    List<UserTask> getUserTaskByUserId(@Param("userId")Long userId);
 }
