@@ -2,13 +2,11 @@ package com.dl2.userservice.Controller;
 
 
 import com.auth0.jwt.interfaces.Claim;
-import com.dl2.userservice.DTO.PaperResponse;
-import com.dl2.userservice.DTO.UserRequest;
-import com.dl2.userservice.DTO.UserTaskRequest;
-import com.dl2.userservice.DTO.UserViewRequest;
-import com.dl2.userservice.Entity.Paper;
+import com.dl2.userservice.DTO.*;
+import com.dl2.userservice.Entity.Task;
 import com.dl2.userservice.Entity.User;
 import com.dl2.userservice.Entity.UserPaper;
+import com.dl2.userservice.Entity.UserTask;
 import com.dl2.userservice.Response;
 import com.dl2.userservice.Security.JWTUtil;
 import com.dl2.userservice.Service.PaperService;
@@ -16,6 +14,7 @@ import com.dl2.userservice.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -171,8 +170,36 @@ public class UserController {
         for (UserPaper userPaper : favouriteUserPapers) {
             favouritePapers.add(paperService.getPaperByArxivId(userPaper.getPaperId()));
         }
+        List<PaperResponse> newUserPapers = paperService.getNewPapersByUserId(user.get().getId());
         result.put("recent", recentPapers);
         result.put("favourite", favouritePapers);
+        result.put("new", newUserPapers);
+        return new Response(200, "success", result);
+    }
+
+    @PostMapping("/choseTasks")
+    @ResponseBody
+    @CrossOrigin
+    public Response getUserTasks(
+            @RequestBody UserViewRequest request
+    ) {
+        Map<String, Claim> valid = jwtUtil.verifyToken(request.getJwt());
+        if (valid == null) {
+            return new Response(400, "Invalid token.");
+        }
+        // get user name from jwt token
+        String name = jwtUtil.getUserName(request.getJwt());
+        Optional<User> user = service.getUserByName(name);
+        if (user.isEmpty()) {
+            return new Response(400, "User not found.");
+        }
+        Map<String, List<String>> result = new java.util.HashMap<>();
+        List<String> tasks = new ArrayList<>();
+        List<UserTask> userTasks = service.getUserTasks(user.get().getId());
+        for (UserTask task: userTasks){
+            tasks.add(task.getTaskId());
+        }
+        result.put("tasks", tasks);
         return new Response(200, "success", result);
     }
 
