@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2531699d-c68f-4ab0-a1b0-d4b842e8d38e" name="Changes" comment="new paper recommend logic" />
+    <list default="true" id="2531699d-c68f-4ab0-a1b0-d4b842e8d38e" name="Changes" comment="select task refine">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +15,13 @@
   <component name="Git.Settings">
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///AIAssistantSnippet" root0="ESSENTIAL" />
+    <setting file="mock:///AIAssistantSnippet" root0="ESSENTIAL" />
+    <setting file="mock:///AIAssistantSnippet" root0="ESSENTIAL" />
+    <setting file="mock:///AIAssistantSnippet" root0="ESSENTIAL" />
+    <setting file="mock:///AIAssistantSnippet" root0="ESSENTIAL" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -52,6 +61,8 @@
       <workItem from="1689871812893" duration="270000" />
       <workItem from="1689872127890" duration="942000" />
       <workItem from="1689998248255" duration="107000" />
+      <workItem from="1690002056537" duration="47000" />
+      <workItem from="1690006095591" duration="1086000" />
     </task>
     <task id="LOCAL-00001" summary="homepage buttons">
       <option name="closed" value="true" />
@@ -69,7 +80,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689998307231</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="select task refine">
+      <option name="closed" value="true" />
+      <created>1690002083675</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1690002083675</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -89,6 +108,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="homepage buttons" />
     <MESSAGE value="new paper recommend logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="new paper recommend logic" />
+    <MESSAGE value="select task refine" />
+    <option name="LAST_COMMIT_MESSAGE" value="select task refine" />
   </component>
 </project>
