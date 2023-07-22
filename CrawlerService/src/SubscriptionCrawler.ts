@@ -2,10 +2,7 @@ import axios from "axios";
 import { writeFileSync } from "fs";
 import BaseCrawler from "./BaseCrawler.js";
 import { UA } from "../utils/Constants.js";
-import { JSDOM } from "jsdom";
-import chalk from "chalk";
 import { XMLParser } from "fast-xml-parser";
-const STEP = 500;
 
 /**
  * Get the date of (date - delta)
