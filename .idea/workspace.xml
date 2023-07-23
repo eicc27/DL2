@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2531699d-c68f-4ab0-a1b0-d4b842e8d38e" name="Changes" comment="Search Lambda" />
+    <list default="true" id="2531699d-c68f-4ab0-a1b0-d4b842e8d38e" name="Changes" comment="Search Lambda">
+      <change afterPath="$PROJECT_DIR$/SearchLambda/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SearchLambda/sampleRequest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,7 +51,7 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Jise/AppData/Local/Programs/Python/Python311/python.exe",
+    "last_opened_file_path": "D:/DL2/SearchLambda",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -56,9 +60,16 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
+    "ts.external.directory.path": "D:\\DL2\\frontend\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\DL2\SearchLambda" />
+      <recent name="D:\DL2\Neo4jService\target" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="WeaviateHelper" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="DL2" />
@@ -105,7 +116,7 @@
       <workItem from="1690002056537" duration="47000" />
       <workItem from="1690006095591" duration="1086000" />
       <workItem from="1690014117515" duration="1032000" />
-      <workItem from="1690015172592" duration="3381000" />
+      <workItem from="1690015172592" duration="4646000" />
     </task>
     <task id="LOCAL-00001" summary="homepage buttons">
       <option name="closed" value="true" />
@@ -147,7 +158,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690018555542</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Search Lambda">
+      <option name="closed" value="true" />
+      <created>1690019025245</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1690019025245</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
