@@ -13,7 +13,10 @@
     matTreeNodeToggle
     (click)="this.openFile(node)"
   >
-    {{ node.name }}
+    <span>{{ node.name }}</span>
+    <button (click)="this.uploadToEval(node)" class="add-file">
+      <mat-icon>upload</mat-icon>
+    </button>
   </mat-tree-node>
   <!-- This is the tree node template for expandable nodes -->
   <mat-nested-tree-node
@@ -21,11 +24,7 @@
     class="mat-tree-node"
   >
     <div>
-      <button
-        matTreeNodeToggle
-        [attr.aria-label]="'Toggle ' + node.name"
-        (click)="this.onNodeClick(node)"
-      >
+      <button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
         <mat-icon class="mat-icon-rtl-mirror">
           {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}
         </mat-icon>
@@ -98,11 +97,32 @@
         mode="determinate"
         [value]="newObject.progress"
       ></mat-progress-bar>
-      <span>{{newObject.progress}}%</span>
+      <span>{{ newObject.progress }}%</span>
     </div>
     <div class="add-new-body-buttons">
       <button mat-stroked-button color="primary" (click)="this.addNew()">
         Add
+      </button>
+      <button mat-stroked-button (click)="this.cancel()">Cancel</button>
+    </div>
+  </div>
+</div>
+<div class="overlay upload-eval" *ngIf="this.uploadEvalFile">
+  <div class="add-new">
+    <div class="add-new-title">Upload to Eval</div>
+    <div class="add-new-body">
+      <input
+        type="input"
+        class="add-new-body-input add-dataset"
+        placeholder="Dataset Name"
+      />
+      <div class="error-msg" *ngIf="evalErrorMsg">
+        {{ evalErrorMsg }}
+      </div>
+    </div>
+    <div class="add-new-body-buttons">
+      <button mat-stroked-button color="primary" (click)="this.evalFile()">
+        Upload
       </button>
       <button mat-stroked-button (click)="this.cancel()">Cancel</button>
     </div>
