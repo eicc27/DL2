@@ -26,8 +26,7 @@
             "assets": ["src/favicon.ico", "src/assets/"],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss",
-              "node_modules/katex/dist/katex.min.css"
+              "src/styles.scss"
             ],
             "scripts": [
               "node_modules/katex/dist/katex.min.js",

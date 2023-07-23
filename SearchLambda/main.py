@@ -7,7 +7,7 @@ def handler(event, context):
     body: str = event['body']
     query = json.loads(body)['query']
     weaviateHelper = WeaviateHelper()
-    results = WeaviateHelper.getNear(query)['data']['Get']['Abstract']
+    results = weaviateHelper.getNear(query)['data']['Get']['Abstract']
     mysqlHelper = MysqlHelper()
     if results:
         paperIds = [i['arxiv_id'] for i in results]

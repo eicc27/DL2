@@ -38,6 +38,60 @@ class MysqlHelper:
             'SELECT * FROM paper WHERE arxiv_id = %s',
             params)
         return self.cursor.fetchone()
+    
+    def _getAuthorPapersByPaperId(self, paperId: str) -> list[RowType]:
+        params = (paperId,)
+        self.cursor.execute(
+            'SELECT * FROM author_paper WHERE paperid = %s',
+            params)
+        return self.cursor.fetchall()
+
+    def _getCodesByPaperId(self, paperId: str) -> list[RowType]:
+        params = (paperId,)
+        self.cursor.execute(
+            'SELECT * FROM code WHERE paperid = %s',
+            params)
+        return self.cursor.fetchall()
+    
+    def _getMostPopularTasksByNumOfPapers(self, paperId: str) -> list[RowType]:
+        params = (paperId,)
+        self.cursor.execute("""
+        SELECT taskid, total_papers
+            FROM (
+                SELECT taskid, COUNT(*) AS total_papers
+                FROM task_paper
+                GROUP BY taskid
+            ) AS total_counts
+            WHERE taskid IN (
+                SELECT taskid
+                FROM task_paper
+                WHERE paperid = %s
+            )
+            ORDER BY total_papers DESC
+            LIMIT 5;
+                            """,
+            params)
+        return self.cursor.fetchall()
+    
+    def _getMostPopularMethodsByNumOfPapers(self, paperId: str) -> list[RowType]:
+        params = (paperId,)
+        self.cursor.execute("""
+        SELECT methodid, total_papers
+            FROM (
+                SELECT methodid, COUNT(*) AS total_papers
+                FROM method_paper
+                GROUP BY methodid
+            ) AS total_counts
+            WHERE methodid IN (
+                SELECT methodid
+                FROM method_paper
+                WHERE paperid = %s
+            )
+            ORDER BY total_papers DESC
+            LIMIT 5;
+                            """,
+            params)
+        return self.cursor.fetchall()
 
     def _getPaperRespByArxivId(self, arxivId: str):
         paper = self._getPaperByArxivId(arxivId)

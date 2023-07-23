@@ -1,0 +1,124 @@
+app-topbar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  z-index: 10;
+}
+
+dt {
+  width: 75vw;
+  height: 2px;
+  margin-top: .3em;
+  margin-bottom: 1em;
+  background: gainsboro;
+}
+
+.main {
+  position: absolute;
+  display: flex;
+  width: 80vw;
+  left: 10vw;
+  top: 10vh;
+  padding-bottom: 10em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+
+  input.input {
+    border: 2px solid gainsboro;
+    outline: none;
+    width: 50vw;
+    font-size: 1.1em;
+    padding: .3em .5em;
+    transition: all .2s ease-out;
+
+    &:focus {
+      border: 2px solid wheat;
+      outline: none;
+    }
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+
+  h2 {
+    padding: 0;
+    margin: 0;
+    margin-top: 1.5em;
+  }
+
+  .desc {
+    margin: .3em 0;
+    font-style: italic;
+    color: #777;
+    width: 60vw;
+
+    &.error {
+      color: orangered !important;
+    }
+
+    em {
+      font-weight: bold;
+    }
+  }
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .example-full-width {
+    width: 100%;
+  }
+  textarea {
+    width: 60vw;
+    height: 30vh;
+    outline: none;
+    resize: none;
+    border: 2px solid gainsboro;
+    font-size: 1.1em;
+
+    &:focus {
+      border: 2px solid wheat;
+      outline: none;
+    }
+  }
+
+  .preview {
+    width: 60vw;
+    padding: 2em 1em;
+    background: whitesmoke;
+  }
+
+  .train-upload, .eval-upload {
+    .desc.pri {
+      color: royalblue;
+    }
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+
+  label {
+    margin: 1em;
+    padding: 1em;
+    border: 1px solid #ccc;
+    display: inline-block;
+    cursor: pointer;
+    transition: all .2s ease-out;
+    &:hover {
+      background: #ddd;
+    }
+  }
+
+  button.submit {
+    font-size: 1em;
+    margin: 3em 0em;
+  }
+}

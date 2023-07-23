@@ -39,7 +39,7 @@ export class PersonalComponent {
     }
     this.recents = data.data.recent;
     this.favs = data.data.favourite;
-    this.new = data.data.new
+    this.new = data.data.new;
   }
 
   private async getRecommends() {

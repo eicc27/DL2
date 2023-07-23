@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MarkdownModule } from 'ngx-markdown';
 // angular-material part
+import { NgFor, AsyncPipe } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,8 +17,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { FormsModule } from '@angular/forms';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTableModule } from '@angular/material/table';
 
 import { HomeComponent } from './home/home/home.component';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -43,7 +45,11 @@ import { TasksComponent } from './tasks/tasks.component';
 import { TaskComponent } from './task/task.component';
 import { MethodComponent } from './method/method.component';
 import { AfterComponent } from './login/after/after.component';
-
+import { UploadDatasetComponent } from './upload-dataset/upload-dataset.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { DatacompComponent } from './datacomp/datacomp.component';
+import { DatasetComponent } from './dataset/dataset.component';
 // routing
 const appRoutes = [
   { path: '', component: HomeComponent },
@@ -65,7 +71,7 @@ const appRoutes = [
   },
   {
     path: 'after',
-    component: AfterComponent
+    component: AfterComponent,
   },
   {
     path: 'home',
@@ -86,7 +92,19 @@ const appRoutes = [
   {
     path: 'method/:method',
     component: MethodComponent,
-  }
+  },
+  {
+    path: 'upload-dataset',
+    component: UploadDatasetComponent,
+  },
+  {
+    path: 'datacomp',
+    component: DatacompComponent,
+  },
+  {
+    path: 'dataset/:dataset',
+    component: DatasetComponent,
+  },
 ];
 
 @NgModule({
@@ -114,6 +132,9 @@ const appRoutes = [
     TaskComponent,
     MethodComponent,
     AfterComponent,
+    UploadDatasetComponent,
+    DatacompComponent,
+    DatasetComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -141,6 +162,13 @@ const appRoutes = [
     MatPaginatorModule,
     MatProgressBarModule,
     FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    MatTableModule,
+    NgFor,
+    AsyncPipe,
   ],
   providers: [],
   bootstrap: [AppComponent],

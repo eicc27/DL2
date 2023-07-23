@@ -1,0 +1,62 @@
+<app-topbar />
+<div class="main" *ngIf="this.dataset">
+  <h1 [innerHTML]="dataset.name | highlightCapitalized : 'royalblue'"></h1>
+  <div class="author">
+    <span class="upload">Uploaded by {{ dataset.userName }}</span>
+    <span>{{ dataset.uploadTime }}</span>
+  </div>
+  <div class="buttons">
+    <h2>Downloads</h2>
+    <button mat-raised-button (click)="this.downloadLocal()">Download locally</button>
+    <button mat-raised-button color="primary">Download to cloud workspace</button>
+  </div>
+  <markdown katex class="intro">{{ dataset.intro }}</markdown>
+  <button mat-stroked-button color="primary" class="join" *ngIf="!this.eval">Upload a file to join CodeComp!</button>
+  <button mat-stroked-button disabled class="join" *ngIf="this.eval">Your code is evaluating...</button>
+  <h2>Evaluations</h2>
+  <table
+    mat-table
+    [dataSource]="submits"
+    class="mat-elevation-z8 demo-table"
+    *ngIf="this.submits.length"
+  >
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let submit">
+        <span *ngIf="!this.name || this.name != submit.user">{{ submit.id }}</span>
+        <em *ngIf="this.name && this.name == submit.user">{{ submit.id }}</em>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="acc">
+      <th mat-header-cell *matHeaderCellDef>Acc.</th>
+      <td mat-cell *matCellDef="let submit">
+        <span *ngIf="!this.name || this.name != submit.user">{{ submit.acc }}</span>
+        <em *ngIf="this.name && this.name == submit.user">{{ submit.acc }}</em>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let submit">
+        <span *ngIf="!this.name || this.name != submit.user">{{ submit.name }}</span>
+        <em *ngIf="this.name && this.name == submit.user">{{ submit.name }}</em>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="user">
+      <th mat-header-cell *matHeaderCellDef>Uploader</th>
+      <td mat-cell *matCellDef="let submit">
+        <span *ngIf="!this.name || this.name != submit.user">{{ submit.user }}</span>
+        <em *ngIf="this.name && this.name == submit.user">{{ submit.user }}</em>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef>Time</th>
+      <td mat-cell *matCellDef="let submit">
+        <span *ngIf="!this.name || this.name != submit.user">{{ submit.time }}</span>
+        <em *ngIf="this.name && this.name == submit.user">{{ submit.time }}</em>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
+<app-loading *ngIf="this.loading" />
