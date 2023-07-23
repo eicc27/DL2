@@ -50,6 +50,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DatacompComponent } from './datacomp/datacomp.component';
 import { DatasetComponent } from './dataset/dataset.component';
+import { AboutComponent } from "./about/about.component";
 // routing
 const appRoutes = [
   { path: '', component: HomeComponent },
@@ -105,6 +106,10 @@ const appRoutes = [
     path: 'dataset/:dataset',
     component: DatasetComponent,
   },
+  {
+    path: 'about',
+    component: AboutComponent,
+  },
 ];
 
 @NgModule({
@@ -112,6 +117,7 @@ const appRoutes = [
     AppComponent,
     HomeComponent,
     SearchbarComponent,
+    AboutComponent,
     UserinfoComponent,
     EditorComponent,
     FsComponent,
