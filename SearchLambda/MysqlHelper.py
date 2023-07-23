@@ -23,7 +23,7 @@ class MysqlHelper:
         params = (query,)
         self.cursor.execute(
             """
-                select * from paper
+                select arxiv_id from paper
                     where title like
                         CONCAT('%', %s, '%')
                 order by citations desc, year desc
@@ -143,7 +143,8 @@ class MysqlHelper:
 
     def getPaperByTitle(self, query: str):
         try:
-            return self._getPaperByTitle(query)
+            arxiv_ids =  self._getPaperByTitle(query)
+            return self.getPaperByArxivIds(arxiv_ids)
         except connector.Error as err:
             print(err)
             return None

@@ -113,6 +113,11 @@
             <artifactId>jackson-core</artifactId>
             <version>2.15.2</version>
         </dependency>
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>sdk-core</artifactId>
+            <version>2.20.45</version>
+        </dependency>
     </dependencies>
 
     <build>
