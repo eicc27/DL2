@@ -1,0 +1,45 @@
+<app-topbar />
+<div class="main">
+  <h1>DataComp is now available!</h1>
+  <div class="data" *ngIf="this.numDatasets && this.numCodes">
+    We have
+    <span>{{ this.numDatasets }}</span> datasets and
+    <span>{{ this.numCodes }}</span> of implementations.
+  </div>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="this.goto('/upload-dataset')"
+  >
+    Upload your dataset
+  </button>
+  <dt></dt>
+  <div class="datasets">
+    <h2>Trending datasets</h2>
+    <div class="dataset" *ngFor="let dataset of this.datasets; index as i" (click)="this.goto('/dataset/' + dataset.name)">
+      <div class="dataset-header">
+        <h3>{{ dataset.name }}</h3>
+        <span>{{ dataset.task }}</span>
+      </div>
+      <div class="user-name">Uploaded by {{ dataset.userName }}</div>
+      <div class="ranking" *ngIf="dataset.userCodes.length">
+        <div class="rank gold">
+          <mat-icon>military_tech</mat-icon>
+          <span class="acc"><i>Acc. </i>{{ dataset.userCodes[0].acc }}</span>
+          <span class="by">By {{ dataset.userCodes[0].name }}, {{ dataset.userCodes[0].time }}</span>
+        </div>
+        <div class="rank silver" *ngIf="dataset.userCodes.length > 1">
+          <mat-icon>military_tech</mat-icon>
+          <span class="acc"><i>Acc. </i>{{ dataset.userCodes[1].acc }}</span>
+          <span class="by">By {{ dataset.userCodes[1].name }}, {{ dataset.userCodes[1].time }}</span>
+        </div>
+        <div class="rank bronze" *ngIf="dataset.userCodes.length > 2">
+          <mat-icon>military_tech</mat-icon>
+          <span class="acc"><i>Acc. </i>{{ dataset.userCodes[2].acc }}</span>
+          <span class="by">By {{ dataset.userCodes[2].name }}, {{ dataset.userCodes[2].time }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loading *ngIf="this.loading" />

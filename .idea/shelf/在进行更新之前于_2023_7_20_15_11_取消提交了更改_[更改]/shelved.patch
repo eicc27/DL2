@@ -1,0 +1,154 @@
+Index: .idea/workspace.xml
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+deleted file mode 100644
+--- a/.idea/workspace.xml	(revision d78daf531710da17299549ae01340570d179cacd)
++++ /dev/null	(revision d78daf531710da17299549ae01340570d179cacd)
+@@ -1,101 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="AutoImportSettings">
+-    <option name="autoReloadType" value="SELECTIVE" />
+-  </component>
+-  <component name="ChangeListManager">
+-    <list default="true" id="4eb74f4c-b9db-4bc1-8c2e-dfb5442f204c" name="更改" comment="">
+-      <change beforePath="$PROJECT_DIR$/frontend/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/angular.json" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+-    </list>
+-    <option name="SHOW_DIALOG" value="false" />
+-    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+-    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+-    <option name="LAST_RESOLUTION" value="IGNORE" />
+-  </component>
+-  <component name="Git.Settings">
+-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+-  </component>
+-  <component name="MarkdownSettingsMigration">
+-    <option name="stateVersion" value="1" />
+-  </component>
+-  <component name="ProjectId" id="2ShghbYBHnYp3i9zBoaeDd3HGO3" />
+-  <component name="ProjectViewState">
+-    <option name="hideEmptyMiddlePackages" value="true" />
+-    <option name="showLibraryContents" value="true" />
+-  </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "WebServerToolWindowFactoryState": "false",
+-    "git-widget-placeholder": "main",
+-    "last_opened_file_path": "D:/大学/项目和比赛/nus summer workshop/cloud computing/DL2/UserService",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "nodejs_package_manager_path": "npm",
+-    "settings.editor.selected.configurable": "preferences.pluginManager",
+-    "ts.external.directory.path": "D:\\大学\\项目和比赛\\nus summer workshop\\cloud computing\\DL2\\frontend\\node_modules\\typescript\\lib",
+-    "vue.rearranger.settings.migration": "true"
+-  }
+-}]]></component>
+-  <component name="RunManager" selected="npm.Angular CLI Server">
+-    <configuration name="Angular Application" type="JavascriptDebugType" uri="http://localhost:4200">
+-      <method v="2" />
+-    </configuration>
+-    <configuration name="Angular CLI Server" type="js.build_tools.npm">
+-      <package-json value="$PROJECT_DIR$/frontend/package.json" />
+-      <command value="run" />
+-      <scripts>
+-        <script value="start" />
+-      </scripts>
+-      <node-interpreter value="project" />
+-      <envs />
+-      <method v="2" />
+-    </configuration>
+-  </component>
+-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+-  <component name="TaskManager">
+-    <task active="true" id="Default" summary="默认任务">
+-      <changelist id="4eb74f4c-b9db-4bc1-8c2e-dfb5442f204c" name="更改" comment="" />
+-      <created>1689604347312</created>
+-      <option name="number" value="Default" />
+-      <option name="presentableId" value="Default" />
+-      <updated>1689604347312</updated>
+-      <workItem from="1689604348339" duration="623000" />
+-      <workItem from="1689605004767" duration="1255000" />
+-      <workItem from="1689606635427" duration="190000" />
+-      <workItem from="1689606853339" duration="756000" />
+-      <workItem from="1689608104678" duration="386000" />
+-      <workItem from="1689608971693" duration="1688000" />
+-      <workItem from="1689661962261" duration="855000" />
+-      <workItem from="1689665517914" duration="987000" />
+-      <workItem from="1689666511143" duration="453000" />
+-      <workItem from="1689666976410" duration="30000" />
+-      <workItem from="1689667023304" duration="20000" />
+-      <workItem from="1689667084970" duration="44000" />
+-      <workItem from="1689667135229" duration="138000" />
+-    </task>
+-    <servers />
+-  </component>
+-  <component name="TypeScriptGeneratedFilesManager">
+-    <option name="version" value="3" />
+-  </component>
+-  <component name="UnknownFeatures">
+-    <option featureType="com.intellij.fileTypeFactory" implementationName="angular.json" />
+-  </component>
+-  <component name="Vcs.Log.Tabs.Properties">
+-    <option name="TAB_STATES">
+-      <map>
+-        <entry key="MAIN">
+-          <value>
+-            <State />
+-          </value>
+-        </entry>
+-      </map>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/misc.xml
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+deleted file mode 100644
+--- a/.idea/misc.xml	(revision d78daf531710da17299549ae01340570d179cacd)
++++ /dev/null	(revision d78daf531710da17299549ae01340570d179cacd)
+@@ -1,4 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="ProjectRootManager" version="2" project-jdk-name="17" project-jdk-type="JavaSDK" />
+-</project>
+\ No newline at end of file
+Index: .idea/vcs.xml
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+deleted file mode 100644
+--- a/.idea/vcs.xml	(revision d78daf531710da17299549ae01340570d179cacd)
++++ /dev/null	(revision d78daf531710da17299549ae01340570d179cacd)
+@@ -1,6 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="VcsDirectoryMappings">
+-    <mapping directory="" vcs="Git" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/aws.xml
+===================================================================
+diff --git a/.idea/aws.xml b/.idea/aws.xml
+deleted file mode 100644
+--- a/.idea/aws.xml	(revision d78daf531710da17299549ae01340570d179cacd)
++++ /dev/null	(revision d78daf531710da17299549ae01340570d179cacd)
+@@ -1,11 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="accountSettings">
+-    <option name="activeRegion" value="us-east-1" />
+-    <option name="recentlyUsedRegions">
+-      <list>
+-        <option value="us-east-1" />
+-      </list>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file

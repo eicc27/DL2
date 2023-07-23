@@ -62,21 +62,19 @@ export class SearchbarComponent {
     const value = (target as HTMLInputElement).value;
     if (!value.length) return;
     this.searching = true;
-    const resp = await axios.get(
-      ServerService.LoginServer + '/search/paper?query=' + value
-    );
-    const data = resp.data as GenericResponse<Paper[]>;
-    console.log(data);
-    if (!data.data) this.papers = [];
+    const resp = await axios.post(ServerService.SearchServer, {
+      query: value,
+    });
+    const data = resp.data;
+    if (!data) this.papers = [];
     else {
-      this.papers = data.data.map((paper: Paper) => {
+      this.papers = data.papers.map((paper: Paper) => {
         if (paper.authors.length > 2) {
           paper.authors = paper.authors.slice(0, 2);
           paper.authors.push('et al.');
         }
         return paper;
       });
-      this.papers = data.data;
     }
     this.searching = false;
     clearTimeout(this.timeout);

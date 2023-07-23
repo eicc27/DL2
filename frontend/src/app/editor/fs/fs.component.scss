@@ -27,8 +27,37 @@ mat-tree {
 /*
  * This padding sets alignment of the nested nodes.
  */
-.example-tree .mat-nested-tree-node div[role=group] {
-  padding-left: 1em;
+.example-tree .mat-nested-tree-node {
+  width: 100%;
+
+  .add-file {
+    position: relative;
+    left: 0.5em;
+
+    mat-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #999;
+
+      &:hover {
+        color: royalblue;
+      }
+    }
+  }
+
+  div {
+    padding-left: 0.5em;
+    width: 100%;
+    align-items: center;
+  }
+
+  div:first-child {
+    &:hover {
+      background: rgba(royalblue, .1);
+    }
+  }
 }
 
 /*
@@ -64,5 +93,105 @@ mat-nested-tree-node {
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+  }
+}
+
+.overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  transition: all .3s ease-out;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+
+  .add-new {
+    padding: 1em 2em;
+    background: whitesmoke;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .add-new-title {
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      font-weight: bold;
+      font-size: 1.5em;
+      margin-bottom: 1em;
+    }
+
+    .add-new-body {
+      margin-bottom: 1em;
+      font-size: 1.1em;
+      font-family: monospace;
+
+      input {
+        height: 1.3lh;
+        margin-left: .3em;
+        border: 1px solid #ccc;
+        font-family: monospace;
+
+        &:focus {
+          outline: 1px solid rgba(royalblue, .1);
+        }
+      }
+    }
+
+    .add-new-body-buttons {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      button {
+        margin: 0 1em;
+      }
+    }
+
+    .error-msg {
+      color: orangered
+    }
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+
+  .custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: .3em .5em;
+    cursor: pointer;
+
+    span {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+
+      mat-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        color: #999;
+      }
+    }
+  }
+
+  .progress {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: .5em 0;
+    span {
+      margin-left: .5em;
+    }
   }
 }

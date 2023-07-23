@@ -1,0 +1,141 @@
+<app-topbar />
+<div class="main">
+  <h1>Upload your dataset</h1>
+  <div class="dts-title">
+    <h2>Dataset Name</h2>
+    <dt></dt>
+    <input
+      class="input"
+      type="text"
+      placeholder="Enter your dataset name"
+      #dtsName
+      (input)="this.checkName()"
+      (focus)="this.checkName()"
+      (blur)="this.checkName()"
+    />
+    <div class="desc" *ngIf="!this.nameError">
+      Your dataset name. Must be unique. &lt;=30 chars long.
+    </div>
+    <div class="desc error" *ngIf="this.nameError">
+      Dataset name is not valid.
+    </div>
+  </div>
+  <div class="dts-title">
+    <h2>Dataset Task</h2>
+    <dt></dt>
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <mat-label>Task</mat-label>
+        <input
+          type="text"
+          matInput
+          [formControl]="myControl"
+          [matAutocomplete]="auto"
+          #dtsTask
+        />
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option
+            *ngFor="let task of filteredTasks | async"
+            [value]="task"
+          >
+            {{ task }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+    <div class="desc" *ngIf="!this.taskError">
+      Please choose the task of your dataset.
+    </div>
+    <div class="desc error" *ngIf="this.taskError">Task name is not valid.</div>
+  </div>
+  <div class="dts-desc">
+    <h2>Dataset Description</h2>
+    <dt></dt>
+    <div class="desc" *ngIf="!this.descError">
+      Your dataset description and how to upload the result. No more than 10000
+      characters.
+    </div>
+    <div class="desc error" *ngIf="this.descError">
+      Dataset description is not valid.
+    </div>
+    <textarea
+      class="desc-content"
+      placeholder="This editor supports markdown and latex..."
+      #mdArea
+      (input)="this.synchronize()"
+    ></textarea>
+    <h3>Preview</h3>
+    <div class="preview">
+      <markdown katex [data]="this.markdownText"></markdown>
+    </div>
+  </div>
+  <div class="train-upload">
+    <h2>Train/Test Data Upload</h2>
+    <dt></dt>
+    <div class="desc pri">
+      * The train/test data file to upload(contained in a folder). This part of
+      files are provided
+      <em>public</em> to the users. They will use these files to train their own
+      dataset.
+    </div>
+    <div class="desc error" *ngIf="this.trainUploadError">
+      Traning/Testing dataset cannot be empty.
+    </div>
+    <label for="folderPicker1" class="folder-picker"> Upload a Folder </label>
+    <input
+      type="file"
+      id="folderPicker1"
+      webkitdirectory
+      directory
+      multiple
+      #dtsTrain
+      (change)="this.fillLabel($event)"
+    />
+  </div>
+  <div class="eval-upload">
+    <h2>Eval Data Upload</h2>
+    <dt></dt>
+    <div class="desc pri">
+      * The evaluation data file to upload. This part of files are
+      <em>private</em> and only for online evaluation.
+    </div>
+    <h3>Python Eval Script</h3>
+    <div class="desc">
+      Your <em>Python</em> script file. Note that our server only provides
+      <em>Pandas and Numpy</em> environment.
+    </div>
+    <label for="filePicker1" clas="file-picker"> Upload a python file </label>
+    <input
+      type="file"
+      id="filePicker1"
+      accept=".py"
+      #evalScript
+      (change)="this.fillLabel($event)"
+    />
+    <div class="desc error" *ngIf="this.evalScriptError">
+      No Python file chosen.
+    </div>
+    <h3>Other Data</h3>
+    <div class="desc">
+      Your other data along with the script file. They will be placed within a
+      <em>same root directory</em> with the eval python script.
+    </div>
+    <label for="folderPicker2" class="folder-picker"> Upload a Folder </label>
+    <input
+      type="file"
+      id="folderPicker2"
+      webkitdirectory
+      directory
+      multiple
+      #evalData
+      (change)="this.fillLabel($event)"
+    />
+    <div class="desc error" *ngIf="this.evalDataError">
+      No eval data folder chosen.
+    </div>
+  </div>
+  <button class="submit" mat-raised-button color="primary" (click)="submit()">
+    Submit!
+  </button>
+</div>
+<app-loading *ngIf="this.uploading"></app-loading>

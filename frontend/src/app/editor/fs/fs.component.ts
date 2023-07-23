@@ -20,6 +20,27 @@ interface FileNode {
   children?: FileNode[];
 }
 
+function isValidFilename(filename: string): boolean {
+  // Invalid characters
+  const invalidChars = /[\\/:\*\?"<>\|]/g;
+  if (invalidChars.test(filename)) {
+    return false;
+  }
+
+  // Reserved words
+  const reservedWords = /^(con|prn|aux|nul|com[0-9]|lpt[0-9])$/i;
+  if (reservedWords.test(filename)) {
+    return false;
+  }
+
+  // Ends with a space or a period
+  if (/[\s\.]$/.test(filename)) {
+    return false;
+  }
+
+  return true;
+}
+
 @Component({
   selector: 'app-fs',
   templateUrl: './fs.component.html',
@@ -28,8 +49,8 @@ interface FileNode {
 export class FsComponent implements OnInit {
   private lspServer: string;
   private fileNodes: FileNode[] = [];
-  private authorized = this.authService.isAuthenticated();
   public userId!: string;
+  public newObject: any = undefined;
 
   @Output('fileSelected')
   public fileSelected = new EventEmitter<string>();
@@ -37,7 +58,10 @@ export class FsComponent implements OnInit {
   @Output('fileOpened')
   public fileOpened = new EventEmitter<string>();
 
-  public constructor(private snackBar: MatSnackBar, private authService: AuthService) {
+  public constructor(
+    private snackBar: MatSnackBar,
+    private authService: AuthService
+  ) {
     this.lspServer = ServerService.LspServer;
     this.dataSource.data = this.fileNodes;
   }
@@ -64,6 +88,10 @@ export class FsComponent implements OnInit {
       });
     const data = fsResponse.data;
     const root = data.parent;
+    // sort data.dirs by type
+    data.dirs = data.dirs.sort((a, b) => {
+      return b.type.length - a.type.length;
+    });
     this.fileNodes.push({
       name: root,
       type: 'folder',
@@ -73,7 +101,7 @@ export class FsComponent implements OnInit {
           name: dir.name,
           type: dir.type,
           parent: root,
-          children: dir.type === 'dir' ? [] : undefined,
+          children: dir.type === 'folder' ? [] : undefined,
         };
       }),
     });
@@ -102,12 +130,15 @@ export class FsComponent implements OnInit {
         if (child.name === path) currentNode = child;
       });
     }
+    data.dirs = data.dirs.sort((a, b) => {
+      return b.type.length - a.type.length;
+    });
     currentNode.children = data.dirs.map((dir) => {
       return {
         name: dir.name,
         type: dir.type,
         parent: absPath,
-        children: dir.type === 'dir' ? [] : undefined,
+        children: dir.type === 'folder' ? [] : undefined,
       };
     });
     // console.log(this.fileNodes);
@@ -127,5 +158,133 @@ export class FsComponent implements OnInit {
       this.fileSelected.emit(absPath);
       this.fileOpened.emit(data.data.content);
     }
+  }
+
+  addFile(node: FileNode) {
+    console.log(node);
+    if (node.type !== 'folder') return;
+    const absPath = [node.parent, node.name].join('/') + '/';
+    this.newObject = {
+      type: 'file',
+      parent: absPath,
+      name: 'new file',
+    };
+  }
+
+  addFolder(node: FileNode) {
+    console.log(node);
+    if (node.type !== 'folder') return;
+    const absPath = [node.parent, node.name].join('/') + '/';
+    this.newObject = {
+      type: 'folder',
+      parent: absPath,
+      name: 'new folder',
+    };
+  }
+
+  checkFileName() {
+    const inputElement = document.querySelector(
+      '.add-new-body-input'
+    ) as HTMLInputElement;
+    let name = inputElement.value;
+    if (this.newObject.type == 'file by upload') {
+      name = name.split('\\').pop()!.split('/').pop()!;
+      this.newObject.name = name;
+    }
+    if (name.length === 0) {
+      this.newObject.errorMsg = 'Name cannot be empty';
+      return;
+    }
+    if (!isValidFilename(name)) {
+      this.newObject.errorMsg = 'Invalid filename';
+      return;
+    }
+    this.newObject.errorMsg = undefined;
+  }
+
+  uploadFile(node: FileNode) {
+    console.log(node);
+    if (node.type !== 'folder') return;
+    const absPath = [node.parent, node.name].join('/') + '/';
+    this.newObject = {
+      type: 'file by upload',
+      parent: absPath,
+      name: '',
+    };
+  }
+
+  async addNew() {
+    if (!this.authService.isAuthenticated()) return;
+    const inputElement = document.querySelector(
+      '.add-new-body-input'
+    ) as HTMLInputElement;
+    let formData: FormData | undefined = undefined;
+    if (this.newObject.type != 'file by upload') {
+      const name = inputElement.value;
+      this.newObject.name = name;
+    } else {
+      formData = new FormData();
+      formData.append('file', this.newObject.file);
+      formData.append('parent', this.newObject.parent);
+      formData.append('name', this.newObject.name);
+      formData.append('type', this.newObject.type);
+    }
+    if (!isValidFilename(this.newObject.name) || !this.newObject.name.length)
+      return;
+    console.log(formData);
+    const res = await axios.post(
+      ServerService.LspServer + '/add',
+      this.newObject.type == 'file by upload' ? formData : this.newObject,
+      {
+        onUploadProgress: (progressEvent) => {
+          if (this.newObject.type !== 'file by upload') return;
+          this.newObject.progress = Math.round(
+            (progressEvent.loaded * 100) / progressEvent.total!
+          );
+        },
+      }
+    );
+    if (res.data.code == 200) {
+      this.snackBar.open('File created successfully', 'OK', {
+        duration: 5000,
+      });
+      // add this file to the tree
+      const absPath = [this.newObject.parent, this.newObject.name].join('/');
+      const paths = absPath.split('/');
+      let currentNode = this.fileNodes[0];
+      for (const path of paths) {
+        if (!currentNode.children) break;
+        currentNode.children.forEach((child) => {
+          if (child.name === path) currentNode = child;
+        });
+      }
+      // sort currentNode.children by type
+      currentNode.children?.sort((a, b) => {
+        return b.type.length - a.type.length;
+      });
+      currentNode.children?.push({
+        name: this.newObject.name,
+        type: this.newObject.type,
+        parent: this.newObject.parent,
+        children: this.newObject.type === 'folder' ? [] : undefined,
+      });
+      this.dataSource.data = [];
+      this.dataSource.data = this.fileNodes;
+      this.newObject = undefined;
+    } else {
+      this.snackBar.open('Error creating file', 'OK', {
+        duration: 5000,
+      });
+    }
+  }
+
+  onFileSelected(event: Event) {
+    if (!this.newObject) return;
+    if (this.newObject.type !== 'file by upload') return;
+    this.newObject.file = (event.target as HTMLInputElement).files![0];
+  }
+
+  cancel() {
+    this.newObject = undefined;
   }
 }

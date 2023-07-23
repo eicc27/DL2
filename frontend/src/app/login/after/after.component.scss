@@ -1,0 +1,33 @@
+app-topbar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+}
+
+.task-selection {
+  position: absolute;
+  left: 10vw;
+  width: 80vw;
+  top: 20vh;
+  padding-bottom: 5em;
+  mat-form-field {
+    width: 30vw;
+    mat-icon {
+      color: #888;
+    }
+  }
+  h2 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  mat-chip-option {
+    margin: .5em;
+  }
+  .selected-tasks {
+    margin: 3em 0;
+  }
+  .empty {
+    color: #888;
+    font-style: italic;
+  }
+}

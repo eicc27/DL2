@@ -1,9 +1,10 @@
 package com.dl2.userservice.Service;
 
-import com.dl2.userservice.Entity.User;
-import com.dl2.userservice.Entity.UserPaper;
+import com.dl2.userservice.Entity.*;
 import com.dl2.userservice.Repository.UserPaperRepository;
+import com.dl2.userservice.Repository.PaperRepository;
 import com.dl2.userservice.Repository.UserRepository;
+import com.dl2.userservice.Repository.UserTaskRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,6 +20,12 @@ public class UserService {
 
     @Autowired
     private UserPaperRepository userPaperRepository;
+
+    @Autowired
+    private UserTaskRepository userTaskRepository;
+
+    @Autowired
+    private PaperRepository paperRepository;
 
 
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -74,9 +81,6 @@ public class UserService {
     public void recordUserViewed(Long userId, String paperId) {
         // first delete
         List<UserPaper> userPapers = userPaperRepository.getRecentViewedPapersByUserId(userId);
-        if (userPapers.size() >= 5) {
-            userPaperRepository.deleteViewedUserPaperById(userPapers.get(4).getId());
-        }
         // then add
         // if exists, delete then insert
         List<UserPaper> papers = userPaperRepository.getUserPapersByUserIdAndPaperIdAndRating(userId, paperId, 1L);
@@ -98,7 +102,25 @@ public class UserService {
     }
 
     @Transactional
+    public List<UserTask> getUserTasks(Long userId) {
+        return userTaskRepository.getUserTaskByUserId(userId);
+    }
+
+    @Transactional
+    public List<Paper> getUserNewPapers(Long userId) {
+        return paperRepository.getNewPapersByUserId(userId);
+    }
+
+    @Transactional
     public List<UserPaper> getUserRecentFav(Long userId) {
         return userPaperRepository.getRecentFavPapersByUserId(userId);
+    }
+
+    @Transactional
+    public void recordUserLikedTasks(Long userId, List<String> taskIds) {
+        userTaskRepository.deleteAllLikedTaskByUserId(userId);
+        for (String taskId : taskIds) {
+            userTaskRepository.addLikedTaskByUserIdAndTaskId(userId, taskId);
+        }
     }
 }

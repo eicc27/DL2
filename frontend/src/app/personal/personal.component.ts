@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 import axios from 'axios';
 import { ServerService } from '../server.service';
 import GenericResponse from '../GenericResponse.model';
@@ -17,8 +18,9 @@ export class PersonalComponent {
   public recents: Paper[] = [];
   public favs: Paper[] = [];
   public recommends: Paper[] = [];
+  public new: Paper[] = [];
 
-  public constructor(private authService: AuthService) {}
+  public constructor(private authService: AuthService, private router: Router) {}
 
   async ngOnInit() {
     if (!this.authorized) window.location.href = '/login';
@@ -37,40 +39,23 @@ export class PersonalComponent {
     }
     this.recents = data.data.recent;
     this.favs = data.data.favourite;
+    this.new = data.data.new;
   }
 
   private async getRecommends() {
     const arxivIds = this.recents.map((paper) => paper.arxivId);
     const resp = await axios.post(
-      ServerService.N4JServer + '/paper/nearbyPaper',
+      ServerService.N4JServer,
       {
-        arxivId: arxivIds,
+        query: arxivIds,
       }
     );
-    const data: GenericResponse<Recommendation> = resp.data;
-    let sortedRecommendations: SortedRecommendation[] = [];
-    data.data.arxivId.forEach((arxivId, i) => {
-      sortedRecommendations.push({
-        arxivId,
-        citations: data.data.citations[i],
-      });
-    });
-    // sort by citations descending
-    sortedRecommendations = sortedRecommendations
-      .sort((a, b) => b.citations - a.citations)
-      .slice(0, 5);
-    const paperResp = await axios.post(
-      ServerService.LoginServer + '/paper/papers',
-      {
-        arxivId: sortedRecommendations.map(
-          (recommendation) => recommendation.arxivId
-        ),
-      }
-    );
-    const paperData: GenericResponse<Paper[]> = paperResp.data;
-    this.recommends = paperData.data;
+    const data = resp.data;
+    this.recommends = data.papers;
   }
-
+  gotoSelect(){
+    this.router.navigate(['/after']);
+  }
   gotoMain() {
     window.location.href = '/';
   }

@@ -1,36 +1,35 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request
 from flask_cors import CORS
-from constants import USER_BASEDIR
-from response import Response
+import boto3
 import os
-import jedi
-jedi.settings.call_signatures_validity = 10.0
+
 
 
 app = Flask(__name__)
 CORS(app)  # This will enable CORS for all routes
-
+s3 = boto3.client('s3')
+BUCKET_NAME = 'dl2-user-data'
 
 @app.route("/fs", methods=["POST"])
 def get_filesystem():
-    def get_dirs_with_type(base_dir: str, dirs: list[str]):
-        dirs_with_type = []
-        for d in dirs:
-            actual_dir = os.path.join(base_dir, d)
-            if os.path.isfile(actual_dir):
-                dirs_with_type.append({"name": d, "type": "file"})
-            elif os.path.isdir(actual_dir):
-                dirs_with_type.append({"name": d, "type": "dir"})
-        return dirs_with_type
     user_id = request.json["userId"]
     is_new = False
-    if not os.path.exists(USER_BASEDIR + user_id):
-        os.mkdir(USER_BASEDIR + user_id)
+    try:
+        s3.head_object(Bucket=BUCKET_NAME, Key=f"{user_id}/")
+    except:
         is_new = True
-    base_dir = USER_BASEDIR + user_id
+        s3.put_object(Bucket=BUCKET_NAME, Key=f"{user_id}/")
     if "parent" not in request.json:  # request of root directory
-        dirs = os.listdir(base_dir)
-        dirs_with_type = get_dirs_with_type(base_dir, dirs)
+        dirs = s3.list_objects_v2(Bucket=BUCKET_NAME, Prefix=f"{user_id}/")["Contents"]
+        print(dirs)
+        dirs_with_type = []
+        for dir in dirs:
+            if dir['Key'] == f"{user_id}/":
+                continue
+            if dir["Key"][-1] == "/":
+                dirs_with_type.append({"name": dir["Key"].split("/")[-2], "type": "folder"})
+            else:
+                dirs_with_type.append({"name": dir["Key"].split("/")[-1], "type": "file"})
         return {
             "code": 200,
             "msg": "ask for root directory",
@@ -43,9 +42,15 @@ def get_filesystem():
         }
     else:
         parent = request.json["parent"]
-        base_dir = "users/" + parent
-        dirs = os.listdir(base_dir)
-        dirs_with_type = get_dirs_with_type(base_dir, dirs)
+        dirs = s3.list_objects_v2(Bucket=BUCKET_NAME, Prefix=f"{parent}/")["Contents"]
+        dirs_with_type = []
+        for dir in dirs:
+            if dir['Key'] == f"{parent}/":
+                continue
+            if dir["Key"][-1] == "/":
+                dirs_with_type.append({"name": dir["Key"].split("/")[-2], "type": "folder"})
+            else:
+                dirs_with_type.append({"name": dir["Key"].split("/")[-1], "type": "file"})
         return {
             "code": 200,
             "msg": "ask for non-root directory",
@@ -61,26 +66,24 @@ def get_filesystem():
 @app.route("/open", methods=["POST"])
 def openFile():
     path = request.json["path"]
-    print(path)
-    uesr_id = request.json["userId"]
+    print("open path: ", path)
+    user_id = os.path.split(path)[0]
     try:
-        with open(f"users/{path}", "r") as f:
-            lines = f.read()
-        print(lines)
+        response = s3.get_object(Bucket=BUCKET_NAME, Key=path)
+        data = response['Body'].read().decode('utf-8')
         return {
             "code": 200,
             "msg": "open file",
-            "data": {"userId": uesr_id, "path": path, "content": lines},
+            "data": {"userId": user_id, "path": path, "content": data},
         }
     except Exception as e:  # tried to open a binary file
         try:
-            f = open(path, "rb")
-            f.close()
+            data = response['Body'].read()
             return {
                 "code": 201,
                 "msg": "binary file",
                 "data": {
-                    "userId": uesr_id,
+                    "userId": user_id,
                     "path": path,
                     "content": "This is a binary file.",
                 },
@@ -90,23 +93,86 @@ def openFile():
             return {
                 "code": 400,
                 "msg": "file not exist",
-                "data": {"userId": uesr_id, "path": path, "content": ""},
+                "data": {"userId": user_id, "path": path, "content": ""},
             }
 
-
-@app.route("/suggestion", methods=["POST"])
-def getSuggestion():
-    row = request.json["row"]
-    col = request.json["col"]
-    text = request.json["text"]
-    script = jedi.Script(text)
-    completions = script.complete(row, col)
-    return {
+@app.route("/add", methods=["POST"])
+def addFile():
+    if request.is_json:
+        type = request.json["type"]
+        name = request.json["name"]
+        parent = request.json["parent"][1:]
+    else:
+        type = request.form["type"]
+        name = request.form["name"]
+        parent = request.form["parent"][1:]
+    try:
+        print(f"new object: {parent}{name}/")
+        if type == 'folder':
+            s3.put_object(Bucket=BUCKET_NAME, Key=f"{parent}{name}/")
+        elif type == 'file':
+            s3.put_object(Bucket=BUCKET_NAME, Key=f"{parent}{name}", Body='')
+        else:
+            file = request.files['file']
+            s3.put_object(Bucket=BUCKET_NAME, Key=f"{parent}{name}", Body=file)
+        return {
         "code": 200,
-        "msg": "get suggestion",
-        "data": {"completions": [c.name for c in completions]},
-    }
+        "msg": "add file",
+        "data": {"type": type, "name": name, "parent": parent},
+        }
+    except Exception as e:
+        print(e)
+        return {
+            "code": 400,
+            "msg": "add file failed",
+            "data": {"type": type, "name": name, "parent": parent},
+        }
 
+@app.route("/save", methods=["POST"])
+def saveFile():
+    path = request.json["path"]
+    text = request.json["text"]
+    user_id = request.json["userId"]
+    try:
+        s3.put_object(Bucket=BUCKET_NAME, Key=path, Body=text)
+        return {
+            "code": 200,
+            "msg": "save file",
+            "data": {"path": path, "userId": user_id},
+        }
+    except Exception as e:
+        print(e)
+        return {
+            "code": 400,
+            "msg": "save file failed",
+            "data": {"path": path, "userId": user_id},
+        }
+
+@app.route("/copy", methods=["POST"])
+def copyFile():
+    user_id = request.json["userId"]
+    dataset = request.json["dataset"]
+    dataset_path = os.path.join(dataset, 'public') + '/'
+    path = os.path.join(user_id, 'datacomp', dataset) + '/'
+    try:
+        # first list objects in dataset_path
+        dirs = s3.list_objects_v2(Bucket=BUCKET_NAME, Prefix=dataset_path)["Contents"]
+        for dir in dirs:
+            if dir['Key'] == dataset_path:
+                continue
+            s3.copy_object(Bucket=BUCKET_NAME, CopySource={'Bucket': BUCKET_NAME, 'Key': dir['Key']}, Key=f"{path}{dir['Key'].split('/')[-1]}")
+        return {
+            "code": 200,
+            "msg": "copy file",
+            "data": {"path": path, "userId": user_id},
+        }
+    except Exception as e:
+        print(e)
+        return {
+            "code": 400,
+            "msg": "copy file failed",
+            "data": {"path": path, "userId": user_id},
+        }
 
 if __name__ == "__main__":
     app.run(port=5000)

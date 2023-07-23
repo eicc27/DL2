@@ -1,6 +1,6 @@
 <app-topbar />
 <div class="methods">
-  <div class="method" *ngFor="let task of tasks">
+  <div class="method" *ngFor="let task of tasks" (click)="this.goto(task.name)">
     <h2>{{task.name}} <span>with {{task.numPapers}} papers</span></h2>
     <div class="pop">
       <span class="pop-title">

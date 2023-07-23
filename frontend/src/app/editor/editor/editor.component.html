@@ -1,6 +1,9 @@
 <app-topbar />
 <mat-drawer-container autosize="true">
-  <mat-drawer mode="side" [(opened)]="this.isDrawerOpen">
+  <mat-drawer
+    mode="side"
+    [(opened)]="this.isDrawerOpen"
+  >
     <app-fs
       (fileSelected)="this.openFile($event)"
       (fileOpened)="this.fillText($event)"
@@ -12,8 +15,12 @@
       [tabs]="this.tabs"
       [activeTab]="this.activeTab"
       (tabClose)="this.closeTab($event)"
+      [style]="{
+        width: 'calc(100vw - ' + this.drawerWidth + ')',
+      }"
+      (fileOpened)="this.fillText($event)"
     ></app-tagbar>
-    <div class="editor noselect {{this.tabs.length ? '' : 'hidden'}}" #editor>
+    <div class="editor noselect {{ this.tabs.length ? '' : 'hidden' }}" #editor>
       <div
         class="line"
         id="r{{ i }}"
@@ -34,3 +41,7 @@
     </div>
   </mat-drawer-content>
 </mat-drawer-container>
+<div class="file-saving" *ngIf="this.saving">
+  <mat-spinner></mat-spinner>
+  <div class="text">Saving your file...</div>
+</div>

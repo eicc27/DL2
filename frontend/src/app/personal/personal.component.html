@@ -5,6 +5,9 @@
     <span class="name">{{ this.name }}</span
     >!
   </h1>
+  <div class="config" (click)="gotoSelect()">Configure your preferences
+    <mat-icon>settings</mat-icon>
+  </div>
   <div class="recommend">
     <h2>For You!</h2>
     <app-paper-info
@@ -13,7 +16,18 @@
       *ngIf="recommends.length"
     />
     <div class="empty" (click)="gotoMain()" *ngIf="!recommends.length">
-      No recommendations. Go check more papers!
+      Recommendation is not available. Go check some papers!
+    </div>
+  </div>
+  <div class="recommend">
+    <h2>New Papers in Your Fields</h2>
+    <app-paper-info
+      class="new"
+      [papers]="new"
+      *ngIf="new.length"
+    />
+    <div class="empty" (click)="gotoMain()" *ngIf="!new.length">
+      Loading...
     </div>
   </div>
   <div class="recent">

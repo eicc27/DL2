@@ -98,7 +98,7 @@ export class RegisterComponent implements AfterViewInit {
     }else if (data.code == 200) {
       // store the user info in local storage
       this.authService.setToken(data.data);
-      window.location.pathname = '/';
+      window.location.pathname = '/after';
     }
   }
 
