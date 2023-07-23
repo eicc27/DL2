@@ -19,48 +19,23 @@ def get_filesystem():
     except:
         is_new = True
         s3.put_object(Bucket=BUCKET_NAME, Key=f"{user_id}/")
-    if "parent" not in request.json:  # request of root directory
-        dirs = s3.list_objects_v2(Bucket=BUCKET_NAME, Prefix=f"{user_id}/")["Contents"]
-        print(dirs)
-        dirs_with_type = []
-        for dir in dirs:
-            if dir['Key'] == f"{user_id}/":
-                continue
-            if dir["Key"][-1] == "/":
-                dirs_with_type.append({"name": dir["Key"].split("/")[-2], "type": "folder"})
-            else:
-                dirs_with_type.append({"name": dir["Key"].split("/")[-1], "type": "file"})
-        return {
-            "code": 200,
-            "msg": "ask for root directory",
-            "data": {
-                "new": is_new,
-                "userId": user_id,
-                "parent": f"{user_id}",
-                "dirs": dirs_with_type,
-            },
-        }
-    else:
-        parent = request.json["parent"]
-        dirs = s3.list_objects_v2(Bucket=BUCKET_NAME, Prefix=f"{parent}/")["Contents"]
-        dirs_with_type = []
-        for dir in dirs:
-            if dir['Key'] == f"{parent}/":
-                continue
-            if dir["Key"][-1] == "/":
-                dirs_with_type.append({"name": dir["Key"].split("/")[-2], "type": "folder"})
-            else:
-                dirs_with_type.append({"name": dir["Key"].split("/")[-1], "type": "file"})
-        return {
-            "code": 200,
-            "msg": "ask for non-root directory",
-            "data": {
-                "new": is_new,
-                "userId": user_id,
-                "parent": parent,
-                "dirs": dirs_with_type,
-            },
-        }
+    # this lists all objects in the bucket
+    dirs = s3.list_objects_v2(Bucket=BUCKET_NAME, Prefix=f"{user_id}/")["Contents"]
+    dirs_with_type = []
+    for dir in dirs:
+        if dir["Key"][-1] == "/":
+            dirs_with_type.append({"name": dir["Key"], "type": "folder"})
+        else:
+            dirs_with_type.append({"name": dir["Key"], "type": "file"})
+    return {
+        "code": 200,
+        "msg": "ask for root directory",
+        "data": {
+            "new": is_new,
+            "userId": user_id,
+            "dirs": dirs_with_type,
+        },
+    }
 
 
 @app.route("/open", methods=["POST"])
@@ -101,11 +76,11 @@ def addFile():
     if request.is_json:
         type = request.json["type"]
         name = request.json["name"]
-        parent = request.json["parent"][1:]
+        parent = request.json["parent"]
     else:
         type = request.form["type"]
         name = request.form["name"]
-        parent = request.form["parent"][1:]
+        parent = request.form["parent"]
     try:
         print(f"new object: {parent}{name}/")
         if type == 'folder':

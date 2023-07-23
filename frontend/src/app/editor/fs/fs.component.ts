@@ -1,15 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ServerService } from 'src/app/server.service';
 import axios from 'axios';
-import FsResponse from './FsResponse.model';
+import FsResponse, { Dirs } from './FsResponse.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import GenericResponse from 'src/app/GenericResponse.model';
-import { FlatTreeControl, NestedTreeControl } from '@angular/cdk/tree';
-import {
-  MatTreeFlatDataSource,
-  MatTreeFlattener,
-  MatTreeNestedDataSource,
-} from '@angular/material/tree';
+import { NestedTreeControl } from '@angular/cdk/tree';
+import { MatTreeNestedDataSource } from '@angular/material/tree';
 import OpenResponse from './OpenResponse';
 import { AuthService } from 'src/app/auth.service';
 
@@ -17,7 +13,63 @@ interface FileNode {
   name: string;
   type: string;
   parent?: string;
-  children?: FileNode[];
+  children?: any;
+}
+
+function createFileNodes(data: FsResponse): any {
+  let fileNodes: Record<string, FileNode> = {};
+
+  // Function to find or create a child with a specific name
+  const findOrCreateChild = (
+    parent: FileNode,
+    name: string,
+    type: string,
+    parentPath: string
+  ): FileNode => {
+    let child = parent.children?.find((child: any) => child.name === name);
+    if (!child) {
+      child = { name: name, type: type, parent: parentPath.slice(1) };
+      if (type === 'folder') {
+        child.children = [];
+      }
+      parent.children?.push(child);
+    }
+    return child;
+  };
+  // Iterate over the list of directories and files
+  for (let entry of data.dirs) {
+    let pathComponents = entry.name.split('/');
+    pathComponents = pathComponents.filter((c) => c);
+    let currentNode: FileNode;
+    if (!(pathComponents[0] in fileNodes)) {
+      currentNode = { name: pathComponents[0], type: 'folder', children: [] };
+      fileNodes[pathComponents[0]] = currentNode;
+    } else {
+      currentNode = fileNodes[pathComponents[0]];
+    }
+    let parentPath = '';
+    for (let i = 1; i < pathComponents.length; i++) {
+      const component = pathComponents[i];
+      const type = i === pathComponents.length - 1 ? entry.type : 'folder';
+      parentPath = parentPath + '/' + pathComponents[i - 1]; // Update the parent path
+      currentNode = findOrCreateChild(currentNode, component, type, parentPath);
+    }
+  }
+  const sortChildren = (node: FileNode) => {
+    if (node.children) {
+      node.children.sort((a: any, b: any) => {
+        if (a.type === b.type) {
+          return a.name.localeCompare(b.name);
+        }
+        return a.type === 'folder' ? -1 : 1;
+      });
+      node.children.forEach(sortChildren);
+    }
+  };
+  // Sort all children in the fileNodes
+  Object.values(fileNodes).forEach(sortChildren);
+  console.log(fileNodes);
+  return Object.values(fileNodes)[0];
 }
 
 function isValidFilename(filename: string): boolean {
@@ -51,6 +103,8 @@ export class FsComponent implements OnInit {
   private fileNodes: FileNode[] = [];
   public userId!: string;
   public newObject: any = undefined;
+  public uploadEvalFile: boolean = false;
+  public evalErrorMsg: any = undefined;
 
   @Output('fileSelected')
   public fileSelected = new EventEmitter<string>();
@@ -77,8 +131,9 @@ export class FsComponent implements OnInit {
     const res = await axios.post(`${this.lspServer}/fs`, {
       userId: this.userId,
     });
-    const fsResponse: GenericResponse<FsResponse> = res.data;
-    if (fsResponse.data.isNew)
+    const fsResponse: GenericResponse<any> = res.data;
+    console.log(fsResponse);
+    if (fsResponse.data['new'])
       this.snackBar.open('Workspace initialized. Welcome!', 'OK', {
         duration: 5000,
       });
@@ -87,62 +142,7 @@ export class FsComponent implements OnInit {
         duration: 5000,
       });
     const data = fsResponse.data;
-    const root = data.parent;
-    // sort data.dirs by type
-    data.dirs = data.dirs.sort((a, b) => {
-      return b.type.length - a.type.length;
-    });
-    this.fileNodes.push({
-      name: root,
-      type: 'folder',
-      parent: undefined,
-      children: data.dirs.map((dir) => {
-        return {
-          name: dir.name,
-          type: dir.type,
-          parent: root,
-          children: dir.type === 'folder' ? [] : undefined,
-        };
-      }),
-    });
-    this.dataSource.data = this.fileNodes;
-  }
-
-  public async onNodeClick(node: FileNode) {
-    const isExpanded = this.treeControl.isExpanded(node);
-    if (!isExpanded) return;
-    let absPath = '';
-    if (node.parent) absPath = [node.parent, node.name].join('/');
-    else absPath = node.name;
-    // console.log(absPath);
-    const res = await axios.post(`${this.lspServer}/fs`, {
-      userId: this.userId,
-      parent: absPath,
-    });
-    const fsResponse: GenericResponse<FsResponse> = res.data;
-    const data = fsResponse.data;
-    // traces the node with absPath
-    const paths = absPath.split('/');
-    let currentNode = this.fileNodes[0];
-    for (const path of paths) {
-      if (!currentNode.children) break;
-      currentNode.children.forEach((child) => {
-        if (child.name === path) currentNode = child;
-      });
-    }
-    data.dirs = data.dirs.sort((a, b) => {
-      return b.type.length - a.type.length;
-    });
-    currentNode.children = data.dirs.map((dir) => {
-      return {
-        name: dir.name,
-        type: dir.type,
-        parent: absPath,
-        children: dir.type === 'folder' ? [] : undefined,
-      };
-    });
-    // console.log(this.fileNodes);
-    this.dataSource.data = [];
+    this.fileNodes = [createFileNodes(data)];
     this.dataSource.data = this.fileNodes;
   }
 
@@ -254,19 +254,21 @@ export class FsComponent implements OnInit {
       let currentNode = this.fileNodes[0];
       for (const path of paths) {
         if (!currentNode.children) break;
-        currentNode.children.forEach((child) => {
+        currentNode.children.forEach((child: any) => {
           if (child.name === path) currentNode = child;
         });
       }
-      // sort currentNode.children by type
-      currentNode.children?.sort((a, b) => {
-        return b.type.length - a.type.length;
-      });
       currentNode.children?.push({
         name: this.newObject.name,
         type: this.newObject.type,
-        parent: this.newObject.parent,
+        parent: this.newObject.parent.slice(0, -1),
         children: this.newObject.type === 'folder' ? [] : undefined,
+      });
+      currentNode.children?.sort((a: any, b: any) => {
+        if (a.type === b.type) {
+          return a.name.localeCompare(b.name);
+        }
+        return a.type === 'folder' ? -1 : 1;
       });
       this.dataSource.data = [];
       this.dataSource.data = this.fileNodes;
@@ -286,5 +288,14 @@ export class FsComponent implements OnInit {
 
   cancel() {
     this.newObject = undefined;
+    this.uploadEvalFile = false;
+  }
+
+  uploadToEval(node: FileNode) {
+    this.uploadEvalFile = true;
+  }
+
+  evalFile() {
+
   }
 }
