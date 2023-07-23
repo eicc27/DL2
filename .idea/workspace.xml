@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2531699d-c68f-4ab0-a1b0-d4b842e8d38e" name="Changes" comment="Search Lambda">
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SearchLambda/MysqlHelper.py" beforeDir="false" afterPath="$PROJECT_DIR$/SearchLambda/MysqlHelper.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +69,9 @@
       <recent name="D:\DL2\SearchLambda" />
       <recent name="D:\DL2\Neo4jService\target" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\DL2\DataAnalysis" />
+    </key>
   </component>
   <component name="RunManager" selected="Spring Boot.UserServiceApplication">
     <configuration name="WeaviateHelper" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -132,6 +131,8 @@
       <workItem from="1690091261284" duration="16000" />
       <workItem from="1690105311242" duration="3885000" />
       <workItem from="1690111971580" duration="1078000" />
+      <workItem from="1690118222379" duration="75000" />
+      <workItem from="1690119581780" duration="4000" />
     </task>
     <task id="LOCAL-00001" summary="homepage buttons">
       <option name="closed" value="true" />
@@ -189,7 +190,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690020184566</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Search Lambda">
+      <option name="closed" value="true" />
+      <created>1690118288068</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1690118288068</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

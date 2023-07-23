@@ -20,6 +20,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from "@angular/material/card";
 
 import { HomeComponent } from './home/home/home.component';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -50,6 +51,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DatacompComponent } from './datacomp/datacomp.component';
 import { DatasetComponent } from './dataset/dataset.component';
+import { AboutComponent }  from './about/about.component';
+
 // routing
 const appRoutes = [
   { path: '', component: HomeComponent },
@@ -64,6 +67,10 @@ const appRoutes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
   },
   {
     path: 'register',
@@ -112,6 +119,7 @@ const appRoutes = [
     AppComponent,
     HomeComponent,
     SearchbarComponent,
+    AboutComponent,
     UserinfoComponent,
     EditorComponent,
     FsComponent,
@@ -145,6 +153,7 @@ const appRoutes = [
         disallowedRoutes: [],
       },
     }),
+    MatCardModule,
     MarkdownModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,
