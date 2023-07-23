@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ServerService {
-  public static readonly LspServer = 'http://54.86.213.128:8080';
+  public static readonly LspServer = 'http://localhost:5000';
 
   public static readonly LoginServer = 'http://localhost:8080';
 

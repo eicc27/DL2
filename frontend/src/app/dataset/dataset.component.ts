@@ -7,6 +7,7 @@ import { AuthService } from '../auth.service';
 import Submit from './submit.model';
 import GenericResponse from '../GenericResponse.model';
 import { saveAs } from 'file-saver';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dataset',
@@ -20,15 +21,17 @@ export class DatasetComponent {
   displayedColumns: string[] = ['id', 'acc', 'name', 'user', 'time'];
   loading = false;
   eval = false;
+  authenticated = false;
 
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
-    private renderer: Renderer2
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit() {
     this.eval = localStorage.getItem('eval') === 'true';
+    this.authenticated = this.authService.isAuthenticated();
     this.route.params.subscribe(async (params) => {
       const dataset = params['dataset'];
       this.loading = true;
@@ -78,5 +81,24 @@ export class DatasetComponent {
         document.body.removeChild(a);
       }, index * 1000); // This will wait index seconds before starting the download
     });
+  }
+
+  async downloadCloud() {
+    if (!this.authService.isAuthenticated())
+      window.location.pathname = '/login';
+    this.loading = true;
+    const resp = await axios.post(ServerService.LspServer + '/copy', {
+      userId: this.authService.getToken()?.name,
+      dataset: this.dataset.name,
+    });
+    this.loading = false;
+    if (resp.data.code == 200) {
+      this.snackBar.open('Dataset has been cloned to datacomp/', 'Close');
+      setTimeout(() => {
+        window.location.pathname = '/editor';
+      }, 1000);
+    } else {
+      this.snackBar.open(resp.data.msg, 'Close');
+    }
   }
 }
