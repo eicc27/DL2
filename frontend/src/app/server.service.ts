@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ServerService {
-  public static readonly LspServer = 'http://localhost:5000';
+  public static readonly LspServer = 'http://dl2-fileservice.us-east-1.elasticbeanstalk.com';
 
   public static readonly LoginServer = 'http://localhost:8080';
 

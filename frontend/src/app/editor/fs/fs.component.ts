@@ -103,8 +103,9 @@ export class FsComponent implements OnInit {
   private fileNodes: FileNode[] = [];
   public userId!: string;
   public newObject: any = undefined;
-  public uploadEvalFile: boolean = false;
+  public evalObject: any = undefined;
   public evalErrorMsg: any = undefined;
+  public loading = false;
 
   @Output('fileSelected')
   public fileSelected = new EventEmitter<string>();
@@ -288,14 +289,40 @@ export class FsComponent implements OnInit {
 
   cancel() {
     this.newObject = undefined;
-    this.uploadEvalFile = false;
+    this.evalObject = undefined;
   }
 
   uploadToEval(node: FileNode) {
-    this.uploadEvalFile = true;
+    this.evalObject = {
+      name: this.authService.getToken()!.name,
+      file: [node.parent, node.name].join('/'),
+    };
   }
 
-  evalFile() {
-
+  async evalFile() {
+    const inputElement = document.querySelector(
+      '.add-new-body-input.add-dataset'
+    ) as HTMLInputElement;
+    const value = inputElement.value;
+    if (!value || !value.length) return;
+    const formData = new FormData();
+    formData.append('name', this.evalObject.name);
+    formData.append('file', this.evalObject.file);
+    formData.append('dataset', value);
+    this.loading = true;
+    const res = await axios.post(
+      ServerService.LoginServer + '/eval/uploads3',
+      formData
+    );
+    this.loading = false;
+    if (res.data.code == 200) {
+      this.snackBar.open(
+        'File evaluated successfully! Your score: ' + res.data.data,
+        'OK'
+      );
+      this.evalObject = undefined;
+    } else {
+      this.snackBar.open(res.data.msg, 'OK');
+    }
   }
 }

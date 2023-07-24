@@ -1,9 +1,6 @@
 package com.dl2.userservice.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,5 +21,13 @@ public class Dataset {
     private String path;
     private String test;
     private String metric;
+    @Column
+    @Temporal(TemporalType.DATE)
     private Date date;
+
+    @PrePersist
+    public void prePersist() {
+        if (date == null)
+            date = new Date(System.currentTimeMillis());
+    }
 }

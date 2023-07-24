@@ -107,7 +107,7 @@
     </div>
   </div>
 </div>
-<div class="overlay upload-eval" *ngIf="this.uploadEvalFile">
+<div class="overlay upload-eval" *ngIf="this.evalObject">
   <div class="add-new">
     <div class="add-new-title">Upload to Eval</div>
     <div class="add-new-body">
@@ -115,6 +115,7 @@
         type="input"
         class="add-new-body-input add-dataset"
         placeholder="Dataset Name"
+        #datasetName
       />
       <div class="error-msg" *ngIf="evalErrorMsg">
         {{ evalErrorMsg }}
@@ -128,3 +129,4 @@
     </div>
   </div>
 </div>
+<app-loading *ngIf="this.loading" />

@@ -31,4 +31,5 @@ public interface UploadRepository extends JpaRepository<Upload, Long> {
             ORDER BY score DESC;
             """, nativeQuery = true)
     List<Object[]> getUserUploadsAndTopUploads(String dataset, String name);
+
 }

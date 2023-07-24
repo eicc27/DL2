@@ -1,4 +1,4 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import axios, { AxiosResponse } from 'axios';
 import { ServerService } from '../server.service';
@@ -22,6 +22,9 @@ export class DatasetComponent {
   loading = false;
   eval = false;
   authenticated = false;
+
+  @ViewChild('fileInput')
+  fileInputElement!: ElementRef<HTMLInputElement>;
 
   constructor(
     private route: ActivatedRoute,
@@ -97,6 +100,33 @@ export class DatasetComponent {
       setTimeout(() => {
         window.location.pathname = '/editor';
       }, 1000);
+    } else {
+      this.snackBar.open(resp.data.msg, 'Close');
+    }
+  }
+
+  selectFile() {
+    this.fileInputElement.nativeElement.click();
+  }
+
+  async onFileSelected(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const file: File = (target.files as FileList)[0];
+    if (!file) return;
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('dataset', this.dataset.name);
+    formData.append('name', this.authService.getToken()!.name);
+    this.loading = true;
+    const resp = await axios
+      .post(ServerService.LoginServer + '/eval/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+    this.loading = false;
+    if (resp.data.code == 200) {
+      this.snackBar.open('File evaluated successfully! Your score: ' + resp.data.data, 'Close');
     } else {
       this.snackBar.open(resp.data.msg, 'Close');
     }

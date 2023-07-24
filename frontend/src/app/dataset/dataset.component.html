@@ -20,11 +20,25 @@
     </button>
   </div>
   <markdown katex class="intro">{{ dataset.intro }}</markdown>
-  <button mat-stroked-button color="primary" class="join" *ngIf="!this.eval">
-    Upload a file to join CodeComp!
-  </button>
+  <div class="upload-btn" *ngIf="!this.eval && this.authenticated">
+    <label for="upload-file">
+      <button mat-stroked-button color="primary" class="join" (click)="selectFile()">
+        Upload a file to join DataComp!
+      </button>
+    </label>
+    <input
+      type="file"
+      id="upload-file"
+      (change)="this.onFileSelected($event)"
+      style="visibility: hidden"
+      #fileInput
+    />
+  </div>
   <button mat-stroked-button disabled class="join" *ngIf="this.eval">
     Your code is evaluating...
+  </button>
+  <button mat-stroked-button disabled class="join" *ngIf="!this.authenticated">
+    Login to join DataComp!
   </button>
   <h2>Evaluations</h2>
   <table

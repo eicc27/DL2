@@ -3,6 +3,7 @@ package com.dl2.userservice.Security;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
+import software.amazon.awssdk.core.ResponseBytes;
 import software.amazon.awssdk.core.ResponseInputStream;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
@@ -11,7 +12,9 @@ import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignRequest;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,6 +105,26 @@ public class S3Config {
             return null;
         }
     }
+
+    public void getObject(String src, String dst) {
+        try {
+            GetObjectRequest getObjectRequest =
+                    GetObjectRequest.builder()
+                            .bucket(bucketName)
+                            .key(src)
+                            .build();
+            ResponseBytes<GetObjectResponse> objectBytes = client.getObjectAsBytes(getObjectRequest);
+            byte[] data = objectBytes.asByteArray();
+            // Write the data to a local file.
+            File myFile = new File(dst);
+            OutputStream os = new FileOutputStream(myFile);
+            os.write(data);
+            os.close();
+        } catch (S3Exception | IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 
     public List<String> listObjects(String path) {
         try {
