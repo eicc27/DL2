@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2531699d-c68f-4ab0-a1b0-d4b842e8d38e" name="Changes" comment="Search Lambda">
+    <list default="true" id="2531699d-c68f-4ab0-a1b0-d4b842e8d38e" name="Changes" comment="for eb deployment">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAnalysis/SparkCF.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataAnalysis/SparkCF.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileService/main.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +24,11 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///AIAssistantSnippet" root0="ESSENTIAL" />
+    <setting file="mock:///AIAssistantSnippet" root0="ESSENTIAL" />
+    <setting file="mock:///AIAssistantSnippet" root0="ESSENTIAL" />
+    <setting file="mock:///AIAssistantSnippet" root0="ESSENTIAL" />
+    <setting file="mock:///AIAssistantSnippet" root0="ESSENTIAL" />
     <setting file="mock:///AIAssistantSnippet" root0="ESSENTIAL" />
     <setting file="mock:///AIAssistantSnippet" root0="ESSENTIAL" />
     <setting file="mock:///AIAssistantSnippet" root0="ESSENTIAL" />
@@ -136,7 +139,7 @@
       <workItem from="1690111971580" duration="1078000" />
       <workItem from="1690118222379" duration="75000" />
       <workItem from="1690119581780" duration="4000" />
-      <workItem from="1690157026340" duration="1848000" />
+      <workItem from="1690157026340" duration="4070000" />
     </task>
     <task id="LOCAL-00001" summary="homepage buttons">
       <option name="closed" value="true" />
@@ -210,7 +213,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690157067828</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="for eb deployment">
+      <option name="closed" value="true" />
+      <created>1690160016520</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1690160016520</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -233,6 +244,7 @@
     <MESSAGE value="select task refine" />
     <MESSAGE value="DataComp" />
     <MESSAGE value="Search Lambda" />
-    <option name="LAST_COMMIT_MESSAGE" value="Search Lambda" />
+    <MESSAGE value="for eb deployment" />
+    <option name="LAST_COMMIT_MESSAGE" value="for eb deployment" />
   </component>
 </project>
