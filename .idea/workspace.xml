@@ -104,6 +104,7 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Python.WeaviateHelper" />
       <item itemvalue="Spring Boot.UserServiceApplication" />
     </list>
   </component>
