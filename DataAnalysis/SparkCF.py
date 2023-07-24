@@ -1,6 +1,7 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 from pyspark.sql.functions import sum
+import sys
 
 host = "database-test.cb6gwcrbia4j.us-east-1.rds.amazonaws.com"
 database = "dl2"
@@ -26,3 +27,6 @@ pair_data.show()
 
 pair_data = pair_data.groupBy("paper1", "paper2").agg(sum("rating").alias("rating_sum"))
 item_similarity = pair_data.withColumn("similarity", col("rating_sum")/(col("item1_count")*col("item2_count")))
+
+
+item_similarity.write.mode("overwrite").csv(sys.argv[1])
