@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2531699d-c68f-4ab0-a1b0-d4b842e8d38e" name="Changes" comment="Search Lambda">
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SearchLambda/MysqlHelper.py" beforeDir="false" afterPath="$PROJECT_DIR$/SearchLambda/MysqlHelper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataAnalysis/SparkCF.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataAnalysis/SparkCF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileService/main.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,12 +28,14 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="mock:///AIAssistantSnippet" root0="ESSENTIAL" />
     <setting file="mock:///AIAssistantSnippet" root0="ESSENTIAL" />
+    <setting file="mock:///AIAssistantSnippet" root0="ESSENTIAL" />
+    <setting file="mock:///AIAssistantSnippet" root0="ESSENTIAL" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2Spyky5E5JecTiZ1BmV6U1FDsux" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -73,6 +73,9 @@
       <recent name="D:\DL2\SearchLambda" />
       <recent name="D:\DL2\Neo4jService\target" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\DL2\DataAnalysis" />
+    </key>
   </component>
   <component name="RunManager" selected="Spring Boot.UserServiceApplication">
     <configuration name="WeaviateHelper" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -104,11 +107,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.WeaviateHelper" />
-      </list>
-    </recent_temporary>
+    <list>
+      <item itemvalue="Python.WeaviateHelper" />
+      <item itemvalue="Spring Boot.UserServiceApplication" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -132,6 +134,9 @@
       <workItem from="1690091261284" duration="16000" />
       <workItem from="1690105311242" duration="3885000" />
       <workItem from="1690111971580" duration="1078000" />
+      <workItem from="1690118222379" duration="75000" />
+      <workItem from="1690119581780" duration="4000" />
+      <workItem from="1690157026340" duration="1848000" />
     </task>
     <task id="LOCAL-00001" summary="homepage buttons">
       <option name="closed" value="true" />
@@ -189,7 +194,23 @@
       <option name="project" value="LOCAL" />
       <updated>1690020184566</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Search Lambda">
+      <option name="closed" value="true" />
+      <created>1690118288068</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1690118288068</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Search Lambda">
+      <option name="closed" value="true" />
+      <created>1690157067828</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1690157067828</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,15 +234,5 @@
     <MESSAGE value="DataComp" />
     <MESSAGE value="Search Lambda" />
     <option name="LAST_COMMIT_MESSAGE" value="Search Lambda" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Neo4jLambda/N4JHelper.py</url>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

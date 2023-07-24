@@ -74,7 +74,7 @@ public class S3Config {
                     .bucket(bucketName)
                     .key(rootPath + file.getOriginalFilename())
                     .build();
-            String filePath = "/tmp/" + file.getOriginalFilename();
+            String filePath = "tmp/" + file.getOriginalFilename();
             File targetFile = new File(filePath);
             if (!targetFile.exists()) {
                 targetFile.mkdirs();
