@@ -19,7 +19,7 @@ out-of-the-box development experience considering UI design.
 
 ## Data Analysis
 
-- Recommendation System based on papers' citation graph and text data and users' social network and interest field.
+- Recommendation System based on papers' citation graph and text data, and users' interest field.
 - A GNN fine-grained field classifier for newly published papers.
 
 ## TODOs
