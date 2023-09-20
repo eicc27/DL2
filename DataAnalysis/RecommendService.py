@@ -3,15 +3,16 @@ from flask_restful import Resource, Api
 import weaviate
 import numpy as np
 import json
+import os
 
 app = Flask(__name__)
 api = Api(app)
 
 client = weaviate.Client(
     url='https://dl2-6ld8p0k2.weaviate.network',
-    auth_client_secret=weaviate.AuthApiKey(api_key='ugyXUyDB0ODDjlivf1URI9lQBCQEc1t8orke'),
+    auth_client_secret=weaviate.AuthApiKey(api_key=os.getenv['WEAVIATE_API_KEY']),
     additional_headers={
-        "X-huggingFace-Api-Key": "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"
+        "X-huggingFace-Api-Key": os.getenv['HF_API_KEY'],
     }
 )
 
