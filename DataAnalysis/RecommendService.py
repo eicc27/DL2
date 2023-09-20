@@ -10,9 +10,9 @@ api = Api(app)
 
 client = weaviate.Client(
     url='https://dl2-6ld8p0k2.weaviate.network',
-    auth_client_secret=weaviate.AuthApiKey(api_key=os.getenv['WEAVIATE_API_KEY']),
+    auth_client_secret=weaviate.AuthApiKey(api_key=os.getenv('WEAVIATE_API_KEY')),
     additional_headers={
-        "X-huggingFace-Api-Key": os.getenv['HF_API_KEY'],
+        "X-huggingFace-Api-Key": os.getenv('HF_API_KEY'),
     }
 )
 
