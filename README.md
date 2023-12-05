@@ -30,7 +30,7 @@ out-of-the-box development experience considering UI design.
 
 ## Demo Video
 
-[![Alt Text](https://img.youtube.com/vi/-3NVk5leMew/0.jpg)](https://www.youtube.com/watch?v=-3NVk5leMew)
+https://github.com/eicc27/DL2/assets/116665077/cb7a9db9-820e-41c8-b4cd-ab148e49e97f
 
 ## TODOs
 
