@@ -28,6 +28,10 @@ out-of-the-box development experience considering UI design.
 
 - ![Should be a Data Flow Illustration](data.png)
 
+## Demo
+
+[![Alt Text](https://img.youtube.com/vi/-3NVk5leMew/0.jpg)](https://www.youtube.com/watch?v=-3NVk5leMew)
+
 ## TODOs
 
 - Autoscaler deployment of backend
