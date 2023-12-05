@@ -39,3 +39,9 @@ https://github.com/eicc27/DL2/assets/116665077/cb7a9db9-820e-41c8-b4cd-ab148e49e
 - Cache the python file in the frontend with IndexedDB
 - New DataComp Recommendation System
 - A ChatBot with OpenAI API
+
+## Service as a Service(Secheduled)
+
+- Kubernetes deployment with autoconfigured docker images
+- ElasticSearch deployment with distributed ML searching capabilities
+- Prometheus TSDB with advanced monitoring and logging of service statuses
