@@ -2,6 +2,8 @@
 
 Deep Learning Learning Platform
 
+![Should be a system framework illustration](framework.png)
+
 ## Frontend
 
 Uses Angular & Angular material to host a frontend. Angular material provides an
@@ -9,8 +11,10 @@ out-of-the-box development experience considering UI design.
 
 ### Features
 
-- Graph visualisation: Uses D3, a rather complex graph engine with embedded physics engine that handles the forces among nodes.
+- A seamless guide through deep learning papers nowadays, where you get customized recommendations based on browsing history and papers' citation graph, as well as access to a Markdown driven method introduction with only a few clicks.
+- Graph visualisation: Uses D3, a graph engine with embedded physics engine that handles the forces among nodes.
 - WebASM integrated LSP: Uses Jedi, Python language metatools to provide code autocompletions, embedded in JS using Pyodide.
+- DataComp(beta) where you can upload datasets and compete with each other. The competition footprint can thus enhance our recommendation system.
 
 ## Backend
 
@@ -22,10 +26,12 @@ out-of-the-box development experience considering UI design.
 - Recommendation System based on papers' citation graph and text data, and users' interest field.
 - A GNN fine-grained field classifier for newly published papers.
 
+- ![Should be a Data Flow Illustration](data.png)
+
 ## TODOs
 
 - Autoscaler deployment of backend
 - WSGI service of RFS
 - Cache the python file in the frontend with IndexedDB
-- New Paper Recommendation System
-- DataComp: Data Competition Platform(Beta)
+- New DataComp Recommendation System
+- A ChatBot with OpenAI API
