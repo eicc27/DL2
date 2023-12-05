@@ -26,9 +26,9 @@ out-of-the-box development experience considering UI design.
 - Recommendation System based on papers' citation graph and text data, and users' interest field.
 - A GNN fine-grained field classifier for newly published papers.
 
-- ![Should be a Data Flow Illustration](data.png)
+![Should be a Data Flow Illustration](data.png)
 
-## Demo
+## Demo Video
 
 [![Alt Text](https://img.youtube.com/vi/-3NVk5leMew/0.jpg)](https://www.youtube.com/watch?v=-3NVk5leMew)
 
