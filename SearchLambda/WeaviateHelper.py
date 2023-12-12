@@ -1,8 +1,9 @@
 import weaviate
+import os
 
 
 class WeaviateHelper:
-    def __init__(self, url="https://dl2-6ld8p0k2.weaviate.network", key="ugyXUyDB0ODDjlivf1URI9lQBCQEc1t8orke", api_key="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"):
+    def __init__(self, url="https://dl2-6ld8p0k2.weaviate.network", key=os.environ['WEAVIATE_API_KEY'], api_key=os.environ['HUGGINGFACE_API_KEY']):
         self.client = weaviate.Client(url=url, auth_client_secret=weaviate.AuthApiKey(
             api_key=key), additional_headers={'X-HuggingFace-Api-Key': api_key})
 
