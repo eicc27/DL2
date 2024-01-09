@@ -5,6 +5,7 @@ import { writeFileSync } from "fs";
 
 /**
  * This crawler inverses the arxivId into PWCId, using PWC API.
+ * @param arxivId - arxivId of the paper
  */
 export default class InverseCrawler extends BaseCrawler {
   public constructor(private arxivId: string) {

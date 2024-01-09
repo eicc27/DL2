@@ -41,8 +41,8 @@ export default class SubscriptionCrawler extends BaseCrawler {
     super();
   }
 
-  public override async crawl(test: boolean): Promise<any> {
-    const [date, nextDate] = getDate();
+  public override async crawl(test: boolean, dateBias: number = 365): Promise<any> {
+    const [date, nextDate] = getDate(dateBias);
     const response = await axios.get(
       `https://export.arxiv.org/api/query?search_query=cat:${this.field}+AND+submittedDate:[${date}+TO+${nextDate}]&start=0&max_results=500`,
       {

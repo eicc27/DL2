@@ -30,4 +30,5 @@ export interface Metadata {
     references: number;
     citations: number;
     referencedPapers: string[];
+    tasks: Task[];
 }

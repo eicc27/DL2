@@ -11,7 +11,7 @@ import chalk from "chalk";
  * As a result, the `alpha` specified is just an approximation.
  * @param alpha The percentage of nodes needed.
  */
-function generateStaticGraph(alpha = 1) {
+export function generateStaticGraph(alpha = 1) {
   const files = fs.readdirSync("data/");
   const fields: any = {};
   const papers: string[] = [];
@@ -43,6 +43,7 @@ function generateStaticGraph(alpha = 1) {
     if (field_counter[field] >= fields[field]) continue;
     nodes.push({
       id: data.id,
+      title: data.name,
       field: field,
     });
   }

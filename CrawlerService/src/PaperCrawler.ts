@@ -2,7 +2,7 @@ import axios from "axios";
 import * as fs from "fs";
 import BaseCrawler from "./BaseCrawler.js";
 import { UA } from "../utils/Constants.js";
-import { Metadata, Method } from "../types/Paper.js";
+import { Metadata, Method, Task } from "../types/Paper.js";
 import CRCrawler from "./CRCrawler.js";
 import AsyncPool from "../utils/AsyncPool.js";
 import MethodCrawler from "./MethodCrawler.js";
@@ -12,17 +12,19 @@ export default class PaperCrawler extends BaseCrawler {
   private url: string;
   private methodsUrl: string;
   private reposUrl: string;
+  private tasksUrl: string;
 
   /**
    * 
-   * @param url The url of the paper, e.g. semantic-segmentation...
+   * @param pwcId The papers with code id of the paper.
    */
-  public constructor(url: string) {
+  public constructor(pwcId: string) {
     super();
     const json = '/?format=json';
-    this.url = "https://paperswithcode.com/api/v1/papers/" + url;
+    this.url = "https://paperswithcode.com/api/v1/papers/" + pwcId;
     this.methodsUrl = this.url + "/methods" + json;
     this.reposUrl = this.url + "/repositories" + json;
+    this.tasksUrl = this.url + "/tasks" + json;
     this.url += json;
   }
 
@@ -54,7 +56,21 @@ export default class PaperCrawler extends BaseCrawler {
     });
   }
 
-  public override async crawl(test = true): Promise<Metadata | undefined> {
+  private async getTasks(): Promise<Task[]> {
+    const response = await axios.get(this.tasksUrl, {
+      headers: {
+        "User-Agent": UA,
+      },
+    });
+    return response.data.results.map((task: any) => {
+      return {
+        name: task.name,
+        desc: task.description,
+      }
+    });
+  }
+
+  public override async crawl(_ = true): Promise<Metadata> {
     const response = await axios.get(this.url, {
       headers: {
         "User-Agent": UA,
@@ -81,6 +97,7 @@ export default class PaperCrawler extends BaseCrawler {
       citations: citesAndRefs.citations,
       references: citesAndRefs.references,
       referencedPapers: citesAndRefs.referencedPapers,
+      tasks: await this.getTasks(),
     };
   }
 }

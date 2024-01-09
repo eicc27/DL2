@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
     this.graphService.init(window.innerWidth, window.innerHeight);
     const svg = this.graphService.createRoot('.right');
     const links = this.graphService.createLinks(svg);
-    const nodes = this.graphService.createNodes(svg);
+    const nodes = this.graphService.createNodes(svg, links);
     const zoom = this.graphService.setZoom(svg, 0.5, 6);
     const zoomOut = () => {
       const svg = d3.select('.right svg');
@@ -64,16 +64,10 @@ export class HomeComponent implements OnInit {
         zoomOut();
       }
     });
-    window.addEventListener('scroll', () => {
-      console.log('scroll');
-      zoomOut();
-    });
-    d3.select('.title').on('scroll', () => {
-      console.log('scroll');
-      zoomOut();
-    });
+    window.addEventListener('scroll', zoomOut);
+    d3.select('.title').on('scroll', zoomOut);
     // svg.call(zoom);
-    nodes.append('title').text((d: Node) => d.id);
+    nodes.append('title').text((d: Node) => [d.id, d.title, d.field].join(`\n`));
     nodes.on('click', (event: MouseEvent) => {
       const target = event.target as SVGElement;
       this.zoom = true;
@@ -94,7 +88,7 @@ export class HomeComponent implements OnInit {
         );
       nodes.attr('fill-opacity', 0.7).attr('stroke-opacity', 0.7);
       links.attr('stroke-opacity', 0.4).attr('stroke', '#fff');
-      this.graphContainer.nativeElement.style.background = 'rgba(0, 0, 0, 0.2)';
+      this.graphContainer.nativeElement.style.background = 'rgba(0, 0, 0, 0.3)';
       svg.transition().duration(200).call(zoom.transform, transform);
     });
     const simulation = this.graphService.Simulation;

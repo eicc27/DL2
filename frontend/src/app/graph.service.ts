@@ -5,6 +5,7 @@ import { GRAPH } from './static-graph.model';
 export interface Node extends d3.SimulationNodeDatum {
   id: string;
   field: string;
+  title: string;
 }
 
 export interface Link {
@@ -33,7 +34,7 @@ export class GraphService {
   private dragStarted = (
     event: d3.D3DragEvent<SVGCircleElement, Node, Node>
   ) => {
-    if (!event.active) this.simulation.alphaTarget(0.3).restart();
+    if (!event.active) this.simulation.alphaTarget(0.4).restart();
     event.subject.fx = event.subject.x;
     event.subject.fy = event.subject.y;
   };
@@ -55,16 +56,19 @@ export class GraphService {
   init(width: number, height: number) {
     this.width = width;
     this.height = height;
+    const radius = Math.min(this.width, this.height) / 2;
     this.simulation = d3
-    .forceSimulation(this.nodes)
-    .force(
-      'link',
-      d3
-        .forceLink(this.links)
-        .id((d: d3.SimulationNodeDatum) => (d as Node).id)
-    )
-    .force('charge', d3.forceManyBody())
-    .force('center', d3.forceCenter(this.width / 2, this.height / 2));
+      .forceSimulation(this.nodes)
+      .force(
+        'link',
+        d3
+          .forceLink(this.links)
+          .id((d: d3.SimulationNodeDatum) => (d as Node).id)
+      )
+      // .force('charge', d3.forceManyBody())
+      .force('radial', d3.forceRadial(radius, this.width / 2, this.height / 2))
+      .force('collide', d3.forceCollide(radius / GRAPH.nodes.length))
+      .force('center', d3.forceCenter(this.width / 2, this.height / 2));
   }
 
   get Nodes() {
@@ -130,24 +134,47 @@ export class GraphService {
   }
 
   public createNodes(
-    svg: d3.Selection<SVGSVGElement, unknown, HTMLElement, undefined>
+    svg: d3.Selection<SVGSVGElement, unknown, HTMLElement, undefined>,
+    link: d3.Selection<SVGLineElement | null, Link, SVGGElement, unknown>
   ) {
-    return (
-      svg
-        .append('g')
-        .attr('stroke', '#fff')
-        // TODO: change this dynamically to the view numbers added by nodes
-        .attr('stroke-width', 1.5)
-        .attr('stroke-opacity', 0.3)
-        .selectAll()
-        .data(this.nodes)
-        .join('circle')
-        .attr('r', 5)
-        .attr('fill', (d) => this.color(d.field))
-        .attr('fill-opacity', 0.3)
-        // on hover: cursor changes to pointer
-        .attr('cursor', 'pointer')
-    );
+    const nodes = svg
+      .append('g')
+      .attr('stroke', '#fff')
+      // TODO: change this dynamically to the view numbers added by nodes
+      .attr('stroke-width', 1.5)
+      .attr('stroke-opacity', 0.3)
+      .selectAll()
+      .data(this.nodes)
+      .join('circle')
+      .attr('r', 5)
+      .attr('fill', (d) => this.color(d.field))
+      .attr('fill-opacity', 0.3)
+      // on hover: cursor changes to pointer
+      .attr('cursor', 'pointer');
+    nodes
+      .on('mouseenter', function (e, d) {
+        link
+        .transition().duration(300)
+        .filter(l => l.source === d || l.target === d)
+        .attr('stroke-opacity', 0.7) 
+        .attr('stroke', 'royalblue');
+        d3.select(this).transition().duration(300)
+          .attr('fill-opacity', 0.8)
+          .attr('r', 7)
+          .attr('stoke-opacity', 0.8);
+      })
+      .on('mouseleave', function (e, d) {
+        link
+        .transition().duration(300)
+        .filter(l => l.source === d || l.target === d)
+        .attr('stroke', '#999')
+        .attr('stroke-opacity', 0.2);
+        d3.select(this).transition().duration(300)
+          .attr('fill-opacity', 0.3)
+          .attr('r', 5)
+          .attr('stoke-opacity', 0.3);
+      });
+    return nodes;
   }
 
   public setTicked(

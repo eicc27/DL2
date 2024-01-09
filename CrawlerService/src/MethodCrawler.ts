@@ -7,14 +7,14 @@ export default class MethodCrawler extends BaseCrawler {
     super();
   }
 
-  public override async crawl(test = true): Promise<Method | undefined> {
+  public override async crawl(test = true): Promise<Method | void> {
     const response = await axios.get(
       `https://paperswithcode.com/api/v1/methods/${this.methodUrl}/?format=json`
     );
     const data = response.data;
     if (test) {
       console.log(data);
-      return undefined;
+      return;
     }
     return {
       method: data.name,

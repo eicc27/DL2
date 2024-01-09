@@ -10,7 +10,7 @@ export default class CRCrawler extends BaseCrawler{
         this.id = id;
     }
 
-    public override async crawl(_=true) {//这个横杆
+    public override async crawl(_=true) {
         const url = `https://partner.semanticscholar.org/v1/paper/arXiv:${this.id}?include_unknown_references=true`;
         const response =
             await axios.get(url, {
@@ -18,7 +18,7 @@ export default class CRCrawler extends BaseCrawler{
                     "User-Agent": UA,
                 }
             });
-        const body = response.data;//response.data 是一个表示 HTTP 响应数据的属性。它通常包含从服务器返回的实际数据。
+        const body = response.data;
         // url be like: https://www.semanticscholar.org/paper/455c7f7aeb6f24a096b49cd85edd9ed42daf5b4b
         const refs: string[] = [];
         for (const ref of body.references) {
