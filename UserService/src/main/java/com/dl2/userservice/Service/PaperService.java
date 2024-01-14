@@ -1,12 +1,17 @@
 package com.dl2.userservice.Service;
 
 import com.dl2.userservice.DTO.*;
+import com.dl2.userservice.DTO.PaperInsertionRequest.Method;
+import com.dl2.userservice.DTO.PaperInsertionRequest.PaperInsertionRequest;
+import com.dl2.userservice.DTO.PaperInsertionRequest.PaperRequest;
+import com.dl2.userservice.DTO.PaperInsertionRequest.Task;
 import com.dl2.userservice.Entity.*;
 import com.dl2.userservice.Repository.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -139,5 +144,54 @@ public class PaperService {
             paperResponses.add(getPaperByArxivId(paper.getArxivId()));
         }
         return paperResponses;
+    }
+
+    @Transactional
+    public boolean insertPaper(PaperRequest paperRequest, Method[] methods, Task[] tasks) {
+        var paper = new Paper();
+        paper.setArxivId(paperRequest.getId());
+        paper.setTitle(paperRequest.getName());
+        paper.setAbs(paperRequest.getAbs());
+        paper.setCitations(paperRequest.getCitations());
+        paper.setYear(Paper.fromArxivId(paper.getArxivId()));
+        paperRepository.save(paper); // paper part
+        for (String author : paperRequest.getAuthors()) {
+            var paperAuthor = new Author();
+            paperAuthor.setName(author);
+            authorRepository.save(paperAuthor);
+            var authorPaper = new AuthorPaper();
+            authorPaper.setPaperId(paper.getArxivId());
+            authorPaper.setAuthorId(author);
+            authorPaperRepository.save(authorPaper);
+        } // author part
+        for (var code : paperRequest.getCodes()) {
+            var paperCode = new Code();
+            paperCode.setPaperId(paper.getArxivId());
+            paperCode.setUrl(code.getUrl());
+            paperCode.setRating(code.getRating());
+            codeRepository.save(paperCode);
+        }
+        for (var method : methods) {
+            var paperMethod = new com.dl2.userservice.Entity.Method();
+            paperMethod.setIntro(method.getDesc());
+            paperMethod.setName(method.getMethod());
+            paperMethod.setPaperid(method.getArxivId());
+            methodRepository.save(paperMethod); // method part
+            var methodPaper = new MethodPaper();
+            methodPaper.setPaperId(paper.getArxivId());
+            methodPaper.setMethodId(paperMethod.getName());
+            methodPaperRepository.save(methodPaper); // methodPaper part
+        }
+        for (var task : tasks) {
+            var paperTask = new com.dl2.userservice.Entity.Task();
+            paperTask.setName(task.getName());
+            paperTask.setIntro(task.getDesc());
+            taskRepository.save(paperTask); // task part
+            var taskPaper = new TaskPaper();
+            taskPaper.setPaperId(paper.getArxivId());
+            taskPaper.setTaskId(paperTask.getName());
+            taskPaperRepository.save(taskPaper); // taskPaper part
+        }
+        return true;
     }
 }

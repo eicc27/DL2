@@ -1,6 +1,6 @@
 import axios from "axios";
 import BaseCrawler from "./BaseCrawler.js";
-import { UA } from "../utils/Constants.js";
+import { UA } from "./utils/Constants.js";
 import { writeFileSync } from "fs";
 
 /**

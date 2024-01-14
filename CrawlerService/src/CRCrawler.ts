@@ -1,6 +1,6 @@
 import axios from "axios";
 import BaseCrawler from "./BaseCrawler.js";
-import { UA } from "../utils/Constants.js";
+import { UA } from "./utils/Constants.js";
 
 export default class CRCrawler extends BaseCrawler{
     private id: string;
@@ -19,7 +19,6 @@ export default class CRCrawler extends BaseCrawler{
                 }
             });
         const body = response.data;
-        // url be like: https://www.semanticscholar.org/paper/455c7f7aeb6f24a096b49cd85edd9ed42daf5b4b
         const refs: string[] = [];
         for (const ref of body.references) {
             if (ref.arxivId) {

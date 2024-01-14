@@ -1,15 +1,19 @@
 package com.dl2.userservice.Controller;
 
+import com.dl2.userservice.DTO.PaperInsertionRequest.Method;
+import com.dl2.userservice.DTO.PaperInsertionRequest.PaperInsertionRequest;
+import com.dl2.userservice.DTO.PaperInsertionRequest.Task;
 import com.dl2.userservice.DTO.PaperResponse;
 import com.dl2.userservice.DTO.PapersRequest;
 import com.dl2.userservice.Response;
 import com.dl2.userservice.Service.PaperService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/paper")
@@ -79,5 +83,28 @@ public class PaperController {
             }
         }
         return new Response(200, "Success.", paperResponses);
+    }
+
+    @PutMapping("/papers")
+    @ResponseBody
+    @CrossOrigin
+    public Response putPapers(@RequestBody PaperInsertionRequest request) {
+        var papers = request.getPapers();
+        var methods = request.getMethods();
+        var tasks = request.getTasks();
+        for (var paper : papers) {
+            var paperMethods = Arrays.stream(paper.getMethods())
+                    .flatMap(s -> Arrays.stream(methods)
+                            .filter(m -> Objects.equals(m.getId(), s)))
+                    .toArray(Method[]::new);
+            var paperTasks = Arrays.stream(paper.getTasks())
+                    .flatMap(s -> Arrays.stream(tasks)
+                            .filter(t -> Objects.equals(t.getId(), s)))
+                    .toArray(Task[]::new);
+            var result = paperService.insertPaper(paper, paperMethods, paperTasks);
+            if (!result)
+                return new Response(500, "Insertion with data error.");
+        }
+        return new Response(200, "Success.");
     }
 }

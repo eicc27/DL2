@@ -1,7 +1,7 @@
 import axios from "axios";
 import { writeFileSync } from "fs";
 import BaseCrawler from "./BaseCrawler.js";
-import { UA } from "../utils/Constants.js";
+import { UA } from "./utils/Constants.js";
 import { XMLParser } from "fast-xml-parser";
 
 /**

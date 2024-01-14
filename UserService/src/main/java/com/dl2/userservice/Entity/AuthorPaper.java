@@ -11,11 +11,9 @@ import java.io.Serializable;
 @Data
 public class AuthorPaper {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "authorid")
     private String authorId;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "paperid")
     private String paperId;
 }

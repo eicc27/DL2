@@ -1,12 +1,8 @@
 import axios from "axios";
-import * as fs from "fs";
 import BaseCrawler from "./BaseCrawler.js";
-import { UA } from "../utils/Constants.js";
-import { Metadata, Method, Task } from "../types/Paper.js";
+import { UA } from "./utils/Constants.js";
+import { Paper, Task } from "./types/Paper.js";
 import CRCrawler from "./CRCrawler.js";
-import AsyncPool from "../utils/AsyncPool.js";
-import MethodCrawler from "./MethodCrawler.js";
-
 
 export default class PaperCrawler extends BaseCrawler {
   private url: string;
@@ -15,12 +11,12 @@ export default class PaperCrawler extends BaseCrawler {
   private tasksUrl: string;
 
   /**
-   * 
+   *
    * @param pwcId The papers with code id of the paper.
    */
   public constructor(pwcId: string) {
     super();
-    const json = '/?format=json';
+    const json = "/?format=json";
     this.url = "https://paperswithcode.com/api/v1/papers/" + pwcId;
     this.methodsUrl = this.url + "/methods" + json;
     this.reposUrl = this.url + "/repositories" + json;
@@ -52,7 +48,7 @@ export default class PaperCrawler extends BaseCrawler {
       return {
         url: repo.url,
         rating: repo.stars,
-      }
+      };
     });
   }
 
@@ -64,40 +60,40 @@ export default class PaperCrawler extends BaseCrawler {
     });
     return response.data.results.map((task: any) => {
       return {
+        id: task.id,
         name: task.name,
         desc: task.description,
-      }
+      };
     });
   }
 
-  public override async crawl(_ = true): Promise<Metadata> {
+  public override async crawl(_ = true): Promise<Paper | void> {
     const response = await axios.get(this.url, {
       headers: {
         "User-Agent": UA,
       },
     });
     const data = response.data;
-    const methods = await this.getMethods();
-    const pool = new AsyncPool(5);
-    const concreteMethods: Method[] = [];
-    for (const method of methods) {
-      await pool.submit(async (method: string) => {
-        concreteMethods.push((await new MethodCrawler(method).crawl(false))!);
-      }, method);
+    if (!data.arxiv_id) {
+      return;
     }
-    await pool.close();
-    const citesAndRefs = await PaperCrawler.getCitesAndRefs(data.arxiv_id);
+    const [citesAndRefs, codes, tasks, methods] = await Promise.all([
+      PaperCrawler.getCitesAndRefs(data.arxiv_id),
+      this.getRepo(),
+      this.getTasks(),
+      this.getMethods(),
+    ]);
     return {
       name: data.title,
       abstract: data.abstract,
       id: data.arxiv_id,
       authors: data.authors,
-      codes: await this.getRepo(),
-      methods: concreteMethods,
+      codes,
+      methods,
       citations: citesAndRefs.citations,
       references: citesAndRefs.references,
       referencedPapers: citesAndRefs.referencedPapers,
-      tasks: await this.getTasks(),
+      tasks,
     };
   }
 }

@@ -72,15 +72,8 @@ export function generateStaticGraph(alpha = 1) {
     const id = node.id;
     return edges.some((edge) => edge.source === id || edge.target === id);
   });
-  fs.writeFileSync(
-    "graph.json",
-    JSON.stringify(
-      {
-        nodes: nodes,
-        edges: edges,
-      },
-      null,
-      "\t"
-    )
-  );
+  return {
+    nodes: nodes,
+    edges: edges,
+  };
 }

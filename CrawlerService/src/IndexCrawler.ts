@@ -1,7 +1,7 @@
 import axios from "axios";
 import { JSDOM } from "jsdom";
 import * as fs from "fs";
-import { UA } from "../utils/Constants.js";
+import { UA } from "./utils/Constants.js";
 
 export default class IndexCrawler {
   taskName: string;

@@ -9,9 +9,11 @@ import lombok.Data;
 public class Method {
 
     @Id
-    @GeneratedValue()
     private String name;
 
     @Column(length = 10000)
     private String intro;
+
+    @Column(name = "paperid")
+    private String paperid;
 }

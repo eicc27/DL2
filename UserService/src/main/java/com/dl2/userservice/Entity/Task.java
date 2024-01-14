@@ -8,7 +8,6 @@ import lombok.Data;
 @Table(name = "task")
 public class Task {
     @Id
-    @GeneratedValue()
     private String name;
 
     @Column(length = 10000)

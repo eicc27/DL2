@@ -1,12 +1,14 @@
 export interface Task {
+    id: string;
     name: string;
     desc: string;
 }
 
 export interface Method {
+    id: string;
     method: string;
     desc?: string;
-    url?: string;
+    arxivId?: string;
 }
 
 
@@ -20,10 +22,10 @@ export interface Author {
     name: string;
 }
 
-export interface Metadata {
+export interface Paper {
     codes: SourceCode[];
-    methods: Method[];
-    authors: Author[];
+    methods: string[];
+    authors: string[];
     name: string;
     id: string;
     abstract: string;

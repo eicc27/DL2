@@ -67,4 +67,6 @@ public interface MethodRepository extends JpaRepository<Method, String> {
                 limit 5;
             """, nativeQuery = true)
     List<Object[]> getTopPapersByMethodName(@Param(value = "task_name") String methodName);
+
+
 }

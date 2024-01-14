@@ -9,7 +9,6 @@ import java.time.Year;
 @Entity
 public class Paper {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "arxiv_id")
     private String arxivId;
 
@@ -21,4 +20,11 @@ public class Paper {
     private String abs;
 
     private Long citations;
+
+    public static Year fromArxivId(String id) {
+        String yearPart = id.substring(0, 2);
+        int year = Integer.parseInt(yearPart);
+        year += (year > 91) ? 1900 : 2000;
+        return Year.of(year);
+    }
 }

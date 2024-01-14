@@ -11,12 +11,10 @@ import java.io.Serializable;
 @Table(name = "method_paper")
 public class MethodPaper {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "methodid")
     private String methodId;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "paperid")
     private String paperId;
 }

@@ -11,6 +11,5 @@ import lombok.Data;
 @Table(name = "author")
 public class Author {
     @Id
-    @GeneratedValue()
     private String name;
 }

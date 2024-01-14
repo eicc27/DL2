@@ -48,4 +48,5 @@ public interface PaperRepository extends JpaRepository<Paper, String> {
             """, nativeQuery = true)
     List<Paper> getNewPapersByUserId(@Param("userId") Long userId);
 
+
 }
