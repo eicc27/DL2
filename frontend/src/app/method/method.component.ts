@@ -18,7 +18,7 @@ export class MethodComponent {
   ngOnInit() {
     this.route.params.subscribe(async (params) => {
       const task = params['method'];
-      const resp = await axios.get(ServerService.LoginServer + `/method?methodName=${task}`);
+      const resp = await axios.get(ServerService.UserServer + `/method?methodName=${task}`);
       const data: GenericResponse<Task> = resp.data;
       this.task = data.data;
       const maxNumPapers = Math.max(...this.task.methodNumPapers);

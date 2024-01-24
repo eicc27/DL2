@@ -204,7 +204,7 @@ export class UploadDatasetComponent {
     appendFiles('script', this.evalScript.nativeElement.files!);
     this.uploading = true;
     const resp = await axios.post(
-      ServerService.LoginServer + '/dataset/upload',
+      ServerService.UserServer + '/dataset/upload',
       formData,
     );
     this.uploading = false;

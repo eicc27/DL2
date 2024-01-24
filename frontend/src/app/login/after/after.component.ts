@@ -72,7 +72,7 @@ export class AfterComponent {
       window.location.pathname = '/login';
       return;
     }
-    const resp = await axios.post(ServerService.LoginServer + '/user/choseTasks', {
+    const resp = await axios.post(ServerService.UserServer + '/user/choseTasks', {
       jwt: localStorage.getItem('access_token'),
     });
     const data: GenericResponse<any> = resp.data;
@@ -94,7 +94,7 @@ export class AfterComponent {
     }
   }
   async submit() {
-    await axios.post(ServerService.LoginServer + '/user/likedTasks', {
+    await axios.post(ServerService.UserServer + '/user/likedTasks', {
       jwt: localStorage.getItem('access_token'),
       taskIds: this.selectedTasks,
     });

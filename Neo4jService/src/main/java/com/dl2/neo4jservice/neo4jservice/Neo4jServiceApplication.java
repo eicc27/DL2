@@ -8,7 +8,4 @@ public class Neo4jServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(Neo4jServiceApplication.class, args);
 	}
-
-
-
 }

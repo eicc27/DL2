@@ -76,7 +76,7 @@ public class PaperController {
     @CrossOrigin
     public Response getPapers(@RequestBody PapersRequest paperIds) {
         List<PaperResponse> paperResponses = new ArrayList<>();
-        for (String paperId : paperIds.getArxivId()) {
+        for (String paperId : paperIds.getArxivIds()) {
             PaperResponse paperResponse = paperService.getPaperByArxivId(paperId);
             if (paperResponse != null) {
                 paperResponses.add(paperResponse);

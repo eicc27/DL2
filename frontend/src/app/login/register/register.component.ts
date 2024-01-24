@@ -83,14 +83,14 @@ export class RegisterComponent implements AfterViewInit {
       return;
     }
     const resp = await axios.post(
-      ServerService.LoginServer + '/user/register',
+      ServerService.UserServer + '/user/register',
       {
         name: this.NameElement.nativeElement.value,
         password: this.PasswordElement.nativeElement.value,
         email: this.EmailElement.nativeElement.value,
       }
     );
-    const data: Response = resp.data;
+    const data: Response<string> = resp.data;
     if (data.code == 400) {
       this.nameUnique = false;
     } else if (data.code == 401) {

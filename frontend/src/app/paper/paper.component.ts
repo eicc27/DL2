@@ -6,7 +6,7 @@ import { ServerService } from '../server.service';
 import GenericResponse from '../GenericResponse.model';
 import { AuthService } from '../auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import Recommendation, { SortedRecommendation } from '../personal/Recommendation.model';
+import Response from 'src/response.model';
 
 @Component({
   selector: 'app-paper',
@@ -32,7 +32,7 @@ export class PaperComponent implements OnInit {
 
   private async getFav() {
     const res = await axios.post<GenericResponse<boolean>>(
-      ServerService.LoginServer + `/user/get_favourite`,
+      ServerService.UserServer + `/user/get_favourite`,
       {
         jwt: localStorage.getItem('access_token'),
         paperId: this.id,
@@ -85,6 +85,7 @@ export class PaperComponent implements OnInit {
           rating: code.rating,
         };
       });
+      this.paper.codes.sort((a, b) => b.rating - a.rating);
       await this.getRelatedPapers();
     });
   }
@@ -92,7 +93,7 @@ export class PaperComponent implements OnInit {
   private async getPaper() {
     this.loading = true;
     const res = await axios.get<GenericResponse<Paper>>(
-      ServerService.LoginServer + `/paper/${this.id}`
+      ServerService.UserServer + `/paper/${this.id}`
     );
     if (res.status !== 200) {
       this.router.navigate(['/404']);
@@ -105,8 +106,8 @@ export class PaperComponent implements OnInit {
     this.fav = !this.fav;
     const res = await axios.post<GenericResponse<any>>(
       this.fav
-        ? ServerService.LoginServer + `/user/favourite`
-        : ServerService.LoginServer + `/user/unfavourite`,
+        ? ServerService.UserServer + `/user/favourite`
+        : ServerService.UserServer + `/user/unfavourite`,
       {
         jwt: localStorage.getItem('access_token'),
         paperId: this.id,
@@ -132,7 +133,7 @@ export class PaperComponent implements OnInit {
   public async gotoArxiv() {
     if (this.authorized) {
       const resp = await axios.post<GenericResponse<any>>(
-        ServerService.LoginServer + `/user/record_viewed`,
+        ServerService.UserServer + `/user/record_viewed`,
         {
           jwt: localStorage.getItem('access_token'),
           paperId: this.id,
@@ -158,13 +159,19 @@ export class PaperComponent implements OnInit {
   }
 
   private async getRelatedPapers() {
-    const resp = await axios.post(
-      ServerService.N4JServer,
+    const resp = await axios.get(
+      `${ServerService.N4JServer}/paper/relatedPapers?id=${this.id}`
+    );
+    const data = resp.data as Response<string[]>;
+    ServerService.UserServer;
+    const papersResp = await axios.post(
+      `${ServerService.UserServer}/paper/papers`,
       {
-        query: [this.id],
+        arxivIds: data.data,
       }
     );
-    const data = resp.data;
-    this.relatedPapers = data.papers;
+    this.relatedPapers = (papersResp.data as Response<Paper[]>).data.filter(
+      (p) => p.arxivId != this.id
+    );
   }
 }

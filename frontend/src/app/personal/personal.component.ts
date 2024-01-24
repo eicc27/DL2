@@ -29,7 +29,7 @@ export class PersonalComponent {
   }
 
   private async getRecent() {
-    const resp = await axios.post(ServerService.LoginServer + '/user/recent', {
+    const resp = await axios.post(ServerService.UserServer + '/user/recent', {
       jwt: localStorage.getItem('access_token'),
     });
     const data: GenericResponse<any> = resp.data;

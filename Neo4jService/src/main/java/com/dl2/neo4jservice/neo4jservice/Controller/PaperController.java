@@ -17,19 +17,13 @@ public class PaperController {
     @Autowired
     private PaperService paperService;
 
-//    @PostMapping("/nearbyPaper")
-//    @ResponseBody
-//    @CrossOrigin(originPatterns = "*", allowedHeaders = "*", allowCredentials = "true")
-//    public Response getPaperById(@RequestBody PaperRequest paperIds) {
-//        PaperResponse paperResponse = paperService.findNearbyPaper(paperIds.getArxivId());
-//        if (paperResponse == null) {
-//            return new Response(400, "Paper not found.");
-//        } else {
-//            System.out.println(paperResponse);
-//
-//            return new Response(200, "Success.", paperResponse);
-//        }
-//    }
+    @GetMapping("/relatedPapers")
+    @ResponseBody
+    @CrossOrigin(originPatterns = "*", allowedHeaders = "*", allowCredentials = "true")
+    public Response getRelatedPapers(@RequestParam("id") String paperId) {
+        var papers = paperService.findNearbyPaper(paperId);
+        return new Response(200, "Success", papers);
+    }
 
     @PutMapping("/papers")
     @ResponseBody
@@ -41,5 +35,12 @@ public class PaperController {
         paperService.addPapers(papers, methods, tasks);
         paperService.addRelations(papers, methods, tasks);
         return new Response(200, "Success");
+    }
+
+    @GetMapping("/homepage")
+    @ResponseBody
+    @CrossOrigin(originPatterns = "*", allowedHeaders = "*", allowCredentials = "true")
+    public Response getHomepageGraph() {
+        return new Response(200, "Success", paperService.getHomepageGraph());
     }
 }

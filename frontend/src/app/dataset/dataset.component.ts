@@ -41,12 +41,12 @@ export class DatasetComponent {
       let resp: AxiosResponse<GenericResponse<Dataset>>;
       if (!this.authService.isAuthenticated()) {
         resp = await axios.get(
-          ServerService.LoginServer + '/dataset/' + dataset
+          ServerService.UserServer + '/dataset/' + dataset
         );
       } else {
         this.name = this.authService.getToken()?.name;
         resp = await axios.post(
-          ServerService.LoginServer + '/dataset/' + dataset,
+          ServerService.UserServer + '/dataset/' + dataset,
           {
             jwt: localStorage.getItem('access_token'),
           }
@@ -70,7 +70,7 @@ export class DatasetComponent {
     const name = this.dataset.name;
     this.loading = true;
     const resp = await axios.get(
-      ServerService.LoginServer + '/dataset/download/' + name
+      ServerService.UserServer + '/dataset/download/' + name
     );
     this.loading = false;
     const urls: string[] = resp.data.data;
@@ -119,7 +119,7 @@ export class DatasetComponent {
     formData.append('name', this.authService.getToken()!.name);
     this.loading = true;
     const resp = await axios
-      .post(ServerService.LoginServer + '/eval/upload', formData, {
+      .post(ServerService.UserServer + '/eval/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

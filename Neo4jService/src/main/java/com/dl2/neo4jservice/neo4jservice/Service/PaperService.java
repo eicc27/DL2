@@ -1,14 +1,22 @@
 package com.dl2.neo4jservice.neo4jservice.Service;
 
+import com.dl2.neo4jservice.neo4jservice.DTO.CitationResult;
 import com.dl2.neo4jservice.neo4jservice.DTO.PaperInsertionRequest.Method;
 import com.dl2.neo4jservice.neo4jservice.DTO.PaperInsertionRequest.PaperRequest;
 import com.dl2.neo4jservice.neo4jservice.DTO.PaperInsertionRequest.Task;
+import com.dl2.neo4jservice.neo4jservice.DTO.PaperResponse;
+import com.dl2.neo4jservice.neo4jservice.Entity.Paper;
 import com.dl2.neo4jservice.neo4jservice.Repository.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Service
@@ -28,6 +36,11 @@ public class PaperService {
     @Autowired
     private AuthorRepository authorRepository;
 
+//    @Transactional
+//    public PaperResponse findNearbyPaper(List<String> paperIds) {
+//
+//    }
+
 ////    @Transactional
 //    public PaperResponse findNearbyPaper(List<String> paperIds) {
 //        List<Paper> NearbyPapers = paperRepository.findNearbyPapers(paperIds);
@@ -43,6 +56,11 @@ public class PaperService {
 //        }
 //        return new PaperResponse(nearbyPaperIds, nearbyPaperCitations);
 //    }
+
+    @Transactional
+    public List<String> findNearbyPaper(String paperId) {
+        return paperRepository.getNearbyPapers(paperId);
+    }
 
     @Transactional
     public void addPapers(PaperRequest[] papers, Method[] methods, Task[] tasks) {
@@ -90,5 +108,10 @@ public class PaperService {
             for (var t : paperTasks)
                 taskRepository.setTaskPaper(paper.getId(), t.getName());
         }
+    }
+
+    @Transactional
+    public List<Map<String, String>> getHomepageGraph() {
+        return paperRepository.getHomepageGraph();
     }
 }

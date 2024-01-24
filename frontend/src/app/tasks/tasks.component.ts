@@ -15,7 +15,7 @@ export class TasksComponent {
   public length: number = 0;
 
   async ngOnInit() {
-    const resp = await axios.get(ServerService.LoginServer + `/tasks`);
+    const resp = await axios.get(ServerService.UserServer + `/tasks`);
     const data: GenericResponse<TaskResponse> = resp.data;
     this.tasks = data.data.tasks;
     this.length = data.data.totalElements;
@@ -25,7 +25,7 @@ export class TasksComponent {
     const index = event.pageIndex;
     const size = event.pageSize;
     console.log(index, size);
-    const resp = await axios.get(ServerService.LoginServer + `/tasks?page=${index + 1}&size=${size}`);
+    const resp = await axios.get(ServerService.UserServer + `/tasks?page=${index + 1}&size=${size}`);
     const data: GenericResponse<TaskResponse> = resp.data;
     this.tasks = [];
     this.tasks = data.data.tasks;

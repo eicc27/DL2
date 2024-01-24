@@ -53,11 +53,11 @@ export class LoginComponent implements AfterViewInit {
     if (!this.nameValid || !this.passValid) {
       return;
     }
-    const resp = await axios.post(ServerService.LoginServer + '/user/login', {
+    const resp = await axios.post(ServerService.UserServer + '/user/login', {
       name: this.NameElement.nativeElement.value,
       password: this.PasswordElement.nativeElement.value,
     });
-    const data: Response = resp.data;
+    const data: Response<string> = resp.data;
     if (data.code == 200) {
       this.authService.setToken(data.data);
       window.location.pathname = '/';

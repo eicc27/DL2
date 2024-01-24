@@ -311,7 +311,7 @@ export class FsComponent implements OnInit {
     formData.append('dataset', value);
     this.loading = true;
     const res = await axios.post(
-      ServerService.LoginServer + '/eval/uploads3',
+      ServerService.UserServer + '/eval/uploads3',
       formData
     );
     this.loading = false;

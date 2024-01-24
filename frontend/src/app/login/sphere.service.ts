@@ -44,7 +44,7 @@ export class SphereService {
       // Update the projection's rotation
       projection.rotate([rotation, 0]);
       // The nodes
-      context.fillStyle = 'gainsboro';
+      context.fillStyle = 'rgba(65, 105, 225, 0.25)'; // royalblue
       nodes.forEach(function (d: any) {
         var point = projection.rotate([new Date().getTime() * 0.01, -30])([
           d.lon,
@@ -56,7 +56,7 @@ export class SphereService {
       });
       // The edges
       context.lineWidth = 1;
-      context.strokeStyle = 'rgba(0, 0, 0, 0.02)';
+      context.strokeStyle = 'rgba(0, 0, 0, 0.05)';
       for (const e of edges) {
         const sourceId = typeof e.source === 'object' ? e.source.id : e.source;
         const targetId = typeof e.target === 'object' ? e.target.id : e.target;

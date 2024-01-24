@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { OnInit } from '@angular/core';
 import * as d3 from 'd3';
-import { GraphService, Node, Link } from 'src/app/graph.service';
+import { GraphService, Node } from 'src/app/graph.service';
 import { Router } from '@angular/router';
 import Paper from 'src/app/paper/paper.model';
 import axios from 'axios';
@@ -15,7 +15,6 @@ import GenericResponse from 'src/app/GenericResponse.model';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  private zoom = false;
   private zoomTarget: SVGElement | null = null;
   public papers: Paper[] = [];
   public methods: {
@@ -37,6 +36,7 @@ export class HomeComponent implements OnInit {
   }
 
   public async ngOnInit() {
+    await this.graphService.getGraph(false);
     // init the canvas with window size
     this.graphService.init(window.innerWidth, window.innerHeight);
     const svg = this.graphService.createRoot('.right');
@@ -70,7 +70,6 @@ export class HomeComponent implements OnInit {
     nodes.append('title').text((d: Node) => [d.id, d.title, d.field].join(`\n`));
     nodes.on('click', (event: MouseEvent) => {
       const target = event.target as SVGElement;
-      this.zoom = true;
       if (this.zoomTarget == target) {
         //double click, goes to the paper page
         const node = d3.select(target);
@@ -117,19 +116,19 @@ export class HomeComponent implements OnInit {
   }
 
   public async getFeaturedPapers() {
-    const resp = await axios.get(ServerService.LoginServer + '/paper/featured/papers');
+    const resp = await axios.get(ServerService.UserServer + '/paper/featured/papers');
     const data: GenericResponse<Paper[]> = resp.data;
     this.papers = data.data;
   }
 
   public async getFeaturedMethods() {
-    const resp = await axios.get(ServerService.LoginServer + '/paper/featured/methods');
+    const resp = await axios.get(ServerService.UserServer + '/paper/featured/methods');
     const data: GenericResponse<{name: string, numPapers: number}[]> = resp.data;
     this.methods = data.data;
   }
 
   public async getFeaturedTasks() {
-    const resp = await axios.get(ServerService.LoginServer + '/paper/featured/tasks');
+    const resp = await axios.get(ServerService.UserServer + '/paper/featured/tasks');
     const data: GenericResponse<{name: string, numPapers: number}[]> = resp.data;
     this.tasks = data.data;
   }

@@ -20,7 +20,7 @@ export class DatacompComponent {
   async ngOnInit() {
     this.loading = true;
     const resp = await axios.get(
-      ServerService.LoginServer + '/dataset/datasets'
+      ServerService.UserServer + '/dataset/datasets'
     );
     this.loading = false;
     const data = resp.data as GenericResponse<any>;

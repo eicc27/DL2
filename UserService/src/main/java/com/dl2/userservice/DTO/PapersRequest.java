@@ -10,5 +10,5 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PapersRequest {
-    private List<String> arxivId;
+    private List<String> arxivIds;
 }

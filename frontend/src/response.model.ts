@@ -1,5 +1,5 @@
-export default interface Response {
+export default interface Response<T> {
   code: number;
   msg: string;
-  data: any;
+  data: T;
 }

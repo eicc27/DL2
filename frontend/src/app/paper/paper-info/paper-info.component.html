@@ -1,5 +1,5 @@
 <div
-  class="paper {{accent ? 'accent' : ''}}"
+  class="paper {{ accent ? 'accent' : '' }}"
   *ngFor="let paper of papers"
   (click)="openPaper(paper.arxivId)"
 >

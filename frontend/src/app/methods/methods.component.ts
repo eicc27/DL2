@@ -15,7 +15,7 @@ export class MethodsComponent {
   public length: number = 0;
 
   async ngOnInit() {
-    const resp = await axios.get(ServerService.LoginServer + `/methods`);
+    const resp = await axios.get(ServerService.UserServer + `/methods`);
     const data: GenericResponse<TaskResponse> = resp.data;
     this.tasks = data.data.tasks;
     this.length = data.data.totalElements;
@@ -25,7 +25,7 @@ export class MethodsComponent {
     const index = event.pageIndex;
     const size = event.pageSize;
     console.log(index, size);
-    const resp = await axios.get(ServerService.LoginServer + `/methods?page=${index + 1}&size=${size}`);
+    const resp = await axios.get(ServerService.UserServer + `/methods?page=${index + 1}&size=${size}`);
     const data: GenericResponse<TaskResponse> = resp.data;
     this.tasks = data.data.tasks;
     this.length = data.data.totalElements;

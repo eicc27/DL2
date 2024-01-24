@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as d3 from 'd3';
-import { GRAPH } from './static-graph.model';
+import { GRAPH, getGraph } from './static-graph.model';
 
 export interface Node extends d3.SimulationNodeDatum {
   id: string;
@@ -20,15 +20,17 @@ export class GraphService {
   private width = 800;
   private height = 600;
 
-  private nodes: Node[] = GRAPH.nodes;
+  private nodes: Node[] = [];
 
-  private links: Link[] = GRAPH.edges;
+  private links: Link[] = [];
 
   // create a force simulation
   private simulation!: d3.Simulation<Node, Link>;
 
   // color scheme for the nodes
   private color = d3.scaleOrdinal(d3.schemeCategory10);
+
+  private graph!: typeof GRAPH;
 
   // drag events
   private dragStarted = (
@@ -50,7 +52,17 @@ export class GraphService {
     event.subject.fy = null;
   };
 
-  constructor() {
+  constructor() {}
+
+  async getGraph(test = false) {
+    try {
+      this.graph = test ? GRAPH : await getGraph();
+    } catch (e) {
+      this.graph = GRAPH;
+    }
+    console.log(this.graph);
+    this.nodes = this.graph.nodes;
+    this.links = this.graph.edges;
   }
 
   init(width: number, height: number) {
@@ -67,7 +79,7 @@ export class GraphService {
       )
       // .force('charge', d3.forceManyBody())
       .force('radial', d3.forceRadial(radius, this.width / 2, this.height / 2))
-      .force('collide', d3.forceCollide(radius / GRAPH.nodes.length))
+      .force('collide', d3.forceCollide(radius / this.graph.nodes.length))
       .force('center', d3.forceCenter(this.width / 2, this.height / 2));
   }
 
@@ -154,22 +166,28 @@ export class GraphService {
     nodes
       .on('mouseenter', function (e, d) {
         link
-        .transition().duration(300)
-        .filter(l => l.source === d || l.target === d)
-        .attr('stroke-opacity', 0.7) 
-        .attr('stroke', 'royalblue');
-        d3.select(this).transition().duration(300)
+          .transition()
+          .duration(300)
+          .filter((l) => l.source === d || l.target === d)
+          .attr('stroke-opacity', 0.7)
+          .attr('stroke', 'royalblue');
+        d3.select(this)
+          .transition()
+          .duration(300)
           .attr('fill-opacity', 0.8)
           .attr('r', 7)
           .attr('stoke-opacity', 0.8);
       })
       .on('mouseleave', function (e, d) {
         link
-        .transition().duration(300)
-        .filter(l => l.source === d || l.target === d)
-        .attr('stroke', '#999')
-        .attr('stroke-opacity', 0.2);
-        d3.select(this).transition().duration(300)
+          .transition()
+          .duration(300)
+          .filter((l) => l.source === d || l.target === d)
+          .attr('stroke', '#999')
+          .attr('stroke-opacity', 0.2);
+        d3.select(this)
+          .transition()
+          .duration(300)
           .attr('fill-opacity', 0.3)
           .attr('r', 5)
           .attr('stoke-opacity', 0.3);
