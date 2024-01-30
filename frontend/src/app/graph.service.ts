@@ -54,13 +54,34 @@ export class GraphService {
 
   constructor() {}
 
-  async getGraph(test = false) {
+  async getGraph() {
+    let that = this;
+    const setGraph = async () => {
+      that.graph = await getGraph();
+      // cache the graph into local storage
+      localStorage.setItem(
+        'graph',
+        JSON.stringify({
+          graph: that.graph,
+          date: new Date(),
+        })
+      );
+    };
     try {
-      this.graph = test ? GRAPH : await getGraph();
-    } catch (e) {
+      const graph = localStorage.getItem('graph');
+      if (graph && JSON.parse(graph).graph) {
+        const { graph: g, date } = JSON.parse(graph);
+        // cache the graph for 1 day
+        if (
+          new Date(date).getTime() + 24 * 60 * 60 * 1000 >
+          new Date().getTime()
+        )
+          this.graph = g;
+        else await setGraph();
+      } else await setGraph();
+    } catch (_) {
       this.graph = GRAPH;
     }
-    console.log(this.graph);
     this.nodes = this.graph.nodes;
     this.links = this.graph.edges;
   }
@@ -77,8 +98,7 @@ export class GraphService {
           .forceLink(this.links)
           .id((d: d3.SimulationNodeDatum) => (d as Node).id)
       )
-      // .force('charge', d3.forceManyBody())
-      .force('radial', d3.forceRadial(radius, this.width / 2, this.height / 2))
+      .force('charge', d3.forceManyBody())
       .force('collide', d3.forceCollide(radius / this.graph.nodes.length))
       .force('center', d3.forceCenter(this.width / 2, this.height / 2));
   }

@@ -18,14 +18,14 @@ export class HomeComponent implements OnInit {
   private zoomTarget: SVGElement | null = null;
   public papers: Paper[] = [];
   public methods: {
-    name: string,
-    numPapers: number,
+    name: string;
+    numPapers: number;
   }[] = [];
   public tasks: {
-    name: string,
-    numPapers: number,
+    name: string;
+    numPapers: number;
   }[] = [];
-  @ViewChild("graphContainer") graphContainer!: ElementRef<HTMLDivElement>;
+  @ViewChild('graphContainer') graphContainer!: ElementRef<HTMLDivElement>;
 
   public constructor(
     titleService: Title,
@@ -36,7 +36,12 @@ export class HomeComponent implements OnInit {
   }
 
   public async ngOnInit() {
-    await this.graphService.getGraph(false);
+    await Promise.all([
+      this.graphService.getGraph(),
+      this.getFeaturedPapers(),
+      this.getFeaturedMethods(),
+      this.getFeaturedTasks(),
+    ]);
     // init the canvas with window size
     this.graphService.init(window.innerWidth, window.innerHeight);
     const svg = this.graphService.createRoot('.right');
@@ -45,19 +50,19 @@ export class HomeComponent implements OnInit {
     const zoom = this.graphService.setZoom(svg, 0.5, 6);
     const zoomOut = () => {
       const svg = d3.select('.right svg');
-        const transform = d3.zoomIdentity
-          .translate(0, 0)
-          .scale(1)
-          .translate(0, 0);
-        svg
-          .transition()
-          .duration(200)
-          .call(zoom.transform as any, transform);
-        this.graphContainer.nativeElement.style.background = 'transparent';
-        links.attr('stroke-opacity', 0.2).attr('stroke', '#999');
-        nodes.attr('fill-opacity', 0.3).attr('stroke-opacity', 0.3);
-        this.zoomTarget = null;
-    }
+      const transform = d3.zoomIdentity
+        .translate(0, 0)
+        .scale(1)
+        .translate(0, 0);
+      svg
+        .transition()
+        .duration(200)
+        .call(zoom.transform as any, transform);
+      this.graphContainer.nativeElement.style.background = 'transparent';
+      links.attr('stroke-opacity', 0.2).attr('stroke', '#999');
+      nodes.attr('fill-opacity', 0.3).attr('stroke-opacity', 0.3);
+      this.zoomTarget = null;
+    };
     // when press ESC, zoom out
     d3.select('body').on('keydown', (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -67,7 +72,9 @@ export class HomeComponent implements OnInit {
     window.addEventListener('scroll', zoomOut);
     d3.select('.title').on('scroll', zoomOut);
     // svg.call(zoom);
-    nodes.append('title').text((d: Node) => [d.id, d.title, d.field].join(`\n`));
+    nodes
+      .append('title')
+      .text((d: Node) => [d.id, d.title, d.field].join(`\n`));
     nodes.on('click', (event: MouseEvent) => {
       const target = event.target as SVGElement;
       if (this.zoomTarget == target) {
@@ -102,11 +109,6 @@ export class HomeComponent implements OnInit {
         .on('drag', dragged)
         .on('end', dragended)
     );
-    await Promise.all([
-      this.getFeaturedPapers(),
-      this.getFeaturedMethods(),
-      this.getFeaturedTasks(),
-    ]);
   }
 
   public ngOnDestroy() {
@@ -116,32 +118,40 @@ export class HomeComponent implements OnInit {
   }
 
   public async getFeaturedPapers() {
-    const resp = await axios.get(ServerService.UserServer + '/paper/featured/papers');
+    const resp = await axios.get(
+      ServerService.UserServer + '/paper/featured/papers'
+    );
     const data: GenericResponse<Paper[]> = resp.data;
     this.papers = data.data;
   }
 
   public async getFeaturedMethods() {
-    const resp = await axios.get(ServerService.UserServer + '/paper/featured/methods');
-    const data: GenericResponse<{name: string, numPapers: number}[]> = resp.data;
+    const resp = await axios.get(
+      ServerService.UserServer + '/paper/featured/methods'
+    );
+    const data: GenericResponse<{ name: string; numPapers: number }[]> =
+      resp.data;
     this.methods = data.data;
   }
 
   public async getFeaturedTasks() {
-    const resp = await axios.get(ServerService.UserServer + '/paper/featured/tasks');
-    const data: GenericResponse<{name: string, numPapers: number}[]> = resp.data;
+    const resp = await axios.get(
+      ServerService.UserServer + '/paper/featured/tasks'
+    );
+    const data: GenericResponse<{ name: string; numPapers: number }[]> =
+      resp.data;
     this.tasks = data.data;
   }
 
   public openPaper(id: string) {
-    window.location.pathname = "/paper/" + id;
+    window.location.pathname = '/paper/' + id;
   }
 
   public openTask(task: string) {
-    window.location.pathname = "/task/" + task;
+    window.location.pathname = '/task/' + task;
   }
 
   public openMethod(method: string) {
-    window.location.pathname = "/method/" + method;
+    window.location.pathname = '/method/' + method;
   }
 }
