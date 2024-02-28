@@ -8,6 +8,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class FeaturedTaskAndMethodResponse {
     private String name;
-
+    private String intro;
     private Long paperNum;
 }

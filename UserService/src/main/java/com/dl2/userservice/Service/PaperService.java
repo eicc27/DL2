@@ -111,7 +111,7 @@ public class PaperService {
         List<Object[]> objects = taskPaperRepository.getMostPopularTasks();
         List<FeaturedTaskAndMethodResponse> featuredTaskAndMethodResponses = new ArrayList<>();
         for (Object[] object : objects) {
-            featuredTaskAndMethodResponses.add(new FeaturedTaskAndMethodResponse((String) object[0], (Long) object[1]));
+            featuredTaskAndMethodResponses.add(new FeaturedTaskAndMethodResponse((String) object[0], (String) object[1], (Long) object[2]));
         }
         return featuredTaskAndMethodResponses;
     }
@@ -121,7 +121,7 @@ public class PaperService {
         List<Object[]> objects = methodPaperRepository.getMostPopularMethods();
         List<FeaturedTaskAndMethodResponse> featuredTaskAndMethodResponses = new ArrayList<>();
         for (Object[] object : objects) {
-            featuredTaskAndMethodResponses.add(new FeaturedTaskAndMethodResponse((String) object[0], (Long) object[1]));
+            featuredTaskAndMethodResponses.add(new FeaturedTaskAndMethodResponse((String) object[0], (String) object[1], (Long) object[2]));
         }
         return featuredTaskAndMethodResponses;
     }

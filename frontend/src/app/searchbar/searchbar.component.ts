@@ -13,7 +13,7 @@ export class SearchbarComponent {
   public showOverlay = false;
   private focus = false;
   public searching = false;
-  public shoudReadOnly = false;
+  public shouldReadOnly = false;
   public papers: Paper[] = [];
   private timeout!: any;
 
@@ -28,14 +28,14 @@ export class SearchbarComponent {
       this.searchBar.nativeElement.style.boxShadow = 'none';
       // unfocus
       this.searchBar.nativeElement.blur();
-      this.shoudReadOnly = true;
+      this.shouldReadOnly = true;
     };
   }
 
   public toggleFocus(focus: boolean) {
     console.log(focus);
     this.focus = focus;
-    this.shoudReadOnly = !focus;
+    this.shouldReadOnly = !focus;
     if (this.focus) this.showOverlay = true;
     if (this.focus) {
       this.searchBar.nativeElement.style.boxShadow =

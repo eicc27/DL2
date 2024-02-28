@@ -47,7 +47,7 @@ public interface TaskRepository extends JpaRepository<Task, String> {
               GROUP BY
                 t.name,
                 m.name
-            )        
+            )       
             SELECT
               task_name,
               method_name,

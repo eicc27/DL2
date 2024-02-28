@@ -33,8 +33,10 @@ public interface MethodPaperRepository extends JpaRepository<MethodPaper, String
     List<Object[]> getMostPopularMethodsByNumOfPapers(@Param("paperId") String paperId);
 
     @Query(value = """
-            select methodid as name, count(*) as paperNum
-            from method_paper
+            select mp.methodid as name, m.intro as intro, count(*) as paperNum
+            from method_paper mp
+            join method m
+            on m.name=mp.methodid
                 group by name
                 order by paperNum desc
                 limit 10;

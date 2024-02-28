@@ -6,9 +6,9 @@
     (blur)="this.toggleFocus(false)"
     (click)="this.toggleFocus(true)"
     (input)="this.search($event.target)"
-    [readOnly]="this.shoudReadOnly"
+    [readOnly]="this.shouldReadOnly"
   />
-  <mat-icon>search</mat-icon>
+  <mat-icon fontIcon="search"></mat-icon>
 </span>
 <app-search-overlay *ngIf="this.showOverlay" [papers]="papers" [searching]="this.searching"></app-search-overlay>
 <div class="background" *ngIf="this.showOverlay"></div>

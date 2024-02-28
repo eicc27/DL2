@@ -1,10 +1,4 @@
-mat-toolbar {
-  z-index: 10;
-  position: fixed;
-}
-
 button {
-  font-style: italic;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-size: 1.2em;
   background: none;
@@ -38,10 +32,6 @@ button {
     margin: 0 1em;
     height: inherit;
     transition: all .2s ease-out;
-    &:nth-child(3) { // datacomp
-      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-      font-weight: bold;
-    }
     &:hover {
       cursor: pointer;
       color: orangered;

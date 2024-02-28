@@ -129,18 +129,22 @@ export class HomeComponent implements OnInit {
     const resp = await axios.get(
       ServerService.UserServer + '/paper/featured/methods'
     );
-    const data: GenericResponse<{ name: string; numPapers: number }[]> =
-      resp.data;
-    this.methods = data.data;
+    const data: GenericResponse<
+      { name: string; intro: string; numPapers: number }[]
+    > = resp.data;
+    this.methods = data.data.filter(m => m && m.intro.length);
+    this.methods.sort((m1, m2) => m2.numPapers - m1.numPapers);
   }
 
   public async getFeaturedTasks() {
     const resp = await axios.get(
       ServerService.UserServer + '/paper/featured/tasks'
     );
-    const data: GenericResponse<{ name: string; numPapers: number }[]> =
-      resp.data;
-    this.tasks = data.data;
+    const data: GenericResponse<
+      { name: string; intro: string; numPapers: number }[]
+    > = resp.data;
+    this.tasks = data.data.filter(t => t && t.intro.length);
+    this.tasks.sort((t1, t2) => t2.numPapers - t1.numPapers);
   }
 
   public openPaper(id: string) {

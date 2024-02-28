@@ -33,11 +33,14 @@ public interface TaskPaperRepository extends JpaRepository<TaskPaper, String> {
     List<Object[]> getMostPopularTasksByNumOfPapers(@Param("paperId") String paperId);
 
     @Query(value = """
-            select taskid as name, count(*) as paperNum
-            from task_paper
-                group by name
-                order by paperNum desc
-                limit 10;
+                 select tp.taskid as name, t.intro as intro, count(*) as paperNum
+                 from task_paper tp
+                     join task t
+                     on tp.taskid = t.name
+                         where intro is not null
+                         group by name
+                         order by paperNum desc
+                         limit 10;
             """, nativeQuery = true)
     List<Object[]> getMostPopularTasks();
 
