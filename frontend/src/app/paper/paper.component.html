@@ -1,8 +1,8 @@
 <app-loading *ngIf="this.loading"></app-loading>
 <app-topbar *ngIf="!this.loading" />
 <main *ngIf="!this.loading" class="container">
-  <h1 [innerHTML]="this.paper.title | highlightCapitalized : 'royalblue'"></h1>
-  <span class="arxiv-and-star">
+  <h1 [innerHTML]="this.paper.title | highlightCapitalized : 'royalblue'" class="p-2"></h1>
+  <span class="arxiv-and-star mt-4 mb-10">
     <i class="arxiv-id" (click)="gotoArxiv()"
       >arxiv: {{ this.paper.arxivId }}</i
     >
@@ -23,25 +23,24 @@
       >
     </button>
   </span>
-  <p class="abs">{{ this.paper.abs }}</p>
-  <div class="authors">
-    <h2 class="title">Authors</h2>
+  <div class="abstract">
+    <h2 class="absolute w-fit py-2 px-4 translate-x-10 border-solid border-2 border-blue-500 bg-white z-10">Abstract</h2>
+    <p class="abs font-mono text-lg relative mt-8 px-4 pt-10 pb-6 border-dashed border-2 border-blue-300">{{ this.paper.abs }}</p>
+  </div>
+  <div class="authors mt-10">
+    <h2 class="title mb-2">Authors</h2>
     <span *ngFor="let author of this.paper.authors; index as i" class="author">
       <i>{{ author }}</i
       ><span *ngIf="i != this.paper.authors.length - 1">, </span>
     </span>
   </div>
-  <div class="tasks" *ngIf="this.paper.tasks.taskName.length">
-    <h2 class="title">Tasks</h2>
+  <div class="tasks mt-10" *ngIf="this.paper.tasks.taskName.length">
+    <h2 class="title mb-2">Tasks</h2>
     <div class="pop-content">
       <span
         *ngFor="let task of this.paper.tasks.taskName; index as i"
         [ngStyle]="{
-          background: paper.methodColors[i],
-          color: 'whitesmoke',
-          padding: '0.5rem 0.8rem',
-          margin: '0.5rem',
-          'border-radius': '2rem'
+          background: paper.taskColors[i],
         }"
         (click)="gotoTask(task)"
       >
@@ -49,18 +48,13 @@
       </span>
     </div>
   </div>
-  <div class="methods" *ngIf="this.paper.methods.methodName.length">
-    <h2 class="title">Methods</h2>
-
+  <div class="methods mt-10" *ngIf="this.paper.methods.methodName.length">
+    <h2 class="title mb-2">Methods</h2>
     <div class="pop-content">
       <span
         *ngFor="let method of this.paper.methods.methodName; index as i"
         [ngStyle]="{
-          background: paper.methodColors[i],
-          color: 'whitesmoke',
-          padding: '0.5rem 0.8rem',
-          margin: '0.5rem',
-          'border-radius': '2rem'
+          background: paper.methodColors[i]
         }"
         (click)="gotoMethod(method)"
       >
@@ -68,15 +62,15 @@
       </span>
     </div>
   </div>
-  <div class="codes">
-    <h2 class="title">Codes</h2>
+  <div class="codes mt-10">
+    <h2 class="title mb-2">Codes</h2>
     <div *ngFor="let task of this.paper.codes; index as i" class="code">
       <a class="url" [href]="task.url" [innerHTML]="task.shortened"></a>
       <div class="rating">{{ task.rating }}</div>
     </div>
   </div>
-  <div class="related" *ngIf="this.relatedPapers.length">
-    <h2 class="title">Related Papers</h2>
+  <div class="related mt-10" *ngIf="this.relatedPapers.length">
+    <h2 class="title mb-2">Related Papers</h2>
     <app-paper-info [papers]="this.relatedPapers"></app-paper-info>
   </div>
 </main>

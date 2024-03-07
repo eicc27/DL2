@@ -18,11 +18,12 @@ h2 {
 }
 
 h1 {
-  font-size: 1.8em;
+  font-size: 1.8rem;
+  background: linear-gradient(to right, rgba(gainsboro, .5), transparent);
 }
 
 h2 {
-  font-size: 1.4em;
+  font-size: 1.6rem;
 }
 
 .arxiv-and-star {
@@ -33,28 +34,28 @@ h2 {
 
   .arxiv-id {
     margin-right: 1em;
+    font-size: .9em;
+    color: #777;
+    text-decoration: underline;
+    transition: all .3s ease-out;
+
+    &:hover {
+      color: royalblue;
+      cursor: pointer;
+    }
   }
 }
+
+
 
 .colorized {
   color: royalblue;
 }
 
-.arxiv-id {
-  font-size: .9em;
-  color: #777;
-  text-decoration: underline;
-  transition: all .3s ease-out;
-
-  &:hover {
-    color: royalblue;
-    cursor: pointer;
-  }
-}
-
 .author i {
   font-family: Arial, Helvetica, sans-serif;
   transition: all .2s ease-out;
+  font-size: large;
 
   &:hover {
     color: royalblue;
@@ -68,7 +69,7 @@ h2 {
 
   .task-name,
   .method-name {
-    font-size: 1.1em;
+    font-size: large;
     margin-left: .5em;
   }
 }
@@ -89,6 +90,7 @@ h2 {
       color: #777;
       text-decoration: none;
       transition: all .2s ease-out;
+
       &:hover {
         color: royalblue;
         cursor: pointer;
@@ -108,8 +110,14 @@ h2 {
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
+
   span {
     transition: all .3s ease-out;
+    color: whitesmoke;
+    padding: 0.5rem 0.8rem;
+    margin: 0.5rem;
+
+    // border-radius: 2rem;
     &:hover {
       transform: scale(1.05);
       cursor: pointer;

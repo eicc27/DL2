@@ -7,6 +7,7 @@ import GenericResponse from '../GenericResponse.model';
 import { AuthService } from '../auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import Response from 'src/response.model';
+import * as d3 from 'd3';
 
 @Component({
   selector: 'app-paper',
@@ -48,6 +49,7 @@ export class PaperComponent implements OnInit {
     this.route.params.subscribe(async (params) => {
       this.id = params['id'];
       await Promise.all([this.getFav(), this.getPaper()]);
+      console.log(this.paper.tasks);
       const maxNumTasks = Math.max(...this.paper.tasks.numPapers);
       const minNumTasks = Math.min(...this.paper.tasks.numPapers);
       const maxNumMethods = Math.max(...this.paper.methods.numPapers);
@@ -61,6 +63,7 @@ export class PaperComponent implements OnInit {
         const r = Math.round(30 + (255 - 30) * ratio);
         const g = Math.round(144 + (69 - 144) * ratio);
         const b = Math.round(255 + (0 - 255) * ratio);
+        console.log(r, g, b);
         return `rgba(${r}, ${g}, ${b}, 0.85)`;
       });
       this.paper.methodColors = this.paper.methods.numPapers.map(

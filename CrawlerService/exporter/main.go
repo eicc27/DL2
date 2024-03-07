@@ -81,11 +81,14 @@ func Serve() {
 	g.Run(":27001")
 }
 
-func main() {
-	// Serve()
+
+func Test() {
 	r := SetRequest(Response{}, true)
 	t, _ := json.Marshal(r)
 	os.WriteFile("request.json", t, 0644)
 	resp := PutPapers(r, "http://localhost:8081/paper/papers")
 	os.WriteFile("response.json", []byte(resp), 0644)
+}
+func main() {
+	Serve()
 }

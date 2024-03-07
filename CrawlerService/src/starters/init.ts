@@ -4,8 +4,7 @@ import chalk from "chalk";
 import AsyncPool from "@eicc27/async-pool";
 import { Method, Paper } from "../types/Paper.js";
 import MethodCrawler from "../MethodCrawler.js";
-import { SQL_EXPORT_SERVER, timeout } from "../utils/Constants.js";
-import { sys } from "typescript";
+import { EXPORT_SERVER, timeout } from "../utils/Constants.js";
 import axios from "axios";
 
 
@@ -70,4 +69,4 @@ export async function init(taskLimit: number, paperLimit: number) {
 // });
 const [taskLimit, paperLimit] = process.argv.slice(2).map(parseInt);
 const papers = await init(taskLimit, paperLimit);
-await axios.post(`${SQL_EXPORT_SERVER}/papers`, papers);
+await axios.post(`${EXPORT_SERVER}/papers`, papers);

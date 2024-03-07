@@ -67,7 +67,7 @@ export default class PaperCrawler extends BaseCrawler {
     });
   }
 
-  public override async crawl(_ = true): Promise<Paper | void> {
+  public override async crawl(_ = true): Promise<Paper | undefined> {
     const response = await axios.get(this.url, {
       headers: {
         "User-Agent": UA,

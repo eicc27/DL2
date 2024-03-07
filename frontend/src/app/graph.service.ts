@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import * as d3 from 'd3';
-import { GRAPH, getGraph } from './static-graph.model';
+import { Graph, getGraph } from './static-graph.model';
 
 export interface Node extends d3.SimulationNodeDatum {
   id: string;
   field: string;
   title: string;
+  citations: number;
 }
 
 export interface Link {
@@ -30,7 +31,7 @@ export class GraphService {
   // color scheme for the nodes
   private color = d3.scaleOrdinal(d3.schemeCategory10);
 
-  private graph!: typeof GRAPH;
+  private graph!: Graph;
 
   // drag events
   private dragStarted = (
@@ -80,7 +81,8 @@ export class GraphService {
         else await setGraph();
       } else await setGraph();
     } catch (_) {
-      this.graph = GRAPH;
+      // needs to be caught
+      this.graph;
     }
     this.nodes = this.graph.nodes;
     this.links = this.graph.edges;
@@ -169,6 +171,10 @@ export class GraphService {
     svg: d3.Selection<SVGSVGElement, unknown, HTMLElement, undefined>,
     link: d3.Selection<SVGLineElement | null, Link, SVGGElement, unknown>
   ) {
+    const nodeRadiusRange = d3
+      .scaleLinear()
+      .domain(d3.extent(this.nodes, (d) => d.citations) as [number, number])
+      .range([5, 10]);
     const nodes = svg
       .append('g')
       .attr('stroke', '#fff')
@@ -178,7 +184,7 @@ export class GraphService {
       .selectAll()
       .data(this.nodes)
       .join('circle')
-      .attr('r', 5)
+      .attr('r', (d) => nodeRadiusRange(d.citations) || 5)
       .attr('fill', (d) => this.color(d.field))
       .attr('fill-opacity', 0.3)
       // on hover: cursor changes to pointer
@@ -191,11 +197,12 @@ export class GraphService {
           .filter((l) => l.source === d || l.target === d)
           .attr('stroke-opacity', 0.7)
           .attr('stroke', 'royalblue');
+        const r = +d3.select(this).attr('r');
         d3.select(this)
           .transition()
           .duration(300)
           .attr('fill-opacity', 0.8)
-          .attr('r', 7)
+          .attr('r', r * 1.2)
           .attr('stoke-opacity', 0.8);
       })
       .on('mouseleave', function (e, d) {
@@ -205,11 +212,12 @@ export class GraphService {
           .filter((l) => l.source === d || l.target === d)
           .attr('stroke', '#999')
           .attr('stroke-opacity', 0.2);
+        const r = +d3.select(this).attr('r');
         d3.select(this)
           .transition()
           .duration(300)
           .attr('fill-opacity', 0.3)
-          .attr('r', 5)
+          .attr('r', r / 1.2)
           .attr('stoke-opacity', 0.3);
       });
     return nodes;

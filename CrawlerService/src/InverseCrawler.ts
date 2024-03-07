@@ -12,7 +12,7 @@ export default class InverseCrawler extends BaseCrawler {
     super();
   }
 
-  public override async crawl(test = true) {
+  public override async crawl(test = true): Promise<string | undefined> {
     const response = await axios.get(
       `https://paperswithcode.com/api/v1/papers/?arxiv_id=${this.arxivId}`,
       {
@@ -27,7 +27,7 @@ export default class InverseCrawler extends BaseCrawler {
     }
     const results = body.results;
     if (!results.length) {
-        return null;
+        return;
     }
     return results[0].id;
   }

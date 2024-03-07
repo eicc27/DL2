@@ -9,6 +9,7 @@ import chalk from "chalk";
  * even-distributed graph considering the fields,
  * and will try to make the generated subgraph as diverse as possible.
  * As a result, the `alpha` specified is just an approximation.
+ * @deprecated Now the service is handled by dedicated graph backends.
  * @param alpha The percentage of nodes needed.
  */
 export function generateStaticGraph(alpha = 1) {
