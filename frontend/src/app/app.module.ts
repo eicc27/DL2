@@ -52,6 +52,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { DatacompComponent } from './datacomp/datacomp.component';
 import { DatasetComponent } from './dataset/dataset.component';
 import { AboutComponent }  from './about/about.component';
+import { FavComponent } from './personal/fav/fav.component';
 
 // routing
 const appRoutes = [
@@ -112,6 +113,10 @@ const appRoutes = [
     path: 'dataset/:dataset',
     component: DatasetComponent,
   },
+  {
+    path: 'home/fav',
+    component: FavComponent,
+  }
 ];
 
 @NgModule({
@@ -143,6 +148,7 @@ const appRoutes = [
     UploadDatasetComponent,
     DatacompComponent,
     DatasetComponent,
+    FavComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

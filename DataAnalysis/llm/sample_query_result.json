@@ -1,0 +1,611 @@
+[
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "CITES",
+            {
+                "abs": "Convolutional Neural Networks (CNNs) have been recently employed to solve\nproblems from both the computer vision and medical image analysis fields.\nDespite their popularity, most approaches are only able to process 2D images\nwhile most medical data used in clinical practice consists of 3D volumes. In\nthis work we propose an approach to 3D image segmentation based on a\nvolumetric, fully convolutional, neural network. Our CNN is trained end-to-end\non MRI volumes depicting prostate, and learns to predict segmentation for the\nwhole volume at once. We introduce a novel objective function, that we optimise\nduring training, based on Dice coefficient. In this way we can deal with\nsituations where there is a strong imbalance between the number of foreground\nand background voxels. To cope with the limited number of annotated volumes\navailable for training, we augment the data applying random non-linear\ntransformations and histogram matching. We show in our experimental evaluation\nthat our approach achieves good performances on challenging test data while\nrequiring only a fraction of the processing time needed by other previous\nmethods.",
+                "citedNum": 6528,
+                "title": "V-Net: Fully Convolutional Neural Networks for Volumetric Medical Image Segmentation",
+                "arxivId": "1606.04797"
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "CITES",
+            {
+                "abs": "High-resolution representation learning plays an essential role in many\nvision problems, e.g., pose estimation and semantic segmentation. The\nhigh-resolution network (HRNet)~\\cite{SunXLW19}, recently developed for human\npose estimation, maintains high-resolution representations through the whole\nprocess by connecting high-to-low resolution convolutions in \\emph{parallel}\nand produces strong high-resolution representations by repeatedly conducting\nfusions across parallel convolutions.\n  In this paper, we conduct a further study on high-resolution representations\nby introducing a simple yet effective modification and apply it to a wide range\nof vision tasks. We augment the high-resolution representation by aggregating\nthe (upsampled) representations from all the parallel convolutions rather than\nonly the representation from the high-resolution convolution as done\nin~\\cite{SunXLW19}. This simple modification leads to stronger representations,\nevidenced by superior results. We show top results in semantic segmentation on\nCityscapes, LIP, and PASCAL Context, and facial landmark detection on AFLW,\nCOFW, $300$W, and WFLW. In addition, we build a multi-level representation from\nthe high-resolution representation and apply it to the Faster R-CNN object\ndetection framework and the extended frameworks. The proposed approach achieves\nsuperior results to existing single-model networks on COCO object detection.\nThe code and models have been publicly available at\n\\url{https://github.com/HRNet}.",
+                "citedNum": 619,
+                "title": "High-Resolution Representations for Labeling Pixels and Regions",
+                "arxivId": "1904.04514"
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "CITES",
+            {
+                "abs": "Implementation of different kinds of Unet Models for Image Segmentation - Unet , RCNN-Unet, Attention Unet, RCNN-Attention Unet, Nested Unet",
+                "citedNum": 3722,
+                "title": "UNet++: A Nested U-Net Architecture for Medical Image Segmentation",
+                "arxivId": "1807.10165"
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "CITES",
+            {
+                "abs": "In this work we investigate the effect of the convolutional network depth on\nits accuracy in the large-scale image recognition setting. Our main\ncontribution is a thorough evaluation of networks of increasing depth using an\narchitecture with very small (3x3) convolution filters, which shows that a\nsignificant improvement on the prior-art configurations can be achieved by\npushing the depth to 16-19 weight layers. These findings were the basis of our\nImageNet Challenge 2014 submission, where our team secured the first and the\nsecond places in the localisation and classification tracks respectively. We\nalso show that our representations generalise well to other datasets, where\nthey achieve state-of-the-art results. We have made our two best-performing\nConvNet models publicly available to facilitate further research on the use of\ndeep visual representations in computer vision.",
+                "citedNum": 9999,
+                "title": "Very Deep Convolutional Networks for Large-Scale Image Recognition",
+                "arxivId": "1409.1556"
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "CITES",
+            {
+                "abs": "We present a conceptually simple, flexible, and general framework for object\ninstance segmentation. Our approach efficiently detects objects in an image\nwhile simultaneously generating a high-quality segmentation mask for each\ninstance. The method, called Mask R-CNN, extends Faster R-CNN by adding a\nbranch for predicting an object mask in parallel with the existing branch for\nbounding box recognition. Mask R-CNN is simple to train and adds only a small\noverhead to Faster R-CNN, running at 5 fps. Moreover, Mask R-CNN is easy to\ngeneralize to other tasks, e.g., allowing us to estimate human poses in the\nsame framework. We show top results in all three tracks of the COCO suite of\nchallenges, including instance segmentation, bounding-box object detection, and\nperson keypoint detection. Without bells and whistles, Mask R-CNN outperforms\nall existing, single-model entries on every task, including the COCO 2016\nchallenge winners. We hope our simple and effective approach will serve as a\nsolid baseline and help ease future research in instance-level recognition.\nCode has been made available at: https://github.com/facebookresearch/Detectron",
+                "citedNum": 9997,
+                "title": "Mask R-CNN",
+                "arxivId": "1703.06870"
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "CITES",
+            {
+                "abs": "Recent work has shown that convolutional networks can be substantially\ndeeper, more accurate, and efficient to train if they contain shorter\nconnections between layers close to the input and those close to the output. In\nthis paper, we embrace this observation and introduce the Dense Convolutional\nNetwork (DenseNet), which connects each layer to every other layer in a\nfeed-forward fashion. Whereas traditional convolutional networks with L layers\nhave L connections - one between each layer and its subsequent layer - our\nnetwork has L(L+1)/2 direct connections. For each layer, the feature-maps of\nall preceding layers are used as inputs, and its own feature-maps are used as\ninputs into all subsequent layers. DenseNets have several compelling\nadvantages: they alleviate the vanishing-gradient problem, strengthen feature\npropagation, encourage feature reuse, and substantially reduce the number of\nparameters. We evaluate our proposed architecture on four highly competitive\nobject recognition benchmark tasks (CIFAR-10, CIFAR-100, SVHN, and ImageNet).\nDenseNets obtain significant improvements over the state-of-the-art on most of\nthem, whilst requiring less computation to achieve high performance. Code and\npre-trained models are available at https://github.com/liuzhuang13/DenseNet .",
+                "citedNum": 9997,
+                "title": "Densely Connected Convolutional Networks",
+                "arxivId": "1608.06993"
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "CITES",
+            {
+                "abs": "Deeper neural networks are more difficult to train. We present a residual\nlearning framework to ease the training of networks that are substantially\ndeeper than those used previously. We explicitly reformulate the layers as\nlearning residual functions with reference to the layer inputs, instead of\nlearning unreferenced functions. We provide comprehensive empirical evidence\nshowing that these residual networks are easier to optimize, and can gain\naccuracy from considerably increased depth. On the ImageNet dataset we evaluate\nresidual nets with a depth of up to 152 layers---8x deeper than VGG nets but\nstill having lower complexity. An ensemble of these residual nets achieves\n3.57% error on the ImageNet test set. This result won the 1st place on the\nILSVRC 2015 classification task. We also present analysis on CIFAR-10 with 100\nand 1000 layers.\n  The depth of representations is of central importance for many visual\nrecognition tasks. Solely due to our extremely deep representations, we obtain\na 28% relative improvement on the COCO object detection dataset. Deep residual\nnets are foundations of our submissions to ILSVRC & COCO 2015 competitions,\nwhere we also won the 1st places on the tasks of ImageNet detection, ImageNet\nlocalization, COCO detection, and COCO segmentation.",
+                "citedNum": 9999,
+                "title": "Deep Residual Learning for Image Recognition",
+                "arxivId": "1512.03385"
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "CITES",
+            {
+                "abs": "This is an official pytorch implementation of Deep High-Resolution\nRepresentation Learning for Human Pose Estimation. In this work, we are\ninterested in the human pose estimation problem with a focus on learning\nreliable high-resolution representations. Most existing methods recover\nhigh-resolution representations from low-resolution representations produced by\na high-to-low resolution network. Instead, our proposed network maintains\nhigh-resolution representations through the whole process. We start from a\nhigh-resolution subnetwork as the first stage, gradually add high-to-low\nresolution subnetworks one by one to form more stages, and connect the\nmutli-resolution subnetworks in parallel. We conduct repeated multi-scale\nfusions such that each of the high-to-low resolution representations receives\ninformation from other parallel representations over and over, leading to rich\nhigh-resolution representations. As a result, the predicted keypoint heatmap is\npotentially more accurate and spatially more precise. We empirically\ndemonstrate the effectiveness of our network through the superior pose\nestimation results over two benchmark datasets: the COCO keypoint detection\ndataset and the MPII Human Pose dataset. The code and models have been publicly\navailable at\n\\url{https://github.com/leoxiaobin/deep-high-resolution-net.pytorch}.",
+                "citedNum": 2852,
+                "title": "Deep High-Resolution Representation Learning for Human Pose Estimation",
+                "arxivId": "1902.09212"
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "CITES",
+            {
+                "abs": "There is large consent that successful training of deep networks requires\nmany thousand annotated training samples. In this paper, we present a network\nand training strategy that relies on the strong use of data augmentation to use\nthe available annotated samples more efficiently. The architecture consists of\na contracting path to capture context and a symmetric expanding path that\nenables precise localization. We show that such a network can be trained\nend-to-end from very few images and outperforms the prior best method (a\nsliding-window convolutional network) on the ISBI challenge for segmentation of\nneuronal structures in electron microscopic stacks. Using the same network\ntrained on transmitted light microscopy images (phase contrast and DIC) we won\nthe ISBI cell tracking challenge 2015 in these categories by a large margin.\nMoreover, the network is fast. Segmentation of a 512x512 image takes less than\na second on a recent GPU. The full implementation (based on Caffe) and the\ntrained networks are available at\nhttp://lmb.informatik.uni-freiburg.de/people/ronneber/u-net .",
+                "citedNum": 9998,
+                "title": "U-Net: Convolutional Networks for Biomedical Image Segmentation",
+                "arxivId": "1505.04597"
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "PERFORMS",
+            {
+                "name": "Instance Segmentation",
+                "desc": "**Instance Segmentation** is a computer vision task that involves identifying and separating individual objects within an image, including detecting the boundaries of each object and assigning a unique label to each object. The goal of instance segmentation is to produce a pixel-wise segmentation map of the image, where each pixel is assigned to a specific object instance.\r\n\r\nImage Credit: [Deep Occlusion-Aware Instance Segmentation with Overlapping BiLayers, CVPR'21](https://github.com/lkeab/BCNet)"
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "PERFORMS",
+            {
+                "name": "Computed Tomography (CT)",
+                "desc": "The term \u201ccomputed tomography\u201d, or CT, refers to a computerized x-ray imaging procedure in which a narrow beam of x-rays is aimed at a patient and quickly rotated around the body, producing signals that are processed by the machine's computer to generate cross-sectional images\u2014or \u201cslices\u201d\u2014of the body.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [Liver Lesion Detection from Weakly-labeled Multi-phase CT Volumes with a Grouped Single Shot MultiBox Detector](https://github.com/L0SG/grouped-ssd-pytorch) )</span>"
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "PERFORMS",
+            {
+                "name": "Image Segmentation",
+                "desc": "**Image Segmentation** is a computer vision task that involves dividing an image into multiple segments or regions, each of which corresponds to a different object or part of an object. The goal of image segmentation is to assign a unique label or category to each pixel in the image, so that pixels with similar attributes are grouped together."
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "PERFORMS",
+            {
+                "name": "Segmentation",
+                "desc": ""
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "PERFORMS",
+            {
+                "name": "Semantic Segmentation",
+                "desc": "**Semantic Segmentation** is a computer vision task in which the goal is to categorize each pixel in an image into a class or object. The goal is to produce a dense pixel-wise segmentation map of an image, where each pixel is assigned to a specific class or object. Some example benchmarks for this task are Cityscapes, PASCAL VOC and ADE20K. Models are usually evaluated with the Mean Intersection-Over-Union (Mean IoU) and Pixel Accuracy metrics. \r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [CSAILVision](https://github.com/CSAILVision/semantic-segmentation-pytorch) )</span>"
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "WRITES",
+            {
+                "name": "Jianming Liang"
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "WRITES",
+            {
+                "name": "Zongwei Zhou"
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "WRITES",
+            {
+                "name": "Nima Tajbakhsh"
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "WRITES",
+            {
+                "name": "Md Mahfuzur Rahman Siddiquee"
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "APPLIES",
+            {
+                "name": "Pruning",
+                "desc": ""
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "APPLIES",
+            {
+                "name": "Max Pooling",
+                "desc": "**Max Pooling** is a pooling operation that calculates the maximum value for patches of a feature map, and uses it to create a downsampled (pooled) feature map.  It is usually used after a convolutional layer. It adds a small amount of translation invariance - meaning translating the image by a small amount does not significantly affect the values of most pooled outputs.\r\n\r\nImage Source: [here](https://computersciencewiki.org/index.php/File:MaxpoolSample2.png)"
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "APPLIES",
+            {
+                "name": "RoIAlign",
+                "desc": "**Region of Interest Align**, or **RoIAlign**, is an operation for extracting a small feature map from each RoI in detection and segmentation based tasks. It removes the harsh quantization of [RoI Pool](https://paperswithcode.com/method/roi-pooling), properly *aligning* the extracted features with the input. To avoid any quantization of the RoI boundaries or bins (using $x/16$ instead of $[x/16]$), RoIAlign uses bilinear interpolation to compute the exact values of the input features at four regularly sampled locations in each RoI bin, and the result is then aggregated (using max or average)."
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "APPLIES",
+            {
+                "name": "ReLU",
+                "desc": "**Rectified Linear Units**, or **ReLUs**, are a type of activation function that are linear in the positive dimension, but zero in the negative dimension. The kink in the function is the source of the non-linearity. Linearity in the positive dimension has the attractive property that it prevents non-saturation of gradients (contrast with [sigmoid activations](https://paperswithcode.com/method/sigmoid-activation)), although for half of the real line its gradient is zero.\r\n\r\n$$ f\\left(x\\right) = \\max\\left(0, x\\right) $$"
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "APPLIES",
+            {
+                "name": "Softmax",
+                "desc": "The **Softmax** output function transforms a previous layer's output into a vector of probabilities. It is commonly used for multiclass classification.  Given an input vector $x$ and a weighting vector $w$ we have:\r\n\r\n$$ P(y=j \\mid{x}) = \\frac{e^{x^{T}w_{j}}}{\\sum^{K}_{k=1}e^{x^{T}wk}} $$"
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "APPLIES",
+            {
+                "name": "SPEED",
+                "desc": "The monocular depth estimation (MDE) is the task of estimating depth from a single frame. This information is an essential knowledge in many computer vision tasks such as scene understanding and visual odometry, which are key components in autonomous and robotic systems. \r\nApproaches based on the state of the art vision transformer architectures are extremely deep and complex not suitable for real-time inference operations on edge and autonomous systems equipped with low resources (i.e. robot indoor navigation and surveillance). This paper presents SPEED, a Separable Pyramidal pooling EncodEr-Decoder architecture designed to achieve real-time frequency performances on multiple hardware platforms. The proposed model is a fast-throughput deep architecture for MDE able to obtain depth estimations with high accuracy from low resolution images using minimum hardware resources (i.e. edge devices). Our encoder-decoder model exploits two depthwise separable pyramidal pooling layers, which allow to increase the inference frequency while reducing the overall computational complexity. The proposed method performs better than other fast-throughput architectures in terms of both accuracy and frame rates, achieving real-time performances over cloud CPU, TPU and the NVIDIA Jetson TX1 on two indoor benchmarks: the NYU Depth v2 and the DIML Kinect v2 datasets."
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "APPLIES",
+            {
+                "name": "U-Net",
+                "desc": "**U-Net** is an architecture for semantic segmentation. It consists of a contracting path and an expansive path. The contracting path follows the typical architecture of a convolutional network. It consists of the repeated application of two 3x3 convolutions (unpadded convolutions), each followed by a rectified linear unit ([ReLU](https://paperswithcode.com/method/relu)) and a 2x2 [max pooling](https://paperswithcode.com/method/max-pooling) operation with stride 2 for downsampling. At each downsampling step we double the number of feature channels. Every step in the expansive path consists of an upsampling of the feature map followed by a 2x2 [convolution](https://paperswithcode.com/method/convolution) (\u201cup-convolution\u201d) that halves the number of feature channels, a concatenation with the correspondingly cropped feature map from the contracting path, and two 3x3 convolutions, each followed by a ReLU. The cropping is necessary due to the loss of border pixels in every convolution. At the final layer a [1x1 convolution](https://paperswithcode.com/method/1x1-convolution) is used to map each 64-component feature vector to the desired number of classes. In total the network has 23 convolutional layers.\r\n\r\n[Original MATLAB Code](https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/u-net-release-2015-10-02.tar.gz)"
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "APPLIES",
+            {
+                "name": "UNet++",
+                "desc": "UNet++ is an architecture for semantic segmentation based on the [U-Net](https://paperswithcode.com/method/u-net). Through the use of densely connected nested decoder sub-networks, it enhances extracted feature processing and was reported by its authors to outperform the U-Net in [Electron Microscopy (EM)](https://imagej.net/events/isbi-2012-segmentation-challenge), [Cell](https://acsjournals.onlinelibrary.wiley.com/doi/full/10.1002/cncy.21576), [Nuclei](https://www.kaggle.com/c/data-science-bowl-2018), [Brain Tumor](https://paperswithcode.com/dataset/brats-2013-1), [Liver](https://paperswithcode.com/dataset/lits17) and [Lung Nodule](https://paperswithcode.com/dataset/lidc-idri) medical image segmentation tasks."
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "APPLIES",
+            {
+                "name": "Concatenated Skip Connection",
+                "desc": "A **Concatenated Skip Connection** is a type of skip connection that seeks to reuse features by concatenating them to new layers, allowing more information to be retained from previous layers of the network. This contrasts with say, residual connections, where element-wise summation is used instead to incorporate information from previous layers. This type of skip connection is prominently used in DenseNets (and also Inception networks), which the Figure to the right illustrates."
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "APPLIES",
+            {
+                "name": "RPN",
+                "desc": "A **Region Proposal Network**, or **RPN**, is a fully convolutional network that simultaneously predicts object bounds and objectness scores at each position. The RPN is trained end-to-end to generate high-quality region proposals. RPN and algorithms like [Fast R-CNN](https://paperswithcode.com/method/fast-r-cnn) can be merged into a single network by sharing their convolutional features - using the recently popular terminology of neural networks with attention mechanisms, the RPN component tells the unified network where to look.\r\n\r\nRPNs are designed to efficiently predict region proposals with a wide range of scales and aspect ratios. RPNs use anchor boxes that serve as references at multiple scales and aspect ratios. The scheme can be thought of as a pyramid of regression references, which avoids enumerating images or filters of multiple scales or aspect ratios."
+            }
+        ]
+    },
+    {
+        "p": [
+            {
+                "name": "Medical Image Segmentation",
+                "desc": "**Medical Image Segmentation** is a computer vision task that involves dividing an medical image into multiple segments, where each segment represents a different object or structure of interest in the image. The goal of medical image segmentation is to provide a precise and accurate representation of the objects of interest within the image, typically for the purpose of diagnosis, treatment planning, and quantitative analysis.\r\n\r\n<span style=\"color:grey; opacity: 0.6\">( Image credit: [IVD-Net](https://github.com/josedolz/IVD-Net) )</span>"
+            },
+            "PERFORMS",
+            {
+                "abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus.",
+                "citedNum": 1500,
+                "title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "arxivId": "1912.05074"
+            },
+            "APPLIES",
+            {
+                "name": "Mask R-CNN",
+                "desc": "**Mask R-CNN** extends [Faster R-CNN](http://paperswithcode.com/method/faster-r-cnn) to solve instance segmentation tasks. It achieves this by adding a branch for predicting an object mask in parallel with the existing branch for bounding box recognition. In principle, Mask R-CNN is an intuitive extension of Faster [R-CNN](https://paperswithcode.com/method/r-cnn), but constructing the mask branch properly is critical for good results. \r\n\r\nMost importantly, Faster R-CNN was not designed for pixel-to-pixel alignment between network inputs and outputs. This is evident in how [RoIPool](http://paperswithcode.com/method/roi-pooling), the *de facto* core operation for attending to instances, performs coarse spatial quantization for feature extraction. To fix the misalignment, Mask R-CNN utilises a simple, quantization-free layer, called [RoIAlign](http://paperswithcode.com/method/roi-align), that faithfully preserves exact spatial locations. \r\n\r\nSecondly, Mask R-CNN *decouples* mask and class prediction: it predicts a binary mask for each class independently, without competition among classes, and relies on the network's RoI classification branch to predict the category. In contrast, an [FCN](http://paperswithcode.com/method/fcn) usually perform per-pixel multi-class categorization, which couples segmentation and classification."
+            }
+        ]
+    }
+]

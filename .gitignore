@@ -1,0 +1,7 @@
+.idea/
+.vscode/
+**/*/.idea/
+**/*/.vscode/
+stats/
+venv/
+**/*/cache/

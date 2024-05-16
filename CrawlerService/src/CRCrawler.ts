@@ -11,12 +11,12 @@ export default class CRCrawler extends BaseCrawler{
     }
 
     public override async crawl(_=true) {
-        const url = `https://partner.semanticscholar.org/v1/paper/arXiv:${this.id}?include_unknown_references=true`;
+        const url = `https://api.semanticscholar.org/v1/paper/arXiv:${this.id}?include_unknown_references=true`;
         const response =
             await axios.get(url, {
                 headers: {
                     "User-Agent": UA,
-                }
+                },
             });
         const body = response.data;
         const refs: string[] = [];
@@ -26,8 +26,8 @@ export default class CRCrawler extends BaseCrawler{
             }
         }
         return {
-            citations: body.citations.length,
-            references: body.references.length,
+            citations: body.numCitedBy,
+            references: body.numCiting,
             referencedPapers: refs
         }
     }

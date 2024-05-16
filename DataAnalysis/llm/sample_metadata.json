@@ -1,0 +1,480 @@
+{
+    "5f0dc32a-7ae7-4ea8-a02c-af0e62a47dd4": {
+        "query_str": "What do you know about medical image segmentation? Introduce me some papers to read.",
+        "graph_store_query": "MATCH (p:Paper)-[:PERFORMS]->(t:Task)\nWHERE toLower(t.name) CONTAINS toLower('medical image segmentation')\nRETURN p.title, p.abs",
+        "graph_store_response": [
+            {
+                "p.title": "TransUNet: Transformers Make Strong Encoders for Medical Image Segmentation",
+                "p.abs": "Medical image segmentation is an essential prerequisite for developing healthcare systems, especially for disease diagnosis and treatment planning. On various medical image segmentation tasks, the u-shaped architecture, also known as U-Net, has become the de-facto standard and achieved tremendous success. However, due to the intrinsic locality of convolution operations, U-Net generally demonstrates limitations in explicitly modeling long-range dependency. Transformers, designed for sequence-to-sequence prediction, have emerged as alternative architectures with innate global self-attention mechanisms, but can result in limited localization abilities due to insufficient low-level details. In this paper, we propose TransUNet, which merits both Transformers and U-Net, as a strong alternative for medical image segmentation. On one hand, the Transformer encodes tokenized image patches from a convolution neural network (CNN) feature map as the input sequence for extracting global contexts. On the other hand, the decoder upsamples the encoded features which are then combined with the high-resolution CNN feature maps to enable precise localization. We argue that Transformers can serve as strong encoders for medical image segmentation tasks, with the combination of U-Net to enhance finer details by recovering localized spatial information. TransUNet achieves superior performances to various competing methods on different medical applications including multi-organ segmentation and cardiac segmentation. Code and models are available at https://github.com/Beckschen/TransUNet."
+            },
+            {
+                "p.title": "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                "p.abs": "We present a novel and practical deep fully convolutional neural network\narchitecture for semantic pixel-wise segmentation termed SegNet. This core\ntrainable segmentation engine consists of an encoder network, a corresponding\ndecoder network followed by a pixel-wise classification layer. The architecture\nof the encoder network is topologically identical to the 13 convolutional\nlayers in the VGG16 network. The role of the decoder network is to map the low\nresolution encoder feature maps to full input resolution feature maps for\npixel-wise classification. The novelty of SegNet lies is in the manner in which\nthe decoder upsamples its lower resolution input feature map(s). Specifically,\nthe decoder uses pooling indices computed in the max-pooling step of the\ncorresponding encoder to perform non-linear upsampling. This eliminates the\nneed for learning to upsample. The upsampled maps are sparse and are then\nconvolved with trainable filters to produce dense feature maps. We compare our\nproposed architecture with the widely adopted FCN and also with the well known\nDeepLab-LargeFOV, DeconvNet architectures. This comparison reveals the memory\nversus accuracy trade-off involved in achieving good segmentation performance.\n  SegNet was primarily motivated by scene understanding applications. Hence, it\nis designed to be efficient both in terms of memory and computational time\nduring inference. It is also significantly smaller in the number of trainable\nparameters than other competing architectures. We also performed a controlled\nbenchmark of SegNet and other architectures on both road scenes and SUN RGB-D\nindoor scene segmentation tasks. We show that SegNet provides good performance\nwith competitive inference time and more efficient inference memory-wise as\ncompared to other architectures. We also provide a Caffe implementation of\nSegNet and a web demo at http://mi.eng.cam.ac.uk/projects/segnet/."
+            },
+            {
+                "p.title": "V-Net: Fully Convolutional Neural Networks for Volumetric Medical Image Segmentation",
+                "p.abs": "Convolutional Neural Networks (CNNs) have been recently employed to solve\nproblems from both the computer vision and medical image analysis fields.\nDespite their popularity, most approaches are only able to process 2D images\nwhile most medical data used in clinical practice consists of 3D volumes. In\nthis work we propose an approach to 3D image segmentation based on a\nvolumetric, fully convolutional, neural network. Our CNN is trained end-to-end\non MRI volumes depicting prostate, and learns to predict segmentation for the\nwhole volume at once. We introduce a novel objective function, that we optimise\nduring training, based on Dice coefficient. In this way we can deal with\nsituations where there is a strong imbalance between the number of foreground\nand background voxels. To cope with the limited number of annotated volumes\navailable for training, we augment the data applying random non-linear\ntransformations and histogram matching. We show in our experimental evaluation\nthat our approach achieves good performances on challenging test data while\nrequiring only a fraction of the processing time needed by other previous\nmethods."
+            },
+            {
+                "p.title": "Boundary loss for highly unbalanced segmentation",
+                "p.abs": "Widely used loss functions for CNN segmentation, e.g., Dice or cross-entropy, are based on integrals over the segmentation regions. Unfortunately, for highly unbalanced segmentations, such regional summations have values that differ by several orders of magnitude across classes, which affects training performance and stability. We propose a boundary loss, which takes the form of a distance metric on the space of contours, not regions. This can mitigate the difficulties of highly unbalanced problems because it uses integrals over the interface between regions instead of unbalanced integrals over the regions. Furthermore, a boundary loss complements regional information. Inspired by graph-based optimization techniques for computing active-contour flows, we express a non-symmetric $L_2$ distance on the space of contours as a regional integral, which avoids completely local differential computations involving contour points. This yields a boundary loss expressed with the regional softmax probability outputs of the network, which can be easily combined with standard regional losses and implemented with any existing deep network architecture for N-D segmentation. We report comprehensive evaluations and comparisons on different unbalanced problems, showing that our boundary loss can yield significant increases in performances while improving training stability. Our code is publicly available: https://github.com/LIVIAETS/surface-loss ."
+            },
+            {
+                "p.title": "U-Net: Convolutional Networks for Biomedical Image Segmentation",
+                "p.abs": "There is large consent that successful training of deep networks requires\nmany thousand annotated training samples. In this paper, we present a network\nand training strategy that relies on the strong use of data augmentation to use\nthe available annotated samples more efficiently. The architecture consists of\na contracting path to capture context and a symmetric expanding path that\nenables precise localization. We show that such a network can be trained\nend-to-end from very few images and outperforms the prior best method (a\nsliding-window convolutional network) on the ISBI challenge for segmentation of\nneuronal structures in electron microscopic stacks. Using the same network\ntrained on transmitted light microscopy images (phase contrast and DIC) we won\nthe ISBI cell tracking challenge 2015 in these categories by a large margin.\nMoreover, the network is fast. Segmentation of a 512x512 image takes less than\na second on a recent GPU. The full implementation (based on Caffe) and the\ntrained networks are available at\nhttp://lmb.informatik.uni-freiburg.de/people/ronneber/u-net ."
+            },
+            {
+                "p.title": "A Novel Focal Tversky loss function with improved Attention U-Net for lesion segmentation",
+                "p.abs": "We propose a generalized focal loss function based on the Tversky index to\naddress the issue of data imbalance in medical image segmentation. Compared to\nthe commonly used Dice loss, our loss function achieves a better trade off\nbetween precision and recall when training on small structures such as lesions.\nTo evaluate our loss function, we improve the attention U-Net model by\nincorporating an image pyramid to preserve contextual features. We experiment\non the BUS 2017 dataset and ISIC 2018 dataset where lesions occupy 4.84% and\n21.4% of the images area and improve segmentation accuracy when compared to the\nstandard U-Net by 25.7% and 3.6%, respectively."
+            },
+            {
+                "p.title": "Brain Tumor Segmentation with Deep Neural Networks",
+                "p.abs": "In this paper, we present a fully automatic brain tumor segmentation method\nbased on Deep Neural Networks (DNNs). The proposed networks are tailored to\nglioblastomas (both low and high grade) pictured in MR images. By their very\nnature, these tumors can appear anywhere in the brain and have almost any kind\nof shape, size, and contrast. These reasons motivate our exploration of a\nmachine learning solution that exploits a flexible, high capacity DNN while\nbeing extremely efficient. Here, we give a description of different model\nchoices that we've found to be necessary for obtaining competitive performance.\nWe explore in particular different architectures based on Convolutional Neural\nNetworks (CNN), i.e. DNNs specifically adapted to image data.\n  We present a novel CNN architecture which differs from those traditionally\nused in computer vision. Our CNN exploits both local features as well as more\nglobal contextual features simultaneously. Also, different from most\ntraditional uses of CNNs, our networks use a final layer that is a\nconvolutional implementation of a fully connected layer which allows a 40 fold\nspeed up. We also describe a 2-phase training procedure that allows us to\ntackle difficulties related to the imbalance of tumor labels. Finally, we\nexplore a cascade architecture in which the output of a basic CNN is treated as\nan additional source of information for a subsequent CNN. Results reported on\nthe 2013 BRATS test dataset reveal that our architecture improves over the\ncurrently published state-of-the-art while being over 30 times faster."
+            },
+            {
+                "p.title": "Attention U-Net: Learning Where to Look for the Pancreas",
+                "p.abs": "We propose a novel attention gate (AG) model for medical imaging that\nautomatically learns to focus on target structures of varying shapes and sizes.\nModels trained with AGs implicitly learn to suppress irrelevant regions in an\ninput image while highlighting salient features useful for a specific task.\nThis enables us to eliminate the necessity of using explicit external\ntissue/organ localisation modules of cascaded convolutional neural networks\n(CNNs). AGs can be easily integrated into standard CNN architectures such as\nthe U-Net model with minimal computational overhead while increasing the model\nsensitivity and prediction accuracy. The proposed Attention U-Net architecture\nis evaluated on two large CT abdominal datasets for multi-class image\nsegmentation. Experimental results show that AGs consistently improve the\nprediction performance of U-Net across different datasets and training sizes\nwhile preserving computational efficiency. The code for the proposed\narchitecture is publicly available."
+            },
+            {
+                "p.title": "UNet++: A Nested U-Net Architecture for Medical Image Segmentation",
+                "p.abs": "Implementation of different kinds of Unet Models for Image Segmentation - Unet , RCNN-Unet, Attention Unet, RCNN-Attention Unet, Nested Unet"
+            },
+            {
+                "p.title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+                "p.abs": "While the Transformer architecture has become the de-facto standard for natural language processing tasks, its applications to computer vision remain limited. In vision, attention is either applied in conjunction with convolutional networks, or used to replace certain components of convolutional networks while keeping their overall structure in place. We show that this reliance on CNNs is not necessary and a pure transformer applied directly to sequences of image patches can perform very well on image classification tasks. When pre-trained on large amounts of data and transferred to multiple mid-sized or small image recognition benchmarks (ImageNet, CIFAR-100, VTAB, etc.), Vision Transformer (ViT) attains excellent results compared to state-of-the-art convolutional networks while requiring substantially fewer computational resources to train."
+            },
+            {
+                "p.title": "Recurrent Residual Convolutional Neural Network based on U-Net (R2U-Net) for Medical Image Segmentation",
+                "p.abs": "Deep learning (DL) based semantic segmentation methods have been providing\nstate-of-the-art performance in the last few years. More specifically, these\ntechniques have been successfully applied to medical image classification,\nsegmentation, and detection tasks. One deep learning technique, U-Net, has\nbecome one of the most popular for these applications. In this paper, we\npropose a Recurrent Convolutional Neural Network (RCNN) based on U-Net as well\nas a Recurrent Residual Convolutional Neural Network (RRCNN) based on U-Net\nmodels, which are named RU-Net and R2U-Net respectively. The proposed models\nutilize the power of U-Net, Residual Network, as well as RCNN. There are\nseveral advantages of these proposed architectures for segmentation tasks.\nFirst, a residual unit helps when training deep architecture. Second, feature\naccumulation with recurrent residual convolutional layers ensures better\nfeature representation for segmentation tasks. Third, it allows us to design\nbetter U-Net architecture with same number of network parameters with better\nperformance for medical image segmentation. The proposed models are tested on\nthree benchmark datasets such as blood vessel segmentation in retina images,\nskin cancer segmentation, and lung lesion segmentation. The experimental\nresults show superior performance on segmentation tasks compared to equivalent\nmodels including U-Net and residual U-Net (ResU-Net)."
+            },
+            {
+                "p.title": "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                "p.abs": "The state-of-the-art models for medical image segmentation are variants of U-Net and fully convolutional networks (FCN). Despite their success, these models have two limitations: (1) their optimal depth is apriori unknown, requiring extensive architecture search or inefficient ensemble of models of varying depths; and (2) their skip connections impose an unnecessarily restrictive fusion scheme, forcing aggregation only at the same-scale feature maps of the encoder and decoder sub-networks. To overcome these two limitations, we propose UNet++, a new neural architecture for semantic and instance segmentation, by (1) alleviating the unknown network depth with an efficient ensemble of U-Nets of varying depths, which partially share an encoder and co-learn simultaneously using deep supervision; (2) redesigning skip connections to aggregate features of varying semantic scales at the decoder sub-networks, leading to a highly flexible feature fusion scheme; and (3) devising a pruning scheme to accelerate the inference speed of UNet++. We have evaluated UNet++ using six different medical image segmentation datasets, covering multiple imaging modalities such as computed tomography (CT), magnetic resonance imaging (MRI), and electron microscopy (EM), and demonstrating that (1) UNet++ consistently outperforms the baseline models for the task of semantic segmentation across different datasets and backbone architectures; (2) UNet++ enhances segmentation quality of varying-size objects -- an improvement over the fixed-depth U-Net; (3) Mask RCNN++ (Mask R-CNN with UNet++ design) outperforms the original Mask R-CNN for the task of instance segmentation; and (4) pruned UNet++ models achieve significant speedup while showing only modest performance degradation. Our implementation and pre-trained models are available at https://github.com/MrGiovanni/UNetPlusPlus."
+            },
+            {
+                "p.title": "V-Net: Fully Convolutional Neural Networks for Volumetric Medical Image Segmentation",
+                "p.abs": "Convolutional Neural Networks (CNNs) have been recently employed to solve\nproblems from both the computer vision and medical image analysis fields.\nDespite their popularity, most approaches are only able to process 2D images\nwhile most medical data used in clinical practice consists of 3D volumes. In\nthis work we propose an approach to 3D image segmentation based on a\nvolumetric, fully convolutional, neural network. Our CNN is trained end-to-end\non MRI volumes depicting prostate, and learns to predict segmentation for the\nwhole volume at once. We introduce a novel objective function, that we optimise\nduring training, based on Dice coefficient. In this way we can deal with\nsituations where there is a strong imbalance between the number of foreground\nand background voxels. To cope with the limited number of annotated volumes\navailable for training, we augment the data applying random non-linear\ntransformations and histogram matching. We show in our experimental evaluation\nthat our approach achieves good performances on challenging test data while\nrequiring only a fraction of the processing time needed by other previous\nmethods."
+            }
+        ],
+        "graph_schema": "Node properties are the following:\nPaper {title: STRING, abs: STRING, citedNum: INTEGER, arxivId: STRING},Author {name: STRING},Code {url: STRING, rating: INTEGER},Method {desc: STRING, name: STRING},Task {name: STRING, desc: STRING}\nRelationship properties are the following:\n\nThe relationships are the following:\n(:Paper)-[:PERFORMS]->(:Task),(:Paper)-[:CITES]->(:Paper),(:Paper)-[:APPLIES]->(:Method),(:Paper)-[:PROPOSES]->(:Method),(:Author)-[:WRITES]->(:Paper)"
+    },
+    "1e8fdf3d-ab3e-49eb-a69a-e7cb0f4bc6c1": {
+        "kg_rel_map": {
+            "medical image segmentation": [
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "CITES",
+                    "V-Net: Fully Convolutional Neural Networks for Volumetric Medical Image Segmentation"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "CITES",
+                    "High-Resolution Representations for Labeling Pixels and Regions"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "CITES",
+                    "UNet++: A Nested U-Net Architecture for Medical Image Segmentation"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "CITES",
+                    "Very Deep Convolutional Networks for Large-Scale Image Recognition"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "CITES",
+                    "Mask R-CNN"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "CITES",
+                    "Densely Connected Convolutional Networks"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "CITES",
+                    "Deep Residual Learning for Image Recognition"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "CITES",
+                    "Deep High-Resolution Representation Learning for Human Pose Estimation"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "CITES",
+                    "U-Net: Convolutional Networks for Biomedical Image Segmentation"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "PERFORMS",
+                    "Instance Segmentation"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "PERFORMS",
+                    "Computed Tomography (CT)"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "PERFORMS",
+                    "Image Segmentation"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "PERFORMS",
+                    "Segmentation"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "PERFORMS",
+                    "Semantic Segmentation"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "WRITES",
+                    "Jianming Liang"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "WRITES",
+                    "Zongwei Zhou"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "WRITES",
+                    "Nima Tajbakhsh"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "WRITES",
+                    "Md Mahfuzur Rahman Siddiquee"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "APPLIES",
+                    "Pruning"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "APPLIES",
+                    "Max Pooling"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "APPLIES",
+                    "RoIAlign"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "APPLIES",
+                    "ReLU"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "APPLIES",
+                    "Softmax"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "APPLIES",
+                    "SPEED"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "APPLIES",
+                    "U-Net"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "APPLIES",
+                    "UNet++"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "APPLIES",
+                    "Concatenated Skip Connection"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "APPLIES",
+                    "RPN"
+                ],
+                [
+                    "PERFORMS",
+                    "UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation",
+                    "APPLIES",
+                    "Mask R-CNN"
+                ]
+            ],
+            "segmentation": [
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "CITES",
+                    "Very Deep Convolutional Networks for Large-Scale Image Recognition"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "CITES",
+                    "Bayesian SegNet: Model Uncertainty in Deep Convolutional Encoder-Decoder Architectures for Scene Understanding"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "CITES",
+                    "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "CITES",
+                    "U-Net: Convolutional Networks for Biomedical Image Segmentation"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "CITES",
+                    "Going Deeper with Convolutions"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "CITES",
+                    "YOLACT: Real-time Instance Segmentation"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "CITES",
+                    "Deep High-Resolution Representation Learning for Visual Recognition"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "CITES",
+                    "Recurrent Residual Convolutional Neural Network based on U-Net (R2U-Net) for Medical Image Segmentation"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "CITES",
+                    "Bayesian SegNet: Model Uncertainty in Deep Convolutional Encoder-Decoder Architectures for Scene Understanding"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "CITES",
+                    "Pyramid Scene Parsing Network"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "CITES",
+                    "Rethinking CNN Models for Audio Classification"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "CITES",
+                    "High-Resolution Representations for Labeling Pixels and Regions"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "CITES",
+                    "Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "PROPOSES",
+                    "SegNet"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "PERFORMS",
+                    "Real-Time Semantic Segmentation"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "PERFORMS",
+                    "Scene Understanding"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "PERFORMS",
+                    "Image Segmentation"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "PERFORMS",
+                    "Semantic Segmentation"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "PERFORMS",
+                    "Crowd Counting"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "PERFORMS",
+                    "Scene Segmentation"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "PERFORMS",
+                    "Lesion Segmentation"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "PERFORMS",
+                    "Medical Image Segmentation"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "PERFORMS",
+                    "General Classification"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "PERFORMS",
+                    "Thermal Image Segmentation"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "WRITES",
+                    "Vijay Badrinarayanan"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "WRITES",
+                    "Alex Kendall"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "WRITES",
+                    "Roberto Cipolla"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "APPLIES",
+                    "SegNet"
+                ],
+                [
+                    "PERFORMS",
+                    "SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation",
+                    "APPLIES",
+                    "Batch Normalization"
+                ]
+            ]
+        },
+        "kg_rel_text": [
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'CITES', 'V-Net: Fully Convolutional Neural Networks for Volumetric Medical Image Segmentation']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'CITES', 'High-Resolution Representations for Labeling Pixels and Regions']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'CITES', 'UNet++: A Nested U-Net Architecture for Medical Image Segmentation']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'CITES', 'Very Deep Convolutional Networks for Large-Scale Image Recognition']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'CITES', 'Mask R-CNN']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'CITES', 'Densely Connected Convolutional Networks']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'CITES', 'Deep Residual Learning for Image Recognition']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'CITES', 'Deep High-Resolution Representation Learning for Human Pose Estimation']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'CITES', 'U-Net: Convolutional Networks for Biomedical Image Segmentation']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'PERFORMS', 'Instance Segmentation']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'PERFORMS', 'Computed Tomography (CT)']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'PERFORMS', 'Image Segmentation']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'PERFORMS', 'Segmentation']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'PERFORMS', 'Semantic Segmentation']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'WRITES', 'Jianming Liang']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'WRITES', 'Zongwei Zhou']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'WRITES', 'Nima Tajbakhsh']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'WRITES', 'Md Mahfuzur Rahman Siddiquee']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'APPLIES', 'Pruning']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'APPLIES', 'Max Pooling']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'APPLIES', 'RoIAlign']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'APPLIES', 'ReLU']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'APPLIES', 'Softmax']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'APPLIES', 'SPEED']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'APPLIES', 'U-Net']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'APPLIES', 'UNet++']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'APPLIES', 'Concatenated Skip Connection']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'APPLIES', 'RPN']",
+            "['PERFORMS', 'UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation', 'APPLIES', 'Mask R-CNN']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'CITES', 'Very Deep Convolutional Networks for Large-Scale Image Recognition']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'CITES', 'Bayesian SegNet: Model Uncertainty in Deep Convolutional Encoder-Decoder Architectures for Scene Understanding']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'CITES', 'Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'CITES', 'U-Net: Convolutional Networks for Biomedical Image Segmentation']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'CITES', 'Going Deeper with Convolutions']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'CITES', 'YOLACT: Real-time Instance Segmentation']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'CITES', 'Deep High-Resolution Representation Learning for Visual Recognition']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'CITES', 'Recurrent Residual Convolutional Neural Network based on U-Net (R2U-Net) for Medical Image Segmentation']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'CITES', 'Bayesian SegNet: Model Uncertainty in Deep Convolutional Encoder-Decoder Architectures for Scene Understanding']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'CITES', 'Pyramid Scene Parsing Network']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'CITES', 'Rethinking CNN Models for Audio Classification']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'CITES', 'High-Resolution Representations for Labeling Pixels and Regions']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'CITES', 'Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'PROPOSES', 'SegNet']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'PERFORMS', 'Real-Time Semantic Segmentation']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'PERFORMS', 'Scene Understanding']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'PERFORMS', 'Image Segmentation']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'PERFORMS', 'Semantic Segmentation']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'PERFORMS', 'Crowd Counting']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'PERFORMS', 'Scene Segmentation']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'PERFORMS', 'Lesion Segmentation']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'PERFORMS', 'Medical Image Segmentation']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'PERFORMS', 'General Classification']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'PERFORMS', 'Thermal Image Segmentation']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'WRITES', 'Vijay Badrinarayanan']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'WRITES', 'Alex Kendall']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'WRITES', 'Roberto Cipolla']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'APPLIES', 'SegNet']",
+            "['PERFORMS', 'SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation', 'APPLIES', 'Batch Normalization']"
+        ],
+        "kg_schema": {
+            "schema": "Node properties are the following:\nPaper {title: STRING, abs: STRING, citedNum: INTEGER, arxivId: STRING},Author {name: STRING},Code {url: STRING, rating: INTEGER},Method {desc: STRING, name: STRING},Task {name: STRING, desc: STRING}\nRelationship properties are the following:\n\nThe relationships are the following:\n(:Paper)-[:PERFORMS]->(:Task),(:Paper)-[:CITES]->(:Paper),(:Paper)-[:APPLIES]->(:Method),(:Paper)-[:PROPOSES]->(:Method),(:Author)-[:WRITES]->(:Paper)"
+        }
+    }
+}

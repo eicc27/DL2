@@ -19,7 +19,10 @@ public interface PaperRepository extends Neo4jRepository<Paper, String> {
     List<Paper> findNearbyPapers(@Param("paperIds") List<String> paperIds);
 
 
-    @Query("MERGE (p:Paper {arxivId: $id, title: $title, abs: $abs, citedNum: $citedNum}) RETURN p")
+    @Query("MERGE (p:Paper {arxivId: $id}) " +
+            "ON CREATE SET p.title = $title, p.abs = $abs, p.citedNum = $citedNum " +
+            "ON MATCH SET p.title = $title, p.abs = $abs, p.citedNum = $citedNum " +
+            "RETURN p")
     void setPaper(@Param("id") String id, @Param("title") String title, @Param("abs") String abs, @Param("citedNum") Long citedNum);
 
     @Query("MERGE (p1: Paper {arxivId: $src})" + "MERGE (p2: Paper {arxivId: $dst})" + "MERGE (p1)-[:CITES]->(p2)" + "RETURN p2")
@@ -37,7 +40,14 @@ public interface PaperRepository extends Neo4jRepository<Paper, String> {
                 source: paper.arxivId,
                 target: citedPaper.arxivId
             }
-            LIMIT 150
+            LIMIT 300
             """)
     List<Map<String, String>> getHomepageGraph();
+
+    @Query("""
+            MATCH (paper:Paper {arxivId: $id})
+            CALL db.create.setNodeVectorProperty(paper, 'propertyKey', :#{literal(#vec)})
+            return paper
+            """)
+    void setPaperEmbedding(@Param("id") String id, String vec);
 }

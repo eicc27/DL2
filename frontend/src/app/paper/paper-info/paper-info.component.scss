@@ -34,11 +34,11 @@ h3 {
   &.accent {
     background: rgba($color: salmon, $alpha: 0.2);
   }
-  transition: all .3s ease-out;
+  transition: all .15s ease-out .1s;
 
   &:hover {
     box-shadow: 2px 2px 2px 0px gray;
-    transform: scale(1.05);
+    transform: scale(1.1);
     cursor: pointer;
   }
 

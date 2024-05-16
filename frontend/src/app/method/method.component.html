@@ -1,7 +1,7 @@
 <app-topbar />
 <div class="task-container" *ngIf="task">
   <h1>{{ task.name }}</h1>
-  <markdown katex [data]="task.intro"></markdown>
+  <markdown *ngIf="task.intro" katex [data]="task.intro"></markdown>
   <div class="pop">
     <h2 class="pop-title">Known to solve:</h2>
     <div class="pop-content">
@@ -9,10 +9,6 @@
         *ngFor="let method of task.methods; index as i"
         [ngStyle]="{
           background: task.methodColors[i],
-          color: 'whitesmoke',
-          padding: '0.5rem 0.8rem',
-          margin: '0.5rem',
-          'border-radius': '2rem'
         }"
         (click)="gotoMethod(method)"
       >

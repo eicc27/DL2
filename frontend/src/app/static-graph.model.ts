@@ -57,5 +57,4 @@ export async function getGraph() {
   return graph;
 }
 
-export const GRAPH: any = {};
 

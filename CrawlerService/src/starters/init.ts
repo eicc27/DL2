@@ -6,8 +6,25 @@ import { Method, Paper } from "../types/Paper.js";
 import MethodCrawler from "../MethodCrawler.js";
 import { EXPORT_SERVER, timeout } from "../utils/Constants.js";
 import axios from "axios";
+import { HttpProxyAgent } from "http-proxy-agent";
+import { HttpsProxyAgent } from "https-proxy-agent";
 
-
+export async function retry(
+  fn: (...args: any[]) => Promise<unknown>,
+  times = 3,
+  ...args: unknown[]
+) {
+  let error: any;
+  for (let i = 0; i < times; i++) {
+    try {
+      return await fn(...args);
+    } catch (e) {
+      console.warn("Retry " + i + " times");
+      error = e;
+    }
+  }
+  // throw error;
+}
 
 export async function init(taskLimit: number, paperLimit: number) {
   const response = {
@@ -18,7 +35,37 @@ export async function init(taskLimit: number, paperLimit: number) {
   };
   const sotACrawler = new SotACrawler();
   console.log("Crawling SotA fields");
-  const pwcIds = await sotACrawler.crawl(false, taskLimit, paperLimit);
+  const areas = [
+    "computer-vision",
+    "natural-language-processing",
+    "medical",
+    "miscellaneous",
+    "methodology",
+    "time-series",
+    "graphs",
+    "speech",
+    "audio",
+    "reasoning",
+    "computer-code",
+    "playing-games",
+    "adversarial",
+    "robots",
+    "knowledge-base",
+    "music",
+  ];
+  const pwcIds = [] as string[];
+  for (const area of areas.splice(15, 1)) {
+    console.log("Crawling " + area);
+    pwcIds.push(
+      ...((await sotACrawler.crawl(
+        false,
+        taskLimit,
+        paperLimit,
+        area
+      )) as string[])
+    );
+  }
+  // const pwcIds = await sotACrawler.crawl(false, taskLimit, paperLimit);
   console.log(chalk.green("SotA fields has been crawled!"));
   // an atomic transaction
   const crawl = async (id: string) => {
@@ -41,22 +88,23 @@ export async function init(taskLimit: number, paperLimit: number) {
     ret.push(methods);
     return ret;
   };
-  const pool = new AsyncPool(10, "eagar");
+  const pool = new AsyncPool(5, "eagar");
+  const task = async (id: string) =>
+    await Promise.race([crawl(id), timeout(1000 * 60)]) // timeout after 1 min
+      .then((ret: any) => {
+        if (ret && ret.length == 2) {
+          const [paper, methods] = ret;
+          response.papers.push(paper);
+          response.methods.push(...methods);
+          console.log(response.papers.length);
+        }
+      }); // add a success handler
   for (const pwcId of pwcIds) {
-    await pool.submit(
-      async (id: string) =>
-        await Promise.race([crawl(id), timeout(1000 * 60)]) // timeout after 1 min
-          .then((ret: any) => {
-            if (ret && ret.length == 2) {
-              const [paper, methods] = ret;
-              response.papers.push(paper);
-              response.methods.push(...methods);
-              console.log(response.papers.length);
-            }
-          }) // add a success handler
-          .catch((reason) => console.warn(reason)), // add an error handler
-      pwcId
-    );
+    try {
+      await pool.submit(retry, task, 3, pwcId);
+    } catch (e) {
+      continue;
+    }
   }
   await pool.close();
   console.log(chalk.green("Papers has been crawled!"));
@@ -64,9 +112,21 @@ export async function init(taskLimit: number, paperLimit: number) {
   return response;
 }
 
+export function setProxy() {
+  axios.defaults.httpAgent = new HttpProxyAgent("http://127.0.0.1:20171");
+  axios.defaults.httpsAgent = new HttpsProxyAgent("http://127.0.0.1:20171");
+}
+
+export function unsetProxy() {
+  axios.defaults.httpAgent = undefined;
+  axios.defaults.httpsAgent = undefined;
+}
+
 // process.argv.forEach((val, index) => {
 //   console.log(`${index}: ${val}`);
 // });
+setProxy();
 const [taskLimit, paperLimit] = process.argv.slice(2).map(parseInt);
 const papers = await init(taskLimit, paperLimit);
+unsetProxy();
 await axios.post(`${EXPORT_SERVER}/papers`, papers);

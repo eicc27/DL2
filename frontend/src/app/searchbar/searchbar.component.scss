@@ -33,9 +33,10 @@
   z-index: 50;
   position: fixed;
   left: 0;
-  top: 10vh;
+  top: 64px;
   width: 100vw;
-  height: 90vh;
+  height: 100vh;
+  overflow: hidden;
   opacity: 0;
   background: rgba(0, 0, 0, 0.5);
   animation: 0.2s ease-out sr-showup forwards;

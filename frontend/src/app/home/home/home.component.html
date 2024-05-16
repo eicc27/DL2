@@ -21,21 +21,21 @@
   </div>
   <div class="methods">
     <h2>Featured Methods</h2>
-    <mat-chip-set>
-      <mat-chip
+    <div class="pop-content">
+      <span
         *ngFor="let method of methods"
         [routerLink]="'/method/'+method.name"
       >
         {{ method.name }}
-      </mat-chip>
-    </mat-chip-set>
+      </span>
+    </div>
   </div>
   <div class="tasks">
     <h2>Featured Tasks</h2>
-    <mat-chip-set>
-      <mat-chip *ngFor="let task of tasks" [routerLink]="'/task/' + task.name">
+    <div class="pop-content">
+      <span *ngFor="let task of tasks" [routerLink]="'/task/' + task.name">
         {{ task.name }}
-      </mat-chip>
-    </mat-chip-set>
+      </span>
+    </div>
   </div>
 </div>

@@ -16,15 +16,24 @@ public class Paper {
 
     private Year year;
 
-    @Column(name="abstract", length = 10000)
+    @Column(name = "abstract", length = 10000)
     private String abs;
 
     private Long citations;
 
     public static Year fromArxivId(String id) {
-        String yearPart = id.substring(0, 2);
-        int year = Integer.parseInt(yearPart);
-        year += (year > 91) ? 1900 : 2000;
-        return Year.of(year);
+        try {
+            String yearPart = id.substring(0, 2);
+            int year = Integer.parseInt(yearPart);
+            year += (year > 91) ? 1900 : 2000;
+            return Year.of(year);
+        } catch (NumberFormatException e) {
+            System.out.println(id);
+            String[] parts = id.split("/");
+            String yearPart = parts[parts.length - 1].substring(0, 2);
+            int year = Integer.parseInt(yearPart);
+            year += (year > 91) ? 1900 : 2000;
+            return Year.of(year);
+        }
     }
 }

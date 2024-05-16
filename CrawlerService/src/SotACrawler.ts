@@ -3,6 +3,7 @@ import BaseCrawler from "./BaseCrawler.js";
 import { UA } from "./utils/Constants.js";
 import * as fs from "fs";
 import { JSDOM } from "jsdom";
+import AsyncPool from "@eicc27/async-pool";
 
 export default class SotACrawler extends BaseCrawler {
   private static async getPapersWithTasks(task: string, limit = 10) {
@@ -30,9 +31,13 @@ export default class SotACrawler extends BaseCrawler {
   public override async crawl(
     test = true,
     taskLimit = 5,
-    paperLimit = 10
-  ): Promise<any> {
-    const response = await axios.get("https://paperswithcode.com/sota", {
+    paperLimit = 10,
+    area?: string
+  ): Promise<string[] | void> {
+    const url = area
+      ? "https://paperswithcode.com/area/" + area
+      : "https://paperswithcode.com/sota";
+    const response = await axios.get(url, {
       headers: {
         "User-Agent": UA,
       },
@@ -60,13 +65,17 @@ export default class SotACrawler extends BaseCrawler {
       }
     }
     const paperIds: string[] = [];
-    await Promise.all(
-      fields.map((f) =>
-        SotACrawler.getPapersWithTasks(f, paperLimit).then((v) =>
-          paperIds.push(...v)
-        )
-      )
-    );
+    const pool = new AsyncPool(10, "eagar");
+    for (const field of fields) {
+      await pool.submit(
+        (f: string) =>
+          SotACrawler.getPapersWithTasks(f, paperLimit).then((v) =>
+            paperIds.push(...v)
+          ),
+        field
+      );
+    }
+    await pool.close();
     console.log(`Got ${paperIds.length} papers`);
     return paperIds;
   }

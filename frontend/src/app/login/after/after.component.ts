@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -7,107 +14,149 @@ import GenericResponse from 'src/app/GenericResponse.model';
 import axios from 'axios';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
+import { MarkdownComponent } from 'ngx-markdown';
 
-/** @title Checkboxes with reactive forms */
+interface Task {
+  name: string;
+  numPapers: number;
+  intro: string;
+  expanded: boolean;
+  focused: boolean;
+}
+
 @Component({
   selector: 'app-after',
   templateUrl: './after.component.html',
   styleUrls: ['./after.component.scss'],
 })
-export class AfterComponent {
-  tasks: String[] = [
-    'Classification',
-    'Conditional Image Generation',
-    'Contrastive Learning',
-    'Data Augmentation',
-    'Domain Adaptation',
-    'Domain Generalization',
-    'General Classification',
-    'Image Captioning',
-    'Image Classification',
-    'Image Generation',
-    'Image Segmentation',
-    'Instance Segmentation',
-    'Language Modelling',
-    'Linguistic Acceptability',
-    'Machine Translation',
-    'Natural Language Inference',
-    'Natural Language Understanding',
-    'NMT',
-    'Object Detection',
-    'Open-Domain Question Answering',
-    'Question Answering',
-    'Reading Comprehension',
-    'Real-Time Object Detection',
-    'Reinforcement Learning (RL)',
-    'Representation Learning',
-    'Retrieval',
-    'Self-Supervised Image Classification',
-    'Self-Supervised Learning',
-    'Semantic Segmentation',
-    'Semantic Textual Similarity',
-    'Semi-Supervised Image Classification',
-    'Sentiment Analysis',
-    'Sentiment Classification',
-    'Speech Recognition',
-    'Text Classification',
-    'Text Generation',
-    'Thermal Image Segmentation',
-    'Transfer Learning',
-    'Translation',
-    'Visual Question Answering (VQA)',
-  ];
-  taskSelected: boolean[] = [];
-  filteredTasks: String[] = this.tasks;
-  selectedTasks: String[] = [];
+export class AfterComponent implements AfterViewInit {
+  tasks: Task[] = [];
+  filteredTasks: Task[] = [];
+  selectedTasks: string[] = [];
+  range = 0;
+  optionWidth = 80;
+  query = '';
+  loading = false;
   private authorized = this.authService.isAuthenticated();
-  public constructor(private authService: AuthService, private router: Router) {
-    for (let i = 0; i < this.tasks.length; i++) {
-      this.taskSelected.push(false);
-    }
-  }
-  query: string = '';
-  async ngOnInit() {
+
+  @ViewChildren('filtered')
+  taskElements!: QueryList<ElementRef<HTMLDivElement>>;
+
+  public constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  async ngAfterViewInit() {
     if (!this.authorized) {
       window.location.pathname = '/login';
       return;
     }
-    const resp = await axios.post(ServerService.UserServer + '/user/choseTasks', {
-      jwt: localStorage.getItem('access_token'),
-    });
-    const data: GenericResponse<any> = resp.data;
-    for (let task of data.data.result) {
-      this.taskSelected[this.tasks.indexOf(task)] = true;
-    }
-    this.selectedTasks = data.data.result;
+    axios
+      .get(ServerService.UserServer + '/tasks?page=0&num=30')
+      .then((resp) => {
+        console.log(resp.data.data.tasks);
+        this.range = this.optionWidth / resp.data.data.tasks[0].numPapers;
+        this.tasks = resp.data.data.tasks
+          .filter((t: any) => t.intro.length)
+          .map((t: any) => {
+            return {
+              name: t.name,
+              numPapers: t.numPapers,
+              intro: t.intro,
+              expanded: false,
+              focused: false,
+            };
+          });
+        this.filteredTasks = this.tasks.slice();
+      });
+    axios
+      .post(ServerService.UserServer + '/user/choseTasks', {
+        jwt: localStorage.getItem('access_token'),
+      })
+      .then((resp) => {
+        const data: GenericResponse<any> = resp.data;
+        this.selectedTasks.push(...data.data.tasks);
+      });
   }
-  toggleSelection(task: String) {
-    const index = this.tasks.indexOf(task);
-    this.taskSelected[index] = !this.taskSelected[index];
-    if (this.taskSelected[index]) {
-      this.selectedTasks.push(this.tasks[index]);
+
+  private shrink(index: number) {
+    this.filteredTasks[index].expanded = false;
+    const taskElement = this.taskElements.get(index)!.nativeElement;
+    const titleElement = taskElement.querySelector('span')!;
+    taskElement.style.height = '2em';
+    titleElement.style.fontSize = '1em';
+  }
+
+  private expand(index: number) {
+    this.filteredTasks[index].expanded = true;
+    const taskElement = this.taskElements.get(index)!.nativeElement;
+    const mdElement = taskElement.querySelector('markdown')!;
+    const titleElement = taskElement.querySelector('span')!;
+    taskElement.style.height = `calc(2em + ${
+      mdElement.getBoundingClientRect().height
+    }px)`;
+    titleElement.style.fontSize = '1.2em';
+  }
+
+  toggleSelection(task: string) {
+    // find task in filtered tasks
+    const index = this.filteredTasks.map((t) => t.name).indexOf(task);
+    // shrink all details
+    this.shrink(index);
+    if (!this.selectedTasks.includes(task)) {
+      this.selectedTasks.push(task);
     } else {
-      this.selectedTasks.splice(
-        this.selectedTasks.indexOf(this.tasks[index]),
-        1
-      );
+      this.selectedTasks.splice(this.selectedTasks.indexOf(task), 1);
     }
   }
-  async submit() {
-    await axios.post(ServerService.UserServer + '/user/likedTasks', {
-      jwt: localStorage.getItem('access_token'),
-      taskIds: this.selectedTasks,
-    });
-    window.location.pathname = '/home';
+
+  toggleTaskIntro(task: string) {
+    // find task in filtered tasks
+    const index = this.filteredTasks.map((t) => t.name).indexOf(task);
+    this.tasks[index].focused = !this.tasks[index].focused;
+    // mouseenter
+    if (this.tasks[index].focused) {
+      setTimeout(() => {
+        if (!this.tasks[index].focused) return;
+        this.expand(index);
+      }, 1000);
+    }
+    // mouseleave
+    else {
+      this.shrink(index);
+    }
   }
+
+  async submit() {
+    try {
+      this.loading = true;
+      await axios.post(ServerService.UserServer + '/user/likedTasks', {
+        jwt: localStorage.getItem('access_token'),
+        taskIds: this.selectedTasks,
+      });
+      this.loading = false;
+      window.location.pathname = '/home';
+    } catch (e) {
+      window.alert('A network error occurred while saving data: ' + e);
+    }
+  }
+
+  includes(task: string) {
+    const t = this.selectedTasks.includes(task);
+    // console.log(t);
+    return t;
+  }
+
   filterTasks(event: Event) {
     const value = (event.target as HTMLInputElement).value;
-    if (value == '') {
-      this.filteredTasks = this.tasks;
+    console.log(value);
+    if (!value) {
+      this.filteredTasks = this.tasks.slice();
       return;
     }
     this.filteredTasks = this.tasks.filter((task) =>
-      task.toLowerCase().includes(value.toLowerCase())
+      task.name.toLowerCase().includes(value.toLowerCase())
     );
   }
 }

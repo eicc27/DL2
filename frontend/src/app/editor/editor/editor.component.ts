@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import {
+  AfterViewChecked,
   AfterViewInit,
   Component,
   ElementRef,
@@ -20,14 +21,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.scss'],
 })
-export class EditorComponent implements OnInit, AfterViewInit {
+export class EditorComponent
+  implements OnInit, AfterViewInit, AfterViewChecked
+{
   private authorized = this.authService.isAuthenticated();
   private dragging = false;
   public isDrawerOpen = true;
   public tabs: Tab[] = [];
   public activeTab = -1;
   @ViewChild('editor') editor!: ElementRef<HTMLDivElement>;
-  private cursor: HTMLInputElement | undefined = undefined;
+  @ViewChild('cursor')
+  private cursor!: ElementRef<HTMLInputElement>;
   private lsp: HTMLUListElement | undefined = undefined;
   private selecting = false;
   private selectStart = [-1, -1];
@@ -40,34 +44,43 @@ export class EditorComponent implements OnInit, AfterViewInit {
     row: 0,
   };
   public suggestions: any[] = [];
+  private timeout!: any;
+  public loading = true;
+  private cursorChanging = false;
 
+  private debounce() {
+    // Changed to an arrow function
+    const later = async () => {
+      if (this.timeout) clearTimeout(this.timeout);
+      await this.suggest();
+    };
+    if (this.timeout) clearTimeout(this.timeout);
+    this.timeout = setTimeout(later, 500);
+  }
+
+  // sets the new position of cursor based on `this.cursorPos`.
+  // this should not be directly called for component lifecycle confict of Angular and DOM.
+  // instead, change `this.cursorChanged` to `true` to trigger cursor updates.
   private setCursor() {
     console.log('set cursor start');
-    this.cursor?.remove();
-    const textArea = this.renderer.createElement('input') as HTMLInputElement;
-    textArea.oninput = this.input.bind(this);
-    textArea.onkeydown = this.control.bind(this);
     // finds the span element with id c${row}_${col} and sets the cursor position
     const id = `c${this.cursorPos.row}_${this.cursorPos.col}`;
     let span = document.getElementById(id)!;
     if (!span) return;
     const left = span.offsetLeft;
-    textArea.style.left = `calc(${left}px - 0.1em)`;
-    // console.log(this.cursorPos.row, this.cursorPos.col);
+    this.cursor.nativeElement.style.left = `calc(${left}px - 0.1em)`;
     // finds the row and appends the textarea
-    const row = document.getElementById(`rc${this.cursorPos.row}`)!;
-    row.appendChild(textArea);
     // set textarea to be focused
-    textArea.focus();
-    this.cursor = textArea;
-    console.log('set cursor');
+    this.cursor.nativeElement.focus();
+    // this.cursor = textArea;
+    console.log('cursor set');
   }
 
-  public input(event: Event) {
+  public input(event: KeyboardEvent) {
     const target = event.target;
     if (!(target instanceof HTMLInputElement)) return;
     this.deleteRegion();
-    const key = target.value;
+    const key = event.key;
     target.value = '';
     // update lines
     const { row, col } = this.cursorPos;
@@ -78,11 +91,9 @@ export class EditorComponent implements OnInit, AfterViewInit {
       // update cursor position
       this.cursorPos.col += 1;
     }
-    setTimeout(async () => {
-      this.setCursor();
-      if (key != ' ') this.suggest();
-      else this.suggestions = [];
-    }, 5);
+    // console.log(this.lines);
+    // if (key != ' ') this.suggest();
+    // else this.suggestions = [];
   }
 
   private async suggest() {
@@ -184,7 +195,7 @@ export class EditorComponent implements OnInit, AfterViewInit {
       col: startCol,
     };
     this.selectEnd = this.selectStart;
-    setTimeout(this.setCursor.bind(this), 20);
+    this.cursorChanging = true;
   }
 
   public isSelected() {
@@ -225,7 +236,6 @@ export class EditorComponent implements OnInit, AfterViewInit {
         this.clearSuggetions();
         this.cursorPos.col -= 1;
         this.cursorPos.col = Math.max(this.cursorPos.col, 0);
-        setTimeout(() => this.setCursor(), 20);
         break;
       case 'ArrowRight':
         this.clearSuggetions();
@@ -234,13 +244,11 @@ export class EditorComponent implements OnInit, AfterViewInit {
           this.cursorPos.col,
           this.lines[this.cursorPos.row].length
         );
-        setTimeout(() => this.setCursor(), 20);
         break;
       case 'ArrowUp':
         this.clearSuggetions();
         this.cursorPos.row -= 1;
         this.cursorPos.row = Math.max(this.cursorPos.row, 0);
-        setTimeout(() => this.setCursor(), 20);
         break;
       case 'ArrowDown':
         this.clearSuggetions();
@@ -249,7 +257,6 @@ export class EditorComponent implements OnInit, AfterViewInit {
           this.cursorPos.row,
           this.lines.length - 1
         );
-        setTimeout(() => this.setCursor(), 20);
         break;
       case 'Backspace':
         console.log(isSelected);
@@ -266,13 +273,11 @@ export class EditorComponent implements OnInit, AfterViewInit {
           const line2 = this.lines[this.cursorPos.row + 1];
           this.lines[this.cursorPos.row] = line1 + line2;
           this.lines.splice(this.cursorPos.row + 1, 1);
-          setTimeout(() => this.setCursor(), 20);
           break;
         }
         const newLine = line.slice(0, col - 1) + line.slice(col);
         this.lines[row] = newLine;
         this.cursorPos.col -= 1;
-        setTimeout(() => this.setCursor(), 20);
         break;
       case 'Enter':
         this.deleteRegion();
@@ -285,7 +290,6 @@ export class EditorComponent implements OnInit, AfterViewInit {
         this.lines.splice(r + 1, 0, line2);
         this.cursorPos.row += 1;
         this.cursorPos.col = 0;
-        setTimeout(() => this.setCursor(), 20);
         break;
       case 'Tab':
         if (!this.suggestions.length) {
@@ -297,7 +301,6 @@ export class EditorComponent implements OnInit, AfterViewInit {
           const newLine = line.slice(0, col) + '    ' + line.slice(col);
           this.lines[row] = newLine;
           this.cursorPos.col += 4;
-          setTimeout(() => this.setCursor(), 20);
         } else {
           const suggestion = this.suggestions[0];
           const name = suggestion.get('name');
@@ -311,13 +314,17 @@ export class EditorComponent implements OnInit, AfterViewInit {
           event.preventDefault();
           event.stopPropagation();
           this.suggestions = [];
-          setTimeout(this.setCursor.bind(this), 20);
         }
+        break;
+      default:
+        if (event.key.length != 1) break;
+        console.log(event.key);
+        this.input(event);
+      // this.setCursor();
     }
+    this.cursorChanging = true;
     // console.log(this.lines);
   }
-
-  loading = true;
 
   constructor(
     private renderer: Renderer2,
@@ -357,14 +364,16 @@ export class EditorComponent implements OnInit, AfterViewInit {
         row: parseInt(row),
         col: parseInt(col),
       };
-      this.setCursor();
+      console.log(this.cursorPos);
+      this.cursorChanging = true;
     };
     this.editor.nativeElement.onmousedown = (e) => {
       for (let i = 0; i < this.lines.length; i++) {
         const line = this.lines[i];
         for (let j = 0; j <= line.length; j++) {
-          const span = document.getElementById(`c${i}_${j}`)!;
-          span.classList.remove('selected');
+          console.log(`c${i}_${j}`);
+          const span = document.getElementById(`c${i}_${j}`);
+          span?.classList.remove('selected');
         }
       }
       this.selectStart = [-1, -1];
@@ -465,6 +474,13 @@ export class EditorComponent implements OnInit, AfterViewInit {
         }
       }
     };
+  }
+
+  // Manage the change of cursor only when the necessary changes of Angular done to DOM have finished.
+  ngAfterViewChecked() {
+    if (!this.cursorChanging) return;
+    this.cursorChanging = false;
+    this.setCursor();
   }
 
   private drag(e: MouseEvent) {

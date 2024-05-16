@@ -30,11 +30,13 @@
           {{ i + 1 }}
         </div>
         <div class="line-content" id="rc{{ i }}">
+          <input (keydown)="this.control($event)" *ngIf="this.cursorPos.row == i" #cursor/>
           <span
             *ngFor="let char of line.split(''); index as j"
-            id="c{{ i }}_{{ j }}"
+            [attr.id]="'c' + i + '_' + j"
             >{{ char === " " ? "&nbsp;" : char }}</span
           >
+          <!-- Add a whitespace at the end of each line to prevent overflowing index -->
           <span id="c{{ i }}_{{ line.split('').length }}">&nbsp;</span>
         </div>
       </div>

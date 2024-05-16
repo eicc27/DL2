@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import * as d3 from 'd3';
-import { GRAPH } from '../static-graph.model';
 
 @Injectable({
   providedIn: 'root',
@@ -24,10 +23,13 @@ export class SphereService {
       .clipAngle(90);
 
     d3.select('canvas').attr('width', width).attr('height', height);
-
+    const graph = localStorage.getItem('graph');
+    if (!graph)
+      return;
+    const { graph: g, date } = JSON.parse(graph);
     // Mapping node IDs to node objects for easier lookup
-    const nodes = JSON.parse(JSON.stringify(GRAPH.nodes)); // Clone nodes to not modify GRAPH
-    const edges = JSON.parse(JSON.stringify(GRAPH.edges)); // Clone edges to not modify GRAPH
+    const nodes = g.nodes;
+    const edges = g.edges;
     for (const d of nodes) {
       d.lon = Math.random() * 360 - 180;
       d.lat = Math.random() * 180 - 90;

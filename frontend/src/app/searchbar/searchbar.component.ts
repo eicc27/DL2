@@ -33,7 +33,7 @@ export class SearchbarComponent {
   }
 
   public toggleFocus(focus: boolean) {
-    console.log(focus);
+    // console.log(focus);
     this.focus = focus;
     this.shouldReadOnly = !focus;
     if (this.focus) this.showOverlay = true;
@@ -62,9 +62,7 @@ export class SearchbarComponent {
     const value = (target as HTMLInputElement).value;
     if (!value.length) return;
     this.searching = true;
-    const resp = await axios.post(ServerService.SearchServer, {
-      query: value,
-    });
+    const resp = await axios.get(ServerService.SearchServer + '/search?query=' + value);
     const data = resp.data;
     if (!data) this.papers = [];
     else {

@@ -52,6 +52,9 @@ export class TagbarComponent implements OnChanges {
   }
 
   public async open(event: MatTabChangeEvent) {
+    if (event.index == -1) {
+      return; // the last tab is closed
+    }
     const tab = this.tabs[event.index];
     const absPath = tab.path;
     console.log(absPath);

@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ServerService {
-  public static readonly LspServer = 'http://dl2-fileservice.us-east-1.elasticbeanstalk.com';
+  public static readonly LspServer = 'http://localhost:5000';
 
   public static readonly UserServer = 'http://localhost:8080';
 
@@ -12,6 +12,6 @@ export class ServerService {
     'http://localhost:8081';
 
   public static readonly SearchServer =
-    'https://8dajt5pqyd.execute-api.us-east-1.amazonaws.com/default/SearchService';
+    'http://localhost:8091';
   constructor() {}
 }

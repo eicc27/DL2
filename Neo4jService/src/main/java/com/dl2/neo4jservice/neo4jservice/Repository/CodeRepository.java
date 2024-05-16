@@ -8,7 +8,10 @@ import org.springframework.data.repository.query.Param;
 
 public interface CodeRepository extends Neo4jRepository<Code, String> {
 
-    @Query("MERGE (c: Code {url: $url, rating: $rating}) RETURN c")
+    @Query("MERGE (c: Code {url: $url}) " +
+            "ON CREATE SET c.url=$url, c.rating=$rating " +
+            "ON MATCH SET c.url=$url, c.rating=$rating " +
+            "RETURN c")
     Code setCode(@Param("url") String url, @Param("rating") Long rating);
 
     @Query("MERGE (p: Paper {arxivId: $paperId}" +

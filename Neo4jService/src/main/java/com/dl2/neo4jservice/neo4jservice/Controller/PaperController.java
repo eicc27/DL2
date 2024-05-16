@@ -32,8 +32,12 @@ public class PaperController {
         var papers = request.getPapers();
         var methods = request.getMethods();
         var tasks = request.getTasks();
+        System.out.println("Adding papers");
         paperService.addPapers(papers, methods, tasks);
+        System.out.println("Adding relations");
         paperService.addRelations(papers, methods, tasks);
+//        System.out.println("Adding embeddings");
+//        paperService.addEmbeddings(papers);
         return new Response(200, "Success");
     }
 

@@ -1,19 +1,36 @@
 import mysql.connector as connector
 from mysql.connector.cursor import RowType
 
+
 class MysqlHelper:
     def __init__(self,
-                 url = 'database-test.cb6gwcrbia4j.us-east-1.rds.amazonaws.com',
-                 user = 'admin',
-                 pwd = 'Jise246808642',
-                 db = 'dl2') -> None:
+                 url='database-test.cb6gwcrbia4j.us-east-1.rds.amazonaws.com',
+                 user='admin',
+                 pwd='Jise246808642',
+                 db='dl2') -> None:
         self.conn = connector.connect(
-            host = url,
-            user = user,
-            password = pwd,
-            database = db)
-        self.conn.autocommit = False # disable autocommit
+            host=url,
+            user=user,
+            password=pwd,
+            database=db)
+        self.conn.autocommit = False  # disable autocommit
         self.cursor = self.conn.cursor()
+
+    def getPapers(self, start: int = -1, count: int = -1) -> list[tuple[str, str]]:
+        params = (start, count)
+        if start < 0 or count < 0:
+            self.cursor.execute(
+                """
+                    select title, abstract, arxiv_id from paper
+                """)
+        else:
+            self.cursor.execute(
+                """
+                select title, abstract, arxiv_id from paper
+                limit %s, %s
+                """,
+                params)
+        return self.cursor.fetchall()
 
     def close(self) -> None:
         self.conn.commit()
@@ -24,8 +41,7 @@ class MysqlHelper:
         self.cursor.execute(
             """
                 select arxiv_id from paper
-                    where title like
-                        CONCAT('%', %s, '%')
+                    where title = %s
                 order by citations desc, year desc
                 limit 10;
             """,
@@ -38,7 +54,7 @@ class MysqlHelper:
             'SELECT * FROM paper WHERE arxiv_id = %s',
             params)
         return self.cursor.fetchone()
-    
+
     def _getAuthorPapersByPaperId(self, paperId: str) -> list[RowType]:
         params = (paperId,)
         self.cursor.execute(
@@ -52,7 +68,7 @@ class MysqlHelper:
             'SELECT * FROM code WHERE paperid = %s',
             params)
         return self.cursor.fetchall()
-    
+
     def _getMostPopularTasksByNumOfPapers(self, paperId: str) -> list[RowType]:
         params = (paperId,)
         self.cursor.execute("""
@@ -70,9 +86,9 @@ class MysqlHelper:
             ORDER BY total_papers DESC
             LIMIT 5;
                             """,
-            params)
+                            params)
         return self.cursor.fetchall()
-    
+
     def _getMostPopularMethodsByNumOfPapers(self, paperId: str) -> list[RowType]:
         params = (paperId,)
         self.cursor.execute("""
@@ -90,7 +106,7 @@ class MysqlHelper:
             ORDER BY total_papers DESC
             LIMIT 5;
                             """,
-            params)
+                            params)
         return self.cursor.fetchall()
 
     def _getPaperRespByArxivId(self, arxivId: str):
@@ -143,7 +159,7 @@ class MysqlHelper:
 
     def getPaperByTitle(self, query: str):
         try:
-            arxiv_ids =  self._getPaperByTitle(query)
+            arxiv_ids = self._getPaperByTitle(query)
             return self.getPaperByArxivIds(arxiv_ids)
         except connector.Error as err:
             print(err)
@@ -151,6 +167,7 @@ class MysqlHelper:
         finally:
             self.conn.commit()
             self.conn.close()
+
 
 if __name__ == '__main__':
     helper = MysqlHelper()

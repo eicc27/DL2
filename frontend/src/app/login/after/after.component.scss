@@ -5,29 +5,76 @@ app-topbar {
   z-index: 100;
 }
 
-.task-selection {
+.tasks {
   position: absolute;
   left: 10vw;
   width: 80vw;
-  top: 20vh;
+  top: 6vh;
   padding-bottom: 5em;
-  mat-form-field {
-    width: 30vw;
-    mat-icon {
-      color: #888;
-    }
-  }
+
   h2 {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1.5em;
   }
-  mat-chip-option {
-    margin: .5em;
+
+  .filtered,
+  .selected {
+    padding: .25em;
+    margin: .25em;
+    transition: all ease-out 0.3s;
+    position: relative;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    overflow: hidden;
+    // initial height
+    height: 2em;
+
+    // do we have to do this?
+    // user-select: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    >span, >markdown {
+      transition: all ease-out .3s;
+    }
+
+    >div {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      height: 100%;
+      width: 80vw;
+      transition: all ease-out 0.3s;
+      // background: gainsboro;
+      background: linear-gradient(to right, rgba(gainsboro, 0.5), gainsboro);
+    }
+
+    &.selected {
+      >div {
+        background: linear-gradient(to right, rgba(royalblue, 0.5), royalblue);
+      }
+
+      >span {
+        color: white;
+      }
+    }
   }
+
   .selected-tasks {
-    margin: 3em 0;
+    .task {
+      background: royalblue;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
   }
+
   .empty {
     color: #888;
     font-style: italic;
+  }
+
+  button {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   }
 }

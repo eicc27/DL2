@@ -65,6 +65,7 @@ public class PaperService {
     @Transactional
     public void addPapers(PaperRequest[] papers, Method[] methods, Task[] tasks) {
         for (var paper : papers) {
+            System.out.println("Adding paper: " + paper.getName());
             paperRepository.setPaper(paper.getId(),
                     paper.getName(),
                     paper.getAbs(),
@@ -77,9 +78,11 @@ public class PaperService {
             }
         }
         for (var method : methods) {
+            System.out.println("Adding method: " + method.getMethod());
             methodRepository.setMethod(method.getMethod(), method.getDesc());
         }
         for (var task : tasks) {
+            System.out.println("Adding task: " + task.getName());
             taskRepository.setTask(task.getName(), task.getDesc());
         }
     }
@@ -96,17 +99,32 @@ public class PaperService {
                             .filter(i -> Objects.equals(i.getId(), t)))
                     .toArray(Task[]::new);
             for (var p : paper.getReferencedPapers()) {
+                System.out.println(paper.getId() + "-->" + p);
                 paperRepository.setPaperCitation(paper.getId(), p);
             }
-            for (var a : paper.getAuthors())
+            for (var a : paper.getAuthors()) {
+                System.out.println(a + "-->" + paper.getId());
                 authorRepository.setAuthorPaper(a, paper.getId());
+            }
             for (var m : paperMethods) {
+                System.out.println(m.getMethod() + "-->" + m.getArxivId());
                 methodRepository.setMethodPaper(paper.getId(), m.getMethod());
                 if (!Objects.isNull(m.getArxivId()))
                     methodRepository.setPaperMethod(m.getMethod(), m.getArxivId());
             }
-            for (var t : paperTasks)
+            for (var t : paperTasks) {
+                System.out.println(paper.getId() + "-->" + t.getName());
                 taskRepository.setTaskPaper(paper.getId(), t.getName());
+            }
+        }
+    }
+
+    @Transactional
+    public void addEmbeddings(PaperRequest[] papers) {
+        for (var paper : papers) {
+            var vector = GenAIService.embedPaper(paper.getName(), paper.getAbs());
+            paperRepository.setPaperEmbedding(paper.getId(), Arrays.toString(vector));
+            System.out.println("Embedded: " + paper.getName());
         }
     }
 

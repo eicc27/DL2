@@ -11,10 +11,10 @@ app-topbar {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  top: 10vw;
+  top: 64px;
   left: 10vw;
   width: 80vw;
-  padding-bottom: 15vw;
+  padding-bottom: 64px;
 
   .method {
     display: flex;
@@ -23,7 +23,7 @@ app-topbar {
     justify-content: center;
     width: 100%;
     margin: 1em 0;
-    padding: 0 1em;
+    padding: 1em;
     background: rgba($color: #ddd, $alpha: 0.4);
     transition: all .3s ease-out;
     &:hover {
@@ -34,11 +34,12 @@ app-topbar {
 
     h2 {
       font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-
+      font-size: 1.3em;
+      margin-bottom: .8em;
       span {
         font-size: .7em;
         font-weight: normal;
-        color: #aaa;
+        color: #747474;
       }
     }
 

@@ -3,12 +3,12 @@ import * as pyodide from 'pyodide';
 
 function makePythonSafe(pythonCode: string): string {
   return pythonCode
-    .replace(/\\/g, '\\\\')  // Replace backslashes first to avoid escaping newly added backslashes
-    .replace(/"/g, '\\"')    // Escape double quotes
-    .replace(/'/g, "\\'")    // Escape single quotes
-    .replace(/\n/g, '\\n')   // Escape newlines
-    .replace(/\r/g, '\\r')   // Escape carriage returns
-    .replace(/\t/g, '\\t');  // Escape tabs
+    .replace(/\\/g, '\\\\') // Replace backslashes first to avoid escaping newly added backslashes
+    .replace(/"/g, '\\"') // Escape double quotes
+    .replace(/'/g, "\\'") // Escape single quotes
+    .replace(/\n/g, '\\n') // Escape newlines
+    .replace(/\r/g, '\\r') // Escape carriage returns
+    .replace(/\t/g, '\\t'); // Escape tabs
 }
 
 @Injectable({
@@ -24,6 +24,10 @@ export class EditorService {
       indexURL: 'assets/pyodide/',
     });
     const py = `import jedi
+import numpy
+import PIL
+from jedi.api import preload_module
+preload_module("numpy", "PIL")
 def suggest(text, line, column):
   script = jedi.Script(text)
   try:
@@ -34,8 +38,11 @@ def suggest(text, line, column):
       'from': c.get_completion_prefix_length()
     } for c in completions]
   except Exception as e:
-    return []`;
-    await this.webasm.loadPackage('jedi');
+    return []
+`;
+    console.log(py);
+    const packages = ['jedi', 'numpy', 'pillow'];
+    await Promise.all(packages.map((pkg) => this.webasm.loadPackage(pkg)));
     await this.webasm.runPythonAsync(py);
   }
 

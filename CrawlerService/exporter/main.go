@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -8,6 +9,8 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/generative-ai-go/genai"
+	"google.golang.org/api/option"
 )
 
 type SourceCode struct {
@@ -48,6 +51,11 @@ type Response struct {
 	Methods []Method `json:"methods"`
 }
 
+type PaperEmbedRequest struct {
+	Title    string `json:"title"`
+	Abstract string `json:"abstract"`
+}
+
 func Cors() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		method := c.Request.Method
@@ -77,18 +85,38 @@ func Serve() {
 		data, _ := json.MarshalIndent(p, "", "  ")
 		os.WriteFile("data.json", data, 0644)
 		fmt.Println("saved file")
+		// send the json to the other services
+		Test()
+	})
+	g.POST("/embed", func(ctx *gin.Context) {
+		b, _ := io.ReadAll(ctx.Request.Body)
+		var p PaperEmbedRequest
+		json.Unmarshal(b, &p)
+		bg := context.Background()
+		client, _ := genai.NewClient(ctx, option.WithAPIKey("AIzaSyD0NpI_90atLTdjD7ODsEpPAWErX1UhPoc"))
+		defer client.Close()
+		model := client.EmbeddingModel("embedding-001")
+		resp, err := model.EmbedContentWithTitle(bg, p.Title, genai.Text(p.Abstract))
+		if err != nil {
+			ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		ctx.JSON(http.StatusOK, gin.H{"embedding": resp.Embedding})
 	})
 	g.Run(":27001")
 }
-
 
 func Test() {
 	r := SetRequest(Response{}, true)
 	t, _ := json.Marshal(r)
 	os.WriteFile("request.json", t, 0644)
+	println("sql")
+	PutPapers(r, "http://localhost:8080/paper/papers")
+	println("n4j")
 	resp := PutPapers(r, "http://localhost:8081/paper/papers")
 	os.WriteFile("response.json", []byte(resp), 0644)
 }
 func main() {
+	// Test()
 	Serve()
 }

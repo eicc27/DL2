@@ -33,6 +33,7 @@ export class MethodComponent {
         const b = Math.round(255 + (0 - 255) * ratio);
         return `rgba(${r}, ${g}, ${b}, 0.85)`;
       });
+      console.log(this.task.intro);
     });
   }
 

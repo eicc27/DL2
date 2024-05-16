@@ -66,3 +66,24 @@ span.short {
 .katex-html {
   display: none !important;
 }
+
+.pop-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+  span {
+    transition: all .3s ease-out;
+    color: whitesmoke;
+    padding: 0.5rem 0.8rem;
+    margin: 0.5rem;
+
+    // border-radius: 2rem;
+    &:hover {
+      transform: scale(1.05);
+      cursor: pointer;
+    }
+  }
+}

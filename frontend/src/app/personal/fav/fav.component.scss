@@ -1,0 +1,16 @@
+.favs {
+  display: flex;
+  flex-direction: column;
+  width:100vw;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  .fav {
+    // margin: 1em;
+    // padding: 1em;
+    // position: absolute;
+    border: 1px solid black;
+    width: 30vw;
+    transform: perspective(400px) rotateY(20deg);
+  }
+}

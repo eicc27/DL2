@@ -6,7 +6,10 @@ import org.springframework.data.neo4j.repository.query.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface MethodRepository extends Neo4jRepository<Method, String> {
-    @Query("MERGE (m: Method {name: $id, desc: $desc}) RETURN m")
+    @Query("MERGE (m: Method {name: $id}) " +
+            "ON CREATE SET m.name=$id, m.desc=$desc " +
+            "ON MATCH SET m.name=$id, m.desc=$desc " +
+            "RETURN m")
     Method setMethod(@Param("id") String id, @Param("desc") String desc);
 
     @Query("MERGE (p: Paper {arxivId: $paperId})" +
