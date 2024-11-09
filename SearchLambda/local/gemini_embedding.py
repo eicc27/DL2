@@ -1,6 +1,6 @@
 import google.ai.generativelanguage as glm
 import google.generativeai as genai
-API_KEY = 'AIzaSyD0NpI_90atLTdjD7ODsEpPAWErX1UhPoc'
+API_KEY = 'AIzaSyDVR3o60tCVvFGcduCzqvZNkH6Vs5T4meI'
 genai.configure(api_key=API_KEY)
 
 if __name__ == '__main__':

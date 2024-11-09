@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'highlightCapitalized',
+    name: 'highlightCapitalized',
+    standalone: true,
 })
 export class HighlightCapitalizedPipe implements PipeTransform {
   transform(value: any, ...args: any[]): unknown {

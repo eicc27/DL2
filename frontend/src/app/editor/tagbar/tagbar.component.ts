@@ -8,12 +8,14 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { MatTabChangeEvent, MatTabGroup } from '@angular/material/tabs';
+import { MatTabChangeEvent, MatTabGroup, MatTabsModule } from '@angular/material/tabs';
 import axios from 'axios';
 import GenericResponse from 'src/app/GenericResponse.model';
 import { AuthService } from 'src/app/auth.service';
 import { ServerService } from 'src/app/server.service';
 import OpenResponse from '../fs/OpenResponse';
+import { MatIconModule } from '@angular/material/icon';
+import { NgFor } from '@angular/common';
 
 export interface Tab {
   name: string;
@@ -22,9 +24,11 @@ export interface Tab {
 }
 
 @Component({
-  selector: 'app-tagbar',
-  templateUrl: './tagbar.component.html',
-  styleUrls: ['./tagbar.component.scss'],
+    selector: 'app-tagbar',
+    templateUrl: './tagbar.component.html',
+    styleUrls: ['./tagbar.component.scss'],
+    imports: [MatTabsModule, MatIconModule, NgFor],
+    standalone: true,
 })
 export class TagbarComponent implements OnChanges {
   @Input('tabs')

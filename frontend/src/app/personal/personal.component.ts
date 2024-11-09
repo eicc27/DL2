@@ -6,11 +6,17 @@ import { ServerService } from '../server.service';
 import GenericResponse from '../GenericResponse.model';
 import Paper from '../paper/paper.model';
 import Recommendation, { SortedRecommendation } from './Recommendation.model';
+import { TopbarComponent } from '../topbar/topbar.component';
+import { PaperInfoComponent } from '../paper/paper-info/paper-info.component';
+import { MatIconModule } from '@angular/material/icon';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-personal',
-  templateUrl: './personal.component.html',
-  styleUrls: ['./personal.component.scss'],
+    selector: 'app-personal',
+    templateUrl: './personal.component.html',
+    styleUrls: ['./personal.component.scss'],
+    imports: [TopbarComponent, PaperInfoComponent, MatIconModule, NgIf],
+    standalone: true,
 })
 export class PersonalComponent {
   private authorized = this.authService.isAuthenticated();

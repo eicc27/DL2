@@ -8,8 +8,8 @@ describe('FavComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FavComponent]
-    });
+    imports: [FavComponent]
+});
     fixture = TestBed.createComponent(FavComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -4,11 +4,24 @@ import { Task } from './task.model';
 import axios from 'axios';
 import { ServerService } from '../server.service';
 import GenericResponse from '../GenericResponse.model';
+import { TopbarComponent } from '../topbar/topbar.component';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { PaperInfoComponent } from '../paper/paper-info/paper-info.component';
+import { MarkdownModule } from 'ngx-markdown';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
-  styleUrls: ['./task.component.scss']
+  styleUrls: ['./task.component.scss'],
+  imports: [
+    TopbarComponent,
+    PaperInfoComponent,
+    NgIf,
+    NgFor,
+    MarkdownModule,
+    CommonModule,
+  ],
+  standalone: true,
 })
 export class TaskComponent {
   public task!: Task;
@@ -18,7 +31,9 @@ export class TaskComponent {
   ngOnInit() {
     this.route.params.subscribe(async (params) => {
       const task = params['task'];
-      const resp = await axios.get(ServerService.UserServer + `/task?taskName=${decodeURI(task)}`);
+      const resp = await axios.get(
+        ServerService.UserServer + `/task?taskName=${decodeURI(task)}`
+      );
       const data: GenericResponse<Task> = resp.data;
       this.task = data.data;
       const maxNumPapers = Math.max(...this.task.methodNumPapers);
@@ -27,7 +42,8 @@ export class TaskComponent {
         if (maxNumPapers === minNumPapers) {
           return 'rgba(30, 144, 255, 0.85)';
         }
-        const ratio = (numPapers - minNumPapers) / (maxNumPapers - minNumPapers);
+        const ratio =
+          (numPapers - minNumPapers) / (maxNumPapers - minNumPapers);
         const r = Math.round(30 + (255 - 30) * ratio);
         const g = Math.round(144 + (69 - 144) * ratio);
         const b = Math.round(255 + (0 - 255) * ratio);

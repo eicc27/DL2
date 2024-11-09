@@ -8,6 +8,7 @@
     "watch": "nodemon -x node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm ./src/index.ts",
     "init": "tsc; node dist/starters/init.js",
     "subscribe": "tsc; node dist/starters/subscribe.js",
+    "import": "tsc; node dist/starters/import_csv.js",
     "build": "esbuild src/index.ts --bundle --minify --sourcemap --platform=node --target=es2020 --outfile=dist/index.js"
   },
   "author": "",

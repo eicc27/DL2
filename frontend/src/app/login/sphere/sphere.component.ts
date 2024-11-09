@@ -8,9 +8,10 @@ import { Router } from '@angular/router';
 import { SphereService } from '../sphere.service';
 
 @Component({
-  selector: 'app-sphere',
-  templateUrl: './sphere.component.html',
-  styleUrls: ['./sphere.component.scss'],
+    selector: 'app-sphere',
+    templateUrl: './sphere.component.html',
+    styleUrls: ['./sphere.component.scss'],
+    standalone: true,
 })
 export class SphereComponent implements OnDestroy {
   animation!: number;

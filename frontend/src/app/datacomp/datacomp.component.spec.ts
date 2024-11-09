@@ -8,8 +8,8 @@ describe('DatacompComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DatacompComponent]
-    });
+    imports: [DatacompComponent]
+});
     fixture = TestBed.createComponent(DatacompComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

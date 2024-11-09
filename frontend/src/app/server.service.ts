@@ -13,5 +13,8 @@ export class ServerService {
 
   public static readonly SearchServer =
     'http://localhost:8091';
+
+  public static readonly RAGServer =
+    'http://localhost:8092';
   constructor() {}
 }

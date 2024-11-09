@@ -1,0 +1,32 @@
+.switch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 3rem;
+  &:hover {
+    cursor: pointer;
+    mat-icon.current {
+      color: royalblue;
+    }
+  }
+  mat-icon {
+    // position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-out;
+    position: absolute;
+    &.current {
+      left: 0rem;
+      font-size: 1.6rem;
+      // color: royalblue;
+    }
+    &.next {
+        left: 1rem;
+        top: -0.5rem;
+        font-size: 0.9rem;
+        color: rgba(0, 0, 0, 0.2);
+    }
+  }
+}

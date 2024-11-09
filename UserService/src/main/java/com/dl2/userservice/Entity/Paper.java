@@ -14,6 +14,7 @@ public class Paper {
 
     private String title;
 
+//    @Transient
     private Year year;
 
     @Column(name = "abstract", length = 10000)

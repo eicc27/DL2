@@ -3,11 +3,17 @@ import axios from 'axios';
 import { ServerService } from '../server.service';
 import GenericResponse from '../GenericResponse.model';
 import Dataset from './dataset.model';
+import { TopbarComponent } from '../topbar/topbar.component';
+import { NgFor, NgIf } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
-  selector: 'app-datacomp',
-  templateUrl: './datacomp.component.html',
-  styleUrls: ['./datacomp.component.scss'],
+    selector: 'app-datacomp',
+    templateUrl: './datacomp.component.html',
+    styleUrls: ['./datacomp.component.scss'],
+    imports: [TopbarComponent, NgIf, NgFor, MatIconModule, LoadingComponent],
+    standalone: true,
 })
 export class DatacompComponent {
   numDatasets = undefined;

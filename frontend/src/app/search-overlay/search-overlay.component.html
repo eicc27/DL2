@@ -1,17 +1,35 @@
-<div class="overlay" *ngIf="this.searching">
-  searching...
-</div>
+<div class="overlay" *ngIf="this.searching">searching...</div>
 
-<div class="overlay" *ngIf="!this.searching && !this.papers.length">
+<div
+  class="overlay"
+  *ngIf="
+    !this.searching &&
+    ((this.mode == 'papers' && !this.papers.length) ||
+      (this.mode == 'qa' && !this.answer.length))
+  "
+>
   The result is empty.
 </div>
 
-<div class="overlay" *ngIf ="!this.searching && this.papers.length">
-  <div class="overlay-paper" *ngFor="let paper of papers" (click)="openPaper(paper.arxivId)">
-    <h3
-      class="overlay-paper-title"
-      [innerHTML]="this.paper.title"
-    ></h3>
+<div
+  class="overlay"
+  *ngIf="this.mode == 'qa' && !this.searching && this.answer.length"
+>
+  <div class="overlay-answer">
+    <markdown katex [data]="this.answer"></markdown>
+  </div>
+</div>
+
+<div
+  class="overlay"
+  *ngIf="this.mode == 'papers' && !this.searching && this.papers.length"
+>
+  <div
+    class="overlay-paper"
+    *ngFor="let paper of papers"
+    (click)="openPaper(paper.arxivId)"
+  >
+    <h3 class="overlay-paper-title" [innerHTML]="paper.title"></h3>
     <div class="overlay-authors">
       <span *ngFor="let author of paper.authors; index as i">
         <i>{{ author }}</i

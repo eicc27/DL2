@@ -1,11 +1,14 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 
 @Component({
-  selector: 'app-userinfo',
-  templateUrl: './userinfo.component.html',
-  styleUrls: ['./userinfo.component.scss'],
+    selector: 'app-userinfo',
+    templateUrl: './userinfo.component.html',
+    styleUrls: ['./userinfo.component.scss'],
+    imports: [NgIf],
+    standalone: true,
 })
 export class UserinfoComponent {
   loggedIn = false;

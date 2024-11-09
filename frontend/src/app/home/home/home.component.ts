@@ -3,16 +3,21 @@ import { Title } from '@angular/platform-browser';
 import { OnInit } from '@angular/core';
 import * as d3 from 'd3';
 import { GraphService, Node } from 'src/app/graph.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import Paper from 'src/app/paper/paper.model';
 import axios from 'axios';
 import { ServerService } from 'src/app/server.service';
 import GenericResponse from 'src/app/GenericResponse.model';
+import { NgFor } from '@angular/common';
+import { TopbarComponent } from 'src/app/topbar/topbar.component';
+import { PaperInfoComponent } from 'src/app/paper/paper-info/paper-info.component';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    imports: [NgFor, TopbarComponent, PaperInfoComponent, RouterModule],
+    standalone: true,
 })
 export class HomeComponent implements OnInit {
   private zoomTarget: SVGElement | null = null;

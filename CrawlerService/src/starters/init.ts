@@ -21,6 +21,7 @@ export async function retry(
     } catch (e) {
       console.warn("Retry " + i + " times");
       error = e;
+      // console.error(e);
     }
   }
   // throw error;
@@ -69,6 +70,7 @@ export async function init(taskLimit: number, paperLimit: number) {
   console.log(chalk.green("SotA fields has been crawled!"));
   // an atomic transaction
   const crawl = async (id: string) => {
+    await timeout(1000 * 5); // make the request sparse to avoid 429
     console.log(id);
     const ret: any[] = [];
     const methods: Method[] = [];
@@ -88,7 +90,7 @@ export async function init(taskLimit: number, paperLimit: number) {
     ret.push(methods);
     return ret;
   };
-  const pool = new AsyncPool(5, "eagar");
+  const pool = new AsyncPool(3, "eager");
   const task = async (id: string) =>
     await Promise.race([crawl(id), timeout(1000 * 60)]) // timeout after 1 min
       .then((ret: any) => {
@@ -125,7 +127,7 @@ export function unsetProxy() {
 // process.argv.forEach((val, index) => {
 //   console.log(`${index}: ${val}`);
 // });
-setProxy();
+// setProxy();
 const [taskLimit, paperLimit] = process.argv.slice(2).map(parseInt);
 const papers = await init(taskLimit, paperLimit);
 unsetProxy();

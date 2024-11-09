@@ -8,11 +8,19 @@ import Submit from './submit.model';
 import GenericResponse from '../GenericResponse.model';
 import { saveAs } from 'file-saver';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TopbarComponent } from '../topbar/topbar.component';
+import { NgIf } from '@angular/common';
+import { MarkdownModule } from 'ngx-markdown';
+import { MatTableModule } from '@angular/material/table';
+import { LoadingComponent } from '../loading/loading.component';
+import { HighlightCapitalizedPipe } from '../highlight-capitalized.pipe';
 
 @Component({
-  selector: 'app-dataset',
-  templateUrl: './dataset.component.html',
-  styleUrls: ['./dataset.component.scss'],
+    selector: 'app-dataset',
+    templateUrl: './dataset.component.html',
+    styleUrls: ['./dataset.component.scss'],
+    imports: [TopbarComponent, NgIf, MarkdownModule, MatTableModule, LoadingComponent, HighlightCapitalizedPipe],
+    standalone: true,
 })
 export class DatasetComponent {
   dataset!: Dataset;

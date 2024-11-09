@@ -65,7 +65,7 @@ export default class SotACrawler extends BaseCrawler {
       }
     }
     const paperIds: string[] = [];
-    const pool = new AsyncPool(10, "eagar");
+    const pool = new AsyncPool(3, "eager");
     for (const field of fields) {
       await pool.submit(
         (f: string) =>

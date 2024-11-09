@@ -6,11 +6,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ServerService } from 'src/app/server.service';
 import Response from 'src/response.model';
 import { AuthService } from 'src/app/auth.service';
+import { SphereComponent } from '../sphere/sphere.component';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
+    imports: [SphereComponent, NgIf],
+    standalone: true,
 })
 export class LoginComponent implements AfterViewInit {
   @ViewChild('username') NameElement!: ElementRef<HTMLInputElement>;

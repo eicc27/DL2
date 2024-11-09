@@ -8,8 +8,8 @@ describe('PaperInfoComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PaperInfoComponent]
-    });
+    imports: [PaperInfoComponent]
+});
     fixture = TestBed.createComponent(PaperInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

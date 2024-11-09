@@ -117,6 +117,16 @@ func Test() {
 	os.WriteFile("response.json", []byte(resp), 0644)
 }
 func main() {
-	// Test()
-	Serve()
+	if len(os.Args) < 2 {
+		fmt.Println("Usage: exporter <mode>(test or serve)")
+		return 
+	}
+	if os.Args[1] == "test" {
+		Test()
+	} else if os.Args[1] == "serve" {
+		Serve()
+	} else {
+		fmt.Println("Usage: exporter <mode>(test or serve)")
+		return
+	}
 }

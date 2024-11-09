@@ -1,4 +1,4 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, NgFor, NgIf } from '@angular/common';
 import {
   AfterViewChecked,
   AfterViewInit,
@@ -9,17 +9,31 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { Tab } from '../tagbar/tagbar.component';
+import { Tab, TagbarComponent } from '../tagbar/tagbar.component';
 import { EditorService } from '../editor.service';
 import { AuthService } from 'src/app/auth.service';
 import axios from 'axios';
 import { ServerService } from 'src/app/server.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TopbarComponent } from 'src/app/topbar/topbar.component';
+import { FsComponent } from '../fs/fs.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.scss'],
+  imports: [
+    TopbarComponent,
+    FsComponent,
+    TagbarComponent,
+    NgFor,
+    NgIf,
+    MatProgressSpinnerModule,
+    MatSidenavModule,
+  ],
+  standalone: true,
 })
 export class EditorComponent
   implements OnInit, AfterViewInit, AfterViewChecked

@@ -1,3 +1,4 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import axios from 'axios';
@@ -7,9 +8,11 @@ import Paper from 'src/app/paper/paper.model';
 import { ServerService } from 'src/app/server.service';
 
 @Component({
-  selector: 'app-fav',
-  templateUrl: './fav.component.html',
-  styleUrls: ['./fav.component.scss'],
+    selector: 'app-fav',
+    templateUrl: './fav.component.html',
+    styleUrls: ['./fav.component.scss'],
+    imports: [NgFor],
+    standalone: true,
 })
 export class FavComponent {
   private authorized = this.authService.isAuthenticated();

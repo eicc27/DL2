@@ -5,6 +5,7 @@
   width: 80vw;
   height: 70vh;
   overflow-x: hidden;
+  overflow-y: auto;
   background-color: white;
   padding: 1em;
   z-index: 100;
@@ -15,6 +16,29 @@
   justify-content: flex-start;
   scrollbar-width: thin;
   scrollbar-color: #ccc #fff;
+
+  .overlay-answer {
+    position: absolute; // Changed to relative to avoid removing it from normal flow
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%; // Use the full width available from the .overlay container
+    max-width: 100%;
+    markdown {
+      width: 100%; // Allow markdown to take full width of the parent container
+      max-width: calc(100% - 3em); // Keep it inside padding
+      box-sizing: border-box; // Include padding in the width calculation
+      font-family: Georgia, "Times New Roman", Times, serif;
+      background: rgba(#ddd, 0.4);
+      padding: 1.5em;
+      box-shadow: 2px 2px 2px 0px gray;
+      line-height: 3ch;
+      font-size: 1.1em;
+      text-wrap-mode: wrap;
+      white-space-collapse: preserve;
+    }
+  }
 
   .overlay-paper {
     position: relative;
@@ -33,7 +57,7 @@
       }
     }
     .overlay-paper-title {
-      transition: all .3s ease-out;
+      transition: all 0.3s ease-out;
       position: relative;
       font-size: 1.3em;
       margin: 0.1em 0;
@@ -45,7 +69,8 @@
       font-size: 0.9em;
       font-style: italic;
       font-weight: normal;
-      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
       color: #666;
       margin: 0.5em 0;
     }
@@ -59,7 +84,8 @@
       flex-wrap: wrap;
       font-size: 1em;
       font-weight: normal;
-      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
     }
 
     .overlay-method-desc {

@@ -5,9 +5,13 @@ import FsResponse, { Dirs } from './FsResponse.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import GenericResponse from 'src/app/GenericResponse.model';
 import { NestedTreeControl } from '@angular/cdk/tree';
-import { MatTreeNestedDataSource } from '@angular/material/tree';
+import { MatTreeModule, MatTreeNestedDataSource } from '@angular/material/tree';
 import OpenResponse from './OpenResponse';
 import { AuthService } from 'src/app/auth.service';
+import { NgIf } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { LoadingComponent } from 'src/app/loading/loading.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 interface FileNode {
   name: string;
@@ -97,6 +101,14 @@ function isValidFilename(filename: string): boolean {
   selector: 'app-fs',
   templateUrl: './fs.component.html',
   styleUrls: ['./fs.component.scss'],
+  imports: [
+    NgIf,
+    MatTreeModule,
+    MatIconModule,
+    LoadingComponent,
+    MatProgressBarModule,
+  ],
+  standalone: true,
 })
 export class FsComponent implements OnInit {
   private lspServer: string;

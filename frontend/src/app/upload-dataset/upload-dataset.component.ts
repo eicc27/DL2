@@ -1,22 +1,32 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import axios from 'axios';
-import { MarkdownService } from 'ngx-markdown';
+import { MarkdownModule, MarkdownService } from 'ngx-markdown';
 import { ServerService } from '../server.service';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { NgFor, AsyncPipe } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatOption } from '@angular/material/core';
 import { AuthService } from '../auth.service';
+import { TopbarComponent } from '../topbar/topbar.component';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-upload-dataset',
   templateUrl: './upload-dataset.component.html',
   styleUrls: ['./upload-dataset.component.scss'],
+  imports: [
+    TopbarComponent,
+    NgIf,
+    MatFormFieldModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    MarkdownModule,
+    LoadingComponent,
+  ],
+  standalone: true,
 })
 export class UploadDatasetComponent {
   public nameError = false;
@@ -188,12 +198,15 @@ export class UploadDatasetComponent {
       return;
     console.log(localStorage.getItem('access_token'));
     const formData = new FormData();
-    formData.append('uploadRequest', JSON.stringify({
-      jwt: localStorage.getItem('access_token'),
-      name: this.dtsName.nativeElement.value,
-      task: this.dtsTask.nativeElement.value,
-      desc: this.markdownArea.nativeElement.value,
-    }));
+    formData.append(
+      'uploadRequest',
+      JSON.stringify({
+        jwt: localStorage.getItem('access_token'),
+        name: this.dtsName.nativeElement.value,
+        task: this.dtsTask.nativeElement.value,
+        desc: this.markdownArea.nativeElement.value,
+      })
+    );
     const appendFiles = (key: string, files: FileList) => {
       for (let i = 0; i < files.length; i++) {
         formData.append(key, files[i], files[i].name);
@@ -205,7 +218,7 @@ export class UploadDatasetComponent {
     this.uploading = true;
     const resp = await axios.post(
       ServerService.UserServer + '/dataset/upload',
-      formData,
+      formData
     );
     this.uploading = false;
     if (resp.data.code != 200) {

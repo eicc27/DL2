@@ -5,3 +5,4 @@
 stats/
 venv/
 **/*/cache/
+*.tar

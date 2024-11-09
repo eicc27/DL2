@@ -8,8 +8,8 @@ describe('FsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FsComponent]
-    });
+    imports: [FsComponent]
+});
     fixture = TestBed.createComponent(FsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -12,7 +12,8 @@ class MysqlHelper:
             host=url,
             user=user,
             password=pwd,
-            database=db)
+            database=db,
+            collation='utf8mb4_general_ci')
         self.conn.autocommit = False  # disable autocommit
         self.cursor = self.conn.cursor()
 

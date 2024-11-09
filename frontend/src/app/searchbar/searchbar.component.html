@@ -1,14 +1,25 @@
 <span class="searchbar" #searchbar>
   <input
     type="text"
-    placeholder="Search..."
+    placeholder="Search or ask..."
     (focus)="this.toggleFocus(true)"
     (blur)="this.toggleFocus(false)"
     (click)="this.toggleFocus(true)"
     (input)="this.search($event.target)"
     [readOnly]="this.shouldReadOnly"
   />
-  <mat-icon fontIcon="search"></mat-icon>
+  <!-- <mat-icon fontIcon="search"></mat-icon> -->
+  <app-switch
+    current="search"
+    next="help"
+    (onCurrentChange)="this.changeMode($event)"
+  />
 </span>
-<app-search-overlay *ngIf="this.showOverlay" [papers]="papers" [searching]="this.searching"></app-search-overlay>
+<app-search-overlay
+  *ngIf="this.showOverlay"
+  [papers]="papers"
+  [searching]="this.searching"
+  [mode]="this.mode"
+  [answer]="this.answer"
+></app-search-overlay>
 <div class="background" *ngIf="this.showOverlay"></div>

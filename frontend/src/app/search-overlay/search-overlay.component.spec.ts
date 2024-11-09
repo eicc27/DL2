@@ -8,8 +8,8 @@ describe('SearchOverlayComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SearchOverlayComponent]
-    });
+    imports: [SearchOverlayComponent]
+});
     fixture = TestBed.createComponent(SearchOverlayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -6,15 +6,17 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { JsonPipe } from '@angular/common';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ServerService } from 'src/app/server.service';
 import GenericResponse from 'src/app/GenericResponse.model';
 import axios from 'axios';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
-import { MarkdownComponent } from 'ngx-markdown';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { TopbarComponent } from 'src/app/topbar/topbar.component';
+import { LoadingComponent } from 'src/app/loading/loading.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MarkdownModule } from 'ngx-markdown';
+import { FormsModule } from '@angular/forms';
 
 interface Task {
   name: string;
@@ -28,6 +30,17 @@ interface Task {
   selector: 'app-after',
   templateUrl: './after.component.html',
   styleUrls: ['./after.component.scss'],
+  imports: [
+    NgFor,
+    NgIf,
+    TopbarComponent,
+    LoadingComponent,
+    MatIconModule,
+    MarkdownModule,
+    FormsModule,
+    CommonModule,
+  ],
+  standalone: true,
 })
 export class AfterComponent implements AfterViewInit {
   tasks: Task[] = [];

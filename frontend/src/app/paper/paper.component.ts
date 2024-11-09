@@ -8,11 +8,30 @@ import { AuthService } from '../auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import Response from 'src/response.model';
 import * as d3 from 'd3';
+import { LoadingComponent } from '../loading/loading.component';
+import { TopbarComponent } from '../topbar/topbar.component';
+import { HighlightCapitalizedPipe } from '../highlight-capitalized.pipe';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { PaperInfoComponent } from './paper-info/paper-info.component';
+import { MarkdownModule } from 'ngx-markdown';
 
 @Component({
   selector: 'app-paper',
   templateUrl: './paper.component.html',
   styleUrls: ['./paper.component.scss'],
+  imports: [
+    LoadingComponent,
+    TopbarComponent,
+    HighlightCapitalizedPipe,
+    NgIf,
+    NgFor,
+    MatIconModule,
+    CommonModule,
+    PaperInfoComponent,
+    MarkdownModule,
+  ],
+  standalone: true,
 })
 export class PaperComponent implements OnInit {
   public id!: string;

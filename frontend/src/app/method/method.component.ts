@@ -4,11 +4,17 @@ import { ActivatedRoute } from '@angular/router';
 import axios from 'axios';
 import { ServerService } from '../server.service';
 import GenericResponse from '../GenericResponse.model';
+import { TopbarComponent } from '../topbar/topbar.component';
+import { MarkdownModule } from 'ngx-markdown';
+import { CommonModule, NgIf } from '@angular/common';
+import { PaperInfoComponent } from '../paper/paper-info/paper-info.component';
 
 @Component({
-  selector: 'app-method',
-  templateUrl: './method.component.html',
-  styleUrls: ['./method.component.scss']
+    selector: 'app-method',
+    templateUrl: './method.component.html',
+    styleUrls: ['./method.component.scss'],
+    imports: [TopbarComponent, MarkdownModule, CommonModule, PaperInfoComponent, NgIf],
+    standalone: true
 })
 export class MethodComponent {
   public task!: Task;

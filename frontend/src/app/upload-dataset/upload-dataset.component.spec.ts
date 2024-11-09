@@ -8,8 +8,8 @@ describe('UploadDatasetComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [UploadDatasetComponent]
-    });
+    imports: [UploadDatasetComponent]
+});
     fixture = TestBed.createComponent(UploadDatasetComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

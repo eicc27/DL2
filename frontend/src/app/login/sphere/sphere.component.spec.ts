@@ -8,8 +8,8 @@ describe('SphereComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SphereComponent]
-    });
+    imports: [SphereComponent]
+});
     fixture = TestBed.createComponent(SphereComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
