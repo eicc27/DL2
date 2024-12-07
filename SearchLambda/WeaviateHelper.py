@@ -1,12 +1,11 @@
 import time
-import requests.auth
 import weaviate
-import requests
-import json
 import google.generativeai as genai
 from MysqlHelper import MysqlHelper
+import os
 
-API_KEY = "AIzaSyBKuPcGeQEWnWunyMGneXaRH3ZiH8ufHaw"
+
+API_KEY = os.environ.get("GOOGLE_API_KEY")
 genai.configure(api_key=API_KEY)
 
 

@@ -5,7 +5,8 @@ import weaviate
 import json
 import os
 
-glm_token = "AIzaSyBKuPcGeQEWnWunyMGneXaRH3ZiH8ufHaw"
+glm_token = os.environ.get("GOOGLE_API_KEY")
+print(glm_token)
 gs = Neo4jGraphStore(
     username="neo4j",
     password="030108chen",
@@ -334,9 +335,9 @@ def enhance_user_data(from_id=-1):
 
 
 if __name__ == "__main__":
-    # r = [sample_num_requests() for _ in range(100)]
-    # print(r)
-    # write_kg()
-    # simulate_users_favourites(350)
-    # write_data()
+    r = [sample_num_requests() for _ in range(100)]
+    print(r)
+    write_kg()
+    simulate_users_favourites(350)
+    write_data()
     enhance_user_data()

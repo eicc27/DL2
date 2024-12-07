@@ -7,7 +7,6 @@ import GenericResponse from '../GenericResponse.model';
 import { AuthService } from '../auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import Response from 'src/response.model';
-import * as d3 from 'd3';
 import { LoadingComponent } from '../loading/loading.component';
 import { TopbarComponent } from '../topbar/topbar.component';
 import { HighlightCapitalizedPipe } from '../highlight-capitalized.pipe';
@@ -42,6 +41,7 @@ export class PaperComponent implements OnInit {
   public authorized = this.authService.isAuthenticated();
   @ViewChild('title')
   public titleElement!: ElementRef<HTMLHeadElement>;
+  public tldr = "";
 
   public constructor(
     private route: ActivatedRoute,
@@ -109,6 +109,11 @@ export class PaperComponent implements OnInit {
       });
       this.paper.codes.sort((a, b) => b.rating - a.rating);
       await this.getRelatedPapers();
+      if (this.authorized) {
+        const query = `Introduce me this paper: ${this.paper.title}`;
+        const resp = await axios.get("http://127.0.0.1:8092/search?query=" + query);
+        this.tldr = resp.data.answer;
+      }
     });
   }
 

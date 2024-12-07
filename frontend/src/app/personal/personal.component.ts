@@ -12,11 +12,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
 
 @Component({
-    selector: 'app-personal',
-    templateUrl: './personal.component.html',
-    styleUrls: ['./personal.component.scss'],
-    imports: [TopbarComponent, PaperInfoComponent, MatIconModule, NgIf],
-    standalone: true,
+  selector: 'app-personal',
+  templateUrl: './personal.component.html',
+  styleUrls: ['./personal.component.scss'],
+  imports: [TopbarComponent, PaperInfoComponent, MatIconModule, NgIf],
+  standalone: true,
 })
 export class PersonalComponent {
   private authorized = this.authService.isAuthenticated();
@@ -26,7 +26,10 @@ export class PersonalComponent {
   public recommends: Paper[] = [];
   public new: Paper[] = [];
 
-  public constructor(private authService: AuthService, private router: Router) {}
+  public constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   async ngOnInit() {
     if (!this.authorized) window.location.href = '/login';
@@ -49,17 +52,19 @@ export class PersonalComponent {
   }
 
   private async getRecommends() {
-    const arxivIds = this.recents.map((paper) => paper.arxivId);
-    const resp = await axios.post(
-      ServerService.N4JServer,
+    const arxivIds = this.favs.map((paper) => paper.arxivId);
+    const resp = await axios.post('http://localhost:8093/predict', {
+      user_favs: arxivIds,
+    });
+    const papersResp = await axios.post(
+      ServerService.UserServer + '/paper/papers',
       {
-        query: arxivIds,
+        arxivIds: resp.data.result,
       }
     );
-    const data = resp.data;
-    this.recommends = data.papers;
+    this.recommends = papersResp.data.data;
   }
-  gotoSelect(){
+  gotoSelect() {
     this.router.navigate(['/after']);
   }
   gotoMain() {

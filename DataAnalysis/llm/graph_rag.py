@@ -2,71 +2,66 @@ import json
 from typing import Dict, List
 from llama_index.llms.gemini import Gemini as GeminiLLM
 from llama_index.embeddings.gemini import GeminiEmbedding
-from llama_index.core.llms import ChatMessage, MessageRole
 from llama_index.core.prompts.prompt_type import PromptType
-from llama_index.graph_stores.neo4j import Neo4jGraphStore
-from llama_index.core import StorageContext, ServiceContext
-from llama_index.core.query_engine import KnowledgeGraphQueryEngine
-from llama_index.core.query_engine import RetrieverQueryEngine
-from llama_index.core.retrievers import KnowledgeGraphRAGRetriever
-from llama_index.legacy.query_engine import KnowledgeGraphQueryEngine
+from llama_index.graph_stores.neo4j import Neo4jPropertyGraphStore
+from llama_index.core.indices.property_graph import  TextToCypherRetriever
+from llama_index.core.query_engine.retriever_query_engine import RetrieverQueryEngine
+from llama_index.core import PropertyGraphIndex, QueryBundle
 from llama_index.core import Settings, PromptTemplate
+
 import google.generativeai as genai
 import os
 from flask import Flask, request
 from flask_cors import CORS
 
-API_KEY = "AIzaSyBKuPcGeQEWnWunyMGneXaRH3ZiH8ufHaw"
+API_KEY = os.environ.get("GOOGLE_API_KEY")
 # set the environment variable first
 os.environ["GOOGLE_API_KEY"] = API_KEY
 genai.configure(api_key=API_KEY)
 
-# Settings.llm = llm
-# Settings.embed_model = embed_model
-# Settings.chunk_size = 512
-
 # Prompt
 DEFAULT_NEO4J_NL2CYPHER_PROMPT_TMPL = (
-    "Task:Generate Cypher statement to query a graph database.\n"
-    "Instructions:\n"
+    "Task: Neo4j Graph Query Synthesis\n"
+    "Schema: {schema}\n"
     "Use only the provided relationship types and properties in the schema.\n"
     "Do not use any other relationship types or properties that are not provided.\n"
     "Use ambiguous searching if necessary, and do not care about keyword capitalization. e.g. WHERE toLower(method.name) CONTAINS toLower('graph')."
     "If the user do not provide a specific property of the keyword, search it extensively among the different types of nodes. e.g.:\n"
-    "Q: What is LoRA?\n"
     "A: MATCH (x: Method | Task | Paper)\n"
-    "WHERE toLower(x.name) CONTAINS toLower('lora')\n"
-    "OR (x:Paper AND toLower(x.title) CONTAINS toLower('lora'))\n"
+    "WHERE toLower(x.name) CONTAINS toLower('name')\n"
+    "OR (x:Paper AND toLower(x.title) CONTAINS toLower('name'))\n"
     "RETURN x"
-    "Always add limitations to the query, such as LIMIT 1, LIMIT 5, etc.\n"
-    "Schema:\n"
-    "{schema}\n"
-    "Note: Do not include any explanations or apologies in your responses.\n"
+    "Always add limitations to the query.\n"
+    "Do not include any explanations or apologies in your responses.\n"
     "Do not respond to any questions that might ask anything else than for you "
     "to construct a Cypher statement. \n"
     "Do not include any text except the generated Cypher statement.\n"
     "Write it in plain text, do not use any markdown or code formatting.\n"
-    "\n"
-    "The question is:\n"
-    "{query_str}\n"
+    "If user provides a question with a wide range of possible answers, "
+    "sort the results by most cited papers and give a limit.\n"
+    "Question: {question}\n"
 )
 
 DEFAULT_KG_RESPONSE_ANSWER_PROMPT_TMPL = """
-The original question is given below.
-This question has been translated into a Graph Database query.
-Both the Graph query and the response are given below.
-Given the Graph Query response, synthesise a response to the original question.
-Use as much information provided in the Graph Query response as possible to provide a detailed answer.
-When possible, provide papers that are relevant to the original question as recommendations.
-
-Original question: {query_str}
-Graph query: {kg_query_str}
-Graph response: {kg_response_str}
-Response:
+    "Context information is below.\n"
+    "---------------------\n"
+    "{context_str}\n"
+    "---------------------\n"
+    "Given the context information and not prior knowledge, "
+    "answer the query.\n"
+    "Use of markdown is allowed. Provide links to necessary keywords 
+    (e.g., if context contains arxiv id for certain papers, compose them as link to original paper in arxiv and provide the link within markdown for the papers) if needed.\n"
+    "Note, the answer should be extensive, explaining the concepts and providing examples for methods and tasks.\n"
+    "The answer should be natural and informative, without mentioning the queries done before.\n"
+    "Do not forget that whenever possible(e.g. Asking for a method, answering for methods and tasks), provide the arxiv id link to relevant papers 
+    (e.g. the original paper, or the paper that cited the original paper, or some paper that uses the method and applies the task) in markdown,
+    even if the user did not ask for it.\n"
+    "Query: {query_str}\n"
+    "Answer: "
 """
 
 
-class DL2Neo4jGraphStore(Neo4jGraphStore):
+class DL2Neo4jGraphStore(Neo4jPropertyGraphStore):
     def detect_subject_type(self, subj: str):
         paper_query = """
         MATCH (p:Paper)
@@ -151,7 +146,7 @@ gs = DL2Neo4jGraphStore(
     url="bolt://localhost:7687",
     database="neo4j",
 )
-stc = StorageContext.from_defaults(graph_store=gs)
+# stc = StorageContext.from_defaults(graph_store=gs)
 gq_synthesis_prompt = PromptTemplate(
     DEFAULT_NEO4J_NL2CYPHER_PROMPT_TMPL, prompt_type=PromptType.TEXT_TO_GRAPH_QUERY
 )
@@ -162,24 +157,12 @@ Settings.llm = llm
 Settings.embed_model = embed_model
 Settings.chunk_size = 512
 
-
-retriever = KnowledgeGraphRAGRetriever(
-    storage_context=stc,
-    verbose=True,
-    with_nl2graphquery=True,
-    # these kwargs are necessary
-    graph_query_synthesis_prompt=gq_synthesis_prompt,
-    graph_response_answer_prompt=kg_answer_prompt,
-)
-qe = RetrieverQueryEngine.from_args(
-    retriever=retriever,
-)
-
+index = PropertyGraphIndex.from_existing(gs)
+retriever = TextToCypherRetriever(gs, text_to_cypher_template=gq_synthesis_prompt)
+qe = RetrieverQueryEngine.from_args(retriever, llm, text_qa_template=kg_answer_prompt)
 
 def query(keyword: str):
-    response = qe.query(
-        keyword
-    )
+    response = qe.query(keyword)
     return response
 
 
@@ -198,6 +181,9 @@ def search():
 # test
 if __name__ == "__main__":
     application.run(port=8092)
-
+    # nodes = retreiver.retrieve_from_graph(QueryBundle("Tell me about attention mechanism."))
+    # [print(node.text) for node in nodes]
+    # resp = qe.query("Tell me about attention mechanism.").response
+    # print(resp)
     # with open('llm/sample_metadata.json', 'w+') as f:
     #     json.dump(response.metadata, f, indent=4)
