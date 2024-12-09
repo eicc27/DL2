@@ -4,6 +4,24 @@ Deep Learning Learning Platform
 
 ![Should be a system framework illustration](framework.png)
 
+## Local Deployment
+
+### System Requirements
+
+1. MySQL or MariaDB w./ schema `dl2`, on `localhost:3306`: `systemctl enable --now mysqld`
+2. Neo4j on `localhost:7474`: `<NEO4J_HOME>/bin/neo4j restart`
+
+### Basic Services
+
+1. User & paper service on `localhost:8080`: `cd UserService;./gradlew run`
+2. Neo4j graph service on `localhost:8081`: `cd Neo4jService;./gradlew run`
+
+### Intelligent Services
+
+1. Vectorized search service w./ weaviate on Docker
+2. Gemini-based GraphRAG: `cd DataAnalysis/llm;`
+3. GAT-based paper recommendation: `cd DataAnalysis;`
+
 ## Frontend
 
 Uses Angular & Angular material to host a frontend. Angular material provides an
