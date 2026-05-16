@@ -1,6 +1,6 @@
 # DL2
 
-Deep Learning Learning Platform
+Deep Learning Learning Platform, a full-stack platform for personalized learning path discovery, based on RAG, citation graphs and semantic search.
 
 ![Should be a system framework illustration](framework.png)
 
